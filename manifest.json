@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "generated_at": "2026-04-15T00:00:00Z",
+  "reports": [
+    {
+      "slug": "gails",
+      "title": "GAIL's Signal Report",
+      "brand": "GAIL's Bakery",
+      "industry": "F&B",
+      "sub_category": "Bakeries",
+      "location": "London",
+      "tags": ["Influencer", "Brand Health", "Content Strategy"],
+      "published_date": "2026-04-15",
+      "path": "/reports/gails",
+      "url": "https://sup-reports.vercel.app/reports/gails"
+    }
+  ]
+}

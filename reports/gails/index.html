@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAIL's Bakery — Signal Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F4F4F5;
+    --text: #09090B;
+    --muted: #71717A;
+    --hint: #A1A1AA;
+    --border: #E4E4E7;
+    --accent: #000000;
+    --gails: #CF2030;
+    --gails-bg: #F5F5ED;
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* ========= ANIMATIONS ========= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* staggered children */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    will-change: opacity, transform;
+  }
+  .stagger.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .stagger.visible > *:nth-child(1)  { transition-delay: 0.00s; }
+  .stagger.visible > *:nth-child(2)  { transition-delay: 0.06s; }
+  .stagger.visible > *:nth-child(3)  { transition-delay: 0.12s; }
+  .stagger.visible > *:nth-child(4)  { transition-delay: 0.18s; }
+  .stagger.visible > *:nth-child(5)  { transition-delay: 0.24s; }
+  .stagger.visible > *:nth-child(6)  { transition-delay: 0.30s; }
+  .stagger.visible > *:nth-child(7)  { transition-delay: 0.36s; }
+  .stagger.visible > *:nth-child(8)  { transition-delay: 0.42s; }
+  .stagger.visible > *:nth-child(9)  { transition-delay: 0.48s; }
+  .stagger.visible > *:nth-child(10) { transition-delay: 0.54s; }
+  .stagger.visible > *:nth-child(11) { transition-delay: 0.60s; }
+  .stagger.visible > *:nth-child(12) { transition-delay: 0.66s; }
+
+  /* cover hero — line-by-line masked reveal */
+  .hero-title {
+    overflow: hidden;
+    padding-bottom: 0.15em;
+  }
+  .hero-title .line {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1s var(--ease);
+    will-change: transform;
+  }
+  .hero-title.visible .line { transform: translateY(0); }
+  .hero-title .line:nth-child(2) { transition-delay: 0.08s; }
+  .hero-title .line:nth-child(3) { transition-delay: 0.16s; }
+
+  /* table rows */
+  .comp-table tbody tr {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .comp-table tbody.visible tr {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .comp-table tbody.visible tr:nth-child(1) { transition-delay: 0.00s; }
+  .comp-table tbody.visible tr:nth-child(2) { transition-delay: 0.08s; }
+  .comp-table tbody.visible tr:nth-child(3) { transition-delay: 0.16s; }
+  .comp-table tbody.visible tr:nth-child(4) { transition-delay: 0.24s; }
+  .comp-table tbody.visible tr:nth-child(5) { transition-delay: 0.32s; }
+
+  /* theme bars */
+  .theme-bar-fill {
+    width: 0;
+    transition: width 1.4s var(--ease);
+    will-change: width;
+  }
+  .theme-bar-row {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .theme-bars.visible .theme-bar-row { opacity: 1; transform: translateX(0); }
+  .theme-bars.visible .theme-bar-row:nth-child(1)  { transition-delay: 0.02s; }
+  .theme-bars.visible .theme-bar-row:nth-child(2)  { transition-delay: 0.06s; }
+  .theme-bars.visible .theme-bar-row:nth-child(3)  { transition-delay: 0.10s; }
+  .theme-bars.visible .theme-bar-row:nth-child(4)  { transition-delay: 0.14s; }
+  .theme-bars.visible .theme-bar-row:nth-child(5)  { transition-delay: 0.18s; }
+  .theme-bars.visible .theme-bar-row:nth-child(6)  { transition-delay: 0.22s; }
+  .theme-bars.visible .theme-bar-row:nth-child(7)  { transition-delay: 0.26s; }
+  .theme-bars.visible .theme-bar-row:nth-child(8)  { transition-delay: 0.30s; }
+  .theme-bars.visible .theme-bar-row:nth-child(9)  { transition-delay: 0.34s; }
+  .theme-bars.visible .theme-bar-row:nth-child(10) { transition-delay: 0.38s; }
+  .theme-bars.visible .theme-bar-row:nth-child(11) { transition-delay: 0.42s; }
+  .theme-bars.visible .theme-bar-row:nth-child(12) { transition-delay: 0.46s; }
+
+  /* card hover */
+  .opp-card, .comp-card, .post-card, .stat-card {
+    transition: transform 0.4s var(--ease), border-color 0.3s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .opp-card:hover, .comp-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--text);
+  }
+  .post-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--gails);
+  }
+
+  /* chart reveal — start invisible, fade in as canvas animation runs */
+  .chart-wrap canvas {
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+  }
+  .chart-wrap.visible canvas { opacity: 1; }
+
+  /* nav entrance */
+  .nav {
+    transform: translateY(-100%);
+    animation: navDrop 0.8s var(--ease) 0.2s forwards;
+  }
+  @keyframes navDrop {
+    to { transform: translateY(0); }
+  }
+
+  /* label pill pulse */
+  .label-pill .dot {
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(29,158,117,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(29,158,117,0); }
+  }
+  .label-pill .dot.red {
+    animation: pulseRed 2.4s ease-in-out infinite;
+  }
+  @keyframes pulseRed {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(207,32,48,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(207,32,48,0); }
+  }
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .stagger > *,
+    .hero-title .line,
+    .comp-table tbody tr,
+    .theme-bar-fill,
+    .theme-bar-row,
+    .chart-wrap canvas,
+    .nav {
+      transition: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .label-pill .dot { animation: none !important; }
+  }
+
+  /* ========= NAV ========= */
+  .nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .sup-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .nav-divider { width: 1px; height: 20px; background: var(--border); }
+  .nav-brand { display: flex; align-items: center; gap: 8px; }
+  .nav-brand img { height: 24px; width: auto; }
+  .nav-center {
+    display: flex;
+    gap: 22px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nav-center a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    position: relative;
+    transition: color 0.3s var(--ease);
+  }
+  .nav-center a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: var(--text);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s var(--ease);
+  }
+  .nav-center a:hover { color: var(--text); text-decoration: none; }
+  .nav-center a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    margin-left: auto;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .nav-cta:hover { text-decoration: none; transform: translateY(-1px); opacity: 0.92; }
+  @media (max-width: 768px) {
+    .nav-center { display: none; }
+    .nav { padding: 0 16px; gap: 8px; }
+    .sup-pill { padding: 4px 10px; font-size: 12px; }
+  }
+
+  /* ========= LAYOUT ========= */
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+  section { padding: 96px 0; border-bottom: 1px solid var(--border); }
+  @media (max-width: 768px) { section { padding: 64px 0; } }
+  section:last-of-type { border-bottom: none; }
+
+  .cover {
+    background: #fff;
+    padding: 120px 0 96px;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 768px) { .cover { padding: 72px 0 56px; } }
+
+  .label-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .label-pill .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+  }
+  .label-pill .dot.red { background: var(--gails); }
+
+  h1 {
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text);
+    max-width: 960px;
+  }
+  h1 em { font-style: normal; color: var(--gails); font-weight: 500; }
+
+  .cover p.subtitle {
+    font-size: clamp(16px, 1.6vw, 18px);
+    color: var(--muted);
+    margin-top: 28px;
+    max-width: 700px;
+    line-height: 1.55;
+  }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 72px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+  }
+  .stats-bar .stat {
+    padding: 0 24px;
+    border-right: 1px solid var(--border);
+  }
+  .stats-bar .stat:last-child { border-right: none; }
+  .stat-num {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 0.01em;
+  }
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: 1fr; padding: 0; }
+    .stats-bar .stat {
+      padding: 20px 0;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-bar .stat:last-child { border-bottom: none; }
+  }
+
+  /* ========= SECTION HEADERS ========= */
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+  h2 {
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--text);
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 18px;
+    max-width: 720px;
+  }
+  p strong, p b { color: var(--text); font-weight: 500; }
+  .lead p { font-size: 17px; color: var(--text); }
+
+  /* ========= STAT CARDS ========= */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0 48px;
+  }
+  .stat-grid.six { grid-template-columns: repeat(6, 1fr); }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 28px 24px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .stat-card.dark {
+    background: var(--gails);
+    color: #fff;
+    border-color: var(--gails);
+  }
+  .stat-card.dark .stat-card-num,
+  .stat-card.dark .stat-card-label { color: #fff; }
+  .stat-card.dark .stat-card-sub { color: rgba(255,255,255,0.75); }
+  .stat-card-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .stat-card-num {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1;
+    margin: 16px 0 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  @media (max-width: 900px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-grid.six { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    .stat-grid.six { grid-template-columns: 1fr; }
+  }
+
+  /* ========= CHART WRAP ========= */
+  .chart-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    margin: 32px 0 24px;
+  }
+  .chart-wrap h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .chart-wrap .chart-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .chart-box { position: relative; height: 360px; }
+  @media (max-width: 768px) {
+    .chart-box { height: 300px; }
+    .chart-wrap { padding: 20px; }
+  }
+  .chart-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  @media (max-width: 768px) { .chart-split { grid-template-columns: 1fr; } }
+
+  /* ========= CALLOUT ========= */
+  .callout {
+    background: var(--surface);
+    border-left: 3px solid var(--gails);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    max-width: 860px;
+  }
+  .callout strong { color: var(--text); font-weight: 500; }
+  .callout p { color: var(--text); margin: 0; }
+  .callout .callout-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gails);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* ========= COMPETITOR TABLE ========= */
+  .comp-table { width: 100%; border-collapse: collapse; margin: 32px 0; font-size: 14px; }
+  .comp-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: #fff;
+  }
+  .comp-table th,
+  .comp-table td {
+    text-align: left;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .comp-table th {
+    font-weight: 500;
+    color: var(--muted);
+    font-size: 12px;
+    background: var(--surface);
+  }
+  .comp-table td { color: var(--text); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.target td { background: rgba(207,32,48,0.04); }
+  .comp-table tr.target td:first-child { font-weight: 500; color: var(--gails); }
+  .comp-table .handle { color: var(--muted); font-size: 13px; }
+
+  /* ========= COMPETITOR CARDS ========= */
+  .comp-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 40px 0;
+  }
+  @media (max-width: 768px) { .comp-cards { grid-template-columns: 1fr; } }
+  .comp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 28px;
+  }
+  .comp-card h4 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .comp-card .comp-handle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .comp-card p { font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+  .comp-card .comp-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .comp-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    color: var(--muted);
+  }
+
+  /* ========= POST CARDS ========= */
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin: 32px 0 24px;
+  }
+  @media (max-width: 1100px) { .post-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .post-grid { grid-template-columns: 1fr; } }
+  .post-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+  .post-card:hover { text-decoration: none; }
+  .post-card .post-rank {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .post-card .post-likes {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 8px 0 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .post-card .post-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .post-card .post-desc {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .post-card .post-link {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ========= THEME BARS ========= */
+  .theme-bars { margin: 32px 0; }
+  .theme-bar-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 56px;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .theme-bar-row:last-child { border-bottom: none; }
+  .theme-bar-label {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .theme-bar-track {
+    height: 8px;
+    background: var(--surface);
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .theme-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: var(--gails);
+  }
+  .theme-bar-value {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 640px) {
+    .theme-bar-row { grid-template-columns: 120px 1fr 48px; gap: 10px; }
+    .theme-bar-label { font-size: 13px; }
+  }
+
+  /* ========= OPPORTUNITIES ========= */
+  .opp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 40px 0 0;
+  }
+  @media (max-width: 1024px) { .opp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) { .opp-grid { grid-template-columns: 1fr; } }
+  .opp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    min-height: 340px;
+  }
+  .opp-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gails);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .opp-title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 14px 0 16px;
+    line-height: 1.2;
+  }
+  .opp-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+    flex-grow: 1;
+  }
+  .opp-stat {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-top: 24px;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .opp-stat-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ========= CLOSING ========= */
+  .closing {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px 40px;
+    margin: 48px auto 64px;
+    max-width: 720px;
+    text-align: left;
+  }
+  .closing p.closing-lead {
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 28px;
+    max-width: none;
+  }
+  .closing p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: none;
+  }
+  .closing p:last-child { margin-bottom: 0; }
+
+  /* ========= FOOTER ========= */
+  footer {
+    padding: 32px 0 48px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  footer span { margin: 0 8px; }
+
+  /* ========= MISC ========= */
+  a.post-link-inline {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--hint);
+    transition: color 0.2s, text-decoration-color 0.2s;
+  }
+  a.post-link-inline:hover {
+    text-decoration-color: var(--gails);
+    color: var(--gails);
+  }
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <span class="sup-pill">👋 Sup</span>
+    <div class="nav-divider"></div>
+    <div class="nav-brand">
+      <img src="https://gails.com/cdn/shop/files/gails-logo_1.png?v=1678900193" alt="GAIL's">
+    </div>
+  </div>
+  <div class="nav-center">
+    <a href="#benchmark">Benchmark</a>
+    <a href="#competitors">Competitors</a>
+    <a href="#content">Content</a>
+    <a href="#influencers">Influencers</a>
+    <a href="#opportunity">Opportunity</a>
+  </div>
+  <a href="#opportunity" class="nav-cta">View Opportunity →</a>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="container">
+    <span class="label-pill reveal"><span class="dot"></span>Influencer Marketing Intelligence Report</span>
+    <h1 class="hero-title">
+      <span class="line">318 creators already talk about you.</span>
+      <span class="line">Most of them <em>aren't talking</em></span>
+      <span class="line"><em>about your food</em>.</span>
+    </h1>
+    <p class="subtitle reveal">You've built something rare: a category-defining cultural brand that London's lifestyle creators organically stage their content inside. This report reads what the data actually says about how creators see GAIL's, where the competition is winning, and the six moves that turn cultural status into commercial performance before Feb 2026.</p>
+    <div class="stats-bar stagger">
+      <div class="stat">
+        <div class="stat-num" data-count="318">0</div>
+        <div class="stat-label">Creator posts tagging you in 12 months</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="55" data-suffix="%">0</div>
+        <div class="stat-label">Mention you without naming you in caption</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="1.7" data-suffix="M" data-decimals="1">0</div>
+        <div class="stat-label">Earned creator views</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="40">0</div>
+        <div class="stat-label">New stores open by Feb 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 01: BENCHMARK -->
+<section id="benchmark">
+  <div class="container">
+    <span class="section-label reveal">01 — Market Benchmark</span>
+    <h2 class="reveal">Already winning. Still leaving reach on the table.</h2>
+    <div class="lead reveal">
+      <p>Against 578 London cafés and bakeries, GAIL's punches above its weight on satisfaction and matches the field on organic creator interest. The ceiling isn't love. The ceiling is how much of that love is translated into reach, content, and performance.</p>
+    </div>
+
+    <div class="stat-grid six stagger">
+      <div class="stat-card dark">
+        <div class="stat-card-label" style="color:rgba(255,255,255,0.8)">Instagram followers</div>
+        <div class="stat-card-num" data-count="166" data-suffix="k">0</div>
+        <div class="stat-card-sub">Rank 40 of 578 London cafés</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Google review score</div>
+        <div class="stat-card-num" data-count="4.08" data-decimals="2">0</div>
+        <div class="stat-card-sub">Above category average</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Google reviews (Notting Hill)</div>
+        <div class="stat-card-num" data-count="3326" data-format="comma">0</div>
+        <div class="stat-card-sub">5 tracked sites in benchmark</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Own IG posts</div>
+        <div class="stat-card-num" data-count="318">0</div>
+        <div class="stat-card-sub">Behind Bread Ahead on reach per post</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Earned creator posts</div>
+        <div class="stat-card-num" data-count="318">0</div>
+        <div class="stat-card-sub">Across 257 unique creators</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">UK locations</div>
+        <div class="stat-card-num" data-count="185">0</div>
+        <div class="stat-card-sub">225 by February 2026</div>
+      </div>
+    </div>
+
+    <div class="chart-split">
+      <div class="chart-wrap reveal" data-chart="followersChart">
+        <h4>Instagram followers vs direct competitors</h4>
+        <p class="chart-sub">Your social footprint is mid-pack against bakeries with a fraction of your physical presence.</p>
+        <div class="chart-box"><canvas id="followersChart"></canvas></div>
+      </div>
+      <div class="chart-wrap reveal" data-chart="reviewScoreChart">
+        <h4>Google review score vs competitors</h4>
+        <p class="chart-sub">You out-score every multi-site competitor. Satisfaction is an asset — creators already feel it.</p>
+        <div class="chart-box"><canvas id="reviewScoreChart"></canvas></div>
+      </div>
+    </div>
+
+    <p class="reveal">GAIL's sits in a strange position. With 185 bakeries you are the largest premium bakery chain in the UK by far, yet your Instagram following (166k) is less than half of Bread Ahead's (424k), a competitor with five sites. Your review score (4.08) beats every multi-site competitor on the benchmark except Buns From Home (4.35), and it crushes Bread Ahead (3.15) and WatchHouse (3.43). Customers love you. Creators post about you. The delta is how little of that is being programmed and scaled.</p>
+    <p class="reveal">The 318 creator posts in this dataset generated <b>1.7M earned video views</b> and <b>258,039 earned likes</b> with almost no formal paid investment. The median creator post has 60 likes. The top creator post has 77,700. That spread tells you the programme is working at one end and invisible at the other.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Benchmark Verdict</span>
+      <p><b>You are under-indexed on social reach per location, over-indexed on customer satisfaction, and mid-pack on creator coordination.</b> Fix the first without losing the second, and the third becomes the lever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02: COMPETITORS -->
+<section id="competitors">
+  <div class="container">
+    <span class="section-label reveal">02 — Competitor Deep Dive</span>
+    <h2 class="reveal">Bigger on Instagram. Smaller on satisfaction. None of them have your scale.</h2>
+
+    <div class="comp-table-wrap reveal">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>IG followers</th>
+          <th>IG posts</th>
+          <th>IG views</th>
+          <th>Locations</th>
+          <th>Google reviews</th>
+          <th>Google score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="target">
+          <td>GAIL's <span class="handle">@gailsbakery</span></td>
+          <td>166,279</td>
+          <td>318</td>
+          <td>1.7M</td>
+          <td>185</td>
+          <td>3,326</td>
+          <td>4.08</td>
+        </tr>
+        <tr>
+          <td>Bread Ahead <span class="handle">@breadaheadbakery</span></td>
+          <td>423,830</td>
+          <td>98</td>
+          <td>2.3M</td>
+          <td>5</td>
+          <td>6,334</td>
+          <td>3.15</td>
+        </tr>
+        <tr>
+          <td>Buns From Home <span class="handle">@bunsfromhome</span></td>
+          <td>186,040</td>
+          <td>104</td>
+          <td>2.2M</td>
+          <td>3</td>
+          <td>2,068</td>
+          <td>4.35</td>
+        </tr>
+        <tr>
+          <td>Fabrique <span class="handle">@fabriquebakery</span></td>
+          <td>108,200</td>
+          <td>46</td>
+          <td>184k</td>
+          <td>5</td>
+          <td>3,195</td>
+          <td>4.32</td>
+        </tr>
+        <tr>
+          <td>WatchHouse <span class="handle">@watchhouse</span></td>
+          <td>107,355</td>
+          <td>224</td>
+          <td>1.3M</td>
+          <td>10</td>
+          <td>6,838</td>
+          <td>3.43</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="comp-cards stagger">
+      <div class="comp-card">
+        <h4>Bread Ahead</h4>
+        <span class="comp-handle">@breadaheadbakery · 424k followers</span>
+        <p>The volume play. Five sites, 2.3M IG views, and a single viral product — the crème brûlée doughnut — built a cult following with outsized reach. But look at the satisfaction score: 3.15 across 6,334 reviews. Reach without retention.</p>
+        <p>Their weakness is your opening. You have a higher review score, more sites, a broader menu, and a community programme (Knead for Speed, Companion magazine) they don't. They've got cult. You've got category.</p>
+        <div class="comp-tags">
+          <span class="comp-tag">Viral SKU strategy</span>
+          <span class="comp-tag">Low satisfaction</span>
+          <span class="comp-tag">Limited community layer</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h4>Buns From Home</h4>
+        <span class="comp-handle">@bunsfromhome · 186k followers</span>
+        <p>The real threat. A lockdown project turned three-shop cult brand, with 2.2M IG views against 104 posts and the highest review score in this cohort (4.35). They are the reference for new, lean, internet-native bakery craft in London.</p>
+        <p>They are what a creator-led premium bakery looks like when it starts small. The playbook they used to crack 186k followers on three sites is the playbook your creator programme should be running at 185.</p>
+        <div class="comp-tags">
+          <span class="comp-tag">Creator-native</span>
+          <span class="comp-tag">High satisfaction</span>
+          <span class="comp-tag">Lean footprint</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h4>Fabrique</h4>
+        <span class="comp-handle">@fabriquebakery · 108k followers</span>
+        <p>The Scandinavian craft reference. Five London shops, a famous cardamom bun, 4.32 review score — but only 46 IG posts and 184k video views. They have story but no volume. An archetypal case of content under-delivery.</p>
+        <p>Their weakness is yours if you don't fix it: brands with craft heritage that don't show the craft miss the content that creators most want to film. The carrot cake tutorial on your feed (6,031 likes) is exactly the content Fabrique should be making weekly and isn't.</p>
+        <div class="comp-tags">
+          <span class="comp-tag">Craft heritage</span>
+          <span class="comp-tag">Content under-delivery</span>
+          <span class="comp-tag">Cardamom-bun-famous</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h4>WatchHouse</h4>
+        <span class="comp-handle">@watchhouse · 107k followers</span>
+        <p>The coffee-led hybrid. Ten London sites, 224 IG posts, 6,838 Google reviews — almost double your review count per site. But the review score is 3.43, and the content engine doesn't punch above weight (1.3M views against 224 posts).</p>
+        <p>They prove you can scale multi-site coffee in London and still lose the creator conversation. The coffee/cafe theme shows up in 38% of the 318 posts tagging you. That audience is adjacent, not owned. WatchHouse is who gets it if you don't.</p>
+        <div class="comp-tags">
+          <span class="comp-tag">Coffee-led</span>
+          <span class="comp-tag">Scale ambition</span>
+          <span class="comp-tag">Weak content engine</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-wrap reveal" data-chart="viewsPerPostChart">
+      <h4>Earned IG views per post</h4>
+      <p class="chart-sub">GAIL's generates less view volume per post than Buns From Home and Bread Ahead. More posts, less reach each.</p>
+      <div class="chart-box"><canvas id="viewsPerPostChart"></canvas></div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">What competitors have that you don't</span>
+      <p>Bread Ahead has a viral SKU. Buns From Home has a creator-native brand voice. Fabrique has craft heritage. WatchHouse has coffee-first category ownership. <b>You have all four, at ten times the scale, and no programme connecting them.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03: CONTENT -->
+<section id="content">
+  <div class="container">
+    <span class="section-label reveal">03 — Feed Content Strategy</span>
+    <h2 class="reveal">Your best-performing content is the one you make least.</h2>
+
+    <div class="stat-grid stagger">
+      <div class="stat-card">
+        <div class="stat-card-label">Your top feed post</div>
+        <div class="stat-card-num" data-count="6031" data-format="comma">0</div>
+        <div class="stat-card-sub">Carrot cake recipe walkthrough, behind-the-scenes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Avg likes per BTS post</div>
+        <div class="stat-card-num" data-count="1403" data-format="comma">0</div>
+        <div class="stat-card-sub">2.7× Inspirational, 13× Promotional</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="stat-card-label" style="color:rgba(255,255,255,0.8)">% of feed that is BTS</div>
+        <div class="stat-card-num" data-count="10" data-suffix="%">0</div>
+        <div class="stat-card-sub">5 of 49 posts, Dec 2025 → Mar 2026</div>
+      </div>
+    </div>
+
+    <p class="reveal"><b>Your own feed published 49 posts in the last three months.</b> Twenty-four were videos, nineteen were carousels, six were single photos. The average post scored 570 likes. The median scored 335. These are respectable numbers for a bakery brand, but they undersell a far more useful signal.</p>
+    <p class="reveal">Sort those 49 posts by content pillar and one row dominates everything else. <b>Behind-the-Scenes</b> averaged 1,403 likes across 5 posts. <b>Inspirational</b> — your dominant pillar at 33 of 49 posts — averaged 526 likes. <b>Seasonal/Timely</b> averaged 304. <b>Promotional</b> averaged 108. The content that shows a real baker, real ingredients, real process is the content that wins on your own channel, and it makes up one in ten posts.</p>
+
+    <div class="chart-split">
+      <div class="chart-wrap reveal" data-chart="pillarChart">
+        <h4>Average likes by content pillar</h4>
+        <p class="chart-sub">Behind-the-Scenes wins on every engagement metric. Inspirational dominates volume, not performance.</p>
+        <div class="chart-box"><canvas id="pillarChart"></canvas></div>
+      </div>
+      <div class="chart-wrap reveal" data-chart="pillarCountChart">
+        <h4>Posts by pillar — the distribution gap</h4>
+        <p class="chart-sub">Production volume is inverse to performance. The biggest miss in your 2026 content plan.</p>
+        <div class="chart-box"><canvas id="pillarCountChart"></canvas></div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:40px">The five posts that actually worked</h3>
+    <p class="reveal">Read these as a creative brief for what your feed should be making more of — and what's being under-produced every week.</p>
+
+    <div class="post-grid stagger">
+      <a href="https://instagram.com/p/DWY7OoxDP6E" target="_blank" class="post-card">
+        <div>
+          <div class="post-rank">01 · Behind the Scenes</div>
+          <div class="post-likes">6,031</div>
+          <div class="post-meta">207 comments · Video</div>
+          <div class="post-desc">Baker walks through the carrot cake recipe with heritage flour and pineapple. Real process, real hands.</div>
+        </div>
+        <div class="post-link">View post ↗</div>
+      </a>
+      <a href="https://instagram.com/p/DU0h545jLFu" target="_blank" class="post-card">
+        <div>
+          <div class="post-rank">02 · Inspirational</div>
+          <div class="post-likes">3,206</div>
+          <div class="post-meta">56 comments · Photo</div>
+          <div class="post-desc">3×3 grid of pastries, each styled on its own plate. Product variety as a hero, no people.</div>
+        </div>
+        <div class="post-link">View post ↗</div>
+      </a>
+      <a href="https://instagram.com/p/DUWHHWLjNoA" target="_blank" class="post-card">
+        <div>
+          <div class="post-rank">03 · Inspirational</div>
+          <div class="post-likes">2,308</div>
+          <div class="post-meta">79 comments · Video</div>
+          <div class="post-desc">Pistachio croissant pastry: slicing, filling, baking, reveal. Product-led BTS in disguise.</div>
+        </div>
+        <div class="post-link">View post ↗</div>
+      </a>
+      <a href="https://instagram.com/p/DThohzFDO3C" target="_blank" class="post-card">
+        <div>
+          <div class="post-rank">04 · Entertaining</div>
+          <div class="post-likes">809</div>
+          <div class="post-meta">19 comments · Video</div>
+          <div class="post-desc">Club sandwich assembly with homemade slaw. Lunch-menu credibility in a 30-second clip.</div>
+        </div>
+        <div class="post-link">View post ↗</div>
+      </a>
+      <a href="https://instagram.com/p/DV3CYdAFJAW" target="_blank" class="post-card">
+        <div>
+          <div class="post-rank">05 · Inspirational</div>
+          <div class="post-likes">750</div>
+          <div class="post-meta">16 comments · Video</div>
+          <div class="post-desc">Sensory montage — frosting, honey, close-ups. Aesthetic, but weaker than a real baker on camera.</div>
+        </div>
+        <div class="post-link">View post ↗</div>
+      </a>
+    </div>
+
+    <p class="reveal">Four of your top five posts are video. Photography outperforms carousels on average (848 likes vs 337). The single highest-earning post is a baker explaining a recipe — one camera, one voice, one product. It outscored every polished montage in the sample, and it has the lowest production complexity.</p>
+    <p class="reveal">Your current programme feels polished, editorial, and over-produced. The audience is asking for bakers, not brand films. The content gap between the carrot cake tutorial (6,031 likes) and the average inspirational post (526 likes) is a 10× multiplier hiding in plain sight.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The biggest miss</span>
+      <p><b>Behind-the-Scenes content averages 2.7× the likes of your Inspirational content. You make one BTS post for every seven Inspirational posts.</b> Flip that ratio and your own feed becomes the most-watched bakery channel in the UK before the 40 new stores open.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04: INFLUENCERS -->
+<section id="influencers">
+  <div class="container">
+    <span class="section-label reveal">04 — Influencer Intelligence</span>
+    <h2 class="reveal">318 creators talk about you. Most of them aren't talking about your food.</h2>
+
+    <div class="stat-grid stagger">
+      <div class="stat-card">
+        <div class="stat-card-label">Creator posts tagging GAIL's</div>
+        <div class="stat-card-num" data-count="318">0</div>
+        <div class="stat-card-sub">12-month window, 257 unique handles</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="stat-card-label" style="color:rgba(255,255,255,0.8)">Don't name you in the caption</div>
+        <div class="stat-card-num" data-count="55" data-suffix="%">0</div>
+        <div class="stat-card-sub">175 of 318 posts — you're the backdrop</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Recurring creators (3+ posts)</div>
+        <div class="stat-card-num" data-count="10">0</div>
+        <div class="stat-card-sub">247 are one-time mentions, never re-engaged</div>
+      </div>
+    </div>
+
+    <p class="reveal">This is the most important section of the report, so read it slowly. Of 318 posts from 257 creators that included a tag or mention of GAIL's, <b>143 mentioned the name in the caption and 175 did not</b>. Those 175 posts tagged you at the location or in the image metadata, but the actual copy was about something else: an outfit, a London walk, a coffee, a book, a baby.</p>
+    <p class="reveal">You aren't a bakery these creators post about. You're the scenery inside the content they were already making. That's culturally powerful — it's the definition of a lifestyle brand — and it's commercially unfinished. You've won the status. You haven't monetised it.</p>
+
+    <h3 class="reveal" style="margin-top:40px">What creators are actually talking about when they post at GAIL's</h3>
+    <div class="theme-bars">
+      <div class="theme-bar-row"><div class="theme-bar-label">Fashion / outfit</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="100"></div></div><div class="theme-bar-value">66%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Food / bakery</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="74.4"></div></div><div class="theme-bar-value">49%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Photography / art</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="63.8"></div></div><div class="theme-bar-value">42%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">City life / London</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="62.4"></div></div><div class="theme-bar-value">41%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Coffee / cafe</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="58.2"></div></div><div class="theme-bar-value">38%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Travel</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="48.2"></div></div><div class="theme-bar-value">32%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Motherhood</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="41.5"></div></div><div class="theme-bar-value">27%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Fitness / running</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="40.5"></div></div><div class="theme-bar-value">27%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Wellness</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="34.9"></div></div><div class="theme-bar-value">23%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Recipe / cooking</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="31.5"></div></div><div class="theme-bar-value">21%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Events / community</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="29.5"></div></div><div class="theme-bar-value">20%</div></div>
+      <div class="theme-bar-row"><div class="theme-bar-label">Books / reading</div><div class="theme-bar-track"><div class="theme-bar-fill" data-width="15.3"></div></div><div class="theme-bar-value">10%</div></div>
+    </div>
+    <p class="reveal" style="margin-top:12px;font-size:13px;color:var(--hint)">A single post can map to more than one theme. The distribution above reads the content, not just the hashtags.</p>
+
+    <p class="reveal">Fashion is the number-one signal in creator content tagging GAIL's — 66% of the 318 posts contain outfit or style markers. You are a fashion backdrop. Read that again: the largest single narrative creators build around your bakeries is what they are wearing. Food shows up second. London, coffee, and photography come next. Fitness and motherhood appear in roughly a quarter of posts each. Books are smallest at 10% but grow straight out of your community programmes.</p>
+
+    <h3 class="reveal" style="margin-top:32px">The performance paradox</h3>
+    <p class="reveal">Sort the 318 posts by likes and the top of the list is not a pastry. The top five earned posts include a <a class="post-link-inline" href="https://instagram.com/p/DNh2qjos9aZ" target="_blank">77,700-like reflection by @dasha.wanderlust</a> on what two years in London changed about her, a <a class="post-link-inline" href="https://instagram.com/p/DRUYKAXjNeg" target="_blank">47,500-like cinematic night-in-London montage from @daiki.shino</a>, a <a class="post-link-inline" href="https://instagram.com/p/DJFBWJYC4Sh" target="_blank">16,000-like ASMR tuna melt cook from @lidiavmera</a> (712,900 views), a <a class="post-link-inline" href="https://instagram.com/p/DVfs29cDc00" target="_blank">12,000-like mother-and-child street scene by @tanyaburr</a>, and a <a class="post-link-inline" href="https://instagram.com/p/DL98w2QtwmS" target="_blank">7,200-like Thames river cruise by @condimentclaire</a>. None of those captions lead with GAIL's. Several don't mention you at all. They're tagged at your location.</p>
+    <p class="reveal">Your highest-reaching owned creator content — <a class="post-link-inline" href="https://instagram.com/p/DPei9Rpjft9" target="_blank">@george_in_london's 221,600-view Notting Hill itinerary</a> — pulls 6,600 likes by explicitly naming you inside a London lifestyle guide. That's the frame creators are already using. <b>Lifestyle first, food second, brand third.</b> It works. It's not being formalised.</p>
+
+    <h3 class="reveal" style="margin-top:32px">Where paid meets organic meets community</h3>
+    <p class="reveal">Only around 30 of the 318 posts carry a clear paid signal — "gifted", "#ad", "sponsored", "ambassador", or "paid partnership". That's roughly 10%. Your own 49 feed posts carry zero native Paid Partnership tags. The picture is of a brand that gifts and hosts, rarely signs, and almost never formalises.</p>
+    <p class="reveal">The 10 recurring creators in the data — the only handles that posted about you three or more times — are the exception and the template. They are what an organised creator programme looks like when it's been stood up correctly.</p>
+    <ul class="reveal" style="list-style:none;padding-left:0;color:var(--muted);font-size:15px;line-height:1.8">
+      <li>· <b style="color:var(--text)">@runnersandstunners (5 posts, 45k views)</b> — Knead for Speed activations, <a class="post-link-inline" href="https://instagram.com/p/DQfJ8fFIT-U" target="_blank">12km run ending in free pastries</a>, group photos of 50+ women runners.</li>
+      <li>· <b style="color:var(--text)">@londongirlsbookclub_ (6 posts, 9k views)</b> — independent community, uses GAIL's as the host venue for monthly picks and <a class="post-link-inline" href="https://instagram.com/p/DVjRNl-DV9k" target="_blank">Run & Read events</a>.</li>
+      <li>· <b style="color:var(--text)">@becky.fitnesss (5 posts, 10.9k views, 2,022 likes)</b> — fitness lifestyle, <a class="post-link-inline" href="https://instagram.com/p/DUP8IUEi0Nq" target="_blank">Christmas Eve workout + pastry</a> framing.</li>
+      <li>· <b style="color:var(--text)">@readsby.emma (4 posts, 3,167 likes)</b> — book-led lifestyle, <a class="post-link-inline" href="https://instagram.com/p/DOTz2hbje8E" target="_blank">weekly reports</a> with GAIL's as a consistent cafe.</li>
+      <li>· <b style="color:var(--text)">@lanawilman (3 posts, 12,100 likes, 60.7k views)</b> — aesthetic home + <a class="post-link-inline" href="https://instagram.com/p/DJRDV3LIu6k" target="_blank">6am productive morning routines</a>.</li>
+      <li>· <b style="color:var(--text)">@george_in_london (3 posts, 8,403 likes, 249.1k views)</b> — London lifestyle itineraries that pull your bakeries into the city's cultural map.</li>
+    </ul>
+
+    <h3 class="reveal" style="margin-top:32px">Real conversation, not just likes</h3>
+    <p class="reveal">Filtering to posts with 50+ likes and looking at comment-to-like ratio surfaces the content that starts an actual conversation rather than scrolling a reflex tap. Top of that list: <a class="post-link-inline" href="https://instagram.com/p/DRW_tBmDaQM" target="_blank">@whatkp_didlondonfood's Christmas menu review</a> (45% ratio — direct opinion on your seasonal product) and <a class="post-link-inline" href="https://instagram.com/p/DP3AzoSCP3q" target="_blank">@jessie_foodies_london's seeded sourdough shot</a> (74% ratio — product-first discussion). The <a class="post-link-inline" href="https://instagram.com/p/DVVmp73jDz1" target="_blank">London Girls Book Club reveal post</a> pulls 33% ratio. The most talked-about content is product-specific and programme-specific, not lifestyle-backdrop.</p>
+
+    <div class="chart-split">
+      <div class="chart-wrap reveal" data-chart="paidOrganicChart">
+        <h4>Paid vs organic split</h4>
+        <p class="chart-sub">Most of what you see in the feed is earned. Formal paid partnership is a rounding error.</p>
+        <div class="chart-box"><canvas id="paidOrganicChart"></canvas></div>
+      </div>
+      <div class="chart-wrap reveal" data-chart="recurringChart">
+        <h4>Recurring vs one-time creators</h4>
+        <p class="chart-sub">247 creators posted about you once and were never brought back into a programme.</p>
+        <div class="chart-box"><canvas id="recurringChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The influencer verdict</span>
+      <p><b>You own a lifestyle your competitors can't buy. You run a community programme that's already producing recurring content. You've never systematically converted one-off creators into repeat partners.</b> The four most-used themes in creator content — fashion, food, London, coffee — are the four themes you don't formally brief against. Everything else in this report follows from that single gap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05: OPPORTUNITY -->
+<section id="opportunity">
+  <div class="container">
+    <span class="section-label reveal">05 — The Opportunity</span>
+    <h2 class="reveal">Six moves that change the game for GAIL's.</h2>
+    <p class="reveal" style="font-size:17px;color:var(--text);max-width:760px">Every opportunity below is sized off the data you've just read. No projected impressions, no hypothetical reach multipliers — each number is pulled from the 49 feed posts, the 318 creator posts, or the 185 live locations feeding this report.</p>
+
+    <div class="opp-grid stagger">
+      <div class="opp-card">
+        <span class="opp-label">Opportunity 01</span>
+        <div class="opp-title">Scale Knead for Speed and Book Club into a national community grid</div>
+        <p class="opp-body">Two community programmes are producing the only recurring creator content you have. Knead for Speed delivered <b>45k views</b> via @runnersandstunners alone. London Girls Book Club produced <b>6 posts and a monthly calendar</b> with your bakeries as the host venue. Both are working at London-scale. Neither has been systematised across the 185 sites, let alone the 40 opening by February. Build a Community Ops function that sources one run club and one book club per city, briefs them monthly, and tracks per-site attendance.</p>
+        <div class="opp-stat" data-count="11" data-suffix=" posts">11 posts</div>
+        <div class="opp-stat-sub">Already delivered by 2 community partnerships — at 185 sites, scale is the opportunity.</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="opp-label">Opportunity 02</span>
+        <div class="opp-title">Activate each new opening with 15–20 local creators, 4 weeks out</div>
+        <p class="opp-body">You're opening <b>40 new stores by February 2026</b>. Stoke Newington, Primrose Hill, Southwark, the Manchester cluster, and Gatwick South Terminal are already dated or confirmed. Each of those catchments has a different creator pool — the Stoke Newington creator is not the Primrose Hill creator is not the Manchester creator. Source locally per site, brief four weeks before opening, track bookings and footfall per location in the first 8 weeks. Run the play once, codify it, apply it to the next 40 openings.</p>
+        <div class="opp-stat">40 × 15</div>
+        <div class="opp-stat-sub">Stores × local creators per opening. You've done zero of these at scale.</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="opp-label">Opportunity 03</span>
+        <div class="opp-title">Flip your feed: 40% Behind-the-Scenes, not 10%</div>
+        <p class="opp-body">Your carrot cake tutorial (<a class="post-link-inline" href="https://instagram.com/p/DWY7OoxDP6E" target="_blank">6,031 likes</a>) is your single best-performing post in the data. Behind-the-Scenes pillar averages <b>1,403 likes</b> vs <b>526 for Inspirational</b>. Today, BTS is 10% of your feed. Move it to 40%. Commission a dedicated content producer in-bakery, film one baker per week, publish two BTS posts per week. The format already wins; the production ratio is the only thing holding it back.</p>
+        <div class="opp-stat" data-count="2.7" data-suffix="×" data-decimals="1">2.7×</div>
+        <div class="opp-stat-sub">Likes multiplier of BTS over your dominant pillar. The cheapest uplift in the report.</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="opp-label">Opportunity 04</span>
+        <div class="opp-title">Build a TikTok creator programme — you have 7k followers, you should have ten times that</div>
+        <p class="opp-body">TikTok: 7k followers. Instagram: 166k. Your TikTok presence is functionally absent for a brand at 185 sites with a carrot cake recipe that scores 6k likes as a 30-second video. Recruit 25 London TikTok food and lifestyle creators at micro-scale (10k–100k). Gift each six bakery visits in return for four posts. Use the existing highest-performing feed content (carrot cake, pistachio croissant, sourdough bread) as the creative brief. Measure by earned views per gifted visit.</p>
+        <div class="opp-stat" data-count="24" data-suffix="×">24×</div>
+        <div class="opp-stat-sub">Instagram : TikTok follower ratio. Closing half the gap is a year's work, and overdue.</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="opp-label">Opportunity 05</span>
+        <div class="opp-title">Formalise a Fashion Creator programme — it's the largest organic theme you've never briefed</div>
+        <p class="opp-body">Fashion and outfit content appear in <b>66% of the 318 creator posts</b> tagging GAIL's. You are the single most-used outfit backdrop in premium London bakery data. None of that traffic is briefed, sourced, or monetised by you. Build a standing 30-creator fashion roster across London and the new Northern stores, gift monthly style-aligned visits, and give them first access to the seasonal pastry drops. The bakery as photoshoot location is already happening. Charge it with intent.</p>
+        <div class="opp-stat" data-count="66" data-suffix="%">66%</div>
+        <div class="opp-stat-sub">Share of creator posts that treat you as a fashion backdrop, with zero fashion partnerships formally in place.</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="opp-label">Opportunity 06</span>
+        <div class="opp-title">Re-engage the 247 one-off creators — you're sitting on your own warm list</div>
+        <p class="opp-body">Of the 257 unique creators who posted about you, <b>247 did it once and were never brought back into a programme</b>. Every one of them is a warm lead: they already know the brand, they've already shown their audience your bakeries, and their posts are the dataset this report is built from. Segment them by theme (fashion, food, fitness, motherhood, books), automate a gifting outreach, convert the top 30% into a recurring roster. The discovery work is already done.</p>
+        <div class="opp-stat" data-count="247">247</div>
+        <div class="opp-stat-sub">Creators who posted once and were never re-engaged. Sup calls this a warm list. You call it free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section style="padding:64px 0 0;border-bottom:none">
+  <div class="container">
+    <div class="closing reveal">
+      <p class="closing-lead">We built this report because GAIL's creator data is genuinely interesting and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+      <p>Sup is an AI-native influencer marketing platform built around data and performance. We source local creators per location, run campaigns centrally from a single brief, and track results — bookings, Google reviews, footfall — per site. That's true whether you're running 5 bakeries or 225. With 40 new stores opening across London, Manchester, and the travel sector by February, we source local creators ahead of each opening and track performance per location from day one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  👋 Sup <span>·</span> sup.co <span>·</span> Confidential <span>·</span> April 2026
+</footer>
+
+<script>
+  const palette = {
+    gails: '#CF2030',
+    purple: '#534AB7',
+    teal: '#1D9E75',
+    coral: '#D85A30',
+    gray: '#71717A',
+    blue: '#378ADD',
+    border: '#E4E4E7',
+    text: '#09090B',
+    muted: '#71717A'
+  };
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ============ REVEAL OBSERVER ============
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .stagger, .hero-title, .comp-table tbody').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // ============ THEME BARS ============
+  const themeBarsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bars = entry.target.querySelectorAll('.theme-bar-fill');
+        entry.target.classList.add('visible');
+        bars.forEach((bar, i) => {
+          const w = parseFloat(bar.dataset.width);
+          setTimeout(() => {
+            bar.style.width = w + '%';
+          }, prefersReduced ? 0 : i * 40);
+        });
+        themeBarsObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+  document.querySelectorAll('.theme-bars').forEach(el => themeBarsObserver.observe(el));
+
+  // ============ NUMBER COUNTERS ============
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    if (isNaN(target)) return;
+    const suffix = el.dataset.suffix || '';
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const format = el.dataset.format || '';
+    const duration = prefersReduced ? 0 : 1400;
+    const start = performance.now();
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+    function render(val) {
+      let out;
+      if (format === 'comma') {
+        out = Math.round(val).toLocaleString('en-US');
+      } else if (decimals > 0) {
+        out = val.toFixed(decimals);
+      } else {
+        out = Math.round(val).toString();
+      }
+      el.textContent = out + suffix;
+    }
+
+    if (duration === 0) { render(target); return; }
+
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const val = target * easeOut(t);
+      render(val);
+      if (t < 1) requestAnimationFrame(frame);
+      else render(target);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.3 });
+
+  document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+  // ============ CHARTS (lazy init on scroll) ============
+  const chartFactories = {
+    followersChart: () => new Chart(document.getElementById('followersChart'), {
+      type: 'bar',
+      data: {
+        labels: ["GAIL's", 'Bread Ahead', 'Buns From Home', 'Fabrique', 'WatchHouse'],
+        datasets: [{
+          data: [166279, 423830, 186040, 108200, 107355],
+          backgroundColor: [palette.gails, palette.purple, palette.teal, palette.coral, palette.blue],
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: buildBarOpts({ yTick: v => (v/1000)+'k' })
+    }),
+    reviewScoreChart: () => new Chart(document.getElementById('reviewScoreChart'), {
+      type: 'bar',
+      data: {
+        labels: ["GAIL's", 'Bread Ahead', 'Buns From Home', 'Fabrique', 'WatchHouse'],
+        datasets: [{
+          data: [4.08, 3.15, 4.35, 4.32, 3.43],
+          backgroundColor: [palette.gails, palette.purple, palette.teal, palette.coral, palette.blue],
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: buildBarOpts({ beginAtZero: false, yMin: 3, yMax: 5 })
+    }),
+    viewsPerPostChart: () => new Chart(document.getElementById('viewsPerPostChart'), {
+      type: 'bar',
+      data: {
+        labels: ["GAIL's", 'Bread Ahead', 'Buns From Home', 'Fabrique', 'WatchHouse'],
+        datasets: [{
+          data: [1697956/318, 2337593/98, 2176011/104, 184470/46, 1280204/224].map(v => Math.round(v)),
+          backgroundColor: [palette.gails, palette.purple, palette.teal, palette.coral, palette.blue],
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: buildBarOpts({ yTick: v => (v/1000).toFixed(1)+'k' })
+    }),
+    pillarChart: () => new Chart(document.getElementById('pillarChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Behind-the-Scenes', 'Inspirational', 'Entertaining', 'Seasonal', 'Educational', 'Promotional'],
+        datasets: [{
+          data: [1403, 526, 521, 304, 192, 108],
+          backgroundColor: [palette.gails, palette.purple, palette.teal, palette.coral, palette.blue, palette.gray],
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: buildBarOpts({})
+    }),
+    pillarCountChart: () => new Chart(document.getElementById('pillarCountChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Behind-the-Scenes', 'Inspirational', 'Entertaining', 'Seasonal', 'Educational', 'Promotional'],
+        datasets: [{
+          data: [5, 33, 2, 6, 1, 1],
+          backgroundColor: [palette.gails, palette.purple, palette.teal, palette.coral, palette.blue, palette.gray],
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: buildBarOpts({})
+    }),
+    paidOrganicChart: () => new Chart(document.getElementById('paidOrganicChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Organic / earned', 'Likely coordinated (recurring)', 'Clearly paid (gifted, #ad, partnership)'],
+        datasets: [{
+          data: [243, 45, 30],
+          backgroundColor: [palette.purple, palette.teal, palette.gails],
+          borderWidth: 0,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        animation: {
+          duration: prefersReduced ? 0 : 1600,
+          easing: 'easeOutCubic',
+          animateRotate: true,
+          animateScale: true
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: palette.muted, font: { family: 'Inter', size: 12 }, padding: 14, boxWidth: 10, boxHeight: 10 }
+          },
+          tooltip: tooltipOpts()
+        }
+      }
+    }),
+    recurringChart: () => new Chart(document.getElementById('recurringChart'), {
+      type: 'bar',
+      data: {
+        labels: ['One-time creators', 'Recurring (3+ posts)'],
+        datasets: [{
+          data: [247, 10],
+          backgroundColor: [palette.gray, palette.gails],
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        ...buildBarOpts({}),
+        indexAxis: 'y',
+        scales: {
+          x: {
+            grid: { color: palette.border, drawBorder: false },
+            ticks: { color: palette.muted, font: { family: 'Inter', size: 11 } },
+            border: { display: false }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: palette.text, font: { family: 'Inter', size: 12, weight: '500' } },
+            border: { display: false }
+          }
+        }
+      }
+    })
+  };
+
+  function tooltipOpts() {
+    return {
+      backgroundColor: '#09090B',
+      padding: 12,
+      titleFont: { family: 'Inter', weight: '500', size: 12 },
+      bodyFont: { family: 'Inter', size: 12 },
+      cornerRadius: 8,
+      displayColors: false
+    };
+  }
+
+  function buildBarOpts({ yTick, beginAtZero, yMin, yMax } = {}) {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: prefersReduced ? 0 : 1500,
+        easing: 'easeOutCubic',
+        delay: (ctx) => ctx.type === 'data' && ctx.mode === 'default'
+          ? ctx.dataIndex * 90
+          : 0
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: tooltipOpts()
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: palette.muted, font: { family: 'Inter', size: 11 } },
+          border: { color: palette.border }
+        },
+        y: {
+          grid: { color: palette.border, drawBorder: false },
+          ticks: {
+            color: palette.muted,
+            font: { family: 'Inter', size: 11 },
+            ...(yTick ? { callback: yTick } : {})
+          },
+          border: { display: false },
+          ...(beginAtZero === false ? { beginAtZero: false } : {}),
+          ...(yMin !== undefined ? { suggestedMin: yMin } : {}),
+          ...(yMax !== undefined ? { suggestedMax: yMax } : {})
+        }
+      }
+    };
+  }
+
+  const chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const key = entry.target.dataset.chart;
+        if (key && chartFactories[key]) {
+          chartFactories[key]();
+          entry.target.classList.add('visible');
+          chartObserver.unobserve(entry.target);
+        }
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+
+  document.querySelectorAll('[data-chart]').forEach(el => chartObserver.observe(el));
+</script>
+
+</body>
+</html>
