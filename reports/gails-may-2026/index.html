@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAIL's Bakery, Influencer Marketing Intelligence Report, May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F4F4F5;
+    --text: #09090B;
+    --muted: #71717A;
+    --hint: #A1A1AA;
+    --border: #E4E4E7;
+    --accent: #000000;
+    --gails: #000000;
+    --c-purple: #534AB7;
+    --c-teal: #1D9E75;
+    --c-coral: #D85A30;
+    --c-gray: #71717A;
+    --c-blue: #378ADD;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: var(--text); }
+
+  /* Sticky nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 56px;
+    display: flex; align-items: center;
+    padding: 0 32px;
+  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .nav-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; border: 1px solid var(--border); border-radius: 9999px;
+    padding: 6px 12px; font-size: 13px; font-weight: 500;
+  }
+  .nav-divider { width: 1px; height: 18px; background: var(--border); }
+  .nav-brand-logo { height: 22px; width: auto; max-width: 88px; object-fit: contain; }
+  @media (max-width: 600px) { .nav-brand-logo { max-width: 64px; } }
+  .nav-center { flex: 1; display: flex; justify-content: center; gap: 22px; font-size: 13px; color: var(--muted); }
+  .nav-center a { text-decoration: none; }
+  .nav-center a:hover { color: var(--text); }
+  .nav-right .cta-pill {
+    background: #000; color: #fff; border-radius: 9999px;
+    padding: 8px 14px; font-size: 13px; font-weight: 500;
+    text-decoration: none;
+  }
+  @media (max-width: 900px) {
+    .nav { padding: 0 16px; }
+    .nav-center { overflow-x: auto; gap: 14px; font-size: 12px; padding: 0 8px; white-space: nowrap; }
+    .nav-center::-webkit-scrollbar { display: none; }
+    .nav-right { display: none; }
+  }
+
+  /* Layout */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 768px) { .container { padding: 0 20px; } }
+  section { padding: 96px 0; border-bottom: 1px solid var(--border); }
+  @media (max-width: 768px) { section { padding: 56px 0; } }
+
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .section-label .dot { display: inline-block; width: 6px; height: 6px; background: var(--text); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  h1 { font-size: 56px; line-height: 1.05; letter-spacing: -0.025em; font-weight: 500; margin: 0 0 24px 0; }
+  h2.headline { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 32px 0; max-width: 860px; }
+  h3 { font-size: 22px; line-height: 1.3; font-weight: 600; margin: 0 0 12px 0; letter-spacing: -0.01em; }
+  h4 { font-size: 15px; font-weight: 600; margin: 0 0 8px 0; letter-spacing: -0.01em; }
+  p { margin: 0 0 18px 0; color: var(--text); }
+  p.muted { color: var(--muted); }
+  @media (max-width: 768px) {
+    h1 { font-size: 36px; }
+    h2.headline { font-size: 30px; }
+    h3 { font-size: 18px; }
+  }
+
+  /* Cover */
+  .cover { background: #fff; padding: 96px 0 80px 0; }
+  .cover-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid var(--border); border-radius: 9999px;
+    padding: 8px 14px; font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .cover-pill .dot { width: 7px; height: 7px; background: var(--c-teal); border-radius: 50%; }
+  .cover h1 { font-size: 64px; line-height: 1.04; letter-spacing: -0.025em; font-weight: 500; max-width: 1000px; margin: 32px 0 24px 0; }
+  .cover-subtitle { font-size: 18px; color: var(--muted); max-width: 720px; margin-bottom: 56px; }
+  @media (max-width: 768px) { .cover h1 { font-size: 38px; } .cover-subtitle { font-size: 15px; margin-bottom: 32px; } }
+  .stats-bar {
+    display: flex; flex-wrap: wrap; gap: 0;
+    border: 1px solid var(--border); border-radius: 24px; overflow: hidden;
+  }
+  .stat-cell {
+    flex: 1 1 200px; padding: 28px 28px;
+    border-right: 1px solid var(--border);
+    min-width: 200px;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .num { font-size: 36px; font-weight: 500; letter-spacing: -0.02em; }
+  .stat-cell .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  @media (max-width: 768px) {
+    .stats-bar { flex-direction: column; }
+    .stat-cell { border-right: none; border-bottom: 1px solid var(--border); flex: 1 1 100%; }
+    .stat-cell:last-child { border-bottom: none; }
+  }
+
+  /* Stat cards */
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  @media (max-width: 768px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr; } }
+  .stat-card {
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px; background: #fff;
+  }
+  .stat-card.dark { background: #09090B; color: #fff; border-color: #09090B; }
+  .stat-card.dark .label { color: rgba(255,255,255,0.65); }
+  .stat-card.dark .sub { color: rgba(255,255,255,0.55); }
+  .stat-card .num { font-size: 36px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 6px; }
+  .stat-card .label { font-size: 13px; color: var(--muted); }
+  .stat-card .sub { font-size: 12px; color: var(--hint); margin-top: 6px; }
+
+  /* Chart blocks */
+  .chart-block { border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 24px 0; background: #fff; }
+  .chart-block h4 { margin-bottom: 16px; }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  @media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+  .chart-container { position: relative; height: 320px; width: 100%; }
+  .chart-container.tall { height: 420px; }
+
+  /* Callout boxes */
+  .callout {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 32px; margin: 32px 0;
+  }
+  .callout .big { font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; margin: 0; }
+  .callout .small { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  /* Comparison table */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; margin: 24px 0; background: #fff; }
+  table.comp { width: 100%; border-collapse: collapse; min-width: 680px; }
+  table.comp th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 500; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  table.comp td { padding: 16px 20px; border-bottom: 1px solid var(--surface); font-size: 14px; }
+  table.comp tr:last-child td { border-bottom: none; }
+  table.comp tr.target td { background: #FAFAFA; font-weight: 500; }
+  table.comp .brand-cell { display: flex; align-items: center; gap: 10px; }
+  table.comp .brand-cell img { width: 24px; height: 24px; border-radius: 4px; object-fit: cover; }
+
+  /* Competitor cards */
+  .comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+  @media (max-width: 768px) { .comp-grid { grid-template-columns: 1fr; } }
+  .comp-card { border: 1px solid var(--border); border-radius: 16px; padding: 24px; background: #fff; }
+  .comp-card .head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .comp-card .head img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); }
+  .comp-card .head .meta { font-size: 12px; color: var(--muted); }
+  .comp-card p { font-size: 14px; color: var(--text); }
+  .comp-card .row-stats { display: flex; gap: 24px; margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--surface); }
+  .comp-card .row-stats div { font-size: 12px; color: var(--muted); }
+  .comp-card .row-stats div b { display: block; color: var(--text); font-size: 16px; font-weight: 500; margin-bottom: 2px; }
+
+  /* Top posts cards */
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 768px) { .post-grid { grid-template-columns: 1fr; } }
+  .post-card { border: 1px solid var(--border); border-radius: 16px; padding: 20px; background: #fff; display: flex; flex-direction: column; gap: 12px; }
+  .post-card .post-head { display: flex; gap: 12px; }
+  .post-card .post-head .post-thumb { width: 64px; height: 64px; border-radius: 8px; background: var(--surface); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--hint); border: 1px solid var(--border); }
+  .post-card .post-head .post-info .pill { font-size: 11px; color: var(--muted); }
+  .post-card .post-head .post-info .pill b { color: var(--text); font-weight: 600; }
+  .post-card .quote { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .post-card .post-foot { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: auto; }
+  .post-card .post-foot b { color: var(--text); font-weight: 500; }
+  .post-card a.view-link { font-size: 12px; color: var(--c-blue); text-decoration: none; align-self: flex-start; }
+
+  /* Ads gallery */
+  .ads-gallery { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; margin: 24px -32px; padding-left: 32px; padding-right: 32px; }
+  .ads-gallery::-webkit-scrollbar { height: 6px; }
+  .ad-card { flex: 0 0 280px; border: 1px solid var(--border); border-radius: 16px; padding: 16px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .ad-card .ad-visual {
+    height: 120px; border-radius: 12px;
+    background: linear-gradient(135deg, #FAFAFA 0%, #F4F4F5 100%);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+  }
+  .ad-card .ad-visual img { max-height: 90%; max-width: 80%; object-fit: contain; border-radius: 6px; }
+  .ad-card .ad-meta { font-size: 12px; color: var(--muted); }
+  .ad-card .ad-meta b { color: var(--text); }
+  .ad-card .ad-days { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .ad-card .ad-hook { font-size: 13px; color: var(--text); line-height: 1.5; flex: 1; }
+  .ad-card a { font-size: 12px; color: var(--c-blue); text-decoration: none; }
+
+  /* Pillar bars */
+  .bar-row { margin-bottom: 14px; }
+  .bar-row .bar-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+  .bar-row .bar-label .pct { color: var(--muted); }
+  .bar-track { background: var(--surface); height: 8px; border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--gails); border-radius: 4px; }
+
+  /* Opportunity cards */
+  .opp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  @media (max-width: 900px) { .opp-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .opp-grid { grid-template-columns: 1fr; } }
+  .opp-card {
+    border: 1px solid var(--border); border-radius: 24px;
+    padding: 28px; background: #FAFAFA; display: flex; flex-direction: column;
+  }
+  .opp-card .opp-num { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  .opp-card h3 { font-size: 20px; line-height: 1.25; margin-bottom: 12px; }
+  .opp-card p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .opp-card .opp-stat {
+    margin-top: auto; padding-top: 20px;
+    font-size: 28px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.15;
+  }
+
+  /* Shortlist cards */
+  .short-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  @media (max-width: 900px) { .short-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .short-grid { grid-template-columns: 1fr; } }
+  .short-card { border: 1px solid var(--border); border-radius: 16px; padding: 22px; background: #fff; display: flex; flex-direction: column; gap: 12px; }
+  .short-card .top { display: flex; align-items: center; gap: 12px; }
+  .short-card .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: var(--surface); border: 1px solid var(--border); flex-shrink: 0; }
+  .short-card .who { flex: 1; min-width: 0; }
+  .short-card .who .handle { font-size: 15px; font-weight: 600; text-decoration: none; color: var(--text); display: block; }
+  .short-card .who .name { font-size: 12px; color: var(--muted); }
+  .short-card .badge { font-size: 10px; padding: 3px 8px; border-radius: 9999px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); font-weight: 500; flex-shrink: 0; }
+  .short-card .why { font-size: 13px; color: var(--text); line-height: 1.55; }
+  .short-card .stats-row { display: flex; gap: 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .short-card .stats-row b { color: var(--text); font-weight: 500; }
+  .short-card .post-links { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+  .short-card .post-links a { color: var(--c-blue); text-decoration: none; }
+
+  /* Inspiration gallery */
+  .insp-gallery { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; margin: 24px -32px; padding-left: 32px; padding-right: 32px; }
+  .insp-card { flex: 0 0 240px; border: 1px solid var(--border); border-radius: 16px; padding: 16px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .insp-card .insp-visual {
+    height: 200px; border-radius: 12px; overflow: hidden;
+    background: linear-gradient(135deg, #FAFAFA 0%, #F4F4F5 100%);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+  }
+  .insp-card .insp-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .insp-card .insp-meta { font-size: 12px; color: var(--muted); }
+  .insp-card .insp-meta b { color: var(--text); }
+  .insp-card .insp-handle { font-weight: 600; font-size: 14px; }
+  .insp-card a { color: var(--c-blue); text-decoration: none; font-size: 12px; }
+
+  /* Closing block */
+  .closing { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 48px 40px; margin: 40px 0; }
+  .closing p { font-size: 16px; line-height: 1.65; color: var(--text); }
+  .closing .who { font-weight: 600; margin: 22px 0 6px 0; }
+
+  .footer { text-align: center; padding: 32px 16px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <span class="nav-pill">👋 Sup</span>
+    <span class="nav-divider"></span>
+    <img class="nav-brand-logo" src="https://gails.com/cdn/shop/files/gails-logo_1.png?v=1678900193" alt="GAIL's">
+  </div>
+  <div class="nav-center">
+    <a href="#s01">Benchmark</a>
+    <a href="#s02">Competitors</a>
+    <a href="#s03">Content</a>
+    <a href="#s04">Paid Ads</a>
+    <a href="#s05">Influencers</a>
+    <a href="#s06">Opportunity</a>
+    <a href="#s07">Shortlist</a>
+  </div>
+  <div class="nav-right">
+    <a class="cta-pill" href="#s06">View Opportunity →</a>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="container">
+    <span class="cover-pill"><span class="dot"></span> Influencer Marketing Intelligence Report</span>
+    <h1>185 stores. One ad. Zero of the category's top creators.</h1>
+    <p class="cover-subtitle">A deep-data look at where GAIL's Bakery sits inside a 595-brand category, what your competitors are doing with creators, and the 10 creators we'd contact this week if we ran your marketing.</p>
+    <div class="stats-bar">
+      <div class="stat-cell"><div class="num">185</div><div class="label">UK locations after recent expansion</div></div>
+      <div class="stat-cell"><div class="num">166k</div><div class="label">Instagram followers (rank 19th)</div></div>
+      <div class="stat-cell"><div class="num">1</div><div class="label">Active paid ad (category runs 797)</div></div>
+      <div class="stat-cell"><div class="num">0</div><div class="label">Top-30 creators tagging GAIL's</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 01 - BENCHMARK -->
+<section id="s01">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 01 Market Benchmark</div>
+    <h2 class="headline">The 5th-largest chain in the category. The 19th-largest creator presence.</h2>
+    <p>We analysed 595 UK bakery, café and coffee brands over a 40-day window (8 February to 19 March 2026). GAIL's ranks in the top 5 of the category on every physical metric we track: locations, Google reviews, real-world footprint. On every digital reach metric, GAIL's sits well below where the chain footprint suggests it should be. The gap is the story.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card dark">
+        <div class="num">5th</div>
+        <div class="label">Chain size (locations, 595 brands ranked)</div>
+        <div class="sub">185 verified UK sites after the 40-store expansion year that closed in February 2026.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">19th</div>
+        <div class="label">Instagram followers, ranked across category</div>
+        <div class="sub">166k followers. Maison Ladurée has 910k from 131 sites. Blank Street has 169k from 97.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">21st</div>
+        <div class="label">Total IG views over the 40-day window</div>
+        <div class="sub">117k views across 60 posts. An average of 1,950 views per post.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">595</div>
+        <div class="label">Brands in the bakery, café and coffee category</div>
+        <div class="sub">Only 41 of them are actively advertising. The category is concentrated.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">3,326</div>
+        <div class="label">Google reviews at 4.1 stars (Notting Hill flagship)</div>
+        <div class="sub">Strong physical-world signal. Customers love showing up. They just don't post about it.</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="num">28th</div>
+        <div class="label">Active paid ads in the category</div>
+        <div class="sub">1 ad. 5-day lifetime. The category is loud, you are whispering.</div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-block">
+        <h4>Followers vs locations, top 20 chain brands</h4>
+        <div class="chart-container"><canvas id="chartBenchmark"></canvas></div>
+      </div>
+      <div class="chart-block">
+        <h4>IG views over 40 days, top 12 brands</h4>
+        <div class="chart-container"><canvas id="chartViews"></canvas></div>
+      </div>
+    </div>
+
+    <p>The pattern is consistent. The brands punching above their physical footprint on creator reach are not the brands with the most stores. Blank Street has 97 sites and roughly the same follower count as GAIL's. Bread Ahead has 21 sites and 2.5 times as many followers. Maison Ladurée has 131 sites and 5.5 times as many followers. None of these brands are winning because they post more often. They are winning because creators talk about them.</p>
+
+    <p>This report is about closing that specific gap. Not the awareness gap (you are a household name in London bakery), but the reach gap that sits between a brand creators already use and a brand creators actually post about. The data shows that GAIL's already has the foundations of a creator programme. The question is whether the programme can scale at the rate the chain itself is scaling.</p>
+
+    <div class="callout">
+      <p class="big">GAIL's is the 5th-largest chain in the category. And the 19th-largest creator presence. The chain footprint is winning. The creator programme isn't keeping up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02 - COMPETITORS -->
+<section id="s02">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 02 Competitor Deep-Dive</div>
+    <h2 class="headline">97 stores at Blank Street. 13 of the top 30 creators in the category. 130 stores at GAIL's. Zero.</h2>
+    <p>We profiled five direct competitors: the closest UK chain bakery and café operators by footprint, format, and brand positioning. The table below benchmarks each on the metrics that determine whether a creator programme is working.</p>
+
+    <div class="table-wrap">
+      <table class="comp">
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>UK locations</th>
+            <th>IG followers</th>
+            <th>IG views (40d)</th>
+            <th>IG posts (40d)</th>
+            <th>Avg views/post</th>
+            <th>Active paid ads</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="target">
+            <td><div class="brand-cell"><img src="https://gails.com/cdn/shop/files/gails-logo_1.png?v=1678900193" alt="GAIL's" onerror="this.style.display='none'"><b>GAIL's</b></div></td>
+            <td>185</td>
+            <td>166,279</td>
+            <td>116,982</td>
+            <td>60</td>
+            <td>1,950</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><div class="brand-cell"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street" onerror="this.style.display='none'">Blank Street</div></td>
+            <td>97</td>
+            <td>169,340</td>
+            <td>1,474,364</td>
+            <td>317</td>
+            <td>4,651</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><div class="brand-cell"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead" onerror="this.style.display='none'">Bread Ahead</div></td>
+            <td>21</td>
+            <td>423,830</td>
+            <td>494,264</td>
+            <td>20</td>
+            <td>24,713</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><div class="brand-cell"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f5f77570-675e-4224-8bde-860218e06dc9" alt="Buns from Home" onerror="this.style.display='none'">Buns from Home</div></td>
+            <td>25</td>
+            <td>186,040</td>
+            <td>15,172</td>
+            <td>20</td>
+            <td>759</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><div class="brand-cell"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f41f5219-da7d-43b8-a43c-71b00a24c013" alt="Maison Ladurée" onerror="this.style.display='none'">Maison Ladurée</div></td>
+            <td>131</td>
+            <td>910,926</td>
+            <td>528,990</td>
+            <td>71</td>
+            <td>7,451</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td><div class="brand-cell"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/b192f961-b538-473f-9b29-d56c285b7a58" alt="Pophams" onerror="this.style.display='none'">Pophams</div></td>
+            <td>independent</td>
+            <td>269,944</td>
+            <td>85,292</td>
+            <td>22</td>
+            <td>3,877</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Two findings sit on top of this table. First, Bread Ahead is the most efficient creator brand in the category, with 24,713 average views per post on 21 sites. They post less than GAIL's and reach more than ten times the audience per post. Second, Blank Street has done something operationally different from everyone else here: they post 317 times in 40 days. That is roughly 8 IG posts per day, or one every three hours. Their creator footprint is built on volume and frequency, not on prestige.</p>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="head">
+          <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street" onerror="this.style.display='none'">
+          <div>
+            <h3 style="margin:0; font-size:18px;">Blank Street</h3>
+            <div class="meta">97 stores, 169k followers, 0 paid ads</div>
+          </div>
+        </div>
+        <p>Blank Street is the cautionary tale of this report. They have a smaller physical footprint than GAIL's, run zero paid ads, and have captured the matcha and lifestyle creator pool almost entirely. Of the 30 most-followed creators in the category on TikTok, 18 of them have tagged Blank Street in the last 60 days. On Instagram, the figure is 13 of 30. They have done this by building product moments designed to be filmed (the "Blank Street Sleeve" launch generated a 406k-view Reel from a 1.5k-follower creator) and by feeding a constant stream of UGC into their own feed.</p>
+        <div class="row-stats">
+          <div><b>30+</b>top creators tagging</div>
+          <div><b>4,651</b>avg views/post</div>
+          <div><b>0</b>paid ads</div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="head">
+          <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead" onerror="this.style.display='none'">
+          <div>
+            <h3 style="margin:0; font-size:18px;">Bread Ahead</h3>
+            <div class="meta">21 stores, 424k followers, 1 paid ad</div>
+          </div>
+        </div>
+        <p>Bread Ahead is the brand most directly comparable to GAIL's on product, but they have built a different creator strategy: own the doughnut. Their hot cross bun making class is a recurring creator anchor. Bite Twice (223k followers) attended one in the dataset window and posted a 115k-view Reel. Olamide Daybyday (26k followers) posted a 215k-view reaction Reel tagged @breadaheadbakery. The class itself is the marketing asset. Creators come, film, and post on their own timeline.</p>
+        <div class="row-stats">
+          <div><b>24,713</b>avg views/post</div>
+          <div><b>2.5x</b>followers vs GAIL's</div>
+          <div><b>21</b>stores</div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="head">
+          <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f5f77570-675e-4224-8bde-860218e06dc9" alt="Buns from Home" onerror="this.style.display='none'">
+          <div>
+            <h3 style="margin:0; font-size:18px;">Buns from Home</h3>
+            <div class="meta">25 stores, 186k followers, 0 paid ads</div>
+          </div>
+        </div>
+        <p>The most direct format match to GAIL's: a chain bakery-café focused on hot, fresh, in-store-baked product. Their digital footprint is the weakest in this competitor set (759 average views per post), which suggests the brand is at an earlier stage of creator investment than GAIL's. Buns from Home is the natural ceiling-test: if you cannot win against them on creator reach with 7x their footprint, the gap is operational, not strategic.</p>
+        <div class="row-stats">
+          <div><b>759</b>avg views/post</div>
+          <div><b>25</b>stores</div>
+          <div><b>0</b>paid ads</div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="head">
+          <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f41f5219-da7d-43b8-a43c-71b00a24c013" alt="Maison Ladurée" onerror="this.style.display='none'">
+          <div>
+            <h3 style="margin:0; font-size:18px;">Maison Ladurée</h3>
+            <div class="meta">131 stores, 910k followers, 8 paid ads</div>
+          </div>
+        </div>
+        <p>The premium scale benchmark. Ladurée has roughly the same UK and global footprint as GAIL's but 5.5x the IG following and runs 8 active paid ads. Their creator pool skews international and aspirational: Soldana (196k) chose a Ladurée café for a gender-reveal moment and pulled 242k views. Parisfood Lilera (139k) featured them in a Paris café roundup. Ladurée's lesson is that the chain footprint is the asset only if you give creators an experience worth posting.</p>
+        <div class="row-stats">
+          <div><b>910k</b>followers</div>
+          <div><b>8</b>active paid ads</div>
+          <div><b>5.5x</b>follower ratio</div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="head">
+          <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/b192f961-b538-473f-9b29-d56c285b7a58" alt="Pophams" onerror="this.style.display='none'">
+          <div>
+            <h3 style="margin:0; font-size:18px;">Pophams Bakery</h3>
+            <div class="meta">Independent, 270k followers, 0 paid ads</div>
+          </div>
+        </div>
+        <p>The "independent threat" comparison. Pophams runs without a chain footprint and without any paid spend, yet they have 270k followers and a 3,877 average views per post on 22 posts. Kaitlyn Park (a creator we found on the top-30 list) posted a 40k-view Pophams vlog. Pophams works because the bakery is a destination. They have made the product the marketing.</p>
+        <div class="row-stats">
+          <div><b>3,877</b>avg views/post</div>
+          <div><b>270k</b>followers</div>
+          <div><b>0</b>paid ads</div>
+        </div>
+      </div>
+    </div>
+
+    <p>GAIL's just completed a 40-store expansion year, taking the chain from 145 to 185 sites, including first openings in the south-west (Bristol, Bath, Salisbury, Marlborough). The Harrogate opening is confirmed for the second half of 2026. The competitive context for that expansion is captured in the table above: GAIL's is now operationally the largest chain in this dataset by a wide margin, but the brand's creator footprint sits behind every chain competitor on the same row. Each new opening is a fresh local-creator activation opportunity that the current programme is not built to capture.</p>
+
+    <div class="callout">
+      <p class="big">Blank Street has 97 stores and 13 of the top 30 IG creators posting about them. GAIL's has 185 stores and zero.</p>
+      <p class="small">Same follower count. Different conversion of physical reach into creator reach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03 - FEED CONTENT -->
+<section id="s03">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 03 Feed Content Strategy</div>
+    <h2 class="headline">Your best-performing pillar gets 3x more engagement. You post it 16% of the time.</h2>
+    <p>We analysed every post on the GAIL's Instagram feed over the last 90 days: 50 posts in total, split between Reels, Carousels, and Photos. The conclusion is one of the cleanest findings in this report. The pillar that performs best on your own feed is the pillar you post the least.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">9,924</div>
+        <div class="label">Likes on your top post in 90 days</div>
+        <div class="sub">A carrot cake recipe Reel. Behind-the-scenes pillar. Posted April.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">1,562</div>
+        <div class="label">Average likes per BTS post (8 posts)</div>
+        <div class="sub">Recipes, ingredient sourcing, in-bakery process.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">482</div>
+        <div class="label">Average likes per Inspirational post (28)</div>
+        <div class="sub">Product photography, seasonal menu announcements.</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="num">3.2x</div>
+        <div class="label">Engagement gap: BTS vs Inspirational</div>
+        <div class="sub">BTS is the under-bet pillar. The data is unambiguous.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">84%</div>
+        <div class="label">Of your output is something other than BTS</div>
+        <div class="sub">Inspirational, seasonal, promotional, entertaining.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">16%</div>
+        <div class="label">Of your output is the pillar that wins</div>
+        <div class="sub">8 of 50 posts in 90 days are behind-the-scenes.</div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-block">
+        <h4>Pillar mix vs average likes per pillar</h4>
+        <div class="chart-container"><canvas id="chartPillarMix"></canvas></div>
+      </div>
+      <div class="chart-block">
+        <h4>Posting cadence by month</h4>
+        <div class="chart-container"><canvas id="chartCadence"></canvas></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;">Top 5 posts on your feed over the last 90 days</h3>
+    <div class="post-grid">
+      <div class="post-card">
+        <div class="post-head">
+          <div class="post-thumb">BTS</div>
+          <div class="post-info"><div class="pill">Behind-the-Scenes Reel</div><div style="font-size:11px; color: var(--muted); margin-top:2px;">April 2026</div></div>
+        </div>
+        <div class="quote">"Our carrot cakes have been a much-loved fixture for years, and we're always being asked for the recipe. So here it is."</div>
+        <div class="post-foot"><b>9,924</b>likes <b>251</b>comments</div>
+        <a class="view-link" href="https://instagram.com/p/DWY7OoxDP6E" target="_blank">View post →</a>
+      </div>
+      <div class="post-card">
+        <div class="post-head">
+          <div class="post-thumb">PHOTO</div>
+          <div class="post-info"><div class="pill">Inspirational Photo</div><div style="font-size:11px; color: var(--muted); margin-top:2px;">February 2026</div></div>
+        </div>
+        <div class="quote">"Mondays call for a pick-me-up. Or two (or three). Which one are you choosing?"</div>
+        <div class="post-foot"><b>3,219</b>likes <b>56</b>comments</div>
+        <a class="view-link" href="https://instagram.com/p/DU0h545jLFu" target="_blank">View post →</a>
+      </div>
+      <div class="post-card">
+        <div class="post-head">
+          <div class="post-thumb">BTS</div>
+          <div class="post-info"><div class="pill">Behind-the-Scenes Reel</div><div style="font-size:11px; color: var(--muted); margin-top:2px;">April 2026</div></div>
+        </div>
+        <div class="quote">"Sometimes you need more from lunch than a simple refuel. For the days when you fancy something more indulgent, our Taleggio & Mushroom brioche is rich with flavour."</div>
+        <div class="post-foot"><b>827</b>likes <b>24</b>comments</div>
+        <a class="view-link" href="https://instagram.com/p/DXd6q37jKSn" target="_blank">View post →</a>
+      </div>
+      <div class="post-card">
+        <div class="post-head">
+          <div class="post-thumb">CAR</div>
+          <div class="post-info"><div class="pill">Inspirational Carousel</div><div style="font-size:11px; color: var(--muted); margin-top:2px;">April 2026</div></div>
+        </div>
+        <div class="quote">"Layers of pistachio and chocolatey pastry melt together in this fudgy breakfast treat. Our Pistachio & Chocolate Croissant."</div>
+        <div class="post-foot"><b>807</b>likes <b>15</b>comments</div>
+        <a class="view-link" href="https://instagram.com/p/DXjUohHjPI7" target="_blank">View post →</a>
+      </div>
+      <div class="post-card">
+        <div class="post-head">
+          <div class="post-thumb">REEL</div>
+          <div class="post-info"><div class="pill">Inspirational Reel</div><div style="font-size:11px; color: var(--muted); margin-top:2px;">March 2026</div></div>
+        </div>
+        <div class="quote">"From jammy sunflower seed butter cookies to malty, chocolatey Stout cakes and savoury mushroom and Taleggio buns, this season we're."</div>
+        <div class="post-foot"><b>776</b>likes <b>16</b>comments</div>
+        <a class="view-link" href="https://instagram.com/p/DV3CYdAFJAW" target="_blank">View post →</a>
+      </div>
+    </div>
+
+    <p style="margin-top:32px;">The paradox is clean. Two of your top three posts are behind-the-scenes content, and the top post outperforms the next-best post by a factor of three. Yet the bulk of the feed continues to lead with product photography and inspirational stylings, which average 482 likes. Inspirational content is not failing in any absolute sense, it is just not your highest-leverage format. The same content production effort, redirected toward more recipe walkthroughs, kitchen-side process moments, ingredient sourcing trips, and baker-led explainers, would compound the feed's reach without any change in posting cadence.</p>
+
+    <p>One operational note. The funnel mix on your feed is 84% TOFU (top of funnel, awareness-led). Only 14% sits at the MOFU stage where consideration and education live. Behind-the-scenes content is almost always MOFU-coded by the algorithm, which is why it gets disproportionate reach: viewers stay longer, save more, and the algorithm reads that as quality signal. The platform is already telling you what to do. The feed mix is what's not listening yet.</p>
+
+    <div class="callout">
+      <p class="big">Your top-performing pillar gets 3x the engagement of your most-posted pillar. You post it 16% of the time.</p>
+      <p class="small">Behind-the-scenes content averages 1,562 likes. Inspirational content averages 482. The shift is operational, not creative.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04 - PAID ADS -->
+<section id="s04">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 04 Paid Ads Intelligence</div>
+    <h2 class="headline">Your category runs 797 ads. You run one.</h2>
+    <p>The category around GAIL's is loud. We tracked every paid ad creative running across the 595 brands in the category window. The result: 797 unique creatives from 41 active advertisers, 208 of them still live at the time of this report. Inside that loud category, GAIL's runs exactly one ad. It is a five-day-old cinematic spring-menu spot, and it doesn't match the DNA of anything that's actually surviving.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">797</div>
+        <div class="label">Active paid ad creatives in your category</div>
+        <div class="sub">208 of them still live at time of analysis.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">41</div>
+        <div class="label">Brands actively advertising in the category</div>
+        <div class="sub">7% of all brands tracked. The competitive set is concentrated.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">4.8%</div>
+        <div class="label">Of ads survive past 60 days (the winner rate)</div>
+        <div class="sub">Below the 11% industry benchmark. This category is harder than average.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">26%</div>
+        <div class="label">Of 60-day winners are creator-led UGC</div>
+        <div class="sub">14 percentage points above the all-ads baseline.</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="num">1</div>
+        <div class="label">Active GAIL's ad</div>
+        <div class="sub">Cinematic spring menu. 5 days running. TOFU.</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="num">5d</div>
+        <div class="label">Your longest-running ad</div>
+        <div class="sub">The category's longest is 1,705 days. Yours is shorter than a school week.</div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-block">
+        <h4>Ad longevity distribution (all 797 creatives)</h4>
+        <div class="chart-container"><canvas id="chartLongevity"></canvas></div>
+      </div>
+      <div class="chart-block">
+        <h4>Winner DNA: 60+ day survivors vs all ads</h4>
+        <div class="chart-container"><canvas id="chartWinnerDNA"></canvas></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;">Beat 1: the category is at full volume</h3>
+    <p>Forty-one brands are actively running paid social in this category right now, between them generating 797 unique creatives over the analysis window. The brands with the most active creatives are Pieminister (47), Brigit's Bakery (24), Volcano Coffee Works (18), Origin Coffee Roasters (16) and Gaya Bakery (13). These are the "testing factories," brands running large creative volumes to find what works. None of them are direct GAIL's competitors. The actual bakery and café chains in the category are running smaller portfolios.</p>
+
+    <h3>Beat 2: most ads die quickly</h3>
+    <p>Of the 797 creatives, 381 (48%) ran for fewer than 30 days. Only 38 creatives have survived past 60 days and remain live. That's a 4.8% survival rate, which is notably worse than the broader Meta ad-platform benchmark of around 11%. Your category is harder to crack than average. The ads that have made it past 60 days are the only ones worth studying, because every other ad in the dataset is a creative bet that the platform has already rejected. The 60-day still-active pool is the category's verified-winning set.</p>
+
+    <div class="chart-block">
+      <h4>Active ads by brand vs median runtime (top 12)</h4>
+      <div class="chart-container tall"><canvas id="chartBrandScatter"></canvas></div>
+    </div>
+
+    <h3 style="margin-top:24px;">Beat 3: the winners look very different from the also-rans</h3>
+    <p>The 38 ads that have survived the platform's profitability filter share a clear DNA. Compared to the full 797-ad dataset, the winners are 25 percentage points more likely to be video, 14 points more likely to be creator-led UGC, and 30 points more likely to be classified as Inspirational rather than Promotional content. The dying format is the static-graphic single-image carousel running a Promotional message. The surviving format is medium-production-complexity video with an Inspirational frame.</p>
+
+    <p>Two single-brand outliers carry most of the category's verified-winning learning. Origin Coffee Roasters owns six of the 38 winners, including a 511-day still-running UGC video built around a "Work From Home with our coffee" hook (the longest-running creator-led ad in the category by a wide margin). The Chai Guys own seven of the winners, mostly product-only carousels in a saturated red colour palette that anchor a recognisable brand pattern across the funnel. Neither brand is a direct GAIL's competitor, but their ads are the closest thing the category has to a proven playbook.</p>
+
+    <div class="ads-gallery">
+      <div class="ad-card">
+        <div class="ad-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Origin Coffee"></div>
+        <div class="ad-days">511 days</div>
+        <div class="ad-meta"><b>Origin Coffee Roasters</b> · video · UGC · TOFU</div>
+        <div class="ad-hook">"Visual satisfaction and the relatable Work From Home context, combined with high-speed rhythmic cuts of aesthetic coffee preparation."</div>
+        <a href="https://www.facebook.com/ads/library?id=470661439001042" target="_blank">View ad in Meta Ad Library →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Origin Coffee"></div>
+        <div class="ad-days">391 days</div>
+        <div class="ad-meta"><b>Origin Coffee Roasters</b> · carousel · Static · BOFU</div>
+        <div class="ad-hook">"Social proof and authority, the list of impressive stats (10,000+ reviews, 20 years expertise) acts as a trust-building anchor."</div>
+        <a href="https://www.facebook.com/ads/library?id=1447927442864649" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Origin Coffee"></div>
+        <div class="ad-days">357 days</div>
+        <div class="ad-meta"><b>Origin Coffee Roasters</b> · video · Polished · TOFU</div>
+        <div class="ad-hook">"A direct question overlay (What's your favourite coffee?) creates a curiosity gap for coffee lovers."</div>
+        <a href="https://www.facebook.com/ads/library?id=691262070156165" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Origin Coffee"></div>
+        <div class="ad-days">258 days</div>
+        <div class="ad-meta"><b>Origin Coffee Roasters</b> · video · Cinematic · TOFU</div>
+        <div class="ad-hook">"Visual beauty of a coffee farm combined with a strong, positive value statement: We believe coffee can be a force for good."</div>
+        <a href="https://www.facebook.com/ads/library?id=2269933023452818" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual">CG</div>
+        <div class="ad-days">315 days</div>
+        <div class="ad-meta"><b>The Chai Guys</b> · carousel · Product-Only · BOFU</div>
+        <div class="ad-hook">"Visual appeal through a bold, saturated red colour palette and a culturally resonant illustration that acts as a pattern interrupt in the feed."</div>
+        <a href="https://www.facebook.com/ads/library?id=1036195778701648" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual">M</div>
+        <div class="ad-days">1,705 days</div>
+        <div class="ad-meta"><b>Manze's Pie and Mash</b> · image · Static Graphic · TOFU</div>
+        <div class="ad-hook">"Sensory appeal through 'food porn' aesthetics, the mid-pour action creates an immediate focal point."</div>
+        <a href="https://www.facebook.com/ads/library?id=191329249760774" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual">J&B</div>
+        <div class="ad-days">361 days</div>
+        <div class="ad-meta"><b>Jack & Beyond</b> · carousel · Static · TOFU</div>
+        <div class="ad-hook">"Sensory appeal and the satisfying visual of a clean knife cut through soft, pristine frosting."</div>
+        <a href="https://www.facebook.com/ads/library?id=1128638549023136" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual">M</div>
+        <div class="ad-days">234 days</div>
+        <div class="ad-meta"><b>Manze's Pie and Mash</b> · video · Polished · BOFU</div>
+        <div class="ad-hook">"Visual heritage and brand recognition using a drone shot of a famous London landmark shop front combined with a high-contrast cut."</div>
+        <a href="https://www.facebook.com/ads/library?id=820134767010331" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual">O</div>
+        <div class="ad-days">291 days</div>
+        <div class="ad-meta"><b>Origin Coffee Roasters</b> · carousel · Static · MOFU</div>
+        <div class="ad-hook">"Authority and Social Proof. By claiming to be Trusted by your favourite baristas, it creates immediate curiosity gap."</div>
+        <a href="https://www.facebook.com/ads/library?id=1284576429694897" target="_blank">View ad →</a>
+      </div>
+      <div class="ad-card">
+        <div class="ad-visual">MS</div>
+        <div class="ad-days">118 days</div>
+        <div class="ad-meta"><b>Moonstruck Café</b> · carousel · Static · BOFU</div>
+        <div class="ad-hook">"The use of the word Academy combined with a clean, high-contrast layout creates an immediate sense of authority and premium positioning."</div>
+        <a href="https://www.facebook.com/ads/library?id=1437464591340037" target="_blank">View ad →</a>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;">Beat 4: where GAIL's actually sits on the map</h3>
+    <p>GAIL's runs one active paid creative. It is a five-day-old cinematic video promoting the Spring Menu, classified as TOFU with a Polished Brand style. On paper, this fits the winning DNA: it is a video, it is medium-production-complexity, it is not a static graphic. In practice, with five days of runtime, it has not been in market long enough to learn anything from. The bigger issue is the absence of everything else. The category's verified-winning playbook is built on continuous testing across multiple creator-led video assets, with the best performers extended for hundreds of days. Origin Coffee built a 511-day winner because they had something to put up against the other creative options they were testing.</p>
+
+    <div class="callout">
+      <p class="big">The 38 ads that have survived 60 days in your category share a DNA your portfolio has never tested.</p>
+      <p class="small">Video over static graphic. UGC over polished brand. Inspirational pillar over promotional. The category has already voted with its budgets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05 - INFLUENCERS -->
+<section id="s05">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 05 Influencer Intelligence</div>
+    <h2 class="headline">You have the foundations. You don't have the programme.</h2>
+    <p>Over the last 90 days, 60 Instagram creators have tagged GAIL's in their posts. That number is unusual for a brand of GAIL's size, and it reflects the genuine cultural foothold the chain has in London. The problem is not awareness. The problem is that almost none of these 60 creators are the creators who actually drive reach in the category, and the activity that does exist is concentrated inside a handful of small, working partnerships rather than a continuous programme.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">60</div>
+        <div class="label">Creators who tagged GAIL's in 90 days</div>
+        <div class="sub">Organic affinity is real. The cultural foothold is there.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">5%</div>
+        <div class="label">Of those posts carry a paid-partnership signal</div>
+        <div class="sub">3 of 60. The rest are organic or undisclosed.</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="num">0</div>
+        <div class="label">Of the top 30 IG and top 30 TT creators in your category have posted about you</div>
+        <div class="sub">The most-followed, most-active creators in this niche are not in your rotation.</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;">The 60 creators who tagged you, by theme</h3>
+    <p>We read every post and clustered them by what creators were actually talking about. GAIL's appears in the data in seven distinct narrative worlds:</p>
+
+    <div style="margin-top:24px; max-width:780px;">
+      <div class="bar-row"><div class="bar-label"><span>Food and bakery (the product itself)</span><span class="pct">27%</span></div><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Photography and aesthetic (lifestyle scenery)</span><span class="pct">22%</span></div><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>City and London life</span><span class="pct">20%</span></div><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Coffee and café culture</span><span class="pct">17%</span></div><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Fashion and outfit-of-the-day (GAIL's as backdrop)</span><span class="pct">15%</span></div><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Fitness and running (run-club content)</span><span class="pct">15%</span></div><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Work-from-café</span><span class="pct">12%</span></div><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Books and reading (book-club content)</span><span class="pct">10%</span></div><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div></div>
+      <div class="bar-row"><div class="bar-label"><span>Motherhood and parenting</span><span class="pct">7%</span></div><div class="bar-track"><div class="bar-fill" style="width:7%"></div></div></div>
+    </div>
+
+    <p style="margin-top:24px;">Only 27% of the 60 posts treat GAIL's as the subject. The other 73% use the brand as scenery: the cup in the outfit shot, the bakery the run-club ends at, the cafe table where the writing gets done. That is a marker of strong cultural permission. People feel comfortable showing GAIL's in their content because the brand is a recognised marker of a certain kind of London life. It is also a marker of an under-built creator programme. The brand is in the room. The brand is not the story.</p>
+
+    <h3 style="margin-top:32px;">What's already running</h3>
+    <p>The data is clear that GAIL's already runs creator activations across at least four community pillars. They are small, but they are real:</p>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <h3 style="font-size:17px;">The book club</h3>
+        <p>The London Girls Book Club account posted 4 separate times in 90 days, including announcement posts for the book of the month. The relationship is recurring and clearly co-branded. <a href="https://www.instagram.com/p/DVVmp73jDz1/" target="_blank">View example post</a>.</p>
+      </div>
+      <div class="comp-card">
+        <h3 style="font-size:17px;">The run clubs</h3>
+        <p>Brighton Running Girls and Bath Fit Fam both tagged GAIL's in 90 days. Gabriel Osi from the LDN Slct run club posted about "post-workout goods by GAIL's." This is a working pattern, currently running on a small set of clubs. <a href="https://www.instagram.com/p/DVUV-t2DPkP/" target="_blank">View example post</a>.</p>
+      </div>
+      <div class="comp-card">
+        <h3 style="font-size:17px;">The preview events</h3>
+        <p>Nia Beynon was "invited to preview some goodies at the lovely GAIL's" and posted a digital-sketch carousel of the spring menu. Other recurring tags in the dataset suggest the brand runs press and creator previews on every menu cycle. <a href="https://www.instagram.com/p/DVYgGueDKrU/" target="_blank">View example post</a>.</p>
+      </div>
+      <div class="comp-card">
+        <h3 style="font-size:17px;">The celebrity tags</h3>
+        <p>Tanya Burr (1.5M followers) tagged GAIL's in a "Life lately" Carousel that pulled 11,995 likes, the brand's largest single piece of earned creator engagement in 90 days. This is happening without a structured programme. <a href="https://www.instagram.com/p/DVfs29cDc00/" target="_blank">View example post</a>.</p>
+      </div>
+    </div>
+
+    <p>None of these four programmes are at the scale that 185 stores would justify. The book club partnership runs in one city. The run clubs are concentrated in London and Brighton. The preview events feed one wave of posts per menu launch. The celebrity tags happen because Tanya Burr happened to be at GAIL's, not because there's a system in place to attract her.</p>
+
+    <h3 style="margin-top:32px;">The conversation gap, by the numbers</h3>
+    <p>Of your 60 organic creators in 90 days, only three carry an explicit paid-partnership signal. That number sounds like a strength (organic reach!) but it is more accurately a tell. It means the brand has not been investing in scaling these relationships. The top organic post in the window pulled 11,995 likes from Tanya Burr; the second pulled 2,193 from Ben's Dose of Life; the third pulled 1,449 from Marbie's Kitchen. Below the top three, engagement drops sharply. Most of the 60 creators are nano and micro accounts where a single GAIL's tag is a one-off, not the start of a relationship.</p>
+
+    <p>Meanwhile, in the wider category, the most-followed and most-active creators are concentrated around Blank Street, Bread Ahead, and Maison Ladurée. Blank Street has captured 13 of the top 30 IG creators and 18 of the top 30 TT creators. Emmajayne Myatt-Smith's "I'm usually a blueberry girly" Reel tagged @blankstreet and pulled 760k views. Maegan Stewart's two-line post ("palette cleanser for your feed @blankstreet") pulled 296k views from a 2k-follower account. These are not paid placements. They are creators choosing to make Blank Street the subject of their content because Blank Street has spent two years building product moments that creators want to post.</p>
+
+    <h3 style="margin-top:32px;">The comment-to-like ratio: where real conversation lives</h3>
+    <p>One useful signal in the dataset: comment-to-like ratio. Anything above 20% on a post with 50+ likes is a marker of real conversation rather than passive engagement. Four creator posts in your 90-day window cleared that bar with engaged GAIL's-adjacent audiences:</p>
+    <ul style="font-size:14px; color: var(--muted); line-height:1.8;">
+      <li><a href="https://www.instagram.com/p/DUpcLENyJBz/" target="_blank">@wemovedtowestsussex</a> coffee spots roundup: 309 likes, 116 comments, 37.5% ratio</li>
+      <li><a href="https://www.instagram.com/p/DUuhpqcsXrr/" target="_blank">@sweethouseliving</a> Cheshire staycation: 153 likes, 51 comments, 33.3% ratio</li>
+      <li><a href="https://www.instagram.com/p/DVVmp73jDz1/" target="_blank">@londongirlsbookclub_</a> book of the month: 113 likes, 37 comments, 32.7% ratio</li>
+      <li><a href="https://www.instagram.com/p/DUbqXjrM8H6/" target="_blank">@jesskeepscooking</a> coffee shop chronicles: 51 likes, 15 comments, 29.4% ratio</li>
+    </ul>
+
+    <p>None of these accounts are on your direct creator roster. Each one is doing exactly the kind of slow-cook, comment-led community building that scales into long-term partnerships. The 60-creator dataset is full of these candidates and the current programme is not built to identify or grow them.</p>
+
+    <p style="font-size:13px; color: var(--muted); padding: 20px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); margin-top:32px;"><b>A note on TikTok.</b> GAIL's posts to TikTok at roughly the same cadence as Instagram (37 posts in 90 days), but average views per post sit at 3,442 with average likes of 102. The brand is showing up; the platform is not responding. This is consistent with a brand-led content strategy on a platform that strongly prefers creator-led content. The Section 06 Opportunity 04 path (a continuous paid creator pipeline) is the path that converts the TikTok presence from filler into reach.</p>
+  </div>
+</section>
+
+<!-- SECTION 06 - OPPORTUNITY -->
+<section id="s06">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 06 The Opportunity</div>
+    <h2 class="headline">Six moves that change the game for GAIL's.</h2>
+    <p>Each of these moves is grounded in something we found in the data above. None of them require new positioning, new product, or new brand. They require turning an underbuilt programme into a built one, and matching the chain's operational pace with an equivalent creator pace.</p>
+
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-num">Opportunity 01</div>
+        <h3>Scale what you already run.</h3>
+        <p>You have a book club, a run-club programme, a preview-event circuit, and a mum-network presence. None of them are at chain scale. Take each programme, define a city-level template, and replicate it across the 40 stores opened in the last year. One book-club host per region. Two run-club partners per region. A mum-network ambassador per region. Same brief, locally executed.</p>
+        <div class="opp-stat">40 new stores. 4 cities with creator activity.</div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-num">Opportunity 02</div>
+        <h3>Activate the new locations.</h3>
+        <p>The south-west cohort (Bristol, Bath, Salisbury, Marlborough) opened with no recorded local-creator activations. Harrogate opens in the second half of 2026. Source 5 to 10 local food and lifestyle creators per opening, six to eight weeks ahead of launch, with a brief built around a soft preview and a launch-week post. Each opening is its own micro-campaign.</p>
+        <div class="opp-stat">5 new cities. 1 confirmed upcoming.</div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-num">Opportunity 03</div>
+        <h3>Triple the behind-the-scenes ratio.</h3>
+        <p>Your top-performing pillar is behind-the-scenes content and you post it eight times per 50. The carrot cake recipe Reel pulled 9,924 likes, four times your next-best post. Move BTS from 16% of feed to roughly 40%. Recipes, ingredient sourcing, baker explainers, kitchen process. Each piece becomes content GAIL's owns, and creator-source briefs to commission too.</p>
+        <div class="opp-stat">BTS is 3x engagement. 16% of output.</div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-num">Opportunity 04</div>
+        <h3>Build a continuous paid creator pipeline.</h3>
+        <p>The category runs 797 ads and 38 of them have survived 60+ days. You run one ad. Start a continuous paid pipeline: 6 to 10 creator-led video assets in market at all times, 60-day testing windows, winners extended. The category's verified-winning DNA is medium-production-complexity video with an Inspirational frame, classified UGC or Polished Brand. Match that DNA.</p>
+        <div class="opp-stat">797 ads in category. You run one.</div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-num">Opportunity 05</div>
+        <h3>Test Origin Coffee's 511-day pattern.</h3>
+        <p>The longest-running creator-led ad in your category is Origin Coffee's "Work From Home with our coffee" UGC video, 511 days and still in market. The closest GAIL's analogue is "Weekday morning ritual" or "WFH from a GAIL's table" with 3 to 5 mid-tier creators filming UGC clips of the morning order, the laptop setup, the cinnamon bun. Single-pattern bet, market-verified for 17 months.</p>
+        <div class="opp-stat">511 days. One angle. Already proven.</div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-num">Opportunity 06</div>
+        <h3>Take the lifestyle creators back from Blank Street.</h3>
+        <p>13 of the top 30 IG creators in this category have posted about Blank Street. 18 of the top 30 TT creators have. Zero have posted about GAIL's. These are the same creators who post fashion, motherhood, run-club, and London-life content, the exact themes your existing organic creators already use GAIL's for. Source 20 to 30 of them in Q3 with a summer iced-drink or seasonal-menu hook.</p>
+        <div class="opp-stat">13 of 30 tag Blank Street. 0 tag GAIL's.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07 - SHORTLIST -->
+<section id="s07">
+  <div class="container">
+    <div class="section-label"><span class="dot"></span> 07 The Shortlist</div>
+    <h2 class="headline">60 creators are active in your category right now. Zero have posted about you.</h2>
+    <p>From the 60 most active creators across Instagram and TikTok in this category over the last 30 days, we have built a shortlist of 10 we would contact this week. Ranked by niche-relevant reach, balanced across tiers and platforms, filtered to creators not already in GAIL's rotation. Each of these creators has a public-facing reason to post about a London bakery, and none of them has yet.</p>
+
+    <div class="short-grid">
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/570e30bd-450c-4bf3-8be2-c23bc0f94513" alt="Bite Twice" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/bitetwicefoodreviews" target="_blank">@bitetwicefoodreviews</a>
+            <div class="name">Bite Twice</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Has posted about Bread Ahead's hot cross bun class with a partnership signal in the last 60 days. 2 niche posts, 115k average views on the category content. London food-review specialist with a track record of producing class-and-product reviews.</div>
+        <div class="stats-row"><span><b>223k</b> followers</span><span><b>149k</b> avg views</span><span><b>2</b> niche posts</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DVnmCz4CEUT/" target="_blank">View top post (178k views) →</a>
+          <a href="https://www.instagram.com/p/DWLkj97DTzw/" target="_blank">View second post (115k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/97d4c345-b051-4fe4-ad1c-904cdcecbb13" alt="Thomas" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/monsieurthomasoff" target="_blank">@monsieurthomasoff</a>
+            <div class="name">Monsieur Thomas</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Posts London and Paris food vlogs to a francophone audience. Recent London vlog featuring a Soho breakfast pulled 158k views. The format (one-day London vlog featuring 2 to 3 bakeries) maps directly onto a GAIL's location tour.</div>
+        <div class="stats-row"><span><b>256k</b> followers</span><span><b>750k</b> avg views</span><span><b>1</b> niche post</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DUfilM0gG3y/" target="_blank">View top post (158k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/bf97e2e5-15d8-44fa-8fb9-eb1f7d06f6f9" alt="Soldana" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/iamsoldana" target="_blank">@iamsoldana</a>
+            <div class="name">Soldana</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Motherhood and lifestyle creator. Recent gender-reveal Reel set in a Maison Ladurée pulled 242k views with 6,433 likes. Her audience reads as the exact GAIL's Mother's Day breakfast persona, and she has shown a willingness to anchor major life moments at premium bakery brands.</div>
+        <div class="stats-row"><span><b>196k</b> followers</span><span><b>95k</b> avg views</span><span><b>1</b> niche post</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DVZCwXWDOsW/" target="_blank">View top post (242k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/1fe4e281-3dfa-4961-87a3-2f334dd12e16" alt="Shauni Van Impe" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/shaunivanimpe" target="_blank">@shaunivanimpe</a>
+            <div class="name">Shauni Van Impe</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Belgian travel-food creator with a regular London and Paris reading list. 2 niche posts in 60 days, averaging 89k views. Posts often take a "what to eat in this city" frame, which makes a GAIL's location-tour brief sit naturally inside her content rhythm.</div>
+        <div class="stats-row"><span><b>58k</b> followers</span><span><b>89k</b> avg views</span><span><b>2</b> niche posts</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DVrAtm4DBY_/" target="_blank">View top post (71k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/732adbe5-77b9-4fce-b89a-29a0b78f2169" alt="Olamide" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/olamide.daybyday" target="_blank">@olamide.daybyday</a>
+            <div class="name">Olamide</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Has posted twice about Bread Ahead, including a 215k-view reaction Reel with 17k likes. Mum and family content, exact match for the kind of "I took my mum out for a treat" narrative your existing motherhood network is already running. The 67% engagement rate on her Bread Ahead post is a real signal.</div>
+        <div class="stats-row"><span><b>26k</b> followers</span><span><b>55k</b> avg views</span><span><b>1</b> niche post</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DUwNOjKjeu5/" target="_blank">View top post (215k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b" alt="Row" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/rowzzaa" target="_blank">@rowzzaa</a>
+            <div class="name">Row</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Boujee-London birthday and brunch content. Her birthday-treat Reel pulled 762k views on the back of a Lola's Cupcakes tag, the single biggest views performance in the category top-100 dataset. Her audience overlaps almost perfectly with GAIL's Mother's Day, birthday, and treat-yourself moments.</div>
+        <div class="stats-row"><span><b>22k</b> followers</span><span><b>296k</b> avg views</span><span><b>1</b> niche post</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DVT9AO1jvG0/" target="_blank">View top post (762k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="Emma" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://www.tiktok.com/@emmamyattsmithxo" target="_blank">@emmamyattsmithxo</a>
+            <div class="name">Emma Myatt-Smith</div>
+          </div>
+          <span class="badge">TT</span>
+        </div>
+        <div class="why">Has posted three times about Blank Street in 60 days, including a 760k-view Reel lamenting that her favourite Blank Street blondie matcha was being discontinued. The voice is GAIL's-shaped: relatable, off-the-cuff, treat-of-the-week. Her audience expects her to bring them along to her favourite drinks.</div>
+        <div class="stats-row"><span><b>10k</b> followers</span><span><b>51k</b> avg views</span><span><b>3</b> niche posts</span></div>
+        <div class="post-links">
+          <a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank">View top post (760k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a955bf38-acef-456d-8c01-dbc5a60e9d94" alt="Maegan" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/megggstewart" target="_blank">@megggstewart</a>
+            <div class="name">Maegan Stewart</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Micro creator with a viral upside. Posted a two-line caption ("palette cleanser for your feed") with a Reel that pulled 296k views and 5,860 likes. The 281% engagement rate is extreme. Her caption style and visual eye sit cleanly inside the GAIL's aesthetic, and 4 niche posts in 60 days suggest she is leaning into the category.</div>
+        <div class="stats-row"><span><b>2k</b> followers</span><span><b>149k</b> avg views</span><span><b>4</b> niche posts</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DVt5TqRB9Ni/" target="_blank">View top post (296k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/37e4b4b0-e758-4702-a94e-1020b6e4fabb" alt="Masha" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://instagram.com/mbarabanshchykovaa" target="_blank">@mbarabanshchykovaa</a>
+            <div class="name">Masha</div>
+          </div>
+          <span class="badge">IG</span>
+        </div>
+        <div class="why">Has posted about Blank Street with a "PR" partnership signal: the Blank Street Sleeve launch Reel pulled 406k views and 5,364 likes on a 1.5k-follower account. Her ratio of niche-views-to-followers is the highest on this shortlist. Product-launch storytelling is her strongest skill.</div>
+        <div class="stats-row"><span><b>1.5k</b> followers</span><span><b>37k</b> avg views</span><span><b>1</b> niche post</span></div>
+        <div class="post-links">
+          <a href="https://www.instagram.com/p/DU26FDxDc9r/" target="_blank">View top post (406k views) →</a>
+        </div>
+      </div>
+
+      <div class="short-card">
+        <div class="top">
+          <img class="avatar" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/1592846c-7e9d-4d9c-9c92-7ca1c6697b69" alt="Charley" onerror="this.style.display='none'">
+          <div class="who">
+            <a class="handle" href="https://www.tiktok.com/@charleyyyyy.x" target="_blank">@charleyyyyy.x</a>
+            <div class="name">Charley</div>
+          </div>
+          <span class="badge">TT</span>
+        </div>
+        <div class="why">Has posted four times about Blank Street in the last 60 days, the deepest niche commitment of any TikTok creator we found. Nano account with a clear "I go to this brand every week" pattern. Exactly the kind of creator GAIL's currently has zero of: a TikTok-native, regular-cadence brand devotee, available for a long-term partnership.</div>
+        <div class="stats-row"><span><b>2.4k</b> followers</span><span><b>2k</b> avg views</span><span><b>4</b> niche posts</span></div>
+        <div class="post-links">
+          <a href="https://www.tiktok.com/@charleyyyyy.x/video/7609656232030457110" target="_blank">View top post (11k views) →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:48px;">What's winning in your niche this month</h3>
+    <p>Five of the highest-performing posts in this category over the analysis window, mixed Instagram and TikTok. These are the formats to brief against.</p>
+
+    <div class="insp-gallery">
+      <div class="insp-card">
+        <div class="insp-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b" alt="Row birthday"></div>
+        <div class="insp-handle">@rowzzaa</div>
+        <div class="insp-meta"><b>762k</b> views · 1,090 likes · IG · Entertaining</div>
+        <a href="https://www.instagram.com/p/DVT9AO1jvG0/" target="_blank">View post →</a>
+      </div>
+      <div class="insp-card">
+        <div class="insp-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="Emma blondie"></div>
+        <div class="insp-handle">@emmamyattsmithxo</div>
+        <div class="insp-meta"><b>760k</b> views · 17,800 likes · TT · Relatable</div>
+        <a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank">View post →</a>
+      </div>
+      <div class="insp-card">
+        <div class="insp-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt="Sarah dessert"></div>
+        <div class="insp-handle">@sarahxgriffiths</div>
+        <div class="insp-meta"><b>451k</b> views · 1,561 likes · IG · Relatable/BTS</div>
+        <a href="https://www.instagram.com/p/DVjDdrPCGuB/" target="_blank">View post →</a>
+      </div>
+      <div class="insp-card">
+        <div class="insp-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/37e4b4b0-e758-4702-a94e-1020b6e4fabb" alt="Masha Sleeve"></div>
+        <div class="insp-handle">@mbarabanshchykovaa</div>
+        <div class="insp-meta"><b>406k</b> views · 5,364 likes · IG · Promotional</div>
+        <a href="https://www.instagram.com/p/DU26FDxDc9r/" target="_blank">View post →</a>
+      </div>
+      <div class="insp-card">
+        <div class="insp-visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/732adbe5-77b9-4fce-b89a-29a0b78f2169" alt="Olamide reaction"></div>
+        <div class="insp-handle">@olamide.daybyday</div>
+        <div class="insp-meta"><b>215k</b> views · 17,372 likes · IG · Relatable</div>
+        <a href="https://www.instagram.com/p/DUwNOjKjeu5/" target="_blank">View post →</a>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:40px;">
+      <p class="big">Combined, these 10 creators have 798,000 followers and 1.5 million niche views in the last 30 days. 5 of them have already posted about your direct competitors. 5 have never been hired by a brand in this category yet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING BLOCK -->
+<section style="border-bottom:none; padding-bottom: 48px;">
+  <div class="container">
+    <div class="closing">
+      <p>We built this report because GAIL's creator data is genuinely interesting and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+      <p class="who">Who are we?</p>
+      <p>Sup is an AI-native influencer marketing platform built around data and performance. We source local creators per location, run campaigns centrally, and track results per site.</p>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  👋 Sup · sup.co · Confidential · May 2026
+</div>
+
+<script>
+// Sup chart palette
+const COLORS = {
+  gails: '#000000',
+  purple: '#534AB7',
+  teal: '#1D9E75',
+  coral: '#D85A30',
+  gray: '#71717A',
+  blue: '#378ADD',
+  border: '#E4E4E7',
+  muted: '#71717A'
+};
+
+Chart.defaults.font.family = 'Inter, sans-serif';
+Chart.defaults.color = COLORS.muted;
+Chart.defaults.borderColor = COLORS.border;
+
+// CHART 1: Followers vs locations (top 20 brands)
+new Chart(document.getElementById('chartBenchmark'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      { label: 'GAIL\'s', data: [{x: 185, y: 166}], backgroundColor: COLORS.gails, borderColor: COLORS.gails, pointRadius: 9, pointHoverRadius: 11 },
+      { label: 'Blank Street', data: [{x: 97, y: 169}], backgroundColor: COLORS.purple, pointRadius: 7 },
+      { label: 'Bread Ahead', data: [{x: 21, y: 424}], backgroundColor: COLORS.teal, pointRadius: 7 },
+      { label: 'Buns from Home', data: [{x: 25, y: 186}], backgroundColor: COLORS.coral, pointRadius: 7 },
+      { label: 'Maison Ladurée', data: [{x: 131, y: 911}], backgroundColor: COLORS.blue, pointRadius: 7 },
+      { label: 'Pophams', data: [{x: 1, y: 270}], backgroundColor: COLORS.gray, pointRadius: 7 },
+      { label: 'Other top 20 chains', data: [
+        {x: 4500, y: 10}, {x: 426, y: 27}, {x: 380, y: 20}, {x: 108, y: 10}, {x: 70, y: 70},
+        {x: 68, y: 6}, {x: 45, y: 11}, {x: 37, y: 25}, {x: 35, y: 957}, {x: 30, y: 108}, {x: 25, y: 76}
+      ], backgroundColor: 'rgba(113,113,122,0.35)', pointRadius: 5 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { type: 'logarithmic', title: { display: true, text: 'UK locations (log scale)' }, grid: { color: COLORS.border } },
+      y: { title: { display: true, text: 'IG followers (thousands)' }, grid: { color: COLORS.border } }
+    },
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } }
+  }
+});
+
+// CHART 2: IG views over 40 days, top 12 brands
+new Chart(document.getElementById('chartViews'), {
+  type: 'bar',
+  data: {
+    labels: ['Blank Street', 'Maison Ladurée', 'Bread Ahead', 'GAIL\'s', 'Pophams', 'Buns from Home', 'Origin Coffee', 'Watch House', 'Brigit\'s', 'Cutter & Sq.', 'Grind', 'Paul'],
+    datasets: [{
+      label: 'IG views',
+      data: [1474364, 528990, 494264, 116982, 85292, 15172, 92024, 107355, 148715, 114889, 242146, 24585],
+      backgroundColor: (ctx) => ctx.dataIndex === 3 ? COLORS.gails : 'rgba(83,74,183,0.65)',
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: COLORS.border }, ticks: { callback: (v) => (v/1000) + 'k' } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// CHART 3: Pillar mix vs avg likes
+new Chart(document.getElementById('chartPillarMix'), {
+  type: 'bar',
+  data: {
+    labels: ['Inspirational', 'Behind-the-Scenes', 'Seasonal', 'Entertaining', 'Educational', 'Promotional'],
+    datasets: [
+      { label: 'Posts (count)', data: [28, 8, 7, 3, 2, 2], backgroundColor: 'rgba(113,113,122,0.5)', borderRadius: 4, yAxisID: 'y' },
+      { label: 'Avg likes per post', data: [482, 1562, 279, 281, 310, 110], backgroundColor: COLORS.gails, borderRadius: 4, yAxisID: 'y1' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10 } } },
+    scales: {
+      y: { type: 'linear', position: 'left', grid: { color: COLORS.border }, title: { display: true, text: 'Posts' } },
+      y1: { type: 'linear', position: 'right', grid: { display: false }, title: { display: true, text: 'Avg likes' } }
+    }
+  }
+});
+
+// CHART 4: Posting cadence by month
+new Chart(document.getElementById('chartCadence'), {
+  type: 'line',
+  data: {
+    labels: ['Feb 26', 'Mar 26', 'Apr 26', 'May 26 (partial)'],
+    datasets: [
+      { label: 'GAIL\'s IG posts', data: [15, 16, 16, 3], borderColor: COLORS.gails, backgroundColor: 'rgba(0,0,0,0.05)', tension: 0.3, fill: true, pointRadius: 5 },
+      { label: 'GAIL\'s TT posts', data: [11, 11, 11, 4], borderColor: COLORS.coral, backgroundColor: 'rgba(216,90,48,0.08)', tension: 0.3, fill: true, pointRadius: 5 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10 } } },
+    scales: { y: { beginAtZero: true, grid: { color: COLORS.border } }, x: { grid: { display: false } } }
+  }
+});
+
+// CHART 5: Longevity distribution
+new Chart(document.getElementById('chartLongevity'), {
+  type: 'bar',
+  data: {
+    labels: ['0-29d', '30-59d', '60-89d', '90-179d', '180+d'],
+    datasets: [
+      { label: 'Total creatives', data: [381, 189, 179, 29, 19], backgroundColor: 'rgba(113,113,122,0.5)', borderRadius: 6 },
+      { label: 'Still active', data: [146, 24, 13, 15, 10], backgroundColor: COLORS.teal, borderRadius: 6 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10 } } },
+    scales: { y: { beginAtZero: true, grid: { color: COLORS.border } }, x: { grid: { display: false } } }
+  }
+});
+
+// CHART 6: Winner DNA (60+d survivors vs all)
+new Chart(document.getElementById('chartWinnerDNA'), {
+  type: 'bar',
+  data: {
+    labels: ['Video', 'UGC', 'Polished Brand', 'Inspirational', 'Med. Production', 'BOFU'],
+    datasets: [
+      { label: 'All ads (797)', data: [33, 12, 11, 12, 66, 27], backgroundColor: 'rgba(113,113,122,0.5)', borderRadius: 4 },
+      { label: '60+ day winners (38)', data: [58, 26, 21, 42, 82, 37], backgroundColor: COLORS.coral, borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10 } } },
+    scales: { y: { beginAtZero: true, grid: { color: COLORS.border }, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } }
+  }
+});
+
+// CHART 7: Brand scatter, active ads vs median runtime
+new Chart(document.getElementById('chartBrandScatter'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      { label: 'Origin Coffee', data: [{x: 16, y: 200}], backgroundColor: COLORS.teal, pointRadius: 10 },
+      { label: 'Chai Guys', data: [{x: 7, y: 180}], backgroundColor: COLORS.coral, pointRadius: 10 },
+      { label: 'Huffkins', data: [{x: 5, y: 110}], backgroundColor: COLORS.purple, pointRadius: 9 },
+      { label: 'Kiss the Hippo', data: [{x: 8, y: 95}], backgroundColor: COLORS.blue, pointRadius: 9 },
+      { label: 'Pieminister', data: [{x: 47, y: 14}], backgroundColor: 'rgba(113,113,122,0.6)', pointRadius: 7 },
+      { label: 'Brigit\'s Bakery', data: [{x: 24, y: 9}], backgroundColor: 'rgba(113,113,122,0.6)', pointRadius: 7 },
+      { label: 'Maison Ladurée', data: [{x: 8, y: 18}], backgroundColor: 'rgba(113,113,122,0.6)', pointRadius: 7 },
+      { label: 'Bread Ahead', data: [{x: 1, y: 22}], backgroundColor: 'rgba(113,113,122,0.6)', pointRadius: 7 },
+      { label: 'GAIL\'s', data: [{x: 1, y: 5}], backgroundColor: COLORS.gails, pointRadius: 11, pointHoverRadius: 13 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } },
+    scales: {
+      x: { title: { display: true, text: 'Active ad creatives' }, grid: { color: COLORS.border }, beginAtZero: true },
+      y: { title: { display: true, text: 'Median runtime (days)' }, grid: { color: COLORS.border }, beginAtZero: true }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
