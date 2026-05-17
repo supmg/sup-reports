@@ -2,1249 +2,1172 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Signal Report · Buns From Home · May 2026</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buns From Home · London Cafés &amp; Bakeries  -  Signal Report</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
-  --bg: #FFFFFF;
-  --surface: #F4F4F5;
-  --text: #09090B;
-  --muted: #71717A;
-  --hint: #A1A1AA;
-  --border: #E4E4E7;
-  --accent: #000000;
-  --brand: #502828;
-  --brand-dark: #321A1A;
-  --brand-tint: rgba(80,40,40,0.06);
-  --chart-purple: #534AB7;
-  --chart-teal: #1D9E75;
-  --chart-coral: #D85A30;
-  --chart-gray: #71717A;
-  --chart-blue: #378ADD;
+  --bg: #FFFFFF; --surface: #F4F4F5; --soft: #FAFAFA;
+  --text: #09090B; --secondary: #52525B; --muted: #71717A; --hint: #A1A1AA;
+  --border: #E4E4E7; --accent: #000000;
+  --brand-primary: #502B2D; --brand-accent-dark: #2F1A1B;
+  --brand-tint: rgba(80,43,45,0.08);
+  --p-purple:#534AB7; --p-teal:#1D9E75; --p-coral:#D85A30; --p-blue:#378ADD; --p-gray:#71717A;
 }
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--text);
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; transition: text-decoration-color 0.15s; }
-a:hover { text-decoration-color: var(--brand); }
-.container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
-.eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
-h1, h2, h3, h4 { margin: 0; font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: 40px; line-height: 1.12; margin-bottom: 18px; }
-h3 { font-size: 22px; line-height: 1.25; margin-bottom: 10px; }
-p { margin: 0 0 14px 0; color: var(--text); }
-.muted { color: var(--muted); }
-.surface { background: var(--surface); }
-.section { padding: 80px 0; border-top: 1px solid var(--border); }
-.section.no-top { border-top: 0; }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','SF Pro Display',-apple-system,system-ui,sans-serif;font-size:16px;line-height:1.55;color:var(--secondary);background:var(--bg);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased}
+img{opacity:0;transition:opacity 300ms ease;max-width:100%;display:block}
+img.loaded,img[loaded]{opacity:1}
+a{color:inherit;text-decoration:none}
+.container{max-width:1180px;margin:0 auto;padding:0 28px}
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--brand-primary);z-index:200;transition:width 100ms linear}
 
-/* Sticky nav */
-.nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  height: 56px;
-}
-.nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; height: 100%; gap: 16px; }
-.nav-left { display: flex; align-items: center; gap: 14px; }
-.sup-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #09090B; color: #FFF; font-weight: 700; font-size: 13px;
-  padding: 6px 12px; border-radius: 999px; text-decoration: none;
-}
-.nav-divider { width: 1px; height: 18px; background: var(--border); }
-.brand-logo-nav { height: 22px; width: auto; }
-.nav-center { display: flex; gap: 22px; flex: 1; justify-content: center; }
-.nav-center a { font-size: 13px; color: var(--text); text-decoration: none; }
-.nav-center a:hover { color: var(--brand); }
-.nav-right .cta {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #09090B; color: #FFF; padding: 8px 14px; border-radius: 999px;
-  font-size: 13px; font-weight: 600; text-decoration: none;
-}
-@media (max-width: 880px) {
-  .nav-center { display: none; }
-  .nav-divider { display: none; }
-}
+/* sticky nav */
+.nav{position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;height:56px}
+.nav-inner{height:56px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.nav-left{display:flex;align-items:center;gap:12px;min-width:0}
+.nav-sup{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:9999px;background:#000;color:#fff;font-size:12.5px;font-weight:500}
+.nav-divider{width:1px;height:18px;background:var(--border)}
+.nav-brand-logo{height:22px;width:auto;opacity:1}
+.nav-brand-name{font-size:14px;color:var(--text);font-weight:500;white-space:nowrap}
+.nav-mid{display:flex;align-items:center;gap:22px;font-size:13.5px;color:var(--secondary)}
+.nav-mid a{position:relative;padding-bottom:2px;font-weight:500;cursor:pointer}
+.nav-mid a:hover{color:var(--text)}
+.nav-mid a.is-active{color:var(--brand-primary)}
+.nav-mid a.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--brand-primary);border-radius:2px}
+.nav-cta a{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:9999px;background:#000;color:#fff;font-size:13px;font-weight:500;transition:transform 180ms cubic-bezier(0.16,1,0.3,1),filter 180ms ease}
+.nav-cta a:hover{transform:scale(1.02);filter:brightness(1.15)}
+@media (max-width:900px){.nav-mid{display:none}}
 
-/* Cover */
-.cover { padding: 90px 0 70px; background: #FFF; }
-.dot-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-  background: #ECFDF5; color: #166534; padding: 6px 12px; border-radius: 999px; font-weight: 700;
-}
-.dot-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #16A34A; display: inline-block; }
-.cover h1 {
-  font-size: 56px; line-height: 1.05; letter-spacing: -0.03em; margin: 22px 0 18px; font-weight: 800;
-  max-width: 920px;
-}
-.cover .sub { font-size: 17px; color: var(--muted); max-width: 720px; margin-bottom: 38px; }
-.cover-stats { display: flex; align-items: stretch; gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.cover-stat { flex: 1; padding: 22px 0; padding-right: 24px; border-right: 1px solid var(--border); }
-.cover-stat:last-child { border-right: 0; padding-right: 0; }
-.cover-stat .num { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
-.cover-stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
-@media (max-width: 720px) {
-  .cover h1 { font-size: 36px; }
-  .cover-stats { flex-direction: column; }
-  .cover-stat { border-right: 0; border-bottom: 1px solid var(--border); padding: 18px 0; }
-  .cover-stat:last-child { border-bottom: 0; }
-}
+/* cover */
+.cover{padding:90px 0 100px}
+.green-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border);border-radius:9999px;background:#fff;font-size:11.5px;font-weight:500;color:var(--text);margin-bottom:24px}
+.green-pill .dot{width:7px;height:7px;background:var(--brand-primary);border-radius:50%}
+.h1{font-size:54px;font-weight:500;letter-spacing:-0.02em;line-height:1.08;color:var(--text);max-width:920px;margin:0}
+@media(max-width:720px){.h1{font-size:38px}}
+.h1 .line{display:block}
+.brand-emphasis{position:relative;color:var(--brand-primary)}
+.brand-emphasis::after{content:"";position:absolute;left:0;bottom:2px;width:0;height:8px;background:var(--brand-primary);opacity:0.16;border-radius:4px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 400ms;z-index:-1}
+.brand-emphasis.is-painted::after{width:100%}
+.cover-sub{font-size:17px;color:var(--secondary);margin-top:18px;max-width:760px;line-height:1.55}
+.cover-stats{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0}
+.cover-stats>div{padding:0 22px;border-right:1px solid var(--border)}
+.cover-stats>div:first-child{padding-left:0}
+.cover-stats>div:last-child{border-right:none;padding-right:0}
+.cover-stats .v{font-size:26px;font-weight:600;letter-spacing:-0.02em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1.05}
+.cover-stats .lbl{font-size:12px;color:var(--muted);margin-top:6px;font-weight:500;line-height:1.4}
+@media(max-width:720px){.cover-stats{grid-template-columns:repeat(2,1fr);gap:18px 0}.cover-stats>div{border-right:none;padding:0 12px}}
+
+/* hero trio */
+.hero-trio{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.hero-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.hero-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(80,43,45,0.4)}
+.hero-card.is-mid{border-top:3px solid var(--brand-primary)}
+.hero-card .img-slot{height:240px;overflow:hidden;background:#F4F4F5}
+.hero-card .img-slot img{width:100%;height:100%;object-fit:cover;transition:transform 400ms cubic-bezier(0.16,1,0.3,1)}
+.hero-card:hover .img-slot img{transform:scale(1.03)}
+.hero-card .meta{padding:12px 16px;font-size:12.5px;color:var(--muted);font-weight:500}
+@media(max-width:720px){.hero-trio{grid-template-columns:1fr;gap:14px}.hero-card .img-slot{aspect-ratio:4/5;height:auto}}
 
 /* What we analysed */
-.bridge {
-  background: #F4F4F5;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 36px 0;
+.wwa-strip{background:#F4F4F5;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:38px 0;margin:0}
+.wwa-label{font-size:13.5px;color:var(--secondary);font-weight:500;margin-bottom:18px}
+.wwa-row{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.wwa-row>div{padding:0 22px;border-right:1px solid var(--border);min-width:0}
+.wwa-row>div:first-child{padding-left:0}
+.wwa-row>div:last-child{border-right:none;padding-right:0}
+.wwa-row .v{font-size:22px;font-weight:600;letter-spacing:-0.015em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1.1}
+.wwa-row .cap{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
+@media(max-width:720px){.wwa-row{grid-template-columns:repeat(2,1fr);gap:20px 0}.wwa-row>div{padding:0 12px;border-right:none;border-bottom:1px solid var(--border);padding-bottom:14px}.wwa-row>div:last-child{border-bottom:none}}
+
+/* sections */
+section{padding:96px 0;border-bottom:1px solid var(--border)}
+@media(max-width:720px){section{padding:64px 0}}
+.s-label{font-size:13px;color:var(--secondary);font-weight:500;margin-bottom:16px}
+.s-h2{font-size:36px;font-weight:500;letter-spacing:-0.02em;line-height:1.15;color:var(--text);max-width:920px;padding-bottom:14px;position:relative;margin-bottom:18px}
+@media(max-width:720px){.s-h2{font-size:28px}}
+.s-h2::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brand-primary);border-radius:2px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 200ms}
+.s-h2.is-in::after{width:48px}
+.s-intro{font-size:16px;color:var(--secondary);max-width:760px;line-height:1.6;margin-bottom:28px}
+.section-stats{display:grid;grid-template-columns:repeat(6,1fr);padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:24px 0 36px}
+.section-stats>div{padding:0 22px;border-right:1px solid var(--border)}
+.section-stats>div:last-child{border-right:none}
+.section-stats .v{font-size:28px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;color:var(--text);font-variant-numeric:tabular-nums}
+.section-stats .ctx{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.section-stats .lbl{font-size:12px;color:var(--muted);margin-top:8px;font-weight:500}
+@media(max-width:900px){.section-stats{grid-template-columns:repeat(3,1fr);gap:24px 0}.section-stats>div{border-right:none;border-bottom:1px solid var(--border);padding-bottom:16px}.section-stats>div:nth-child(4),.section-stats>div:nth-child(5),.section-stats>div:nth-child(6){border-bottom:none}}
+@media(max-width:560px){.section-stats{grid-template-columns:repeat(2,1fr)}}
+
+/* player cards */
+.player-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:32px}
+.player-card{border:1px solid var(--border);border-radius:24px;padding:22px 18px;background:#fff;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.player-card.is-target{border:1.5px solid var(--brand-primary);background:linear-gradient(180deg,var(--brand-tint) 0%,#fff 60%)}
+.player-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(80,43,45,0.4)}
+.pc-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:#fff;border:1px solid var(--border);border-radius:9999px;font-size:11px;font-weight:500;color:var(--text);margin-bottom:14px}
+.pc-eyebrow .ed{width:6px;height:6px;border-radius:50%;background:var(--brand-primary)}
+.pc-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.pc-logo{width:36px;height:36px;border-radius:10px;background:#F4F4F5;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.pc-name{font-size:14.5px;font-weight:600;line-height:1.15;color:var(--text)}
+.pc-handle{font-size:11px;color:var(--muted)}
+.pc-stats{margin-top:18px;display:flex;flex-direction:column;gap:14px}
+.stat-row{font-size:12px}
+.stat-row .lbl{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:4px}
+.stat-row .row-v{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.stat-row .row-v .v{font-size:17px;font-weight:600;letter-spacing:-0.01em;color:var(--text);font-variant-numeric:tabular-nums}
+.rank-pill{display:inline-block;padding:3px 8px;font-size:9.5px;font-weight:500;border:1px solid var(--border);background:#fff;border-radius:9999px;color:var(--text);font-variant-numeric:tabular-nums;transform:scale(0);transition:transform 400ms cubic-bezier(0.34,1.56,0.64,1)}
+.rank-pill.is-in{transform:scale(1)}
+.rank-pill.is-top{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.bar{height:5px;background:#F4F4F5;border-radius:4px;overflow:hidden;margin-top:8px}
+.bar>span{display:block;height:100%;background:var(--brand-primary);width:0;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+.player-card .stat-row:nth-child(1) .bar>span{transition-delay:200ms}
+.player-card .stat-row:nth-child(2) .bar>span{transition-delay:280ms}
+.player-card .stat-row:nth-child(3) .bar>span{transition-delay:360ms}
+.player-card .stat-row:nth-child(4) .bar>span{transition-delay:440ms}
+@media(max-width:900px){.player-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.player-row{grid-template-columns:1fr}}
+
+.section-text{font-size:16px;color:var(--secondary);line-height:1.65;margin-top:24px;max-width:780px}
+.section-text p{margin-bottom:14px}
+
+.callout{position:relative;background:var(--surface);border-radius:16px;padding:24px 28px 24px 32px;border:1px solid var(--border);margin:32px 0 0;max-width:840px}
+.callout::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;background:var(--brand-primary);border-radius:4px}
+.callout-label{display:block;font-size:13px;font-weight:500;color:var(--brand-primary);margin-bottom:10px}
+.callout p{font-size:15.5px;color:var(--text);margin:0;line-height:1.55}
+
+/* themes & charts */
+.theme-rows{display:flex;flex-direction:column;gap:14px;margin-top:28px;max-width:760px}
+.theme-row{display:grid;grid-template-columns:200px 1fr 60px;gap:18px;align-items:center;font-size:13.5px}
+.theme-row .name{color:var(--text);font-weight:500}
+.theme-bar{height:8px;background:#F4F4F5;border-radius:4px;overflow:hidden}
+.theme-bar-fill{height:100%;background:var(--brand-primary);width:0;transition:width 900ms cubic-bezier(0.16,1,0.3,1) 200ms}
+.theme-row .pct{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+@media(max-width:700px){.theme-row{grid-template-columns:160px 1fr 50px;gap:10px;font-size:12.5px}}
+
+.chart-wrap{margin-top:32px;border:1px solid var(--border);border-radius:16px;padding:24px;background:#fff;height:340px;position:relative}
+.chart-wrap h3{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:8px}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+@media(max-width:900px){.chart-row{grid-template-columns:1fr}}
+
+/* top creators chips */
+.creator-chips{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.cc-chip{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:16px;background:#fff;transition:transform 200ms,border-color 200ms;cursor:pointer}
+.cc-chip:hover{transform:translateY(-2px);border-color:rgba(80,43,45,0.4)}
+.cc-avatar{width:32px;height:32px;border-radius:50%;background:#F4F4F5;flex-shrink:0;overflow:hidden}
+.cc-avatar img{width:100%;height:100%;object-fit:cover}
+.cc-text{font-size:12.5px;color:var(--text);line-height:1.3;min-width:0}
+.cc-text .h{font-weight:500}
+.cc-text .stats{color:var(--muted);font-size:11.5px;margin-top:2px}
+
+/* opportunities */
+.opp-grid{margin-top:28px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.opp{border:1px solid var(--border);border-radius:16px;padding:26px 24px;background:#fff;transition:transform 200ms,border-color 200ms}
+.opp:hover{transform:translateY(-2px);border-color:rgba(80,43,45,0.4);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.opp .eyebrow{font-size:11px;font-weight:500;color:var(--brand-primary);letter-spacing:0;text-transform:none}
+.opp h4{font-size:18px;font-weight:500;color:var(--text);margin-top:8px;line-height:1.3;letter-spacing:-0.01em}
+.opp p{font-size:14.5px;color:var(--secondary);margin-top:12px;line-height:1.55}
+.opp .closing{display:flex;align-items:baseline;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.opp .closing .big{font-size:26px;font-weight:600;color:var(--brand-primary);font-variant-numeric:tabular-nums;letter-spacing:-0.02em}
+.opp .closing .lab{font-size:12px;color:var(--muted)}
+.opp .backed{font-size:10.5px;color:var(--muted);margin-top:12px}
+@media(max-width:780px){.opp-grid{grid-template-columns:1fr}}
+
+/* shortlist */
+.sl-grid{margin-top:28px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.sl{display:flex;gap:16px;padding:20px 22px;border:1px solid var(--border);border-radius:16px;background:#fff;transition:transform 200ms,border-color 200ms}
+.sl:hover{transform:translateY(-2px);border-color:rgba(80,43,45,0.4);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.sl-avatar{width:48px;height:48px;border-radius:50%;background:#F4F4F5;overflow:hidden;flex-shrink:0}
+.sl-avatar img{width:100%;height:100%;object-fit:cover}
+.sl-body{flex:1;min-width:0}
+.sl-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sl-handle{font-size:14.5px;font-weight:500;color:var(--text)}
+.sl-handle a{color:inherit}
+.sl-handle a:hover{color:var(--brand-primary)}
+.sl-plat{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:10.5px;font-weight:500;background:var(--brand-tint);color:var(--brand-primary)}
+.sl-name{font-size:12px;color:var(--muted);margin-top:2px}
+.sl-stats{font-size:11.5px;color:var(--secondary);margin-top:8px;font-variant-numeric:tabular-nums}
+.sl-why{font-size:13px;color:var(--text);margin-top:10px;line-height:1.5}
+@media(max-width:780px){.sl-grid{grid-template-columns:1fr}}
+
+/* inspiration gallery */
+.insp-grid{margin-top:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.insp{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;transition:transform 200ms,border-color 200ms}
+.insp:hover{transform:translateY(-2px);border-color:rgba(80,43,45,0.4)}
+.insp .visual{aspect-ratio:1;background:#F4F4F5;display:flex;align-items:center;justify-content:center;color:var(--hint);font-size:11px;overflow:hidden}
+.insp .visual img{width:100%;height:100%;object-fit:cover;transition:transform 400ms}
+.insp:hover .visual img{transform:scale(1.03)}
+.insp .ins-meta{padding:10px 12px;font-size:11px;color:var(--muted)}
+.insp .ins-meta .h{color:var(--text);font-weight:500;font-size:12px;margin-bottom:2px}
+@media(max-width:900px){.insp-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* competitor cards */
+.comp-grid{margin-top:24px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cc{padding:24px;border:1px solid var(--border);border-radius:16px;background:#fff;transition:transform 200ms,border-color 200ms}
+.cc:hover{transform:translateY(-2px);border-color:rgba(80,43,45,0.4);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.cc-head{display:flex;align-items:center;gap:12px}
+.cc-logo{width:36px;height:36px;border-radius:10px;background:#F4F4F5;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.cc-name{font-size:16px;font-weight:500;color:var(--text)}
+.cc-strats{margin-top:14px;font-size:12.5px;color:var(--muted);display:flex;align-items:flex-start;gap:8px}
+.cc-strats .dot{width:5px;height:5px;border-radius:50%;background:var(--brand-primary);margin-top:7px;flex-shrink:0}
+@media(max-width:780px){.comp-grid{grid-template-columns:1fr}}
+
+/* multi-play operators */
+.mpo{margin-top:36px;border-top:1px solid var(--border);padding-top:28px}
+.mpo h3{font-size:13.5px;font-weight:500;color:var(--secondary);margin-bottom:18px}
+.mpo .item{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border:1px solid var(--border);border-radius:14px;background:#fff;margin-bottom:10px;transition:border-color 200ms}
+.mpo .item:hover{border-color:rgba(80,43,45,0.4)}
+.mpo .item.is-target{border-left:4px solid var(--brand-primary)}
+.mpo .mpo-logo{width:32px;height:32px;border-radius:8px;background:#F4F4F5;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11.5px;font-weight:700;flex-shrink:0}
+.mpo .mpo-text{font-size:13.5px;color:var(--text);line-height:1.5}
+.mpo .mpo-text .brand{font-weight:500}
+.mpo .mpo-text .strats{color:var(--muted);font-size:12.5px;margin-top:4px}
+
+/* top10 ads */
+.ad-grid{margin-top:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ad-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;transition:transform 200ms,border-color 200ms;display:flex;flex-direction:column}
+.ad-card:hover{transform:translateY(-2px);border-color:rgba(80,43,45,0.4);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.ad-card .thumb{aspect-ratio:4/5;background:#F4F4F5;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.ad-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 400ms}
+.ad-card:hover .thumb img{transform:scale(1.03)}
+.ad-card .badge{position:absolute;top:10px;left:10px;padding:3px 8px;background:rgba(0,0,0,0.7);color:#fff;font-size:10px;font-weight:500;border-radius:9999px}
+.ad-card .meta{padding:12px 14px;font-size:11.5px;color:var(--muted);flex:1}
+.ad-card .meta .brand{font-size:12.5px;color:var(--text);font-weight:500;margin-bottom:4px;line-height:1.3}
+.ad-card .meta .days{margin-top:6px;font-weight:500;color:var(--brand-primary)}
+@media(max-width:900px){.ad-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* post grid (Section 05 top 5) */
+.post-grid{margin-top:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.post-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;transition:transform 200ms,border-color 200ms;display:flex;flex-direction:column}
+.post-card.is-highlight{border:1px solid var(--brand-primary)}
+.post-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.post-card .thumb{aspect-ratio:1;background:#F4F4F5;overflow:hidden}
+.post-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 400ms}
+.post-card:hover .thumb img{transform:scale(1.03)}
+.post-card .p-meta{padding:14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.post-card .p-rank{font-size:11px;color:var(--muted);font-weight:500}
+.post-card .p-likes{font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.post-card .p-fmt{font-size:11px;color:var(--muted)}
+.post-card .p-desc{font-size:12px;color:var(--secondary);line-height:1.45;margin-top:4px}
+.post-card .p-link{font-size:11px;color:var(--brand-primary);font-weight:500;margin-top:auto;padding-top:8px}
+@media(max-width:900px){.post-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* feed stat cards (section 05) */
+.feed-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.feed-stat{padding:24px;border:1px solid var(--border);border-radius:16px;background:#fff}
+.feed-stat.dark{background:#09090B;color:#fff;border-color:#09090B}
+.feed-stat .lbl{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:8px}
+.feed-stat.dark .lbl{color:#A1A1AA}
+.feed-stat .v{font-size:32px;font-weight:600;letter-spacing:-0.02em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
+.feed-stat.dark .v{color:#fff}
+.feed-stat .sub{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+.feed-stat.dark .sub{color:#A1A1AA}
+@media(max-width:780px){.feed-stats{grid-template-columns:1fr}}
+
+/* paid stat cards (section 04) */
+.paid-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.paid-stat{padding:22px;border:1px solid var(--border);border-radius:16px;background:#fff}
+.paid-stat .lbl{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:8px}
+.paid-stat .v{font-size:30px;font-weight:600;letter-spacing:-0.02em;color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
+.paid-stat .sub{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:780px){.paid-stats{grid-template-columns:1fr}}
+
+/* closing block */
+.closing{margin:96px auto 64px;max-width:720px}
+.closing .box{background:#F4F4F5;border:1px solid var(--border);border-radius:24px;padding:48px 40px;text-align:left}
+.closing .lead{font-size:18px;color:var(--text);line-height:1.55;margin-bottom:28px}
+.closing h3{font-size:15.5px;font-weight:600;color:var(--text);margin:0 0 12px}
+.closing .sup-intro{font-size:15px;color:var(--muted);line-height:1.65}
+.closing .book-line{font-size:14.5px;color:var(--secondary);margin-top:28px;padding:0 8px}
+.closing .book-line a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.footer{font-size:12px;color:var(--muted);text-align:center;padding:24px 0 48px}
+
+/* animations */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}
+.reveal.is-in{opacity:1;transform:translateY(0)}
+.stagger>*{opacity:0;transform:translateY(12px);transition:opacity 500ms cubic-bezier(0.16,1,0.3,1),transform 500ms cubic-bezier(0.16,1,0.3,1)}
+.stagger.is-in>*:nth-child(1){transition-delay:0ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(2){transition-delay:80ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(3){transition-delay:160ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(4){transition-delay:240ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(5){transition-delay:320ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(6){transition-delay:400ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(n+7){transition-delay:480ms;opacity:1;transform:translateY(0)}
+
+@keyframes wave-wiggle {
+  0%{transform:rotate(0)}15%{transform:rotate(-20deg)}30%{transform:rotate(20deg)}45%{transform:rotate(-10deg)}60%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0)}
 }
-.bridge .lbl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 14px; }
-.bridge-row { display: flex; gap: 0; flex-wrap: wrap; }
-.bridge-item { padding-right: 28px; margin-right: 28px; border-right: 1px solid #D4D4D8; }
-.bridge-item:last-child { border-right: 0; padding-right: 0; margin-right: 0; }
-.bridge-num { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
-.bridge-cap { font-size: 12px; color: var(--muted); margin-top: 2px; }
-@media (max-width: 880px) {
-  .bridge-row { gap: 18px 24px; }
-  .bridge-item { border-right: 0; padding-right: 0; margin-right: 0; flex: 1 1 45%; min-width: 130px; }
-}
+.wave{display:inline-block;transform-origin:70% 70%}
+.wave.play{animation:wave-wiggle 1.2s ease-in-out}
 
-/* Section header */
-.sec-num { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
-.sec h2 { margin-top: 8px; max-width: 880px; }
-.sec .intro { font-size: 17px; color: var(--text); max-width: 720px; margin-bottom: 36px; }
-.sec .intro.muted { color: var(--muted); }
-
-/* Stat cards */
-.stats-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 24px 0 38px;
-}
-.stat-card {
-  background: var(--brand-dark);
-  color: #fff;
-  padding: 22px 18px; border-radius: 14px;
-  border-left: 4px solid var(--brand);
-  display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;
-}
-.stat-card .v { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
-.stat-card .l { font-size: 12px; color: #D4D4D8; margin-top: 8px; }
-.stat-card .sub { font-size: 11px; color: #A1A1AA; margin-top: 4px; }
-@media (max-width: 980px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
-
-/* Callout */
-.callout {
-  background: var(--surface);
-  border-left: 4px solid var(--brand);
-  border-radius: 0 12px 12px 0;
-  padding: 22px 28px;
-  margin: 30px 0;
-  font-size: 18px;
-  line-height: 1.45;
-  font-weight: 500;
-}
-.callout .lbl { display: block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
-.callout .big { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
-
-/* Chart wrapper */
-.chart-wrap { background: #FFF; border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin: 18px 0; }
-.chart-wrap h4 { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
-.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 760px) { .chart-row { grid-template-columns: 1fr; } }
-.chart-box { position: relative; height: 280px; }
-.chart-box.tall { height: 320px; }
-
-/* Comparison table */
-.comp-table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 13px; }
-.comp-table th, .comp-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; }
-.comp-table th { font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
-.comp-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
-.comp-table th.num { text-align: right; }
-.comp-table tr.target { background: var(--brand-tint); }
-.brand-cell { display: flex; align-items: center; gap: 10px; }
-.brand-cell .logo { width: 22px; height: 22px; border-radius: 4px; object-fit: cover; background: #F4F4F5; }
-.brand-cell .name { font-weight: 600; }
-.target .name { color: var(--brand); }
-@media (max-width: 760px) { .comp-table { font-size: 12px; } .comp-table th, .comp-table td { padding: 10px 8px; } }
-
-/* Competitor narrative cards */
-.compcards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0; }
-.compcard { background: #FFF; border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
-.compcard .head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.compcard .head img.logo { width: 36px; height: 36px; border-radius: 6px; object-fit: cover; background: var(--surface); }
-.compcard .head .name { font-size: 18px; font-weight: 700; }
-.compcard.target .head .name { color: var(--brand); }
-.compcard p { font-size: 14px; color: var(--text); }
-.compcard .tag { display: inline-block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-@media (max-width: 760px) { .compcards { grid-template-columns: 1fr; } }
-
-/* Section 03 top-5 post cards */
-.post-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 22px 0; }
-.post-card { background: #FFF; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; border-top: 3px solid var(--brand); }
-.post-card a.body { color: inherit; text-decoration: none; display: block; padding: 14px; }
-.post-card .badge { display: inline-block; font-size: 10px; padding: 3px 8px; border-radius: 999px; background: var(--brand-tint); color: var(--brand); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
-.post-card .title { font-size: 13px; font-weight: 600; line-height: 1.3; margin-bottom: 8px; }
-.post-card .meta { font-size: 11px; color: var(--muted); }
-.post-card .lead { background: var(--surface); height: 90px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--brand); font-weight: 800; letter-spacing: -0.01em; }
-@media (max-width: 980px) { .post-cards { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .post-cards { grid-template-columns: repeat(2, 1fr); } }
-
-/* Section 04 ad gallery */
-.ad-gallery { display: flex; gap: 14px; overflow-x: auto; padding: 14px 4px 18px; scroll-snap-type: x mandatory; }
-.ad-card { background: #FFF; border: 1px solid var(--border); border-radius: 12px; flex: 0 0 230px; scroll-snap-align: start; overflow: hidden; display: flex; flex-direction: column; }
-.ad-card .lead {
-  height: 130px; background: var(--surface);
-  display: flex; align-items: center; justify-content: center; position: relative;
-}
-.ad-card .lead img { width: 100%; height: 100%; object-fit: cover; }
-.ad-card .lead .fallback { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.ad-card .lead .fallback img { width: 48px; height: 48px; object-fit: contain; border-radius: 8px; }
-.ad-card .lead .fallback .type-badge { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: #FFF; color: var(--brand); font-weight: 700; letter-spacing: 0.05em; }
-.ad-card .body { padding: 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-.ad-card .brand { font-size: 13px; font-weight: 700; }
-.ad-card .days { font-size: 12px; color: var(--brand); font-weight: 700; }
-.ad-card .meta { font-size: 11px; color: var(--muted); line-height: 1.4; }
-.ad-card a { color: inherit; text-decoration: none; }
-
-/* Section 05 mentions list */
-.mention-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.mention-row:last-child { border-bottom: 0; }
-.mention-row .av { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: var(--surface); flex: 0 0 28px; }
-.mention-row .text { font-size: 14px; flex: 1; }
-.mention-row .text a { font-weight: 600; }
-.mention-row .stat { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
-
-/* Section 06 opportunity cards */
-.opcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
-.opcard { background: #FFF; border: 1px solid var(--border); border-radius: 14px; padding: 26px 24px; display: flex; flex-direction: column; min-height: 320px; }
-.opcard .num { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); font-weight: 800; margin-bottom: 10px; }
-.opcard h3 { font-size: 19px; line-height: 1.3; margin-bottom: 12px; }
-.opcard p { font-size: 14px; color: var(--text); line-height: 1.5; flex: 1; }
-.opcard .stat { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--brand); line-height: 1.15; }
-.opcard .stat .lbl { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 4px; }
-@media (max-width: 980px) { .opcards { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .opcards { grid-template-columns: 1fr; } }
-
-/* Section 07 shortlist cards */
-.creator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
-.creator-card { background: #FFF; border: 1px solid var(--border); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-.creator-card .head { display: flex; align-items: center; gap: 12px; }
-.creator-card .head img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: var(--surface); flex: 0 0 44px; }
-.creator-card .handle { font-size: 15px; font-weight: 700; }
-.creator-card .handle a { text-decoration: none; }
-.creator-card .name { font-size: 12px; color: var(--muted); }
-.creator-card .pbadge { display: inline-block; font-size: 10px; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 999px; background: var(--brand-tint); color: var(--brand); font-weight: 700; margin-left: auto; }
-.creator-card .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; padding: 10px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.creator-card .stats .lbl { color: var(--muted); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
-.creator-card .stats .v { font-weight: 700; font-variant-numeric: tabular-nums; }
-.creator-card .why { font-size: 13px; line-height: 1.45; }
-.creator-card .examples a { font-size: 12px; color: var(--muted); margin-right: 8px; }
-@media (max-width: 980px) { .creator-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .creator-grid { grid-template-columns: 1fr; } }
-
-/* Inspiration gallery */
-.insp-gallery { display: flex; gap: 14px; overflow-x: auto; padding: 14px 4px 18px; scroll-snap-type: x mandatory; }
-.insp-card { background: #FFF; border: 1px solid var(--border); border-radius: 12px; flex: 0 0 230px; scroll-snap-align: start; overflow: hidden; display: flex; flex-direction: column; }
-.insp-card .lead { height: 150px; background: var(--surface); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
-.insp-card .lead img.av { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
-.insp-card .lead .plat { font-size: 10px; padding: 4px 10px; border-radius: 999px; background: #FFF; color: var(--brand); font-weight: 700; letter-spacing: 0.05em; }
-.insp-card .body { padding: 12px; }
-.insp-card a { text-decoration: none; color: inherit; }
-.insp-card .h { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-.insp-card .v { font-size: 14px; font-weight: 700; }
-.insp-card .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-/* Closing */
-.closing {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 36px 32px;
-  margin: 30px 0 8px;
-}
-.closing p { font-size: 16px; line-height: 1.6; }
-.closing .who { font-weight: 700; font-size: 15px; margin: 16px 0 6px; }
-
-/* Footer */
-.footer { padding: 30px 0 60px; color: var(--muted); font-size: 13px; text-align: center; }
-
-/* small utility */
-.row { display: flex; gap: 14px; align-items: center; }
-@media (max-width: 600px) {
-  h2 { font-size: 30px; }
-  .section { padding: 56px 0; }
-}
+@media (prefers-reduced-motion: reduce){.reveal,.stagger>*{opacity:1;transform:none}.theme-bar-fill,.bar>span{transition:none}}
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress"></div>
 
-<!-- Sticky nav -->
-<header class="nav">
-  <div class="nav-inner">
+<nav class="nav">
+  <div class="container nav-inner">
     <div class="nav-left">
-      <a href="#cover" class="sup-pill">Sup</a>
-      <div class="nav-divider"></div>
-      <img class="brand-logo-nav" src="https://images.squarespace-cdn.com/content/v1/6086982b8d0f0051fe91eae9/a33a5c4d-654d-49b3-a78c-581b7a966114/BROWN+LOFO.png?format=400w" alt="buns from home">
+      <span class="nav-sup"><span class="wave">👋</span> Sup</span>
+      <span class="nav-divider"></span>
+      <img class="nav-brand-logo" src="https://images.squarespace-cdn.com/content/v1/6086982b8d0f0051fe91eae9/a33a5c4d-654d-49b3-a78c-581b7a966114/BROWN+LOFO.png?format=500w" alt="Buns From Home">
+      <span class="nav-brand-name">Buns From Home</span>
     </div>
-    <nav class="nav-center">
-      <a href="#sec01">Benchmark</a>
-      <a href="#sec02">Competitors</a>
-      <a href="#sec03">Content</a>
-      <a href="#sec04">Paid Ads</a>
-      <a href="#sec05">Influencers</a>
-      <a href="#sec06">Opportunity</a>
-      <a href="#sec07">Shortlist</a>
-    </nav>
-    <div class="nav-right"><a class="cta" href="#sec06">View Opportunity →</a></div>
+    <div class="nav-mid">
+      <a href="#benchmark">Benchmark</a>
+      <a href="#influencer">Influencer</a>
+      <a href="#competitors">Competitors</a>
+      <a href="#paid">Paid</a>
+      <a href="#feed">Feed</a>
+      <a href="#shortlist">Shortlist</a>
+      <a href="#opportunity">Opportunity</a>
+    </div>
+    <div class="nav-cta"><a href="#opportunity">View opportunity</a></div>
+  </div>
+</nav>
+
+<header class="cover">
+  <div class="container">
+    <div class="green-pill reveal"><span class="dot"></span><span>Influencer marketing intelligence report</span></div>
+    <h1 class="h1 reveal">
+      <span class="line">Buns From Home and the London cafés &amp; bakeries category.</span>
+      <span class="line">A look at <span class="brand-emphasis">where they sit, what is moving</span>.</span>
+    </h1>
+    <p class="cover-sub reveal">Where the brand stands across paid, organic, content, and creators, with a 37 day window across the niche and a 25 day window of the brand's own feed and Creator Tagged Posts.</p>
+    <div class="cover-stats reveal">
+      <div><div class="v" data-count="186040" data-format="compact">186K</div><div class="lbl">Instagram followers</div></div>
+      <div><div class="v" data-count="16" data-format="comma">16</div><div class="lbl">Creator Tagged Posts in the 37 day window</div></div>
+      <div><div class="v" data-count="25" data-format="comma">25</div><div class="lbl">Verified London stores</div></div>
+      <div><div class="v" data-count="0" data-format="comma">0</div><div class="lbl">Active Meta ads</div></div>
+    </div>
+    <div class="hero-trio reveal">
+      <a href="https://www.instagram.com/p/DVd4-UyjL5B/" target="_blank" rel="noopener" class="hero-card">
+        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/da0300cf-2a72-4d8c-a2b7-33a482d1c734" alt="Behind-the-Scenes post"></div>
+        <div class="meta">4,847 likes · Behind-the-Scenes</div>
+      </a>
+      <a href="https://www.instagram.com/p/DVvQPkZDMQ0/" target="_blank" rel="noopener" class="hero-card is-mid">
+        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/3afd28d8-d7ee-42c1-b77b-25eb10879910" alt="Inspirational post"></div>
+        <div class="meta">3,356 likes · Inspirational</div>
+      </a>
+      <a href="https://www.instagram.com/p/DV8ixo0jJAt/" target="_blank" rel="noopener" class="hero-card">
+        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/8a70a0a1-ad27-4710-a4af-3f5431434459" alt="Promotional post"></div>
+        <div class="meta">2,126 likes · Promotional</div>
+      </a></div>
   </div>
 </header>
 
-<!-- Cover -->
-<section id="cover" class="cover">
+<div class="wwa-strip">
   <div class="container">
-    <span class="dot-pill">Influencer Marketing Intelligence Report</span>
-    <h1>17th-biggest IG follower count in your category. Zero of the top thirty creators have ever tagged you.</h1>
-    <p class="sub">A read of how Buns From Home sits inside London's bakery and craft-coffee category, what your competitors are quietly winning at, and the ten creators we'd put on the calendar this week.</p>
-    <div class="cover-stats">
-      <div class="cover-stat"><div class="num">186,040</div><div class="lbl">Instagram followers</div></div>
-      <div class="cover-stat"><div class="num">17/664</div><div class="lbl">Rank in category by IG followers</div></div>
-      <div class="cover-stat"><div class="num">0</div><div class="lbl">Paid ads currently active</div></div>
-      <div class="cover-stat"><div class="num">0 / 30</div><div class="lbl">Top niche creators tagging you</div></div>
+    <div class="wwa-label">What we analysed</div>
+    <div class="wwa-row reveal">
+      <div><div class="v" data-count="642" data-format="comma">642</div><div class="cap">brands in the London cafés &amp; bakeries category</div></div>
+      <div><div class="v" data-count="200" data-format="comma">200</div><div class="cap">top creators across Instagram and TikTok</div></div>
+      <div><div class="v" data-count="363" data-format="comma">363</div><div class="cap">paid ad creatives active in the category</div></div>
+      <div><div class="v">37 day</div><div class="cap">category window · 13 February 2026 to 22 March 2026</div></div>
+      <div><div class="v">25 day</div><div class="cap">brand window · own feed and Creator Tagged Posts</div></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- What we analysed -->
-<section class="bridge">
+<section id="benchmark" class="section reveal">
   <div class="container">
-    <div class="lbl">What we analysed</div>
-    <div class="bridge-row">
-      <div class="bridge-item"><div class="bridge-num">664</div><div class="bridge-cap">brands in the London bakery and craft-coffee category</div></div>
-      <div class="bridge-item"><div class="bridge-num">172</div><div class="bridge-cap">top creators across Instagram and TikTok</div></div>
-      <div class="bridge-item"><div class="bridge-num">585</div><div class="bridge-cap">paid ad creatives currently active in the category</div></div>
-      <div class="bridge-item"><div class="bridge-num">24-day</div><div class="bridge-cap">category window, 15 Feb to 11 Mar 2026</div></div>
-      <div class="bridge-item"><div class="bridge-num">90-day</div><div class="bridge-cap">brand window for your feed and the creators who tagged you</div></div>
+    <div class="s-label">01 · Market benchmark</div>
+    <h2 class="s-h2">Strong social footprint, quieter creator presence.</h2>
+    <div class="section-stats reveal"><div><div class="v" data-count="" data-text="186K">186K</div><div class="ctx">rank 16 of 642 (top 3%)</div><div class="lbl">Instagram followers</div></div><div><div class="v" data-count="" data-text="16">16</div><div class="ctx">rank 23 of 642 (top 4%)</div><div class="lbl">Creator Tagged Posts</div></div><div><div class="v" data-count="" data-text="25">25</div><div class="ctx">rank 12 of 642 (top 2%)</div><div class="lbl">Locations</div></div><div><div class="v" data-count="" data-text="23K">23K</div><div class="ctx">rank 53 of 642 (top 9%)</div><div class="lbl">Total Creator Views</div></div><div><div class="v" data-count="" data-text="15">15</div><div class="ctx">all unpaid in the 37-day window</div><div class="lbl">Unique creators tagging</div></div><div><div class="v" data-count="" data-text="0">0</div><div class="ctx">vs 363 active across 47 niche advertisers</div><div class="lbl">Active Meta ads</div></div></div>
+    <div class="player-row stagger"><div class="player-card is-target">
+      <div class="pc-eyebrow"><span class="ed"></span>Target brand</div>
+      <div class="pc-top"><div class="pc-logo" style="background:#fff;border:1px solid var(--border)"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f5f77570-675e-4224-8bde-860218e06dc9" alt="Buns From Home logo" style="width:100%;height:100%;object-fit:contain"></div><div><div class="pc-name" style="color:var(--brand-primary)">Buns From Home</div><div class="pc-handle">@bunsfromhome</div></div></div>
+      <div class="pc-stats">
+        <div class="stat-row">
+          <div class="lbl">Followers</div>
+          <div class="row-v">
+            <span class="v" data-count="186040" data-format="compact">186K</span>
+            <span class="rank-pill">#16 of 642</span>
+          </div>
+          <div class="bar"><span style="background:var(--brand-primary)" data-width="24"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Creator Tagged Posts</div>
+          <div class="row-v">
+            <span class="v" data-count="16" data-format="comma">16</span>
+            <span class="rank-pill">#23 of 642</span>
+          </div>
+          <div class="bar"><span style="background:var(--brand-primary)" data-width="4"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Locations</div>
+          <div class="row-v">
+            <span class="v" data-count="25" data-format="comma">25</span>
+            <span class="rank-pill">#12 of 642</span>
+          </div>
+          <div class="bar"><span style="background:var(--brand-primary)" data-width="14"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Total Creator Views</div>
+          <div class="row-v">
+            <span class="v" data-count="23035" data-format="compact">23K</span>
+            <span class="rank-pill">#53 of 642</span>
+          </div>
+          <div class="bar"><span style="background:var(--brand-primary)" data-width="0"></span></div>
+        </div></div>
+    </div><div class="player-card">
+      
+      <div class="pc-top"><div class="pc-logo" style="background:#fff;border:1px solid var(--border)"><img src="https://first-possum-672.convex.cloud/api/storage/37b38677-42ff-46f2-bf87-fd8623950445" alt="GAIL’s Bakery Notting Hill logo" style="width:100%;height:100%;object-fit:contain"></div><div><div class="pc-name" style="">GAIL’s Bakery Notting Hill</div><div class="pc-handle">@gailsbakery</div></div></div>
+      <div class="pc-stats">
+        <div class="stat-row">
+          <div class="lbl">Followers</div>
+          <div class="row-v">
+            <span class="v" data-count="166279" data-format="compact">166K</span>
+            <span class="rank-pill">#19 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#534AB7" data-width="22"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Creator Tagged Posts</div>
+          <div class="row-v">
+            <span class="v" data-count="56" data-format="comma">56</span>
+            <span class="rank-pill">#4 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#534AB7" data-width="15"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Locations</div>
+          <div class="row-v">
+            <span class="v" data-count="170" data-format="comma">170</span>
+            <span class="rank-pill">#2 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#534AB7" data-width="100"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Total Creator Views</div>
+          <div class="row-v">
+            <span class="v" data-count="116982" data-format="compact">117K</span>
+            <span class="rank-pill">#21 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#534AB7" data-width="4"></span></div>
+        </div></div>
+    </div><div class="player-card">
+      
+      <div class="pc-top"><div class="pc-logo" style="background:#fff;border:1px solid var(--border)"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street Coffee - Monument logo" style="width:100%;height:100%;object-fit:contain"></div><div><div class="pc-name" style="">Blank Street Coffee - Monument</div><div class="pc-handle">@blankstreet</div></div></div>
+      <div class="pc-stats">
+        <div class="stat-row">
+          <div class="lbl">Followers</div>
+          <div class="row-v">
+            <span class="v" data-count="169340" data-format="compact">169K</span>
+            <span class="rank-pill">#18 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#1D9E75" data-width="22"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Creator Tagged Posts</div>
+          <div class="row-v">
+            <span class="v" data-count="366" data-format="comma">366</span>
+            <span class="rank-pill is-top">#1 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#1D9E75" data-width="100"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Locations</div>
+          <div class="row-v">
+            <span class="v" data-count="40" data-format="comma">40</span>
+            <span class="rank-pill">#6 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#1D9E75" data-width="23"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Total Creator Views</div>
+          <div class="row-v">
+            <span class="v" data-count="2810064" data-format="compact">2.8M</span>
+            <span class="rank-pill is-top">#1 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#1D9E75" data-width="100"></span></div>
+        </div></div>
+    </div><div class="player-card">
+      
+      <div class="pc-top"><div class="pc-logo" style="background:#fff;border:1px solid var(--border)"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead Bakery South Kensington logo" style="width:100%;height:100%;object-fit:contain"></div><div><div class="pc-name" style="">Bread Ahead Bakery South Kensington</div><div class="pc-handle">@breadaheadbakery</div></div></div>
+      <div class="pc-stats">
+        <div class="stat-row">
+          <div class="lbl">Followers</div>
+          <div class="row-v">
+            <span class="v" data-count="423830" data-format="compact">424K</span>
+            <span class="rank-pill">#5 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#D85A30" data-width="56"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Creator Tagged Posts</div>
+          <div class="row-v">
+            <span class="v" data-count="20" data-format="comma">20</span>
+            <span class="rank-pill">#17 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#D85A30" data-width="5"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Locations</div>
+          <div class="row-v">
+            <span class="v" data-count="6" data-format="comma">6</span>
+            <span class="rank-pill">#32 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#D85A30" data-width="3"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Total Creator Views</div>
+          <div class="row-v">
+            <span class="v" data-count="494849" data-format="compact">495K</span>
+            <span class="rank-pill">#5 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#D85A30" data-width="17"></span></div>
+        </div></div>
+    </div><div class="player-card">
+      
+      <div class="pc-top"><div class="pc-logo" style="background:#fff;border:1px solid var(--border)"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/396bef03-263d-46a0-88d2-57ebc966d747" alt="Peggy Porschen Belgravia logo" style="width:100%;height:100%;object-fit:contain"></div><div><div class="pc-name" style="">Peggy Porschen Belgravia</div><div class="pc-handle">@peggyporschenofficial</div></div></div>
+      <div class="pc-stats">
+        <div class="stat-row">
+          <div class="lbl">Followers</div>
+          <div class="row-v">
+            <span class="v" data-count="748810" data-format="compact">749K</span>
+            <span class="rank-pill">#4 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#378ADD" data-width="100"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Creator Tagged Posts</div>
+          <div class="row-v">
+            <span class="v" data-count="35" data-format="comma">35</span>
+            <span class="rank-pill">#8 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#378ADD" data-width="9"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Locations</div>
+          <div class="row-v">
+            <span class="v" data-count="2" data-format="comma">2</span>
+            <span class="rank-pill">#77 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#378ADD" data-width="1"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="lbl">Total Creator Views</div>
+          <div class="row-v">
+            <span class="v" data-count="125907" data-format="compact">126K</span>
+            <span class="rank-pill">#17 of 642</span>
+          </div>
+          <div class="bar"><span style="background:#378ADD" data-width="4"></span></div>
+        </div></div>
+    </div></div>
+    <p style="font-size:13px;color:var(--muted);margin-top:16px">The London bakery cohort, brand by brand · 37-day niche window. Four direct competitors compared on four metrics. Buns From Home highlighted.</p>
+    <div class="section-text reveal">
+      <p>Buns From Home sits in the top 3% of London cafés &amp; bakeries by Instagram followers (rank 16 of 642) and the top 4% by Creator Tagged Post volume (rank 23 of 642). The social footprint and the conversation around it don't yet line up: 25 verified shops, an earned-mention engine running at category-leading density per creator, and a paid programme that is still on the runway.</p>
+    </div>
+    <div class="callout reveal">
+      <span class="callout-label">The benchmark verdict</span>
+      <p>The brand is already in a position most niche bakeries would want to be in. Creator Tagged Posts, follower rank, and location count all sit inside the top 12% of the category. The thing left to do is amplify a working signal, not fix an absent one.</p>
     </div>
   </div>
 </section>
 
-<!-- Section 01: Market benchmark -->
-<section id="sec01" class="section">
-  <div class="container sec">
-    <div class="sec-num">01 Market Benchmark</div>
-    <h2>You are a top-ten-percent follower brand on a three-shop footprint.</h2>
-    <p class="intro">Across the 24-day category window (15 Feb to 11 Mar 2026), six hundred and sixty-four London bakery and craft-coffee brands posted, advertised, or sat dormant. Buns From Home shows up high in the audience rankings and low almost everywhere else. We'll spend the rest of this report explaining what to do about that.</p>
-
-    <div class="stats-grid">
-      <div class="stat-card"><div class="v">17 / 664</div><div class="l">IG follower rank (top 10%)</div></div>
-      <div class="stat-card"><div class="v">186,040</div><div class="l">Instagram followers</div></div>
-      <div class="stat-card"><div class="v">8,043</div><div class="l">TikTok followers</div><div class="sub">Rank 19 of 95 (top 20%)</div></div>
-      <div class="stat-card"><div class="v">15 posts</div><div class="l">Brand IG posts in window<div class="sub">Top 20% by volume</div></div></div>
-      <div class="stat-card"><div class="v">13,422</div><div class="l">Total IG views in window<div class="sub">Top 50% by reach</div></div></div>
-      <div class="stat-card"><div class="v">2,068</div><div class="l">Google reviews · 4.4★<div class="sub">Top 10% by review volume</div></div></div>
-    </div>
-
-    <div class="chart-row">
-      <div class="chart-wrap"><h4>Follower distribution across the top 25 brands</h4><div class="chart-box"><canvas id="chart-followers"></canvas></div></div>
-      <div class="chart-wrap"><h4>Posts in window vs reach in window</h4><div class="chart-box"><canvas id="chart-postsviews"></canvas></div></div>
-    </div>
-
-    <p>To understand the shape of this category: only two hundred and twelve of the six hundred and sixty-four brands posted anything to Instagram in the niche window. Twelve managed a single TikTok. Sixty-two ran any paid spend at all. The median brand has 4,262 IG followers and three posts in twenty-four days. So when we say Buns From Home is in the top ten percent on followers, we are saying it has built a bigger audience than 647 of the brands competing for the same croissant pound.</p>
-
-    <p>Where it gets interesting: that audience is doing a lot of waiting around. Fifteen posts in the window generated 13,422 IG views, which rank a respectable Top 50% by reach, but the per-post yield drops fast against peers who post less and earn far more. Pophams Bakery (270k followers, eighteen posts) cleared 40k views. Bombolone Doughnuts (a 2,200-follower one-site bakery) cleared 284k. We re-ran the comparison expecting an error; the number held.</p>
-
-    <p>Buns From Home is the brand that has done the hard part. The lookalike-audience question, the croissant-bun-as-format question, the London discovery question. It's the brand that hasn't yet leaned into the easy part of the loop, which is letting other people on Instagram and TikTok do the work of selling the next croissant bun to the next person who hasn't tried one yet.</p>
-
-    <p>One more read on the benchmark that surprised us. Buns From Home's Google review count (2,068, top 10% of the category) and a 4.4-star average suggest a level of in-shop conversion that the social numbers do not capture. The brand is good at converting the people who walk in. The question this report is built around is what happens when many more people, who currently do not know the brand exists, are made aware of it by a creator they already trust.</p>
-
-    <div class="callout">
-      <span class="lbl">Headline</span>
-      <div class="big">Three shops, 186k followers, twentieth-percentile organic reach per post. The audience is built. The discovery loop isn't running.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 02: Competitors -->
-<section id="sec02" class="section">
-  <div class="container sec">
-    <div class="sec-num">02 Competitor Deep-Dive</div>
-    <h2>One of these competitors has 13 sites. The other has 5. Both are quietly doing what you aren't.</h2>
-    <p class="intro">Same 24-day category window. We picked the seven competitors that share your London neighbourhood-bakery DNA and ranked the same metrics across them. The pattern that kept coming up: the brands closest to you on follower count are spending their posting calendar very differently.</p>
-
-    <table class="comp-table">
-      <thead>
-        <tr>
-          <th>Brand</th>
-          <th class="num">Sites</th>
-          <th class="num">IG followers</th>
-          <th class="num">Posts in window</th>
-          <th class="num">Total IG views</th>
-          <th class="num">Active ads</th>
-          <th class="num">Ads 60+ days</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="target">
-          <td><div class="brand-cell"><span class="logo" style="background: var(--brand);"></span><span class="name">Buns From Home</span></div></td>
-          <td class="num">3</td>
-          <td class="num">186,040</td>
-          <td class="num">15</td>
-          <td class="num">13,422</td>
-          <td class="num">0</td>
-          <td class="num">0</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #2D5B3E;"></span><span class="name">Blank Street Coffee</span></div></td>
-          <td class="num">13</td>
-          <td class="num">169,340</td>
-          <td class="num">300</td>
-          <td class="num">1,273,157</td>
-          <td class="num">0</td>
-          <td class="num">0</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #C8102E;"></span><span class="name">GAIL's Bakery</span></div></td>
-          <td class="num">5</td>
-          <td class="num">166,279</td>
-          <td class="num">58</td>
-          <td class="num">116,982</td>
-          <td class="num">1</td>
-          <td class="num">0</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #4A2C16;"></span><span class="name">Bread Ahead Bakery</span></div></td>
-          <td class="num">5</td>
-          <td class="num">423,830</td>
-          <td class="num">19</td>
-          <td class="num">494,264</td>
-          <td class="num">5</td>
-          <td class="num">10</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #1D1D1B;"></span><span class="name">Pophams Bakery</span></div></td>
-          <td class="num">2</td>
-          <td class="num">269,944</td>
-          <td class="num">18</td>
-          <td class="num">40,782</td>
-          <td class="num">0</td>
-          <td class="num">0</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #6B4423;"></span><span class="name">Fortitude Bakehouse</span></div></td>
-          <td class="num">1</td>
-          <td class="num">222,948</td>
-          <td class="num">16</td>
-          <td class="num">67,850</td>
-          <td class="num">0</td>
-          <td class="num">0</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #E8B8C8;"></span><span class="name">Aux Merveilleux de Fred</span></div></td>
-          <td class="num">2</td>
-          <td class="num">83,134</td>
-          <td class="num">18</td>
-          <td class="num">26,545</td>
-          <td class="num">0</td>
-          <td class="num">0</td>
-        </tr>
-        <tr>
-          <td><div class="brand-cell"><span class="logo" style="background: #1F1F1F;"></span><span class="name">Crumbs and Doilies</span></div></td>
-          <td class="num">2</td>
-          <td class="num">372,411</td>
-          <td class="num">5</td>
-          <td class="num">44,275</td>
-          <td class="num">0</td>
-          <td class="num">0</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="chart-row">
-      <div class="chart-wrap"><h4>Views-per-post efficiency (window)</h4><div class="chart-box"><canvas id="chart-vpp"></canvas></div></div>
-      <div class="chart-wrap"><h4>Active ad portfolio</h4><div class="chart-box"><canvas id="chart-ads"></canvas></div></div>
-    </div>
-
-    <div class="compcards">
-      <div class="compcard target">
-        <div class="head"><span class="logo" style="background: var(--brand);"></span><div><div class="name">Buns From Home</div></div></div>
-        <span class="tag">The target</span>
-        <p>The 17th-largest follower base in the cleaned niche, sitting between Marchesi 1824 and Arabica. Your IG output is consistent (15 posts in 24 days puts you in the top 20% by cadence) and your weekend special drops can clear 4,000 likes when they hit. Three shops as of analysis, with public reporting suggesting an active expansion programme. We could not find a single paid Meta creative under your handle.</p>
-      </div>
-      <div class="compcard">
-        <div class="head"><span class="logo" style="background: #2D5B3E;"></span><div><div class="name">Blank Street Coffee</div></div></div>
-        <span class="tag">The cadence outlier</span>
-        <p>Three hundred IG posts in the same 24-day window, 1.27m views, and a UGC engine on TikTok that almost certainly explains why their handle appears in 67 of the top TikToks we pulled in the category. The Lemon Loaf Matcha "secret code" drop alone produced a queue of organic creator posts that read like a coordinated campaign without being one. They run zero active paid ads. They've made TikTok the ad.</p>
-      </div>
-      <div class="compcard">
-        <div class="head"><span class="logo" style="background: #C8102E;"></span><div><div class="name">GAIL's Bakery</div></div></div>
-        <span class="tag">The boring scale model</span>
-        <p>166k followers, 58 posts in window, 117k views. Solid, methodical, the kind of output that suggests a content calendar with budget behind it. Notable for what's absent: minimal creator activity for the category presence they have. The brand uses owned channels heavily and almost never appears in tagged influencer content. Their one active ad has yet to break 60 days running.</p>
-      </div>
-      <div class="compcard">
-        <div class="head"><span class="logo" style="background: #4A2C16;"></span><div><div class="name">Bread Ahead Bakery</div></div></div>
-        <span class="tag">The paid ads veteran</span>
-        <p>The category's only craft bakery with proven long-form Meta creative. Ten ads have run 60+ days, with the longest-performing video built around their baking school. They also turn up organically: Olamide Day-by-Day's reaction Reel at <a href="https://www.instagram.com/p/DUwNOjKjeu5/" target="_blank">Bread Ahead</a> hit 215k views in our window, anchored by a non-foodie creator with a personal-blog tone. They are the one brand in this peer set with two functioning growth loops at once.</p>
-      </div>
-      <div class="compcard">
-        <div class="head"><span class="logo" style="background: #1D1D1B;"></span><div><div class="name">Pophams Bakery</div></div></div>
-        <span class="tag">Quiet, organic, present</span>
-        <p>A two-shop independent with 270k followers and a steady, recipe-driven feed. They turn up across a handful of food-creator posts but don't appear to pursue paid ads or coordinated campaigns. The closest pure analogue to Buns From Home in scale and posture, except they're punching above on raw follower count and below on per-post reach. Useful as a control: this is what your shape looks like without a creator programme.</p>
-      </div>
-      <div class="compcard">
-        <div class="head"><span class="logo" style="background: #6B4423;"></span><div><div class="name">Fortitude Bakehouse</div></div></div>
-        <span class="tag">Single-site cult</span>
-        <p>One Bloomsbury location, 223k followers, 16 posts averaging 4,240 likes each. This is what the inspirational-pillar-only playbook looks like at extreme: no ads, no obvious influencer programme, and an output that reads like a slow-fashion magazine. Worth studying for tone and visual restraint, not as a scale model.</p>
-      </div>
-    </div>
-
-    <p>The interesting question this raises is what the brands closest to you on follower count are doing with that audience that you aren't. Bread Ahead and Blank Street, the two we kept coming back to, are operating different machines, but both share one trait: they don't expect their audience to do all the discovery work. Bread Ahead spends to keep prospecting; Blank Street has turned the brand into an open-source meme that creators run with. Buns From Home is the third option, which is: trust the audience and post.</p>
-
-    <p>It's worth pausing on Blank Street for a second because the comparison is so close on follower count and so far apart on cadence. Three hundred posts in a 24-day window translates to roughly twelve a day across all formats. The output mix is mostly UGC repost and lo-fi product cuts, not high-production campaign content. The marginal cost of post 295 is somewhere near zero, and the reach yield per post is small in absolute terms but enormous in aggregate. What this means in practice is that the marginal hour of a Blank Street social manager is spent reposting a customer, not lighting a hero shot. That is a transferable operational choice, not a budget choice.</p>
-
-    <p>Where Pophams and Fortitude land in this peer set is more interesting than the numbers alone suggest. Both are single- or two-site bakeries with very large follower counts and very modest reach per post. They are essentially Buns From Home's organic-only future if nothing else changes. The argument isn't that those brands are losing; both run sustainable businesses. The argument is that they represent the ceiling of the current playbook, and Buns From Home, with three sites and a more visible product story, has a clear path to a higher ceiling if it picks one.</p>
-
-    <div class="callout">
-      <span class="lbl">The peer-set takeaway</span>
-      <div class="big">Bread Ahead has captured ten 60-day-survivor ads on five sites. Blank Street has captured 67 of the category's top TikTok tags from thirteen sites. Buns From Home has captured neither, on three sites with a comparable follower base.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 03: Content -->
-<section id="sec03" class="section">
-  <div class="container sec">
-    <div class="sec-num">03 Feed Content Strategy</div>
-    <h2>You have an Entertaining pillar that prints, and you post it three times in ninety days.</h2>
-    <p class="intro">Over the rolling 90-day brand window ending 13 May 2026, Buns From Home shipped sixty-two posts to its own Instagram feed. We pulled the top thirty by views and read every one. The headline pattern: when you let the bun be the protagonist, the numbers move. When you let the kitchen be the protagonist, they don't.</p>
-
-    <div class="stats-grid">
-      <div class="stat-card"><div class="v">62</div><div class="l">IG feed posts in 90d</div></div>
-      <div class="stat-card"><div class="v">2,427</div><div class="l">Avg likes, Entertaining pillar</div></div>
-      <div class="stat-card"><div class="v">3 / 30</div><div class="l">Entertaining posts in the top 30</div></div>
-      <div class="stat-card"><div class="v">149</div><div class="l">Avg likes, Behind-the-Scenes</div></div>
-      <div class="stat-card"><div class="v">6 / 30</div><div class="l">Behind-the-Scenes in the top 30</div></div>
-      <div class="stat-card"><div class="v">4,387</div><div class="l">Top-post likes (Cookie Dough drop)</div></div>
-    </div>
-
-    <div class="chart-row">
-      <div class="chart-wrap"><h4>Average likes by content pillar (90d brand window)</h4><div class="chart-box"><canvas id="chart-pillars"></canvas></div></div>
-      <div class="chart-wrap"><h4>Hook Score vs average likes</h4><div class="chart-box"><canvas id="chart-hooks"></canvas></div></div>
-    </div>
-
-    <p>Sixteen of the thirty top posts use a Hook Score of eight or above. The three posts that scored nine, all of them Entertaining-pillar weekend special drops, averaged 2,427 likes. The six posts on the Behind-the-Scenes pillar averaged 149. We re-read the BTS posts to check for a confound. There isn't one. They're well-shot, they're craft-driven, they're consistent with the brand's storytelling instincts. They just don't land like the Cookie Dough Cross-Section does.</p>
-
-    <p>The Entertaining pillar at Buns From Home means one specific thing: the weekend special drop. Pandan in April. Banana-rama. Cereal Milk in May. Cookie Dough. Yuzu fortune-cookie bun. These posts share a format (close-up cross-section, full-frame product hero, hand-rolled aesthetic), a cadence (Friday or Saturday morning), and a payoff (immediate appetite trigger, queue at the shop). They are the brand's product-marketing engine, dressed as feed content. They run three times in 90 days.</p>
-
-    <div class="post-cards">
-      <div class="post-card">
-        <a class="body" href="https://www.instagram.com/p/DXOhre5n6yY/" target="_blank">
-          <div class="lead">4.4k</div>
-        </a>
-        <div style="padding: 14px;">
-          <span class="badge">Entertaining · Hook 9</span>
-          <div class="title">"It's dropped!" Cookie Dough weekend special</div>
-          <div class="meta">17 Apr · 4,387 likes · 67 comments</div>
-        </div>
-      </div>
-      <div class="post-card">
-        <a class="body" href="https://www.instagram.com/p/DYErzj-AP-d/" target="_blank">
-          <div class="lead">2.5k</div>
-        </a>
-        <div style="padding: 14px;">
-          <span class="badge">Entertaining · Hook 9</span>
-          <div class="title">"Cereal milk is back" weekend drop</div>
-          <div class="meta">8 May · 2,502 likes · 21 comments</div>
-        </div>
-      </div>
-      <div class="post-card">
-        <a class="body" href="https://www.instagram.com/p/DW8sGmtGjQ4/" target="_blank">
-          <div class="lead">1.8k</div>
-        </a>
-        <div style="padding: 14px;">
-          <span class="badge">Inspirational · Hook 8</span>
-          <div class="title">Pandan, the vanilla of Southeast Asia</div>
-          <div class="meta">10 Apr · 1,807 likes · 35 comments</div>
-        </div>
-      </div>
-      <div class="post-card">
-        <a class="body" href="https://www.instagram.com/p/DXgqIXpGkPu/" target="_blank">
-          <div class="lead">1.5k</div>
-        </a>
-        <div style="padding: 14px;">
-          <span class="badge">Inspirational · Hook 8</span>
-          <div class="title">Banana-rama weekend special</div>
-          <div class="meta">24 Apr · 1,480 likes · 28 comments</div>
-        </div>
-      </div>
-      <div class="post-card">
-        <a class="body" href="https://www.instagram.com/p/DWbDeUulTgA/" target="_blank">
-          <div class="lead">1.4k</div>
-        </a>
-        <div style="padding: 14px;">
-          <span class="badge">Promotional · Hook 8</span>
-          <div class="title">"The dream box" Jaffa Cake collection</div>
-          <div class="meta">28 Mar · 1,449 likes · 60 comments</div>
-        </div>
-      </div>
-    </div>
-
-    <p>This isn't a critique of the BTS pillar as a concept. The <a href="https://www.instagram.com/p/DXrA3j1jGW9/" target="_blank">Paddy the corgi</a> moment, the <a href="https://www.instagram.com/p/DXEEz6IDBmG/" target="_blank">Leadenhall Market storefront shot</a>, the laminated-dough close-ups, those all belong in the calendar. The argument is about ratio. Six of thirty top-performing posts came from BTS while three came from the format that prints 16x more engagement per post. The split should arguably be flipped.</p>
-
-    <p>One other thing worth flagging because it doesn't fit anywhere else. The single post that broke the model in this window wasn't on Instagram. It was on TikTok: a <a href="https://www.tiktok.com/@bunsfromhome/video/7613428041062026518" target="_blank">Photo Slideshow announcing the closure of the original Notting Hill shop</a> after a rent dispute. 38,500 views, 1,259 likes, 29 comments. By a wide margin the most-viewed TikTok the brand shipped in the window. The audience responds to the "started in my mum's kitchen" story-arc more than to most of the product content. There's a content lesson buried in there about how often the founding story should resurface.</p>
-
-    <p>A second pattern worth naming: the brand's IG output is overwhelmingly Photo, not Video. Twenty-four of the top thirty in the 90-day window are Photo, four are Video, two are Carousel. The four videos averaged 434 likes vs 838 for photos, which on the surface argues against switching format. But all four videos in the dataset are short product cuts that read like B-roll, not Reels. We could not find a single attempt at a Reel built around a creator, a customer, or a named member of the team. That's the format gap, not "post more videos".</p>
-
-    <p>The funnel-stage breakdown across the top 30 is twenty-seven TOFU, three MOFU, zero BOFU. The brand is permanently in awareness mode on its own feed. The MOFU posts that did appear (the chocolate-cream batch shot, the Paddy the corgi photo, the look-who's-back teaser) all averaged 319 likes, well below the brand's typical TOFU output. The conclusion isn't that MOFU doesn't work; it's that the MOFU content currently being shipped reads as TOFU minus the appetite trigger. There's an unexplored brief here for content that earns the next visit specifically (loyalty programme, group order, gift box, weekend booking).</p>
-
-    <div class="callout">
-      <span class="lbl">The biggest miss</span>
-      <div class="big">Entertaining-pillar weekend-special drops yield 16x the engagement of Behind-the-Scenes content, and you ship them at half the frequency. Shipping the weekend special weekly across two shops adds eight high-yield posts a month at zero marginal cost.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 04: Paid ads -->
-<section id="sec04" class="section">
-  <div class="container sec">
-    <div class="sec-num">04 Paid Ads Intelligence</div>
-    <h2>The category is running 585 paid ads. You are not.</h2>
-    <p class="intro">Paid ads are a point-in-time snapshot, not a windowed dataset. Across the active set in the London bakery and craft-coffee category, sixty-two brands have at least one live creative. The category's 60-day survival rate is unusually high; the winner DNA is unusually consistent; and Buns From Home is silent in a market that is paying to talk.</p>
-
-    <div class="stats-grid">
-      <div class="stat-card"><div class="v">585</div><div class="l">Active ads in the niche</div></div>
-      <div class="stat-card"><div class="v">62</div><div class="l">Brands actively advertising</div></div>
-      <div class="stat-card"><div class="v">51.6%</div><div class="l">60-day survival rate</div><div class="sub">vs ~11% industry benchmark</div></div>
-      <div class="stat-card"><div class="v">11%</div><div class="l">UGC-style within 60-day winners</div></div>
-      <div class="stat-card"><div class="v">0</div><div class="l">Buns From Home active ads</div></div>
-      <div class="stat-card"><div class="v">9</div><div class="l">Median competitor longest ad (days)</div></div>
-    </div>
-
-    <div class="chart-row">
-      <div class="chart-wrap"><h4>Ad longevity distribution in the category</h4><div class="chart-box"><canvas id="chart-longevity"></canvas></div></div>
-      <div class="chart-wrap"><h4>Winner DNA: creative style</h4><div class="chart-box"><canvas id="chart-style"></canvas></div></div>
-    </div>
-
-    <p>The first thing to flag, because it's the kind of stat that misleads if you don't say it out loud: 51.6% sixty-day survival is not because the London bakery category has uniquely good ads. It's because Tim Hortons alone accounts for 190 of the 302 sixty-day survivors. Strip Tim Hortons out and the survival rate drops to 25%, which is still more than double the industry benchmark of around 11%. The takeaway holds either way. When a craft bakery in this category invests in Meta creative, the ads tend to last.</p>
-
-    <p>Within the 100 longest-running creatives we pulled, three patterns kept appearing. First, Carousel and Static Graphic formats together account for 58% of survivors. Second, the Promotional pillar carries 81% of all winners, which is unusual and suggests this audience tolerates a direct sell better than most. Third, UGC style runs to about 11% of long-survivors. UGC is one good answer, not the headline answer; the unsexy answer is "high-quality static product photography with clear pricing".</p>
-
-    <div class="ad-gallery">
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=470661439001042" target="_blank">
-          <div class="lead">
-            <img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/470601703_431906169853011_826" alt="" onerror="this.parentElement.innerHTML='<div class=fallback><div class=type-badge>VIDEO</div></div>'">
-          </div>
-          <div class="body">
-            <div class="brand">Origin Coffee Roasters</div>
-            <div class="days">513 days running</div>
-            <div class="meta">Cinematic brewing-methods montage targeting remote workers. Product-Only style.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=3639776306326990" target="_blank">
-          <div class="lead"><div class="fallback"><div class="type-badge">IMAGE</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">PAUL Bakery</div></div></div>
-          <div class="body">
-            <div class="brand">PAUL Bakery</div>
-            <div class="days">372 days running</div>
-            <div class="meta">Flat-lay lunch-spread photograph. Product-Only static. Single image carrying the longest non-coffee lifespan.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=1128638549023136" target="_blank">
-          <div class="lead"><div class="fallback"><div class="type-badge">CAROUSEL</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">Jack and Beyond</div></div></div>
-          <div class="body">
-            <div class="brand">Jack and Beyond</div>
-            <div class="days">363 days running</div>
-            <div class="meta">Matcha-and-strawberry cake slice carousel. Sensory-appeal hook, Product-Only style.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=1036195778701648" target="_blank">
-          <div class="lead"><div class="fallback"><div class="type-badge">CAROUSEL</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">Chai Guys</div></div></div>
-          <div class="body">
-            <div class="brand">Chai Guys</div>
-            <div class="days">317 days running</div>
-            <div class="meta">Minimalist loose-leaf packaging, two-tone background. Brand-asset carousel, Low complexity.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=4346053262307003" target="_blank">
-          <div class="lead">
-            <img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/615329749_851062481248715_414" alt="" onerror="this.parentElement.innerHTML='<div class=fallback><div class=type-badge>VIDEO</div><div style=&quot;font-size:11px;color:var(--muted);margin-top:4px;&quot;>Bread Ahead</div></div>'">
-          </div>
-          <div class="body">
-            <div class="brand">Bread Ahead Bakery</div>
-            <div class="days">118 days running</div>
-            <div class="meta">Baking-school montage. Polished Brand. The closest peer-analogue to a creative Buns From Home could run.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=1461628825327399" target="_blank">
-          <div class="lead">
-            <img src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.35426-6/594745568_1171030025233792_13" alt="" onerror="this.parentElement.innerHTML='<div class=fallback><div class=type-badge>VIDEO</div><div style=&quot;font-size:11px;color:var(--muted);margin-top:4px;&quot;>Lola&#39;s Cupcakes</div></div>'">
-          </div>
-          <div class="body">
-            <div class="brand">Lola's Cupcakes</div>
-            <div class="days">113 days running</div>
-            <div class="meta">Convenience-positioning video for party hosting. Polished Brand. TOFU funnel.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=1612240609779189" target="_blank">
-          <div class="lead">
-            <img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/616811579_914965787614340_377" alt="" onerror="this.parentElement.innerHTML='<div class=fallback><div class=type-badge>VIDEO</div><div style=&quot;font-size:11px;color:var(--muted);margin-top:4px;&quot;>Huffkins</div></div>'">
-          </div>
-          <div class="body">
-            <div class="brand">Huffkins Bakery</div>
-            <div class="days">113 days running</div>
-            <div class="meta">App-download free-cake offer. UGC style. BOFU. The cleanest acquisition-loop ad in the niche.</div>
-          </div>
-        </a>
-      </div>
-      <div class="ad-card">
-        <a href="https://www.facebook.com/ads/library?id=1238975168175810" target="_blank">
-          <div class="lead"><div class="fallback"><div class="type-badge">CAROUSEL</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">Tim Hortons</div></div></div>
-          <div class="body">
-            <div class="brand">Tim Hortons</div>
-            <div class="days">92 days running</div>
-            <div class="meta">24/7 drive-thru reach play. Static Graphic carousel. The 59-ad volume bet, made cheaply.</div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <p>The two patterns we'd lean on if we were briefing the first Buns From Home ad next week: Origin Coffee's "barista's pick" UGC video series, which has kept multiple creatives alive past 300 days each, and PAUL's single static flat-lay, which has run 372 days off a Low-Complexity production. These are the verified winning playbooks in your category. The first is a B-roll-and-talking-head loop, the second is one excellent photograph plus pricing copy. The fact that they coexist in the same long-survivor pool is the most interesting fact in this section.</p>
-
-    <p>Where this leaves Buns From Home. Zero active creatives means zero baseline. The category has a 25% sixty-day survival rate ex-Tim Hortons, which means that if you ship four creatives next month, statistically one should still be running in August. The opportunity here isn't to compete with Tim Hortons at scale. It's to be the third craft bakery (after Bread Ahead and Lola's) with a working Meta presence, on a follower base bigger than either of them.</p>
-
-    <p>We read through forty-something of the longest-running ads to see whether the survivor pool clustered around any specific message. The honest answer: not really. The unifying factor is Production_Complexity, not message. Forty-seven of the top hundred long-survivors are Low complexity, fifty-one are Medium, and only two are High. That's the actionable observation. The category does not reward the most expensive ad in the auction. It rewards the cheapest ad that looks brand-correct and reads as a clear product offer.</p>
-
-    <p>Hook_Mechanism is more varied than we expected. There's no single dominant hook across the top hundred; the winners split between curiosity-gap text overlays, sensory-appeal ASMR cuts, and social-proof "10,000+ five-star reviews" framings. The corollary: there is room for a hook that isn't yet being used in this category, and "the bun that started in someone's mum's kitchen" is one we'd test. The Notting Hill closure post on TikTok already suggested the audience responds to that frame organically.</p>
-
-    <p>One concession worth making here. We couldn't cluster three or more brands around a single cross-brand winning pattern with the data we had. Tim Hortons dominates the carousel pool, Origin Coffee dominates the long-running video pool, and the rest sit in their own corners. So instead of inventing a market-validated pattern that isn't really there, we'd name two single-brand outliers that are worth studying. The first is Origin Coffee's "barista's pick" UGC series, the second is PAUL's single 372-day flat-lay photograph. Both have run longer than any equivalent creative in the category, and the production cost of replicating either is low enough that Buns From Home could test both inside a month.</p>
-
-    <div class="callout">
-      <span class="lbl">The single biggest paid-ads gap</span>
-      <div class="big">62 of your category peers ran a Meta ad in the last quarter. You did not. Bread Ahead alone has ten 60-day-survivor creatives. Buns From Home has zero baseline. The first three creatives you ship will be the most data-rich month of paid testing the brand has ever had.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 05: Influencer intelligence -->
-<section id="sec05" class="section">
-  <div class="container sec">
-    <div class="sec-num">05 Influencer Intelligence</div>
-    <h2>Ten creators tagged you in 90 days. Nine were tourists. One was a vegan food list.</h2>
-    <p class="intro">We read every brand-targeted post from the last 90 days. Across both Instagram and TikTok, fewer than fifteen creator posts tagged Buns From Home over a 90-day window. The handful that did landed in a specific narrative bucket that may or may not be the one the brand wants to live in.</p>
-
-    <div class="stats-grid">
-      <div class="stat-card"><div class="v">10 IG · 2 TT</div><div class="l">Creator posts tagging BFH (90d)</div></div>
-      <div class="stat-card"><div class="v">9 / 10</div><div class="l">Tags from lifestyle/travel creators, not food</div></div>
-      <div class="stat-card"><div class="v">1 / 10</div><div class="l">Posts where BFH is the subject, not scenery</div></div>
-      <div class="stat-card"><div class="v">5.26%</div><div class="l">Avg engagement rate on BFH tags</div></div>
-      <div class="stat-card"><div class="v">3,794</div><div class="l">Total likes across 10 IG tags</div></div>
-      <div class="stat-card"><div class="v">0 / 10</div><div class="l">Posts with paid-partnership disclosure</div></div>
-    </div>
-
-    <div class="chart-wrap">
-      <h4>What creators are actually posting when they tag Buns From Home</h4>
-      <div class="chart-box tall"><canvas id="chart-themes"></canvas></div>
-    </div>
-
-    <p>The most-viewed post tagging Buns From Home in the 90-day window came from <a href="https://www.instagram.com/p/DVdi_pWDMsi/" target="_blank">@ingegneriavegetale</a>, an Italian vegan creator on a London food tour. 12k views. The post is structured as a vegan-food round-up that includes Buns From Home alongside Unity Diner, Sutton & Sons Vegan, and Purezza. We kept looking for a creator post that was about the bun. We couldn't find one.</p>
-
-    <p>What we did find was a cluster of "London aesthetic" posts where Buns From Home plays a supporting role. <a href="https://www.instagram.com/p/DVrUgbMDRo4/" target="_blank">@notre_vie_a_londres</a> recommends a goûter tour featuring three bakeries. <a href="https://www.instagram.com/p/DVlq6uMDYFh/" target="_blank">@ariannacorrado</a> photographs colourful Notting Hill shopping bags with BFH as a backdrop. <a href="https://www.instagram.com/p/DU9J77ajM6p/" target="_blank">@hyimages</a> shoots a Fujifilm X100VI sitting on a wooden tray; the bun is on a different tray. <a href="https://www.instagram.com/p/DU-pVoAjTpS/" target="_blank">@sonia_grispo</a> tags BFH from a London Tube carriage, modelling a suede handbag. These are aesthetic-led, fashion-adjacent posts that use the bakery as a Notting Hill signifier rather than a food destination. They aren't bad. They aren't quite what a food brand is usually optimising for.</p>
-
-    <div style="background: var(--surface); border-radius: 12px; padding: 22px; margin: 22px 0;">
-      <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 14px;">Top recent BFH tags</div>
-      <div class="mention-row"><img class="av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b" alt="" onerror="this.style.display='none'"><div class="text">"Non ci credevo neanche io che quelle pizze fossero vegane" · <a href="https://www.instagram.com/p/DVdi_pWDMsi/" target="_blank">@ingegneriavegetale</a> (77k)</div><div class="stat">12,358 views · 740 likes</div></div>
-      <div class="mention-row"><img class="av" alt="" onerror="this.style.display='none'"><div class="text">"Where to have an afternoon goûter in London" · <a href="https://www.instagram.com/p/DVrUgbMDRo4/" target="_blank">@notre_vie_a_londres</a> (20k)</div><div class="stat">206 likes · 12 comments</div></div>
-      <div class="mention-row"><img class="av" alt="" onerror="this.style.display='none'"><div class="text">"10 must-try sweet treats in London" · <a href="https://www.instagram.com/p/DVBBv2aiEOF/" target="_blank">@whatgabyate</a> (4k)</div><div class="stat">797 likes · 39 comments</div></div>
-      <div class="mention-row"><img class="av" alt="" onerror="this.style.display='none'"><div class="text">"Quiet luxury" subway aesthetic, BFH tagged · <a href="https://www.instagram.com/p/DU-pVoAjTpS/" target="_blank">@sonia_grispo</a> (81k)</div><div class="stat">794 likes · 25 comments</div></div>
-      <div class="mention-row"><img class="av" alt="" onerror="this.style.display='none'"><div class="text">Fujifilm X100VI flat-lay, BFH tagged · <a href="https://www.instagram.com/p/DU9J77ajM6p/" target="_blank">@hyimages</a> (4k)</div><div class="stat">836 likes · 27 comments</div></div>
-    </div>
-
-    <p>One useful read on this. The 90-day brand window engagement rate on tagged posts is 5.26%, well above the typical UK foodie creator baseline of around 1.5%. The audiences these creators bring are tagging Buns From Home alongside actual luxury brands. That's an asset most bakeries don't have. The argument isn't that this is the wrong audience; it's that the brand has earned a place in lifestyle-adjacent content and hasn't yet built the bridge from "scenery in a fashion post" to "the reason to visit".</p>
-
-    <p>One more thing we noticed. Zero of the ten posts disclosed any commercial relationship. No "gifted", no "ad", no "partnership". The brand-targeted content footprint reads as a hundred percent organic. The implication: nothing here was bought. The follow-on implication: there is no current creator programme to scale. We could not find a single coordinated activation on the brand's tag history.</p>
-
-    <p>A real community signal does exist, just not at scale. <a href="https://www.instagram.com/p/DXrA3j1jGW9/" target="_blank">Paddy the corgi</a>, <a href="https://www.instagram.com/p/DXEEz6IDBmG/" target="_blank">@londonfoodaddict</a>'s Leadenhall storefront shot, <a href="https://www.instagram.com/p/DXY02-qH7Wa/" target="_blank">@wildfarmed</a> flour partnerships, <a href="https://www.instagram.com/p/DXY02-qH7Wa/" target="_blank">@allpressespressouk</a> coffee. The brand has functional partnerships with ingredient suppliers and a tiny but real organic community. The gap is between that and a creator programme designed to make tagging Buns From Home a thing food creators do.</p>
-
-    <p>The Rough Trade collaboration is one we'd flag specifically. The <a href="https://www.instagram.com/p/DXeFT-jn1BK/" target="_blank">flashback photograph</a> of customers queueing outside Rough Trade with Buns From Home in the same frame is the kind of community moment most bakeries would build a whole campaign around. It currently lives as a single Inspirational-pillar post with 393 likes. That image, with a recurring "Buns x Records" Saturday-morning programme behind it, has the shape of a recurring tentpole that creators would happily document. The PerfectTed matcha-misu launch from 2024 demonstrated the format works at retail; the social muscle didn't get built around it.</p>
-
-    <p>The other gap in the tagged-influencer footprint is geographical. Of the ten creators who tagged the brand, four are based outside the UK (Norway, Netherlands, Italy x2) and three more lead with Notting Hill specifically. The Leadenhall, Thayer Street, Hammersmith, and other Buns From Home shops are essentially absent from the creator content. Each new location has its own micro-community of London creators who already cover that neighbourhood. The creator data suggests those neighbourhood pools have not yet been mapped, briefed, or activated.</p>
-
-    <div class="callout">
-      <span class="lbl">What 90 days of creator data says</span>
-      <div class="big">Buns From Home is being treated by creators as a Notting Hill landmark, not a bakery. Nine of ten tagged posts feature the brand as scenery for a fashion or travel story. The food-creator pool exists in London and has not yet been activated.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 06: Opportunity -->
-<section id="sec06" class="section">
-  <div class="container sec">
-    <div class="sec-num">06 The Opportunity</div>
-    <h2>Six moves that change the game for Buns From Home.</h2>
-    <p class="intro">Each card below ties to a specific finding from the previous five sections, with the supporting data point pinned to the bottom of the card. No projected numbers, no hypothetical lifts: every figure here is observed in the dataset.</p>
-
-    <p>The arc of these six opportunities is roughly: monetise what already works (Opportunity 01), match the operational cadence of expansion (Opportunity 02), build the missing acquisition loop (Opportunity 03), unlock the latent creator pool (Opportunity 04), copy a verified-winning paid format (Opportunity 05), and contest the TikTok category before it consolidates further (Opportunity 06). Two of the six (03 and 05) sit on paid ads; the other four sit on organic, partnership, and creator infrastructure. The split mirrors the data: the creative infrastructure exists; the distribution infrastructure does not.</p>
-
-    <div class="opcards">
-      <div class="opcard">
-        <div class="num">Opportunity 01</div>
-        <h3>Build the weekend-special drop into a recurring creator activation</h3>
-        <p>The Cookie Dough and Cereal Milk drops are already the brand's two highest-performing organic posts of the quarter. Convert each Friday-morning drop into a five-creator brief with a forty-eight-hour exclusivity window. The shape of the asset is already proven; what's missing is a creator-distribution layer underneath it.</p>
-        <div class="stat">2,427<span class="lbl">avg likes per Entertaining post vs 149 on BTS</span></div>
-      </div>
-      <div class="opcard">
-        <div class="num">Opportunity 02</div>
-        <h3>Run new-location launches with hyperlocal creators</h3>
-        <p>Public reporting tells us the brand is actively expanding (over twenty sites and counting in 2026). The current owned-content launch pattern is a single photo of the new storefront. Replace that with a five-creator activation per opening, ideally weighted toward creators whose audience indexes within five postcodes of the site. The Notting Hill closure post showed what location-specific content can do for reach.</p>
-        <div class="stat">38,500<span class="lbl">views on the Notting Hill closure TikTok</span></div>
-      </div>
-      <div class="opcard">
-        <div class="num">Opportunity 03</div>
-        <h3>Ship your first three Meta ad creatives</h3>
-        <p>The category runs five hundred and eighty-five live ads across sixty-two brands. The ex-Tim-Hortons sixty-day survival rate is twenty-five percent, more than double the global benchmark. Start with a single static product photograph in the PAUL or Jack and Beyond mould, plus one Origin-style "behind the bun" UGC video. The cheapest data the brand can buy right now is the data its competitors already have.</p>
-        <div class="stat">0 of 585<span class="lbl">active ads in the category come from Buns From Home</span></div>
-      </div>
-      <div class="opcard">
-        <div class="num">Opportunity 04</div>
-        <h3>Convert the lifestyle-tag pool into food-led content</h3>
-        <p>The ten creators who tagged the brand in the last 90 days have an average engagement rate of 5.26%, well above the foodie baseline. Eight of them sit in the lifestyle, travel, or fashion space. Brief five of them with a free-bun tasting and a single ask: shoot the bun, not the bag. The pool exists. The frame has to change.</p>
-        <div class="stat">5.26%<span class="lbl">avg ER on existing organic BFH tags</span></div>
-      </div>
-      <div class="opcard">
-        <div class="num">Opportunity 05</div>
-        <h3>Test the verified-winning Origin Coffee playbook</h3>
-        <p>Origin Coffee Roasters has a UGC-style "barista's pick" video that has run live for 359 days, alongside a cinematic brewing montage at 513 days. Both lean on staff-as-talent, low production complexity, and direct product framing. Translate the same shape to a "baker's pick weekend special" Reel and ship it as a paid creative in week one. The pattern is verified outside Buns From Home; the cost of testing it is one afternoon's shoot.</p>
-        <div class="stat">513 days<span class="lbl">longest-running creative in the category</span></div>
-      </div>
-      <div class="opcard">
-        <div class="num">Opportunity 06</div>
-        <h3>Launch a TikTok creator program before Blank Street finishes building the category</h3>
-        <p>Blank Street appears in 67 of the top TikToks we pulled in the niche. Their "Lemon Loaf Matcha secret code" produced a wave of organic creator UGC that looked coordinated and wasn't. The brand needs an equivalent: a TikTok-first, weekly-cadence drop with a code or in-store unlock, run with twenty micro-creators per cycle. Currently you have eight thousand followers there and two qualifying tags in 90 days.</p>
-        <div class="stat">67 vs 2<span class="lbl">Blank Street's TikTok tag count vs yours</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 07: Shortlist -->
-<section id="sec07" class="section">
-  <div class="container sec">
-    <div class="sec-num">07 The Shortlist</div>
-    <h2>Sixty creators are active in your category right now. Zero have posted about you.</h2>
-    <p class="intro">We built a candidate pool of sixty creators across the top-thirty Instagram and top-thirty TikTok lists in the 24-day niche window, then excluded anyone who has already tagged Buns From Home more than once or has gone dark for sixty-plus days. The ten below are the highest-leverage targets we'd contact this week. Each one comes with a clickable handle and one example post that explains why.</p>
-    <p class="intro muted">Selection logic: ranked by total niche views in the window, with tiebreakers on number of unique competitor brands in their tags and on engagement rate. Tier mix is three macro (over 100k followers), four mid (10-100k), and three micro (under 10k with above-category engagement). Platform mix is weighted toward Instagram because that's where the brand's audience already sits, with two TikTok-first creators included to seed the channel where the category gap is widest.</p>
-
-    <div class="creator-grid">
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a549e11a-7149-4781-a55f-33cf624a0c97" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/lickyplate" target="_blank">@lickyplate</a></div><div class="name">LickyPlate</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">126,875</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">112,681</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">1.23%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">1</div></div>
-        </div>
-        <div class="why">Macro London dessert reviewer who put Panadera Bakery's flan-croissant on the map in the niche window. Sells viral pastry through the language of a regular customer, not a critic. Has posted about Panadera Bakery.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DVnem_0DeKD/" target="_blank">→ Panadera flan post (165k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c72f2d58-74b5-4937-be3f-9a811889ad18" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/oliwia.sierakowska" target="_blank">@oliwia.sierakowska</a></div><div class="name">Oliwia Sierakowska</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">134,905</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">45,296</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">1.59%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">2</div></div>
-        </div>
-        <div class="why">Macro Reel creator with a clean, lifestyle-first aesthetic that already plays well with the kind of audience tagging Buns From Home as a Notting Hill landmark. Has posted about Blank Street; would be an obvious bridge into Sup's category.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DVViM54iHP4/" target="_blank">→ Blank Street post (122k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb3639b6-1528-4302-bd25-610f2c3a9875" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/aperitivi_urbani" target="_blank">@aperitivi_urbani</a></div><div class="name">Valeria Carbone</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">95,859</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">86,418</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">1.36%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">2</div></div>
-        </div>
-        <div class="why">Italian-language pastry reviewer with a fast-paced dessert-montage format that hits an audience already over-indexing on London bakery tags. Has posted about Marchesi 1824 and Italian patisserie. The Italian-foodie demographic is one of Buns From Home's existing organic audiences.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DVtPqvXiH-1/" target="_blank">→ Pastry montage (253k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c06b271a-7799-4039-8128-11e58880c9c2" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/tinylondoner" target="_blank">@tinylondoner</a></div><div class="name">Tiny Londoner</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">59,588</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">186,106</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">2.16%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">1</div></div>
-        </div>
-        <div class="why">London discovery and culture creator whose bucket-list Reel format pulled 275k views in the window. Already includes hidden-gem food spots; bakery hasn't entered the rotation yet. Useful for new-location launches.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DUvteEEjHoQ/" target="_blank">→ London bucket list (275k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a00d5669-8d59-4c75-8a23-e40ab8cb4d40" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/jessdoestravels" target="_blank">@jessdoestravels</a></div><div class="name">Jess | London life & travel</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">48,015</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">466,974</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">129.11%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">4</div></div>
-        </div>
-        <div class="why">Mid-tier London lifestyle creator with an unusual view-to-follower ratio and a track record of four niche-tagged posts in 24 days. Has posted about Avobar London, Biscuiteers, Kuro London, and Ottolenghi. The most niche-active creator on the list.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DVnifdijGFN/" target="_blank">→ Marylebone spring guide (210k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/b8e5e19e-a019-4004-a680-34109ce8ffd7" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/mumbleforum" target="_blank">@mumbleforum</a></div><div class="name">Mumble Forum</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">49,063</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">66,101</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">2.73%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">3</div></div>
-        </div>
-        <div class="why">Community-organisation page that runs London culture and pop-up coverage, three niche posts in window, tags Queens of Mayfair and similar London-specific cafe brands. Strong fit for a Notting Hill or Leadenhall launch.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DVqpHd2iFPO/" target="_blank">→ Queens of Mayfair (69k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a1ab61c6-f7f2-47c3-a48b-9720a2e70ef2" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/helainezhao_" target="_blank">@helainezhao_</a></div><div class="name">Helaine Zhao</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">94,409</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">25,734</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">1.95%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">3</div></div>
-        </div>
-        <div class="why">Mid-tier London foodie content creator with a high niche-post count and consistent dessert and cafe coverage. Three niche posts in window across multiple London bakery brands.</div>
-        <div class="examples"><a href="https://www.instagram.com/helainezhao_/" target="_blank">→ Profile (62k niche views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://instagram.com/sarahxgriffiths" target="_blank">@sarahxgriffiths</a></div><div class="name">Sarah Griffiths</div></div><span class="pbadge">IG</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">21,140</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">55,631</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">1.86%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">3</div></div>
-        </div>
-        <div class="why">Micro blogger whose Patisserie Valerie wedding-cake Reel pulled 451k views in the window from 21k followers. Specific in audience, relatable in voice. Wedding cake territory is a Buns From Home-adjacent unlock.</div>
-        <div class="examples"><a href="https://www.instagram.com/p/DVjDdrPCGuB/" target="_blank">→ Wedding cake Reel (451k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://www.tiktok.com/@emmamyattsmithxo" target="_blank">@emmamyattsmithxo</a></div><div class="name">Emma Myatt-Smith</div></div><span class="pbadge">TT</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">10,100</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">51,476</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">14.41%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">3</div></div>
-        </div>
-        <div class="why">Micro TikTok creator with a Blank Street obsession that earned 760k views on a single Blondie-loaf Reel and 762k total niche views in the 24-day window. The Blueprint creator for the Blank Street-style activation. Has posted about Blank Street.</div>
-        <div class="examples"><a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank">→ Blondie post (760k views)</a></div>
-      </div>
-
-      <div class="creator-card">
-        <div class="head"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7ab0d101-8529-4c2c-8f61-c43678a4e057" alt="" onerror="this.style.display='none'"><div><div class="handle"><a href="https://www.tiktok.com/@andieajello" target="_blank">@andieajello</a></div><div class="name">Andie Ajello</div></div><span class="pbadge">TT</span></div>
-        <div class="stats">
-          <div><div class="lbl">Followers</div><div class="v">80,200</div></div>
-          <div><div class="lbl">Avg views</div><div class="v">8,810</div></div>
-          <div><div class="lbl">Engagement</div><div class="v">1.08%</div></div>
-          <div><div class="lbl">Niche posts</div><div class="v">2</div></div>
-        </div>
-        <div class="why">Mid-tier TikTok foodie with twelve niche brands across her tags, regularly posts viral coffee and bakery drops. Has posted about Blank Street. The TikTok bridge to the audience Buns From Home is currently invisible to.</div>
-        <div class="examples"><a href="https://www.tiktok.com/@andieajello/video/7615715287660301581" target="_blank">→ Blank Street lemon loaf (37k views)</a></div>
-      </div>
-
-    </div>
-
-    <div style="margin-top: 36px;">
-      <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 8px;">What's winning in your niche this month</div>
-      <h3 style="font-size: 18px; margin-bottom: 14px;">Five highest-leverage posts to copy the shape of</h3>
-      <div class="insp-gallery">
-        <div class="insp-card">
-          <a href="https://www.instagram.com/p/DVbMJSYjHht/" target="_blank">
-            <div class="lead"><div class="plat">IG · INSPIRATIONAL</div><img class="av" alt=""></div>
-            <div class="body">
-              <div class="h">@noavko · 87k</div>
-              <div class="v">858,651 views</div>
-              <div class="sub">"Deckchair or trousers?" Aesthetic outdoor lifestyle Reel</div>
-            </div>
-          </a>
-        </div>
-        <div class="insp-card">
-          <a href="https://www.instagram.com/p/DVT9AO1jvG0/" target="_blank">
-            <div class="lead"><div class="plat">IG · ENTERTAINING</div><img class="av" alt=""></div>
-            <div class="body">
-              <div class="h">@rowzzaa · 22k</div>
-              <div class="v">762,381 views</div>
-              <div class="sub">"Calories don't count on your birthday" tasting AD Reel</div>
-            </div>
-          </a>
-        </div>
-        <div class="insp-card">
-          <a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank">
-            <div class="lead"><div class="plat">TT · OBSESSION-LED</div><img class="av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt=""></div>
-            <div class="body">
-              <div class="h">@emmamyattsmithxo · 10k</div>
-              <div class="v">760,100 views</div>
-              <div class="sub">"192,738 people told me to get the Blondie" Blank Street fan post</div>
-            </div>
-          </a>
-        </div>
-        <div class="insp-card">
-          <a href="https://www.instagram.com/p/DVjDdrPCGuB/" target="_blank">
-            <div class="lead"><div class="plat">IG · RELATABLE</div><img class="av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt=""></div>
-            <div class="body">
-              <div class="h">@sarahxgriffiths · 21k</div>
-              <div class="v">451,782 views</div>
-              <div class="sub">Patisserie Valerie wedding-cake reaction</div>
-            </div>
-          </a>
-        </div>
-        <div class="insp-card">
-          <a href="https://www.instagram.com/p/DUwNOjKjeu5/" target="_blank">
-            <div class="lead"><div class="plat">IG · RELATABLE</div><img class="av" alt=""></div>
-            <div class="body">
-              <div class="h">@olamide.daybyday · 26k</div>
-              <div class="v">215,223 views</div>
-              <div class="sub">Bread Ahead first-bite reaction (15.71% ER)</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <span class="lbl">Combined shortlist value</span>
-      <div class="big">720,564 combined followers across these ten. 2.81m niche views in the 24-day window. Six have posted about your direct competitors. Ten have never been hired by a brand in this space yet.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Closing -->
-<section class="section no-top">
+<section id="influencer" class="section reveal">
   <div class="container">
-    <div class="closing">
-      <p>We built this report because Buns From Home's creator data is genuinely interesting and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
-      <div class="who">Who are we?</div>
-      <p>👋 Sup is an AI-native influencer marketing platform built around data and performance. We source local creators per location, run campaigns centrally, and track results per site.</p>
+    <div class="s-label">02 · Influencer intelligence</div>
+    <h2 class="s-h2">Fifteen creators tagged you unpaid in 25 days. That is the signal.</h2>
+    <p class="s-intro">Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) are the headline finding. In the 25 day brand window, 15 unique creators posted about Buns From Home without paid partnership signals. The conversation themes that emerge from these posts are not what the brand's own feed targets.</p>
+
+    <div class="paid-stats reveal">
+      <div class="paid-stat"><div class="lbl">Unpaid Creator Tagged Posts (25 day)</div><div class="v" data-count="15" data-format="comma">15</div><div class="sub">Across 15 unique creators. 1 paid partnership signal in the same window.</div></div>
+      <div class="paid-stat"><div class="lbl">Calibration</div><div class="v" style="font-size:22px;color:var(--brand-primary)">Strong</div><div class="sub">Ten or more unpaid taggers in window. Treat retainer programmes as amplification.</div></div>
+      <div class="paid-stat"><div class="lbl">Top performer</div><div class="v">22.2%</div><div class="sub">@hyimages ER on the Origin Coffee Roasters + Buns From Home pairing post.</div></div>
     </div>
-    <div class="footer">👋 Sup · sup.co · Confidential · May 2026</div>
+
+    <h3 style="font-size:18px;font-weight:500;color:var(--text);margin-top:40px">What the conversation is actually about</h3>
+    <div class="theme-rows"><div class="theme-row reveal">
+      <div class="name">Notting Hill / location landmark</div>
+      <div class="theme-bar"><div class="theme-bar-fill" data-width="62"></div></div>
+      <div class="pct">25%</div>
+    </div><div class="theme-row reveal">
+      <div class="name">London travel must-eat lists</div>
+      <div class="theme-bar"><div class="theme-bar-fill" data-width="78"></div></div>
+      <div class="pct">31%</div>
+    </div><div class="theme-row reveal">
+      <div class="name">Cinnamon-bun hero shot</div>
+      <div class="theme-bar"><div class="theme-bar-fill" data-width="62"></div></div>
+      <div class="pct">25%</div>
+    </div><div class="theme-row reveal">
+      <div class="name">International travelers / &#x27;a foreigner in London&#x27;</div>
+      <div class="theme-bar"><div class="theme-bar-fill" data-width="62"></div></div>
+      <div class="pct">25%</div>
+    </div></div>
+
+    <div class="section-text reveal">
+      <p>The dominant theme is not the cinnamon bun. It is Notting Hill and London travel itineraries: international foodies dropping into a multi-stop guide where Buns From Home is one of three to five names. The bakery has accidentally become a Notting Hill landmark on the London foodie itinerary, and the people writing that itinerary live in Italian, Norwegian, French, and Dutch as often as they do in English.</p>
+      <p>We kept looking for paid creator content in the window. There is one paid partnership signal across 16 Creator Tagged Posts. The rest are unpaid mentions inside multi-brand London round-ups, café-spotting reels, and quiet-luxury fashion content where the bakery serves as backdrop. Competitors like Blank Street are running long-term retainers to manufacture this exact pattern.</p>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:500;color:var(--text);margin-top:36px">Top creators tagging Buns From Home (brand window)</h3>
+    <div class="creator-chips"><a class="cc-chip" href="https://www.instagram.com/p/DU9J77ajM6p/" target="_blank" rel="noopener">
+      <div class="cc-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e96beccc-cb89-4d46-8088-73a57153d4a3" alt="@hyimages"></div>
+      <div class="cc-text"><div class="h">@hyimages</div><div class="stats">3,880 foll · 836 likes · 22.24% ER</div></div>
+    </a><a class="cc-chip" href="https://www.instagram.com/p/DVBBv2aiEOF/" target="_blank" rel="noopener">
+      <div class="cc-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/62e92589-9637-4d76-a6f0-c9aaee9a215a" alt="@whatgabyate"></div>
+      <div class="cc-text"><div class="h">@whatgabyate</div><div class="stats">3,979 foll · 797 likes · 21.01% ER</div></div>
+    </a><a class="cc-chip" href="https://www.instagram.com/p/DU-pVoAjTpS/" target="_blank" rel="noopener">
+      <div class="cc-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e1a31759-0dcb-40fa-a3c6-2c9a5c698f18" alt="@sonia_grispo"></div>
+      <div class="cc-text"><div class="h">@sonia_grispo</div><div class="stats">80,564 foll · 794 likes · 1.02% ER</div></div>
+    </a><a class="cc-chip" href="https://www.instagram.com/p/DVdi_pWDMsi/" target="_blank" rel="noopener">
+      <div class="cc-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/56221284-fa7f-4378-8ad0-a20e71ee3f07" alt="@ingegneriavegetale"></div>
+      <div class="cc-text"><div class="h">@ingegneriavegetale</div><div class="stats">77,310 foll · 740 likes · 1.03% ER</div></div>
+    </a><a class="cc-chip" href="https://www.instagram.com/p/DVrUgbMDRo4/" target="_blank" rel="noopener">
+      <div class="cc-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7c4a873e-df4b-4305-9833-f92c6fdac735" alt="@notre_vie_a_londres"></div>
+      <div class="cc-text"><div class="h">@notre_vie_a_londres</div><div class="stats">19,688 foll · 206 likes · 1.11% ER</div></div>
+    </a><a class="cc-chip" href="https://www.instagram.com/p/DVqSap6FH8-/" target="_blank" rel="noopener">
+      <div class="cc-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/484adf21-025b-4e3f-b195-2ef90ebe5c3e" alt="@bellyvibesonlyy"></div>
+      <div class="cc-text"><div class="h">@bellyvibesonlyy</div><div class="stats">7,104 foll · 186 likes · 3.00% ER</div></div>
+    </a></div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The earned engine</span>
+      <p>Fifteen unique creators tagged Buns From Home without prompting in 25 days. Most niche brands run paid budgets trying to reach that number. The brand is doing the part competitors pay for, in a window where the rest of the category averages 1.1 posts per creator (no detected retainer concentration anywhere).</p>
+    </div>
   </div>
 </section>
+
+<section id="competitors" class="section reveal">
+  <div class="container">
+    <div class="s-label">03 · Competitor deep-dive</div>
+    <h2 class="s-h2">The category already has a creator programme. Blank Street is running eight.</h2>
+    <p class="s-intro">Across the 37 day niche window, Table 17 (the Sup campaign-spy index) detects nine of 16 named creator strategies running somewhere in this niche. Buns From Home is detected on one. Blank Street is detected on eight. The rest of the bakery cohort sits between those two poles.</p>
+
+    <div class="comp-grid stagger"><div class="cc">
+      <div class="cc-head"><div class="cc-logo" style="background:#534AB7">GB</div><div class="cc-name">GAIL&#x27;s Bakery</div></div>
+      <p style="margin-top:14px;color:var(--secondary);font-size:14.5px;line-height:1.6">London&#x27;s largest bakery chain (170 verified locations, 166K IG followers). Detected in &#x27;UGC for Brand Feed&#x27; alongside Buns From Home (rank 7).</p>
+      <div class="cc-strats"><span class="dot"></span>Strategies in play: UGC for Brand Feed</div>
+    </div><div class="cc">
+      <div class="cc-head"><div class="cc-logo" style="background:#1D9E75">BS</div><div class="cc-name">Blank Street Coffee</div></div>
+      <p style="margin-top:14px;color:var(--secondary);font-size:14.5px;line-height:1.6">The multi-play operator in this niche. Detected on 8 of 16 strategies, including always-on retainers, earned-mention engine, geo-clusters and UGC for Brand Feed.</p>
+      <div class="cc-strats"><span class="dot"></span>Strategies in play: UGC for Brand Feed, Earned Organic Mentions, Creator Collective / Volume Model, Always-On Creator Retainers</div>
+    </div><div class="cc">
+      <div class="cc-head"><div class="cc-logo" style="background:#D85A30">BA</div><div class="cc-name">Bread Ahead Bakery</div></div>
+      <p style="margin-top:14px;color:var(--secondary);font-size:14.5px;line-height:1.6">The premium doughnut bakery with 424K IG followers. Detected on press / brand trips, long-term ambassadors and geo-clustered micro-creators.</p>
+      <div class="cc-strats"><span class="dot"></span>Strategies in play: Press &amp; Brand Trips, Long-Term Brand Ambassador, Geo-Clustered Micro-Creators</div>
+    </div><div class="cc">
+      <div class="cc-head"><div class="cc-logo" style="background:#378ADD">PP</div><div class="cc-name">Peggy Porschen</div></div>
+      <p style="margin-top:14px;color:var(--secondary);font-size:14.5px;line-height:1.6">The pastel cake bakery with 749K IG followers. Detected on always-on retainers, earned-mention engine and alt-handle / brand-affiliated channel.</p>
+      <div class="cc-strats"><span class="dot"></span>Strategies in play: Earned Organic Mentions, Always-On Creator Retainers, Alt-Handle / Brand-Affiliated Creator Channel</div>
+    </div></div>
+
+    <div class="mpo">
+      <h3>Multi-play operators · brands running 3+ plays</h3>
+      <div class="item">
+      <div class="mpo-logo" style="background:#534AB7">BS</div>
+      <div class="mpo-text">
+        <div class="brand">Blank Street Coffee - Monument</div>
+        <div class="strats">Running 9 plays: UGC for Brand Feed, Earned Organic Mentions, Creator Collective / Volume Model, Always-On Creator Retainers, Press &amp; Brand Trips, Alt-Handle / Brand-Affiliated Creator Channel, Long-Term Brand Ambassador, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding</div>
+      </div>
+    </div><div class="item">
+      <div class="mpo-logo" style="background:#534AB7">CR</div>
+      <div class="mpo-text">
+        <div class="brand">Capilungo Restaurant</div>
+        <div class="strats">Running 5 plays: Earned Organic Mentions, Creator Collective / Volume Model, Press &amp; Brand Trips, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding</div>
+      </div>
+    </div><div class="item">
+      <div class="mpo-logo" style="background:#534AB7">FB</div>
+      <div class="mpo-text">
+        <div class="brand">Fred Bakery Holborn</div>
+        <div class="strats">Running 4 plays: Earned Organic Mentions, Creator Collective / Volume Model, Press &amp; Brand Trips, Geo-Clustered Micro-Creators</div>
+      </div>
+    </div><div class="item">
+      <div class="mpo-logo" style="background:#534AB7">BA</div>
+      <div class="mpo-text">
+        <div class="brand">Bread Ahead Bakery South Kensington</div>
+        <div class="strats">Running 3 plays: Press &amp; Brand Trips, Long-Term Brand Ambassador, Geo-Clustered Micro-Creators</div>
+      </div>
+    </div><div class="item">
+      <div class="mpo-logo" style="background:#534AB7">EL</div>
+      <div class="mpo-text">
+        <div class="brand">EL&amp;N London - Brompton Road</div>
+        <div class="strats">Running 3 plays: Earned Organic Mentions, Creator Collective / Volume Model, Press &amp; Brand Trips</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="chart-wrap reveal" style="margin-top:36px"><h3>Creator Tagged Posts vs Total Creator Views (37 day niche window)</h3><canvas id="comp-bars"></canvas></div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The multi-play stack</span>
+      <p>Blank Street is running a stack of eight plays simultaneously: always-on retainers, earned-mention engine, creator collective, alt-handle channel, brand trips, long-term ambassadors, geo-clustered micro-creators, and UGC for brand feed. The visible competitor is not winning on one tactic, it is operating a stack.</p>
+    </div>
+  </div>
+</section>
+
+<section id="paid" class="section reveal">
+  <div class="container">
+    <div class="s-label">04 · Creator content in paid</div>
+    <h2 class="s-h2">The category's paid spend runs on creator content. Yours doesn't yet.</h2>
+    <p class="s-intro">Across the 363 active Meta creatives in the London cafés &amp; bakeries niche right now, 38% are creator-shot (UGC or Lifestyle look) and the longest-surviving creatives over-index toward creator-led work. Buns From Home is running zero. The gap is not budget  -  it is the creator pipeline producing enough variants to test at category cadence.</p>
+
+    <div class="paid-stats reveal">
+      <div class="paid-stat"><div class="lbl">Active creatives in niche</div><div class="v" data-count="363" data-format="comma">363</div><div class="sub">Across 47 advertisers in the category.</div></div>
+      <div class="paid-stat"><div class="lbl">Creator-shot share (top 100)</div><div class="v" data-count="38" data-format="comma" data-suffix="%">38%</div><div class="sub">UGC + Lifestyle creative styles across the top-100 creatives by longevity.</div></div>
+      <div class="paid-stat"><div class="lbl">Buns From Home active ads</div><div class="v" data-count="0" data-format="comma">0</div><div class="sub">Zero active Meta creatives in the niche right now.</div></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-wrap reveal"><h3>Longevity buckets (all active creatives in niche)</h3><canvas id="long-chart"></canvas></div>
+      <div class="chart-wrap reveal"><h3>Winners DNA · creative style share (60+ day still active)</h3><canvas id="winners-chart"></canvas></div>
+    </div>
+
+    <div class="section-text reveal">
+      <p>Read the longevity chart left to right. The 60+ day buckets are the testing-graveyard survivors: 86 creatives that have survived more than 60 days of paid pressure and are still live. Of those, 32% are creator-shot UGC or Lifestyle  -  slightly over-represented vs the full top-100 baseline. Plain-format videos and carousels with creator-style framing make up the bulk of what survives.</p>
+      <p>Three cross-brand patterns emerge in the survivors pool. The first is a UGC food POV with a local offer hook  -  Huffkins Bakery, Origin Coffee Roasters, and Chai Guys all run 100+ day video creatives with this template. The second is the founder / heritage close-up (M.Manze, Studio Tiramisù, sitting at 200+ days each). The third is the polished cinematic product hero, which over-indexes among Blank Street's portfolio specifically. None of these patterns is expensive to brief; all of them outlast the median ad.</p>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:500;color:var(--text);margin-top:36px">The top 10 longest-running creator-shot ads in the niche</h3>
+    <div class="ad-grid stagger"><a class="ad-card" href="https://www.facebook.com/ads/library?id=191329249760774" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/cee1680d-9e1e-4263-bebd-f3a95feeb2b1" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">M.Manze Pie and Mash, Tower Bridge Road SE</div>image · Lifestyle<div class="days">1708 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=470661439001042" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/392623b2-1b81-433d-bb1e-2a420904295a" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Origin Coffee Roasters</div>video · UGC<div class="days">514 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1128638549023136" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/2d83dedf-298c-46b1-8dd2-2bafd8f8ca9d" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Jack and Beyond</div>carousel · Lifestyle<div class="days">364 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1141434057969226" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/78a77832-fc8d-4306-8e57-aeed3e543fc2" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Studio Tiramisù</div>image · UGC<div class="days">213 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1532427995270528" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/9f733af9-b6e4-47ba-ac1e-7918bff41c84" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Huffkins Bakery</div>video · UGC<div class="days">114 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1948720199373874" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/543386c1-f31c-4ce8-aa57-ad57171739d2" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Huffkins Bakery</div>video · UGC<div class="days">114 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1530395671407052" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/48c65b03-6342-4119-af5e-7dc40c7e6321" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Huffkins Bakery</div>video · UGC<div class="days">114 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1575571243563862" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/3e59e3f3-084a-4bcd-83a2-41353327770e" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Chai Guys</div>video · Lifestyle<div class="days">105 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=902106882469344" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/aa1818e9-d4c5-4b23-97d8-38166bb00afb" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Chai Guys</div>video · Lifestyle<div class="days">105 days running</div></div>
+    </a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1938893017506948" target="_blank" rel="noopener">
+      <div class="thumb"><span class="badge">CREATOR-SHOT</span><img src="https://first-possum-672.convex.cloud/api/storage/98bb8dca-db1e-48e0-a7b6-8be367c74a5f" alt="ad" onerror="this.style.display='none'"></div>
+      <div class="meta"><div class="brand">Eat&#x27;s Healthy</div>video · UGC<div class="days">103 days running</div></div>
+    </a></div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The commissioning gap</span>
+      <p>47 niche advertisers are running 363 active Meta creatives between them, 38% of them creator-shot. Buns From Home commissions zero. The gap isn&#x27;t budget  -  the category has built a creator pipeline producing enough variants to test at category cadence; the target brand has not commissioned a single one.</p>
+    </div>
+  </div>
+</section>
+
+<section id="feed" class="section reveal">
+  <div class="container">
+    <div class="s-label">05 · Feed content strategy</div>
+    <h2 class="s-h2">Your highest-performing pillar is the one you make least.</h2>
+
+    <div class="feed-stats reveal">
+      <div class="feed-stat"><div class="lbl">Top feed post likes</div><div class="v" data-count="4847" data-format="comma">4,847</div><div class="sub">Holland Park goodbye + Hampstead opening (Behind the Scenes carousel).</div></div>
+      <div class="feed-stat"><div class="lbl">Best pillar avg likes</div><div class="v" data-count="1874" data-format="comma">1,874</div><div class="sub">1.84× Inspirational, on 3 of 27 window posts.</div></div>
+      <div class="feed-stat dark"><div class="lbl">Dominant pillar share</div><div class="v" data-count="51" data-format="comma" data-suffix="%">51%</div><div class="sub">14 of 27 posts are Inspirational.</div></div>
+    </div>
+
+    <div class="section-text reveal">
+      <p>Across the 37 day brand window, Buns From Home published 27 own-feed posts on Instagram. The split is 12 videos, 7 carousels, and 8 photos. Average post pulled 998 likes; the typical (median) post landed at 635. The averages flatten an interesting signal underneath them: the pillars are not performing evenly.</p>
+      <p>Behind the Scenes averages 1,874 likes per post on 3 posts in window  -  including the rank-1 Holland Park goodbye / Hampstead opening carousel at 4,847 likes. Promotional sits at 1,026 likes per post on 4 posts. Inspirational, the dominant pillar by volume (14 of 27 posts, 52% share), averages just 1,017 likes  -  the floor of the engagement table once Entertaining (477) and Relatable (538) are excluded. The pattern is the inverse-correlation: what wins per-post is published least, what dominates volume performs middling.</p>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-wrap reveal"><h3>Average likes by content pillar</h3><canvas id="pillar-likes"></canvas></div>
+      <div class="chart-wrap reveal"><h3>Posts by pillar · the distribution gap</h3><canvas id="pillar-count"></canvas></div>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:500;color:var(--text);margin-top:36px">The five posts your audience picked</h3>
+    <p style="font-size:13px;color:var(--muted);margin-top:6px">The five highest-engaging own-feed posts in the brand window. The grid is a creative brief: this is what the audience is asking for more of.</p>
+    <div class="post-grid stagger"><a class="post-card is-highlight" href="https://www.instagram.com/p/DVd4-UyjL5B/" target="_blank" rel="noopener">
+      <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/da0300cf-2a72-4d8c-a2b7-33a482d1c734" alt="Behind-the-Scenes post"></div>
+      <div class="p-meta">
+        <div class="p-rank">01 · Behind-the-Scenes</div>
+        <div class="p-likes" data-count="4847" data-format="comma">4,847</div>
+        <div class="p-fmt">155 comments · Carousel / Album</div>
+        <div class="p-desc">Founder hand-installs Hampstead signage in a Holland Park goodbye / Hampstead opening carousel  -  a candid behind-the-scenes milestone that doubles as the brand&#x27;s origin retelling.</div>
+        <div class="p-link">View post ↗</div>
+      </div>
+    </a><a class="post-card" href="https://www.instagram.com/p/DVvQPkZDMQ0/" target="_blank" rel="noopener">
+      <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/3afd28d8-d7ee-42c1-b77b-25eb10879910" alt="Inspirational post"></div>
+      <div class="p-meta">
+        <div class="p-rank">02 · Inspirational</div>
+        <div class="p-likes" data-count="3356" data-format="comma">3,356</div>
+        <div class="p-fmt">97 comments · Photo</div>
+        <div class="p-desc">Pizza bun launch photo: a tray of pepperoni-and-hot-honey buns being pulled from the commercial oven, shot in landscape with handheld realism rather than studio polish.</div>
+        <div class="p-link">View post ↗</div>
+      </div>
+    </a><a class="post-card" href="https://www.instagram.com/p/DV8ixo0jJAt/" target="_blank" rel="noopener">
+      <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/8a70a0a1-ad27-4710-a4af-3f5431434459" alt="Promotional post"></div>
+      <div class="p-meta">
+        <div class="p-rank">03 · Promotional</div>
+        <div class="p-likes" data-count="2126" data-format="comma">2,126</div>
+        <div class="p-fmt">19 comments · Photo</div>
+        <div class="p-desc">Storefront close-up of four pepperoni-and-cheese buns held in front of the bakery facade, leaning into product detail with the shop sign in soft background focus.</div>
+        <div class="p-link">View post ↗</div>
+      </div>
+    </a><a class="post-card" href="https://www.instagram.com/p/DViYWJiFcNX/" target="_blank" rel="noopener">
+      <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/d0b8ad45-942c-4b2e-b402-2492a0ddbb4b" alt="Inspirational post"></div>
+      <div class="p-meta">
+        <div class="p-rank">04 · Inspirational</div>
+        <div class="p-likes" data-count="1799" data-format="comma">1,799</div>
+        <div class="p-fmt">27 comments · Carousel / Album</div>
+        <div class="p-desc">Chocolate biscoff cheesecake weekend special  -  two cream-and-biscoff pastries shot close enough to read the layered cremeux, a flat product hero with high colour saturation.</div>
+        <div class="p-link">View post ↗</div>
+      </div>
+    </a><a class="post-card" href="https://www.instagram.com/p/DWGdHiLFZbc/" target="_blank" rel="noopener">
+      <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/119f7b3a-fec5-48ce-a692-8a9557f2a98d" alt="Inspirational post"></div>
+      <div class="p-meta">
+        <div class="p-rank">05 · Inspirational</div>
+        <div class="p-likes" data-count="1328" data-format="comma">1,328</div>
+        <div class="p-fmt">24 comments · Carousel / Album</div>
+        <div class="p-desc">Baklava-inspired bun returning to the menu  -  pistachio cream, kataifi crisp, in-hand 2-up flatlay framed as the seasonal returning hero.</div>
+        <div class="p-link">View post ↗</div>
+      </div>
+    </a></div>
+
+    <div class="section-text reveal">
+      <p>Format-wise, carousels lead on average likes (1,680) followed by photos (1,101) and videos (532). Production complexity in the top five is uniformly low  -  phone photography, founder hand in frame, product-on-counter close-up. The lowest-production posts pull the highest engagement. There is no cinematic top-of-stack here; the audience is voting for the founder-in-frame milestone moment.</p>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The biggest miss</span>
+      <p>Behind-the-Scenes content averages 1.84× the likes of your Inspirational content (1,874 vs 1,017). You make one Behind-the-Scenes post for every 5 Inspirational posts. Flip that ratio and the own-feed becomes the most-watched bakery channel in the niche before the next openings hit.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shortlist" class="section reveal">
+  <div class="container">
+    <div class="s-label">06 · The shortlist</div>
+    <h2 class="s-h2">9 creators I'd contact this week if I ran your marketing.</h2>
+    <p class="s-intro">From the top 100 niche-active creators on Instagram and the top 100 on TikTok (37 day window), scored by total creator views, competitor overlap, and engagement rate. Creators already running 2+ Buns From Home posts are excluded. Three macro, five mid-tier, one micro-nano with exceptional engagement.</p>
+    <div class="sl-grid stagger"><div class="sl">
+      <div class="sl-avatar"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/bitetwicefoodreviews/" target="_blank" rel="noopener">@bitetwicefoodreviews</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Bite Twice  -  London food reviews</div>
+        <div class="sl-stats">222,956 foll · 146,540 avg views · 0.7% ER · 2 niche posts</div>
+        <div class="sl-why">Pure London food-review beat; already tags two niche bakeries.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Bread Ahead Bakery South Kensington, Happy Sky Bakery</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/exploringlondon/" target="_blank" rel="noopener">@exploringlondon</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Exploring London</div>
+        <div class="sl-stats">770,752 foll · 140,549 avg views · 0.2% ER · 2 niche posts</div>
+        <div class="sl-why">London-tourism creator with 770K reach  -  pairs naturally with the location-landmark theme already working.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Bombolone Doughnuts, Qima Cafe</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dac4550c-ace1-492f-9bce-77064f417bda" alt="@quisitaffia" onerror="this.style.display='none'"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/quisitaffia/" target="_blank" rel="noopener">@quisitaffia</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Alex, Filippo e Gianmarco</div>
+        <div class="sl-stats">198,639 foll · 323,388 avg views · 1.3% ER · 1 niche posts</div>
+        <div class="sl-why">Italian food-creator trio with travel-to-London format and 323K average views  -  the international-traveler audience already engaging with the brand. <a href="https://www.instagram.com/p/DVDUshZCM03/" target="_blank" rel="noopener" style="color:var(--brand-primary);font-size:11.5px;text-decoration:underline">View example</a></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Marchesi 1824</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/jessdoestravels/" target="_blank" rel="noopener">@jessdoestravels</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Jess Does Travels</div>
+        <div class="sl-stats">48,015 foll · 69,646 avg views · 1.3% ER · 4 niche posts</div>
+        <div class="sl-why">Four posts about niche bakeries this window across four different competitors  -  the most niche-active travel creator in the pool.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Biscuiteers Boutique and Icing Cafe, Hermanos Colombian Coffee Roasters - Columbia Road, How Matcha Cafe Marylebone</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt="@sarahxgriffiths" onerror="this.style.display='none'"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/sarahxgriffiths/" target="_blank" rel="noopener">@sarahxgriffiths</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Sarah Griffiths</div>
+        <div class="sl-stats">21,140 foll · 55,631 avg views · 1.9% ER · 3 niche posts</div>
+        <div class="sl-why">Three niche posts this window with 451K-view spike  -  repeatable mid-tier London food beat. <a href="https://www.instagram.com/p/DVjDdrPCGuB/" target="_blank" rel="noopener" style="color:var(--brand-primary);font-size:11.5px;text-decoration:underline">View example</a></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Blank Street Coffee - Monument, Patisserie Valerie To Donutlier</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/aperitivi_urbani/" target="_blank" rel="noopener">@aperitivi_urbani</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Aperitivi Urbani</div>
+        <div class="sl-stats">95,859 foll · 135,809 avg views · 1.4% ER · 2 niche posts</div>
+        <div class="sl-why">Italian-language London-food creator at 95K  -  opens the European traveler segment already over-indexed in Buns&#x27; tagged posts.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Marchesi 1824</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="@emmamyattsmithxo" onerror="this.style.display='none'"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.tiktok.com/@emmamyattsmithxo" target="_blank" rel="noopener">@emmamyattsmithxo</a></span> <span class="sl-plat">TT</span></div>
+        <div class="sl-name">Emma Myatt-Smith</div>
+        <div class="sl-stats">10,100 foll · 254,039 avg views · 14.4% ER · 3 niche posts</div>
+        <div class="sl-why">Most niche-active TikTok creator with 14% ER and a 760K-view post  -  the TikTok lever the brand has not pulled. <a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank" rel="noopener" style="color:var(--brand-primary);font-size:11.5px;text-decoration:underline">View example</a></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Blank Street Coffee - Monument</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/1fb17cc9-5ef9-4802-9a00-d8639bffe1e8" alt="@evamils_" onerror="this.style.display='none'"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.tiktok.com/@evamils_" target="_blank" rel="noopener">@evamils_</a></span> <span class="sl-plat">TT</span></div>
+        <div class="sl-name">Eva Mils</div>
+        <div class="sl-stats">172,700 foll · 273,200 avg views · 26.1% ER · 1 niche posts</div>
+        <div class="sl-why">172K TikTok creator with a 273K-view niche post and 26% ER  -  the macro TikTok bet that pairs with Buns&#x27; under-developed TT channel. <a href="https://www.tiktok.com/@evamils_/video/7611908367899987222" target="_blank" rel="noopener" style="color:var(--brand-primary);font-size:11.5px;text-decoration:underline">View example</a></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Blank Street Coffee - Monument</div>
+      </div>
+    </div><div class="sl">
+      <div class="sl-avatar"></div>
+      <div class="sl-body">
+        <div class="sl-top"><span class="sl-handle"><a href="https://www.instagram.com/megggstewart/" target="_blank" rel="noopener">@megggstewart</a></span> <span class="sl-plat">IG</span></div>
+        <div class="sl-name">Megg Stewart</div>
+        <div class="sl-stats">2,092 foll · 74,319 avg views · 29.3% ER · 4 niche posts</div>
+        <div class="sl-why">Micro-creator running 29% ER and 4 niche posts  -  the exceptional-engagement micro test slot.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">Already posted about: Blank Street Coffee - Monument</div>
+      </div>
+    </div></div>
+
+    <h3 style="font-size:18px;font-weight:500;color:var(--text);margin-top:40px">What is winning in your niche this month</h3>
+    <div class="insp-grid"><a class="insp" href="https://www.instagram.com/p/DVT9AO1jvG0/" target="_blank" rel="noopener">
+      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b" alt="@rowzzaa" onerror="this.style.display='none'"></div>
+      <div class="ins-meta"><div class="h">@rowzzaa</div>762K views · IG</div>
+    </a><a class="insp" href="https://www.instagram.com/p/DVjDdrPCGuB/" target="_blank" rel="noopener">
+      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt="@sarahxgriffiths" onerror="this.style.display='none'"></div>
+      <div class="ins-meta"><div class="h">@sarahxgriffiths</div>452K views · IG</div>
+    </a><a class="insp" href="https://www.instagram.com/p/DVDUshZCM03/" target="_blank" rel="noopener">
+      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dac4550c-ace1-492f-9bce-77064f417bda" alt="@quisitaffia" onerror="this.style.display='none'"></div>
+      <div class="ins-meta"><div class="h">@quisitaffia</div>424K views · IG</div>
+    </a><a class="insp" href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank" rel="noopener">
+      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="@emmamyattsmithxo" onerror="this.style.display='none'"></div>
+      <div class="ins-meta"><div class="h">@emmamyattsmithxo</div>760K views · TT</div>
+    </a><a class="insp" href="https://www.tiktok.com/@evamils_/video/7611908367899987222" target="_blank" rel="noopener">
+      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/1fb17cc9-5ef9-4802-9a00-d8639bffe1e8" alt="@evamils_" onerror="this.style.display='none'"></div>
+      <div class="ins-meta"><div class="h">@evamils_</div>273K views · TT</div>
+    </a></div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The shortlist verdict</span>
+      <p>Combined: <span data-count="1542253" data-format="compact">1.5M</span> followers across these 9 creators. <span data-count="3398592" data-format="compact">3.4M</span> Total Creator Views in the last 30 days. 9 have already posted about your direct competitors in the niche, and the macro names lean toward the London-tourism beat that is already driving your earned mentions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="opportunity" class="section reveal" style="border-bottom:none">
+  <div class="container">
+    <div class="s-label">07 · The opportunity</div>
+    <h2 class="s-h2">Six moves that change the game for Buns From Home.</h2>
+    <p class="s-intro">Six plays, ranked by strategic leverage against the current state of the niche and the brand's earned-mention engine. Four are new programmes the niche has tested at scale; two amplify signals Buns From Home is already running, but at rank 8 of 8 in their respective plays.</p>
+    <div class="opp-grid stagger"><div class="opp">
+      <div class="eyebrow">Opportunity 01</div>
+      <h4>Build a retainer bench from the creators already tagging unpaid</h4>
+      <p>Fifteen unique creators tagged Buns From Home unpaid in the 37-day window  -  putting the brand in the top 4% of London Cafés &amp; Bakeries on Creator Tagged Posts. Across the same window, no niche brand averages even 1.3 posts per creator  -  the entire category is broad-earned, not retainer-driven. The first brand to convert organic taggers into a 3-month retainer bench compounds an already-working signal.</p>
+      <div class="closing"><span class="big">15 → 50</span><span class="lab">Earned mentions → committed monthly Creator Tagged Posts under retainer</span></div>
+      <div class="backed">Backed by: Always-On Creator Retainers</div>
+    </div><div class="opp">
+      <div class="eyebrow">Opportunity 02</div>
+      <h4>Layer a geo-clustered micro-creator programme across 25 stores</h4>
+      <p>Eight competitors are detected running geo-clustered micro-creator programmes  -  including Bread Ahead, Capilungo and Fred Bakery  -  converting individual location footprints into local creator catchments. Buns From Home runs 25 verified shops across London but has no detected geo-creator play. Each store is one programme away from being a creator catchment with its own micro-roster.</p>
+      <div class="closing"><span class="big">25 → 25</span><span class="lab">Stores → store-level micro-creator catchments</span></div>
+      <div class="backed">Backed by: Geo-Clustered Micro-Creators</div>
+    </div><div class="opp">
+      <div class="eyebrow">Opportunity 03</div>
+      <h4>Launch a long-term ambassador layer</h4>
+      <p>Seven niche brands are detected running long-term ambassador programmes  -  including Bread Ahead, Lola&#x27;s Cupcakes, Le Swine and The Acai Girls. Buns From Home has no detected ambassador layer. A small founder-aligned roster (2-4 ambassadors, six-month terms) is the lightest-touch version of this play.</p>
+      <div class="closing"><span class="big">0 → 4</span><span class="lab">Ambassadors today → six-month committed ambassadors</span></div>
+      <div class="backed">Backed by: Long-Term Brand Ambassador</div>
+    </div><div class="opp">
+      <div class="eyebrow">Opportunity 04</div>
+      <h4>Engineer the next location launch through creators</h4>
+      <p>Seven niche brands are detected running press / brand-trip plays around openings  -  Blank Street, Bread Ahead, Marchesi, Cutter &amp; Squidge, Capilungo, Fred Bakery and EL&amp;N. Buns From Home&#x27;s top-performing own-feed post in the window is a founder-led location milestone (Holland Park goodbye, 4,847 likes). That signal compounds if the next opening is briefed to a creator cohort 7 days in advance.</p>
+      <div class="closing"><span class="big">1 → 12</span><span class="lab">Next location launch → creators briefed 7 days ahead</span></div>
+      <div class="backed">Backed by: Press &amp; Brand Trips</div>
+    </div><div class="opp">
+      <div class="eyebrow">Opportunity 05</div>
+      <h4>Test the existing organic creative in paid distribution</h4>
+      <p>47 niche advertisers run 363 active Meta creatives between them; 38% of the top-100 creatives are creator-shot. Buns From Home runs zero. The creator content already earning organic reach (15 tagged posts, 23K creator views) is the lowest-cost-to-brief creative the brand could test in paid.</p>
+      <div class="closing"><span class="big">0 → 6</span><span class="lab">Active Meta creatives today → first creator-shot test set</span></div>
+      <div class="backed">Backed by: UGC for Paid Ads</div>
+    </div><div class="opp">
+      <div class="eyebrow">Opportunity 06</div>
+      <h4>Lift UGC for Brand Feed from rank 8 to rank 3</h4>
+      <p>Buns From Home is already running &#x27;UGC for Brand Feed&#x27; (rank 8 in the campaign)  -  5 posts and 58K views detected in the niche pool. Fabrique, Lola&#x27;s Cupcakes and Blank Street sit at rank 1-3 with 10 posts and 700K-3.7M views. Closing 60% of the volume gap is a programme of regular UGC re-share rights, not a new strategy.</p>
+      <div class="closing"><span class="big">5 → 12</span><span class="lab">Brand-feed UGC posts per month</span></div>
+      <div class="backed">Backed by: UGC for Brand Feed</div>
+    </div></div>
+  </div>
+</section>
+
+<div class="closing">
+  <div class="box">
+    <p class="lead">We built this report because Buns From Home's creator data is genuinely interesting and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+    <h3>Who are we?</h3>
+    <p class="sup-intro"><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We source local creators per location, run campaigns centrally, and track results per site.</p>
+  </div>
+  <div class="book-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet">sup.co/meet</a></div>
+</div>
+
+<div class="footer"><span class="wave">👋</span> Sup · sup.co · Confidential · May 2026</div>
 
 <script>
-const brand = '#502828';
-const brandDark = '#321A1A';
-const palette = ['#534AB7', '#1D9E75', '#D85A30', '#71717A', '#378ADD'];
-const fontFamily = "'Inter', -apple-system, sans-serif";
-Chart.defaults.font.family = fontFamily;
-Chart.defaults.font.size = 11;
-Chart.defaults.color = '#71717A';
-Chart.defaults.borderColor = '#E4E4E7';
+const BRAND_PRIMARY = '#502B2D';
+const PALETTE = ['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
 
-// Followers chart
-new Chart(document.getElementById('chart-followers'), {
-  type: 'bar',
-  data: {
-    labels: ['Ottolenghi','EL&N','Laduree','Peggy P.','Bread Ahead','Starbucks','C&D','Doughnut T.','Primrose','Pophams','S. Sophia','Grind','Biscuiteers','Fortitude','Marchesi','Poilâne','Buns From Home','Arabica','Blank Street','GAIL\'s','D. Knuckle','Hummingbird','Brigit\'s','Lola\'s','Feya'],
-    datasets: [{
-      label: 'IG followers (000s)',
-      data: [3066,957,911,749,424,402,372,341,276,270,267,242,232,223,199,189,186,185,169,166,162,151,149,145,143],
-      backgroundColor: ctx => ctx.dataIndex === 16 ? brand : '#A1A1AA',
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { ticks: { maxRotation: 70, minRotation: 60, font: { size: 9 } }, grid: { display: false } },
-      y: { ticks: { callback: v => v >= 1000 ? (v/1000)+'M' : v+'k' } }
+function fmtCompact(n){ if(n>=1e6)return (n/1e6).toFixed(n>=1e7?0:1).replace(/\.0$/,'')+'M'; if(n>=1e3)return (n/1e3).toFixed(n>=1e4?0:1).replace(/\.0$/,'')+'K'; return Math.round(n).toString(); }
+function fmtNumber(v,fmt,suffix){ const s=suffix||''; if(fmt==='comma') return v.toLocaleString()+s; if(fmt==='compact') return fmtCompact(v)+s; return Math.round(v).toString()+s; }
+
+function scramble(el){
+  const target = parseFloat(el.dataset.count); if(isNaN(target)) return;
+  const fmt = el.dataset.format||'comma';
+  const suffix = el.dataset.suffix||'';
+  const duration = target>100?1400:900;
+  const scramblePhase = 0.65;
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min(1,(now-start)/duration);
+    let v;
+    if(t<scramblePhase){
+      const intensity = 1-(t/scramblePhase);
+      const baseline = target*(t/scramblePhase);
+      const jitter = target*0.5*intensity*(Math.random()-0.3);
+      v = Math.max(0, Math.floor(baseline+jitter));
+    } else {
+      const settleT = (t-scramblePhase)/(1-scramblePhase);
+      const eased = 1-Math.pow(1-settleT,3);
+      const lastScr = target*scramblePhase;
+      v = Math.floor(lastScr+(target-lastScr)*eased);
     }
+    el.textContent = fmtNumber(v,fmt,suffix);
+    if(t<1) requestAnimationFrame(tick);
+    else el.textContent = fmtNumber(target,fmt,suffix);
   }
+  requestAnimationFrame(tick);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){
+    document.querySelectorAll('.reveal,.stagger').forEach(e=>e.classList.add('is-in'));
+    document.querySelectorAll('[data-count]').forEach(e=>{ const n=parseFloat(e.dataset.count); if(!isNaN(n)) e.textContent = fmtNumber(n,e.dataset.format||'comma',e.dataset.suffix||''); });
+    document.querySelectorAll('.theme-bar-fill,.bar>span,.pillar-fill').forEach(e=>{ const w=e.dataset.width; if(w) e.style.width=w+'%'; });
+    document.querySelectorAll('.brand-emphasis').forEach(e=>e.classList.add('is-painted'));
+    document.querySelectorAll('.rank-pill').forEach(e=>e.classList.add('is-in'));
+    document.querySelectorAll('.s-h2').forEach(e=>e.classList.add('is-in'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-in');
+        if(entry.target.hasAttribute('data-count')) scramble(entry.target);
+        if(entry.target.matches('.theme-bar-fill,.bar>span,.pillar-fill')){
+          const w = entry.target.dataset.width;
+          if(w) entry.target.style.width = w+'%';
+        }
+        if(entry.target.classList.contains('player-card')){
+          setTimeout(()=>{ entry.target.querySelectorAll('.rank-pill').forEach((p,i)=>setTimeout(()=>p.classList.add('is-in'), i*60)); }, 1400);
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+
+  document.querySelectorAll('.reveal,.stagger,[data-count],.theme-bar-fill,.bar>span,.pillar-fill,.player-card,.s-h2').forEach(el=>io.observe(el));
+
+  // brand emphasis paint
+  document.querySelectorAll('.brand-emphasis').forEach(el=>{ setTimeout(()=>el.classList.add('is-painted'), 800); });
+
+  // image fade
+  document.querySelectorAll('img').forEach(img=>{
+    if(img.complete && img.naturalHeight!==0) img.classList.add('loaded');
+    else { img.addEventListener('load',()=>img.classList.add('loaded')); img.addEventListener('error',()=>{img.style.opacity=1;}); }
+  });
+
+  // nav active state
+  const navIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        document.querySelectorAll('.nav-mid a').forEach(a=>a.classList.remove('is-active'));
+        const link = document.querySelector('.nav-mid a[href="#'+id+'"]');
+        if(link) link.classList.add('is-active');
+      }
+    });
+  },{rootMargin:'-40% 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>navIO.observe(s));
+
+  // wave
+  setInterval(()=>{ document.querySelectorAll('.wave').forEach(el=>{ el.classList.remove('play'); void el.offsetWidth; el.classList.add('play'); }); }, 10000);
+
 });
 
-// Posts vs views scatter
-new Chart(document.getElementById('chart-postsviews'), {
-  type: 'scatter',
-  data: {
-    datasets: [
-      { label: 'Buns From Home', data: [{x:15, y:13422}], backgroundColor: brand, pointRadius: 9 },
-      { label: 'Blank Street', data: [{x:300, y:1273157}], backgroundColor: palette[0], pointRadius: 7 },
-      { label: 'Bread Ahead', data: [{x:19, y:494264}], backgroundColor: palette[1], pointRadius: 7 },
-      { label: 'GAIL\'s', data: [{x:58, y:116982}], backgroundColor: palette[2], pointRadius: 7 },
-      { label: 'Pophams', data: [{x:18, y:40782}], backgroundColor: palette[3], pointRadius: 7 },
-      { label: 'Fortitude', data: [{x:16, y:67850}], backgroundColor: palette[4], pointRadius: 7 },
-      { label: 'Marchesi 1824', data: [{x:47, y:781787}], backgroundColor: '#888', pointRadius: 5 },
-      { label: 'Starbucks UK', data: [{x:52, y:1080268}], backgroundColor: '#888', pointRadius: 5 },
-      { label: 'Lola\'s', data: [{x:28, y:832056}], backgroundColor: '#888', pointRadius: 5 }
+// scroll progress
+window.addEventListener('scroll',()=>{
+  const h = document.documentElement;
+  const pct = (h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  const e = document.getElementById('scroll-progress');
+  if(e) e.style.width = pct+'%';
+},{passive:true});
+
+// CHARTS
+const baseOpts = {
+  responsive:true, maintainAspectRatio:false,
+  plugins:{ legend:{ display:false }, tooltip:{ enabled:true } },
+  animation:{ duration:1200, easing:'easeOutCubic', delay:(ctx)=>(ctx.dataIndex??0)*70 }
+};
+
+// Section 03 competitor comparison
+new Chart(document.getElementById('comp-bars'),{
+  type:'bar',
+  data:{ labels:["Buns", "GAIL\u2019s", "Blank", "Bread", "Peggy"],
+    datasets:[
+      {label:'Creator Tagged Posts', data:[16, 56, 366, 20, 35], backgroundColor:[BRAND_PRIMARY, PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[3]]}
     ]
   },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } },
-    scales: {
-      x: { title: { display: true, text: 'Posts in 24-day window' } },
-      y: { type: 'logarithmic', title: { display: true, text: 'Total views in window' } }
-    }
-  }
+  options:{ ...baseOpts, indexAxis:'y', scales:{x:{beginAtZero:true,grid:{color:'#F4F4F5'}, ticks:{color:'#71717A'}}, y:{grid:{display:false}, ticks:{color:'#52525B'}}} }
 });
 
-// Views per post
-new Chart(document.getElementById('chart-vpp'), {
-  type: 'bar',
-  data: {
-    labels: ['Bread Ahead', 'Marchesi 1824', 'Lola\'s', 'Blank Street', 'GAIL\'s', 'Pophams', 'Buns From Home'],
-    datasets: [{
-      label: 'Views per post',
-      data: [26014, 16634, 29716, 4244, 2017, 2266, 894],
-      backgroundColor: ctx => ctx.dataIndex === 6 ? brand : '#A1A1AA',
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: { y: { ticks: { callback: v => v.toLocaleString() } } }
-  }
-});
-
-// Ads chart
-new Chart(document.getElementById('chart-ads'), {
-  type: 'bar',
-  data: {
-    labels: ['Bread Ahead', 'GAIL\'s', 'Buns From Home', 'Pophams', 'Fortitude', 'Crumbs & Doilies'],
-    datasets: [
-      { label: 'Active ads', data: [5, 1, 0, 0, 0, 0], backgroundColor: brand, stack: 's1' },
-      { label: '60-day survivors', data: [10, 0, 0, 0, 0, 0], backgroundColor: palette[0], stack: 's2' }
+// Longevity buckets (Section 04)
+new Chart(document.getElementById('long-chart'),{
+  type:'bar',
+  data:{ labels:["0-29", "30-59", "60-89", "90-179", "180+"],
+    datasets:[
+      {label:'Still active', data:[213, 64, 51, 21, 14], backgroundColor:BRAND_PRIMARY},
+      {label:'Expired', data:[119, 32, 14, 7, 4], backgroundColor:'#A1A1AA'}
     ]
   },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
-    scales: { y: { beginAtZero: true } }
-  }
+  options:{ ...baseOpts, plugins:{legend:{display:true,position:'bottom',labels:{color:'#52525B',font:{size:11}}}, tooltip:{enabled:true}}, scales:{x:{stacked:true,grid:{display:false},ticks:{color:'#71717A'}}, y:{stacked:true,beginAtZero:true,grid:{color:'#F4F4F5'},ticks:{color:'#71717A'}}} }
 });
 
-// Pillars
-new Chart(document.getElementById('chart-pillars'), {
-  type: 'bar',
-  data: {
-    labels: ['Entertaining', 'Promotional', 'Inspirational', 'Lifestyle', 'Relatable/Meme', 'Behind-the-Scenes'],
-    datasets: [{
-      label: 'Avg likes per post',
-      data: [2427, 820, 724, 309, 261, 149],
-      backgroundColor: brand,
-      borderRadius: 4
-    }]
+// Winners DNA  -  donut
+new Chart(document.getElementById('winners-chart'),{
+  type:'doughnut',
+  data:{ labels:['Product-Only','Polished Brand','UGC','Static Graphic','Lifestyle','Cinematic'],
+    datasets:[{ data:[24.4,22,17.1,17.1,14.6,4.9], backgroundColor:['#534AB7','#1D9E75',BRAND_PRIMARY,'#A1A1AA','#D85A30','#378ADD']}]
   },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    indexAxis: 'y',
-    plugins: { legend: { display: false } },
-    scales: { x: { ticks: { callback: v => v.toLocaleString() } } }
-  }
+  options:{ ...baseOpts, cutout:'62%', plugins:{legend:{display:true,position:'right',labels:{color:'#52525B',font:{size:11},boxWidth:10}}, tooltip:{callbacks:{label:(ctx)=>ctx.label+': '+ctx.parsed.toFixed(1)+'%'}}} }
 });
 
-// Hooks
-new Chart(document.getElementById('chart-hooks'), {
-  type: 'bar',
-  data: {
-    labels: ['Hook 4', 'Hook 6', 'Hook 7', 'Hook 8', 'Hook 9'],
-    datasets: [{
-      label: 'Avg likes',
-      data: [209, 193, 674, 697, 2427],
-      backgroundColor: ctx => ctx.dataIndex === 4 ? brand : '#A1A1AA',
-      borderRadius: 4
-    }]
+// Section 05 pillar likes
+new Chart(document.getElementById('pillar-likes'),{
+  type:'bar',
+  data:{ labels:["Behind-the-Scenes", "Entertaining", "Inspirational", "Promotional", "Relatable/Meme", "Seasonal/Timely"],
+    datasets:[{label:'Avg likes', data:[1874, 477, 1017, 1026, 538, 493], backgroundColor:["#502B2D", "#A1A1AA", "#A1A1AA", "#A1A1AA", "#A1A1AA", "#A1A1AA"]}]
   },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: { y: { ticks: { callback: v => v.toLocaleString() } } }
-  }
+  options:{ ...baseOpts, indexAxis:'y', scales:{x:{beginAtZero:true,grid:{color:'#F4F4F5'}, ticks:{color:'#71717A'}}, y:{grid:{display:false}, ticks:{color:'#52525B'}}} }
 });
 
-// Longevity
-new Chart(document.getElementById('chart-longevity'), {
-  type: 'bar',
-  data: {
-    labels: ['0-29d', '30-59d', '60-89d', '90-179d', '180+d'],
-    datasets: [{
-      label: 'Active ads in category',
-      data: [75, 208, 126, 100, 76],
-      backgroundColor: ['#A1A1AA','#A1A1AA',palette[0],palette[0],brand],
-      borderRadius: 4
-    }]
+new Chart(document.getElementById('pillar-count'),{
+  type:'bar',
+  data:{ labels:["Behind-the-Scenes", "Entertaining", "Inspirational", "Promotional", "Relatable/Meme", "Seasonal/Timely"],
+    datasets:[{label:'Post count', data:[3, 3, 14, 4, 2, 1], backgroundColor:["#A1A1AA", "#A1A1AA", "#502B2D", "#A1A1AA", "#A1A1AA", "#A1A1AA"]}]
   },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } }
-  }
-});
-
-// Winner style
-new Chart(document.getElementById('chart-style'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Static Graphic', 'Polished Brand', 'UGC', 'Animation', 'Product-Only', 'Lifestyle', 'Cinematic'],
-    datasets: [{
-      data: [42, 27, 11, 7, 6, 5, 2],
-      backgroundColor: [brand, palette[0], palette[1], palette[2], palette[3], palette[4], '#888'],
-      borderColor: '#FFF', borderWidth: 2
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } }
-  }
-});
-
-// Themes (Section 05)
-new Chart(document.getElementById('chart-themes'), {
-  type: 'bar',
-  data: {
-    labels: ['Lifestyle/fashion with BFH as backdrop', 'London food round-up (BFH in a list)', 'Notting Hill aesthetic / shopping bags', 'Direct bun review or recommendation', 'Travel guide (London goûter)', 'Paid partnership disclosed'],
-    datasets: [{
-      label: 'Posts (out of 10 IG tags, 90d)',
-      data: [4, 2, 2, 1, 1, 0],
-      backgroundColor: brand,
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    indexAxis: 'y',
-    plugins: { legend: { display: false } },
-    scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } } }
-  }
+  options:{ ...baseOpts, indexAxis:'y', scales:{x:{beginAtZero:true,grid:{color:'#F4F4F5'}, ticks:{color:'#71717A'}}, y:{grid:{display:false}, ticks:{color:'#52525B'}}} }
 });
 </script>
 </body>
