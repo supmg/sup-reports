@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="sup-brand-primary" content="#C8102E">
+<title>Hamburger Helper · Signal Report · Boxed Meal Kits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #FFFFFF;
+  --surface: #F4F4F5;
+  --soft: #FAFAFA;
+  --text: #09090B;
+  --secondary: #52525B;
+  --muted: #71717A;
+  --hint: #A1A1AA;
+  --border: #E4E4E7;
+  --accent: #000000;
+  --brand-primary: #C8102E;
+  --brand-accent-dark: #8B0E22;
+  --brand-tint: rgba(200,16,46,0.08);
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: hidden; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; height: auto; opacity: 0; transition: opacity 300ms ease; }
+img.loaded { opacity: 1; }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 900px) { .container { padding: 0 24px; } }
+@media (max-width: 560px) { .container { padding: 0 20px; } }
+
+/* SCROLL PROGRESS */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--brand-primary); z-index: 200; transition: width 100ms linear; }
+
+/* STICKY NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); height: 56px;
+}
+.nav-inner { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-left { display: flex; align-items: center; gap: 12px; }
+.nav-pill {
+  display: inline-flex; align-items: center; gap: 6px; background: #000; color: #fff;
+  border-radius: 9999px; padding: 6px 12px; font-size: 12px; font-weight: 500;
+}
+.nav-divider { width: 1px; height: 18px; background: var(--border); }
+.nav-brand { display: flex; align-items: center; gap: 8px; }
+.nav-brand img { height: 22px; opacity: 1; }
+.nav-brand-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.nav-mid { display: flex; align-items: center; gap: 22px; }
+.nav-mid a { color: var(--secondary); font-size: 13px; font-weight: 500; text-decoration: none; position: relative; padding-bottom: 2px; transition: color 180ms; }
+.nav-mid a:hover { color: var(--text); }
+.nav-mid a.is-active { color: var(--brand-primary); }
+.nav-mid a.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--brand-primary); border-radius: 2px; }
+.nav-cta a {
+  display: inline-block; background: #000; color: #fff; border-radius: 9999px;
+  padding: 8px 16px; font-size: 13px; font-weight: 500; text-decoration: none;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease;
+}
+.nav-cta a:hover { transform: scale(1.02); filter: brightness(1.15); }
+@media (max-width: 900px) { .nav-mid { display: none; } }
+
+/* SECTIONS */
+section { padding: 96px 0 120px; }
+@media (max-width: 900px) { section { padding: 72px 0 80px; } }
+@media (max-width: 560px) { section { padding: 56px 0 64px; } }
+
+.section-label {
+  font-size: 13.5px; font-weight: 500; color: var(--secondary);
+  margin: 0 0 16px; letter-spacing: 0;
+}
+h1, h2, h3, h4 { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); }
+h2 {
+  font-size: clamp(22px, 4vw, 38px); font-weight: 500; letter-spacing: -0.02em;
+  line-height: 1.15; padding-bottom: 14px; position: relative;
+}
+.section h2::after,
+section h2::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+  background: var(--brand-primary); border-radius: 2px;
+  transition: width 700ms cubic-bezier(0.16, 1, 0.3, 1) 200ms;
+}
+section.is-in h2::after, h2.is-in::after { width: 48px; }
+h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
+p { font-size: 16px; line-height: 1.65; color: var(--secondary); margin: 0 0 18px; }
+p strong { color: var(--text); font-weight: 600; }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+.stagger > * { opacity: 0; transform: translateY(12px); transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1); }
+.stagger.is-in > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(n+7) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+
+/* COVER */
+.cover { padding: 64px 0 56px; }
+.green-dot-pill {
+  display: inline-flex; align-items: center; gap: 8px; background: #fff;
+  border: 1px solid var(--border); border-radius: 9999px; padding: 6px 14px;
+  font-size: 11.5px; font-weight: 500; color: var(--secondary); margin-bottom: 24px;
+}
+.green-dot-pill::before { content: ""; width: 7px; height: 7px; background: #10B981; border-radius: 50%; }
+.cover h1 { font-size: clamp(32px, 5vw, 64px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 18px; }
+.cover h1 .s1, .cover h1 .s2 { display: block; }
+.brand-emphasis { position: relative; color: var(--brand-primary); }
+.brand-emphasis::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 6px;
+  background: var(--brand-primary); opacity: 0.18; border-radius: 4px;
+  transition: width 700ms cubic-bezier(0.16, 1, 0.3, 1) 400ms; z-index: -1;
+}
+.brand-emphasis.is-painted::after { width: 100%; }
+.cover-sub { font-size: 17px; color: var(--muted); max-width: 720px; margin: 0 0 36px; line-height: 1.55; }
+.cover-stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+.cover-stats > div { padding: 0 22px; border-right: 1px solid var(--border); }
+.cover-stats > div:first-child { padding-left: 0; }
+.cover-stats > div:last-child { padding-right: 0; border-right: none; }
+.cover-stats .v { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+.cover-stats .lbl { font-size: 12px; color: var(--muted); margin-top: 6px; }
+@media (max-width: 720px) { .cover-stats { grid-template-columns: repeat(2, 1fr); gap: 18px 0; } .cover-stats > div { border-right: none; border-bottom: 1px solid var(--border); padding: 8px 16px 14px; } .cover-stats > div:nth-child(3), .cover-stats > div:nth-child(4) { border-bottom: none; } }
+
+.hero-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.hero-card { background: var(--soft); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; max-height: 280px; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease; }
+.hero-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.hero-card .img-slot { aspect-ratio: 4/5; background: #FAFAFA; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.hero-card .img-slot img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+.hero-card:hover .img-slot img { transform: scale(1.03); }
+.hero-card .ft { padding: 12px 14px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+.hero-card.middle { border-top: 3px solid var(--brand-primary); }
+@media (max-width: 720px) { .hero-trio { grid-template-columns: 1fr; } }
+
+/* WHAT WE ANALYSED */
+.wwa-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 0; }
+.wwa-label { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 16px; }
+.wwa-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+.wwa-row > div { padding: 0 22px; border-right: 1px solid var(--border); min-width: 0; }
+.wwa-row > div:first-child { padding-left: 0; }
+.wwa-row > div:last-child { border-right: none; padding-right: 0; }
+.wwa-row .v { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.wwa-row .cap { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+@media (max-width: 900px) { .wwa-row { grid-template-columns: repeat(3, 1fr); row-gap: 20px; } .wwa-row > div { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 16px; } .wwa-row > div:nth-last-child(-n+1) { border-bottom: none; } }
+@media (max-width: 560px) { .wwa-row { grid-template-columns: repeat(2, 1fr); row-gap: 18px; } }
+
+/* SECTION 01 STATS */
+.section-stats { display: grid; grid-template-columns: repeat(6, 1fr); padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 18px; }
+.section-stats > div { padding: 0 22px; border-right: 1px solid var(--border); }
+.section-stats > div:first-child { padding-left: 0; }
+.section-stats > div:last-child { border-right: none; padding-right: 0; }
+.section-stats .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; color: var(--text); font-variant-numeric: tabular-nums; }
+.section-stats .ctx { font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+.section-stats .lbl { font-size: 12px; color: var(--muted); margin-top: 8px; font-weight: 500; }
+@media (max-width: 900px) { .section-stats { grid-template-columns: repeat(3, 1fr); row-gap: 20px; } .section-stats > div { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 16px; } .section-stats > div:nth-last-child(-n+3) { border-bottom: none; } }
+@media (max-width: 560px) { .section-stats { grid-template-columns: repeat(2, 1fr); row-gap: 16px; } .section-stats .v { font-size: 24px; } }
+
+/* PLAYER CARDS */
+.players-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 40px; }
+.player-card {
+  background: #fff; border: 1px solid var(--border); border-radius: 24px;
+  padding: 20px 18px; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+  min-height: 320px; display: flex; flex-direction: column; gap: 14px;
+}
+.player-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.player-card.target { border: 1.5px solid var(--brand-primary); background: linear-gradient(180deg, var(--brand-tint) 0%, #fff 60%); }
+.player-card .target-tag { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--border); border-radius: 9999px; padding: 4px 10px; font-size: 11px; font-weight: 500; color: var(--text); width: fit-content; }
+.player-card .target-tag::before { content: ""; width: 6px; height: 6px; background: var(--brand-primary); border-radius: 50%; }
+.player-card .head { display: flex; gap: 10px; align-items: flex-start; }
+.player-card .logo-tile { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: #FAFAFA; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.player-card .logo-tile img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.player-card .logo-tile.initials { color: #fff; font-weight: 700; font-size: 13px; }
+.player-card .b-name { font-size: 14.5px; font-weight: 600; line-height: 1.15; color: var(--text); }
+.player-card .b-handle { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.player-card .stat-row { display: flex; flex-direction: column; gap: 4px; }
+.player-card .stat-row .label { font-size: 12px; font-weight: 500; color: var(--muted); }
+.player-card .stat-row .val-rank { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.player-card .stat-row .val { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); font-variant-numeric: tabular-nums; }
+.player-card .rank-pill {
+  display: inline-block; font-size: 10px; font-weight: 500; color: var(--text);
+  background: #fff; border: 1px solid var(--border); border-radius: 9999px;
+  padding: 3px 8px; font-variant-numeric: tabular-nums;
+  transform: scale(0); transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.player-card .rank-pill.is-in { transform: scale(1); }
+.player-card .rank-pill.first { background: var(--brand-primary); color: #fff; border-color: var(--brand-primary); }
+.player-card .bar { height: 5px; background: var(--surface); border-radius: 4px; overflow: hidden; }
+.player-card .bar > span { display: block; height: 100%; border-radius: 4px; width: 0; transition: width 900ms cubic-bezier(0.16, 1, 0.3, 1); }
+.player-card .stat-row:nth-child(1) .bar > span { transition-delay: 200ms; }
+.player-card .stat-row:nth-child(2) .bar > span { transition-delay: 280ms; }
+.player-card .stat-row:nth-child(3) .bar > span { transition-delay: 360ms; }
+.player-card .stat-row:nth-child(4) .bar > span { transition-delay: 440ms; }
+.players-cap { font-size: 13px; color: var(--muted); margin-top: 16px; line-height: 1.55; }
+@media (max-width: 900px) { .players-row { grid-template-columns: repeat(2, 1fr); } .player-card.target { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .players-row { grid-template-columns: 1fr; } .player-card.target { grid-column: auto; } }
+
+/* CALLOUT */
+.callout { position: relative; background: var(--surface); border-radius: 16px; padding: 22px 24px 22px 28px; border: 1px solid var(--border); margin: 24px 0 0; }
+.callout::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 4px; background: var(--brand-primary); border-radius: 4px; }
+.callout-label { display: block; font-size: 13px; font-weight: 500; color: var(--brand-primary); margin-bottom: 10px; }
+.callout p { font-size: 15.5px; color: var(--text); margin: 0; line-height: 1.55; }
+
+/* THEME BARS */
+.theme-bars { display: flex; flex-direction: column; gap: 14px; margin: 24px 0 28px; }
+.theme-bar { display: grid; grid-template-columns: 220px 1fr 80px; gap: 16px; align-items: center; font-size: 14px; }
+.theme-bar .name { color: var(--text); font-weight: 500; }
+.theme-bar .track { height: 8px; background: var(--surface); border-radius: 4px; overflow: hidden; }
+.theme-bar .track .fill { height: 100%; background: var(--brand-primary); border-radius: 4px; width: 0; transition: width 900ms cubic-bezier(0.16, 1, 0.3, 1); }
+.theme-bar .pct { font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) { .theme-bar { grid-template-columns: 1fr; gap: 6px; } .theme-bar .pct { text-align: left; } }
+
+/* CHARTS */
+.chart-wrap { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 28px 0; }
+.chart-wrap h3 { margin: 0 0 8px; }
+.chart-wrap .ch-sub { font-size: 12px; color: var(--muted); margin: 0 0 18px; }
+.chart-canvas { position: relative; height: 360px; }
+@media (max-width: 900px) { .chart-canvas { height: 300px; } }
+@media (max-width: 560px) { .chart-canvas { height: 240px; } }
+.charts-side-by-side { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 28px 0; }
+@media (max-width: 900px) { .charts-side-by-side { grid-template-columns: 1fr; } }
+
+/* COMPETITOR TABLE */
+.comp-table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid var(--border); border-radius: 16px; }
+.comp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.comp-table th, .comp-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+.comp-table th { font-size: 12px; font-weight: 500; color: var(--muted); background: var(--soft); }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr.target-row { background: rgba(200,16,46,0.06); }
+.comp-table .b-cell { display: flex; align-items: center; gap: 10px; }
+.comp-table .b-cell img { width: 22px; height: 22px; border-radius: 4px; object-fit: contain; background: #fff; border: 1px solid var(--border); padding: 1px; }
+.comp-table .b-cell .nm { font-weight: 500; color: var(--text); }
+
+/* COMPETITOR NARRATIVE CARDS */
+.comp-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 28px 0; }
+.cc {
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+}
+.cc:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.cc .h { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.cc .h img { width: 36px; height: 36px; border-radius: 8px; object-fit: contain; background: #FAFAFA; padding: 3px; }
+.cc .h .nm { font-size: 16px; font-weight: 600; color: var(--text); }
+.cc .h .hd { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.cc p { font-size: 14.5px; color: var(--secondary); margin: 0 0 14px; line-height: 1.6; }
+.cc .strats { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12.5px; color: var(--muted); align-items: center; }
+.cc .strats .lbl { font-weight: 500; color: var(--secondary); }
+.cc .strats .pill { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid var(--border); border-radius: 9999px; padding: 3px 9px; font-size: 11.5px; color: var(--text); }
+.cc .strats .pill::before { content: ""; width: 5px; height: 5px; background: var(--brand-primary); border-radius: 50%; }
+@media (max-width: 780px) { .comp-cards { grid-template-columns: 1fr; } }
+
+/* MULTI-PLAY OPERATORS */
+.mpo { margin: 32px 0; }
+.mpo-head { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 14px; }
+.mpo .item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; background: var(--soft); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease; }
+.mpo .item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.mpo .item.is-target { border-left: 4px solid var(--brand-primary); }
+.mpo .item img { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: #fff; padding: 3px; border: 1px solid var(--border); }
+.mpo .item .body { flex: 1; }
+.mpo .item .nm { font-size: 15px; font-weight: 600; color: var(--text); }
+.mpo .item .sum { font-size: 13.5px; color: var(--secondary); margin-top: 4px; line-height: 1.5; }
+.mpo .item .badge { font-size: 12px; font-weight: 500; color: var(--brand-primary); background: var(--brand-tint); padding: 4px 10px; border-radius: 9999px; }
+
+/* PAID ADS GALLERY (top 10 ads) */
+.ad-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 28px 0; }
+@media (max-width: 980px) { .ad-gallery { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .ad-gallery { grid-template-columns: repeat(2, 1fr); } }
+.ad-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease; }
+.ad-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.ad-card .thumb { aspect-ratio: 4/5; background: #FAFAFA; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+.ad-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+.ad-card:hover .thumb img { transform: scale(1.03); }
+.ad-card .thumb .fallback { font-size: 11px; color: var(--muted); padding: 8px 12px; text-align: center; }
+.ad-card .body { padding: 12px 14px; }
+.ad-card .b-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.ad-card .b-row img { width: 18px; height: 18px; border-radius: 4px; object-fit: contain; background: #FAFAFA; padding: 1px; }
+.ad-card .b-row .nm { font-size: 12px; font-weight: 500; color: var(--text); }
+.ad-card .days { font-size: 11px; color: var(--muted); }
+.ad-card .premise { font-size: 12px; color: var(--secondary); line-height: 1.4; margin: 6px 0; }
+.ad-card .badge { display: inline-block; font-size: 10px; font-weight: 500; color: var(--brand-primary); background: var(--brand-tint); padding: 2px 7px; border-radius: 9999px; margin-top: 4px; }
+
+/* SECTION 04 STAT CARDS */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+@media (max-width: 720px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr; } }
+.stat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease; }
+.stat:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.stat .lbl { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 10px; }
+.stat .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.05; }
+.stat .sub { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+.stat.dark { background: #09090B; color: #FAFAFA; border-color: #09090B; }
+.stat.dark .lbl, .stat.dark .sub { color: rgba(250,250,250,0.65); }
+.stat.dark .v { color: #FAFAFA; }
+
+/* SECTION 05 TOP-5 GRID */
+.posts-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 24px 0; }
+@media (max-width: 980px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .posts-grid { grid-template-columns: 1fr; } }
+.post-card {
+  background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+}
+.post-card.is-highlight { border-color: var(--brand-primary); }
+.post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); }
+.post-card .thumb { aspect-ratio: 4/5; background: #FAFAFA; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.post-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+.post-card:hover .thumb img { transform: scale(1.03); }
+.post-card .thumb .fallback { font-size: 12px; color: var(--muted); padding: 12px; text-align: center; font-weight: 500; }
+.post-card .body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.post-card .rl { font-size: 10.5px; font-weight: 500; color: var(--brand-primary); text-transform: none; letter-spacing: 0; }
+.post-card .likes { font-size: 18px; font-weight: 600; color: var(--text); }
+.post-card .meta { font-size: 11px; color: var(--muted); }
+.post-card .desc { font-size: 12.5px; color: var(--secondary); line-height: 1.45; }
+.post-card .link { font-size: 12px; color: var(--text); text-decoration: underline; text-underline-offset: 3px; margin-top: 4px; }
+.post-card .link:hover { color: var(--brand-primary); }
+
+/* SHORTLIST */
+.sl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 28px 0; }
+@media (max-width: 780px) { .sl-grid { grid-template-columns: 1fr; } }
+.sl {
+  background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+}
+.sl:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.sl .h { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.sl .av { width: 48px; height: 48px; border-radius: 50%; background: #FAFAFA; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border); }
+.sl .meta { flex: 1; min-width: 0; }
+.sl .handle { font-size: 15px; font-weight: 600; color: var(--text); word-break: break-word; }
+.sl .handle a { color: inherit; text-decoration: none; }
+.sl .handle a:hover { color: var(--brand-primary); text-decoration: underline; }
+.sl .name { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.sl .plat { display: inline-block; font-size: 10.5px; font-weight: 500; color: var(--brand-primary); background: var(--brand-tint); padding: 3px 9px; border-radius: 9999px; margin-left: 6px; vertical-align: middle; }
+.sl .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; padding: 12px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+@media (max-width: 540px) { .sl .stats-row { grid-template-columns: repeat(2, 1fr); } }
+.sl .stats-row .s .v { font-size: 14px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.sl .stats-row .s .lb { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+.sl .why { font-size: 13px; color: var(--secondary); line-height: 1.55; }
+.sl .overlap { font-size: 11.5px; color: var(--muted); margin-top: 10px; }
+
+/* INSPIRATION GALLERY */
+.insp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 24px 0; }
+@media (max-width: 980px) { .insp-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .insp-grid { grid-template-columns: repeat(2, 1fr); } }
+.insp { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease; }
+.insp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.insp .visual { aspect-ratio: 4/5; background: #FAFAFA; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+.insp .visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+.insp:hover .visual img { transform: scale(1.03); }
+.insp .body { padding: 10px 12px; font-size: 12px; }
+.insp .h { font-weight: 500; color: var(--text); }
+.insp .m { color: var(--muted); margin-top: 3px; }
+
+/* OPPORTUNITY CARDS */
+.opp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 28px 0; }
+@media (max-width: 880px) { .opp-grid { grid-template-columns: 1fr; } }
+.opp {
+  background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 26px;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+}
+.opp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9, 9, 11, 0.12); border-color: rgba(200,16,46,0.4); }
+.opp .eb { font-size: 11.5px; font-weight: 500; color: var(--brand-primary); margin-bottom: 8px; }
+.opp h4 { font-size: 18px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 14px; color: var(--text); }
+.opp p { font-size: 14.5px; line-height: 1.6; color: var(--secondary); margin: 0 0 12px; }
+.opp .closer { display: flex; align-items: baseline; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border); margin-top: 16px; }
+.opp .closer .big { font-size: 32px; font-weight: 600; color: var(--brand-primary); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.opp .closer .lbl { font-size: 12px; color: var(--muted); flex: 1; line-height: 1.4; }
+.opp .backed { font-size: 10.5px; color: var(--muted); margin-top: 12px; }
+
+/* CLOSING BLOCK */
+.closing { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; max-width: 720px; margin: 48px auto 0; padding: 48px 40px; }
+.closing .closing-lead { font-size: 18px; color: var(--text); line-height: 1.55; margin: 0 0 28px; }
+.closing h4 { font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+.closing .sup-intro { font-size: 15px; color: var(--muted); line-height: 1.65; margin: 0; }
+.booking-line { font-size: 14.5px; color: var(--secondary); text-align: center; margin: 28px auto 0; max-width: 720px; font-weight: 500; }
+.booking-line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.booking-line a:hover { color: var(--brand-primary); }
+.report-footer { text-align: center; font-size: 12px; color: var(--muted); padding: 48px 20px 60px; }
+@media (max-width: 720px) { .closing { padding: 32px 24px; max-width: calc(100% - 40px); } }
+
+/* WAVE EMOJI */
+@keyframes wave-wiggle {
+  0% { transform: rotate(0); }
+  15% { transform: rotate(-20deg); }
+  30% { transform: rotate(20deg); }
+  45% { transform: rotate(-10deg); }
+  60% { transform: rotate(10deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0); }
+}
+.wave { display: inline-block; transform-origin: 70% 70%; }
+
+/* INLINE LINKS */
+a.post-link-inline, .opp p a, .cc p a, .sl .why a {
+  color: var(--text); text-decoration: underline; text-decoration-thickness: 1px;
+  text-underline-offset: 3px; text-decoration-color: var(--hint);
+  transition: color 180ms, text-decoration-color 180ms, text-decoration-thickness 180ms;
+}
+a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
+  color: var(--brand-primary); text-decoration-color: var(--brand-primary);
+  text-decoration-thickness: 2px;
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="nav-left">
+      <span class="nav-pill"><span class="wave">👋</span> Sup</span>
+      <div class="nav-divider"></div>
+      <div class="nav-brand">
+        <img src="https://www.hamburgerhelper.com/wp-content/themes/idea-hamburgerhelper/library/img/logo.png" alt="Hamburger Helper logo" onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="nav-mid"><a href="#benchmark">Benchmark</a><a href="#influencer">Influencer</a><a href="#competitors">Competitors</a><a href="#paid">Paid</a><a href="#feed">Feed</a><a href="#shortlist">Shortlist</a><a href="#opportunity">Opportunity</a></div>
+    <div class="nav-cta"><a href="#opportunity">View Opportunity</a></div>
+  </div>
+</nav>
+<section class="cover">
+  <div class="container">
+    <div class="green-dot-pill reveal">Influencer Marketing Intelligence Report</div>
+    <h1 class="reveal">
+      <span class="s1">Hamburger Helper and the Boxed Meal Kits category.</span>
+      <span class="s2">Where the brand sits, <span class="brand-emphasis">what is moving around it</span>.</span>
+    </h1>
+    <p class="cover-sub reveal">Where the brand sits across the 57-brand category map, what is moving on Meta and the creator side, and the strategies competitors are running.</p>
+
+    <div class="cover-stats reveal">
+      <div><div class="v" data-count="57" data-format="comma">57</div><div class="lbl">Brands in the Boxed Meal Kits category</div></div>
+      <div><div class="v" data-count="62" data-format="comma">62</div><div class="lbl">Active ad creatives surfaced</div></div>
+      <div><div class="v" data-count="26" data-format="comma">26</div><div class="lbl">Hamburger Helper live Meta creatives</div></div>
+      <div><div class="v" data-count="2" data-format="comma">2</div><div class="lbl">Creators tagging the brand in the window</div></div>
+    </div>
+
+    <div class="hero-trio reveal">
+      <a href="https://www.instagram.com/p/DYAegH9DoR_/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="hero-card">
+        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/4d9da427-0b30-4fa7-acd7-38b910c90ea5" alt="Promotional" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="ft">660 likes · Promotional</div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DWmKOEGjlJJ/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="hero-card middle">
+        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/ec7f4659-7422-4a1d-a2c1-42ea838264be" alt="Promotional" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="ft">413 likes · Promotional</div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DX-bRlfjWSg/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="hero-card">
+        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/370f726e-a7e8-42bf-ab84-e5d5426110db" alt="Relatable/Meme" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="ft">84 likes · Relatable/Meme</div>
+      </div>
+    </a>
+    </div>
+  </div>
+</section>
+
+<div class="wwa-strip">
+  <div class="container">
+    <div class="wwa-label">What we analysed</div>
+    <div class="wwa-row">
+      <div><div class="v" data-count="57" data-format="comma">57</div><div class="cap">brands in the Boxed Meal Kits category</div></div>
+      <div><div class="v" data-count="114" data-format="comma">114</div><div class="cap">top creators across Instagram and TikTok</div></div>
+      <div><div class="v" data-count="62" data-format="comma">62</div><div class="cap">paid ad creatives active in the category</div></div>
+      <div><div class="v">84-day</div><div class="cap">category window · 2026-02-20 to 2026-05-15</div></div>
+      <div><div class="v">80-day</div><div class="cap">brand window   -   own feed and Creator Tagged Posts</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="benchmark">
+  <div class="container">
+    <div class="section-label reveal">01 · Market benchmark</div>
+    <h2 class="reveal">Heavy paid presence, light creator footprint.</h2>
+    <p class="reveal">Hamburger Helper sits in the top 10 of the 57-brand Boxed Meal Kits category on active Meta ad volume (rank 9 of 57) but in the bottom half on Instagram followers (rank 43 of 57) and on Creator Tagged Posts (rank 34 of 57). Across the 84-day category window, the brand's ad budget shows up; the creator side does not.</p>
+    <div class="section-stats stagger">
+      <div>
+      <div class="v" data-count="26" data-format="comma">26</div>
+      <div class="ctx">rank 9 of 57 (top 16%)</div>
+      <div class="lbl">Active Meta ads</div>
+    </div><div>
+      <div class="v" data-count="2" data-format="comma">2</div>
+      <div class="ctx">rank 34 of 57 (top 60%)</div>
+      <div class="lbl">Creator Tagged Posts (84d)</div>
+    </div><div>
+      <div class="v" data-count="2" data-format="comma">2</div>
+      <div class="ctx">vs category top of 77 (@goodles)</div>
+      <div class="lbl">Unique tagging creators</div>
+    </div><div>
+      <div class="v" data-count="11000" data-format="comma">11K</div>
+      <div class="ctx">rank 43 of 57 (top 76%)</div>
+      <div class="lbl">Instagram followers</div>
+    </div><div>
+      <div class="v" data-count="0" data-format="comma">0</div>
+      <div class="ctx">vs category leader @allgoodles at 6</div>
+      <div class="lbl">Strategies detected in category map</div>
+    </div><div>
+      <div class="v" data-count="0" data-format="comma">0</div>
+      <div class="ctx">of 26 live creatives   -   heavy short-cycle testing, no long-runners</div>
+      <div class="lbl">Ads surviving 30+ days</div>
+    </div>
+    </div>
+    <div class="players-row stagger">
+      <div class="player-card target">
+      <div class="target-tag">Target brand</div>
+      <div class="head">
+        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/d41b2199-bed1-48f9-8868-27b22ab70cb2" alt="Hamburger Helper" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#C8102E';this.parentElement.textContent='HH'"></div>
+        <div>
+          <div class="b-name">Hamburger Helper</div>
+          <div class="b-handle">@helper</div>
+        </div>
+      </div>
+      <div class="stat-row">
+          <div class="label">Instagram followers</div>
+          <div class="val-rank">
+            <span class="val" data-count="11235" data-format="compact">11.2KK</span>
+            <span class="rank-pill">#43 of 57</span>
+          </div>
+          <div class="bar"><span data-width="7.9" style="background:#C8102E;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Creator Tagged Posts</div>
+          <div class="val-rank">
+            <span class="val" data-count="2" data-format="comma">2</span>
+            <span class="rank-pill">#34 of 57</span>
+          </div>
+          <div class="bar"><span data-width="2.3" style="background:#C8102E;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Active Meta ads</div>
+          <div class="val-rank">
+            <span class="val" data-count="26" data-format="comma">26</span>
+            <span class="rank-pill">#9 of 57</span>
+          </div>
+          <div class="bar"><span data-width="43.3" style="background:#C8102E;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Total Creator Views</div>
+          <div class="val-rank">
+            <span class="val" data-count="1099" data-format="compact">1.1KK</span>
+            <span class="rank-pill">#37 of 57</span>
+          </div>
+          <div class="bar"><span data-width="0.0" style="background:#C8102E;"></span></div>
+        </div>
+    </div><div class="player-card">
+      
+      <div class="head">
+        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd" alt="Knorr" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#534AB7';this.parentElement.textContent='KN'"></div>
+        <div>
+          <div class="b-name">Knorr</div>
+          <div class="b-handle">@knorr</div>
+        </div>
+      </div>
+      <div class="stat-row">
+          <div class="label">Instagram followers</div>
+          <div class="val-rank">
+            <span class="val" data-count="75012" data-format="compact">75.0KK</span>
+            <span class="rank-pill">#18 of 57</span>
+          </div>
+          <div class="bar"><span data-width="53.0" style="background:#534AB7;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Creator Tagged Posts</div>
+          <div class="val-rank">
+            <span class="val" data-count="36" data-format="comma">36</span>
+            <span class="rank-pill">#5 of 57</span>
+          </div>
+          <div class="bar"><span data-width="41.9" style="background:#534AB7;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Active Meta ads</div>
+          <div class="val-rank">
+            <span class="val" data-count="28" data-format="comma">28</span>
+            <span class="rank-pill">#8 of 57</span>
+          </div>
+          <div class="bar"><span data-width="46.7" style="background:#534AB7;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Total Creator Views</div>
+          <div class="val-rank">
+            <span class="val" data-count="26845852" data-format="compact">26.8MM</span>
+            <span class="rank-pill first">#1 of 57</span>
+          </div>
+          <div class="bar"><span data-width="100.0" style="background:#534AB7;"></span></div>
+        </div>
+    </div><div class="player-card">
+      
+      <div class="head">
+        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#1D9E75';this.parentElement.textContent='GO'"></div>
+        <div>
+          <div class="b-name">Goodles</div>
+          <div class="b-handle">@allgoodles</div>
+        </div>
+      </div>
+      <div class="stat-row">
+          <div class="label">Instagram followers</div>
+          <div class="val-rank">
+            <span class="val" data-count="141480" data-format="compact">141K</span>
+            <span class="rank-pill">#7 of 57</span>
+          </div>
+          <div class="bar"><span data-width="100.0" style="background:#1D9E75;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Creator Tagged Posts</div>
+          <div class="val-rank">
+            <span class="val" data-count="86" data-format="comma">86</span>
+            <span class="rank-pill first">#1 of 57</span>
+          </div>
+          <div class="bar"><span data-width="100.0" style="background:#1D9E75;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Active Meta ads</div>
+          <div class="val-rank">
+            <span class="val" data-count="1" data-format="comma">1</span>
+            <span class="rank-pill">#23 of 57</span>
+          </div>
+          <div class="bar"><span data-width="1.7" style="background:#1D9E75;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Total Creator Views</div>
+          <div class="val-rank">
+            <span class="val" data-count="988297" data-format="compact">988K</span>
+            <span class="rank-pill">#11 of 57</span>
+          </div>
+          <div class="bar"><span data-width="3.7" style="background:#1D9E75;"></span></div>
+        </div>
+    </div><div class="player-card">
+      
+      <div class="head">
+        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f" alt="Land O&#x27;Lakes Mac &amp; Cheese" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#D85A30';this.parentElement.textContent='LO'"></div>
+        <div>
+          <div class="b-name">Land O&#x27;Lakes Mac &amp; Cheese</div>
+          <div class="b-handle">@landolakesktchn</div>
+        </div>
+      </div>
+      <div class="stat-row">
+          <div class="label">Instagram followers</div>
+          <div class="val-rank">
+            <span class="val" data-count="96447" data-format="compact">96.4KK</span>
+            <span class="rank-pill">#14 of 57</span>
+          </div>
+          <div class="bar"><span data-width="68.2" style="background:#D85A30;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Creator Tagged Posts</div>
+          <div class="val-rank">
+            <span class="val" data-count="16" data-format="comma">16</span>
+            <span class="rank-pill">#17 of 57</span>
+          </div>
+          <div class="bar"><span data-width="18.6" style="background:#D85A30;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Active Meta ads</div>
+          <div class="val-rank">
+            <span class="val" data-count="60" data-format="comma">60</span>
+            <span class="rank-pill">#4 of 57</span>
+          </div>
+          <div class="bar"><span data-width="100.0" style="background:#D85A30;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Total Creator Views</div>
+          <div class="val-rank">
+            <span class="val" data-count="1385976" data-format="compact">1.4MM</span>
+            <span class="rank-pill">#7 of 57</span>
+          </div>
+          <div class="bar"><span data-width="5.2" style="background:#D85A30;"></span></div>
+        </div>
+    </div><div class="player-card">
+      
+      <div class="head">
+        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af" alt="Old El Paso" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#378ADD';this.parentElement.textContent='OE'"></div>
+        <div>
+          <div class="b-name">Old El Paso</div>
+          <div class="b-handle">@oldelpaso</div>
+        </div>
+      </div>
+      <div class="stat-row">
+          <div class="label">Instagram followers</div>
+          <div class="val-rank">
+            <span class="val" data-count="52450" data-format="compact">52.5KK</span>
+            <span class="rank-pill">#22 of 57</span>
+          </div>
+          <div class="bar"><span data-width="37.1" style="background:#378ADD;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Creator Tagged Posts</div>
+          <div class="val-rank">
+            <span class="val" data-count="9" data-format="comma">9</span>
+            <span class="rank-pill">#22 of 57</span>
+          </div>
+          <div class="bar"><span data-width="10.5" style="background:#378ADD;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Active Meta ads</div>
+          <div class="val-rank">
+            <span class="val" data-count="46" data-format="comma">46</span>
+            <span class="rank-pill">#5 of 57</span>
+          </div>
+          <div class="bar"><span data-width="76.7" style="background:#378ADD;"></span></div>
+        </div><div class="stat-row">
+          <div class="label">Total Creator Views</div>
+          <div class="val-rank">
+            <span class="val" data-count="305843" data-format="compact">306K</span>
+            <span class="rank-pill">#21 of 57</span>
+          </div>
+          <div class="bar"><span data-width="1.1" style="background:#378ADD;"></span></div>
+        </div>
+    </div>
+    </div>
+    <p class="players-cap">Four direct competitors compared on four metrics. Hamburger Helper highlighted. Active Meta ads substituted for the standard locations metric since every brand in this CPG category has zero physical footprint.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Benchmark Verdict</span>
+      <p>Goodles is the category's anomaly. It runs six different creator plays at once (the highest count in the category map), pulls in 988K creator-attributable views, and only spends on a single live Meta ad. Hamburger Helper runs none of the six and concentrates the entire ad budget on a Helper Deluxe launch instead.</p>
+    </div>
+  </div>
+</section>
+
+<section id="influencer">
+  <div class="container">
+    <div class="section-label reveal">02 · Influencer intelligence</div>
+    <h2 class="reveal">Only two creators tagged the brand all quarter.</h2>
+    <p class="reveal">Across the 80-day brand window, just two Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) on Instagram, zero on TikTok, from two different creators. 2 unique creators places Hamburger Helper at rank 35 of 57 on creator tagging volume in the category, and at rank 39 of 57 on unique tagging creators. The category leader, Goodles, pulls in 77 unique creators in the same window.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;">
+      <div class="stat reveal"><div class="lbl">Unique tagging creators</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">vs Goodles at 77 (the category top)</div></div>
+      <div class="stat reveal"><div class="lbl">Total Creator Tagged Posts (84d)</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">Goodles: 86 · Annie's: 38 · Knorr: 36</div></div>
+      <div class="stat dark reveal"><div class="lbl">Tagged-post views in window</div><div class="v" data-count="1099" data-format="comma">1,099</div><div class="sub">vs Knorr's 26.8M (the category top)</div></div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:36px;margin-bottom:14px;">What creators do say, when they say it</h3>
+    <div class="theme-bars reveal">
+      <div class="theme-bar">
+      <div class="name">Vegan grocery finds round-ups</div>
+      <div class="track"><div class="fill" data-width="50.0" style="width:0;"></div></div>
+      <div class="pct">50.0% · 1 post</div>
+    </div><div class="theme-bar">
+      <div class="name">Day-in-the-life evening routines</div>
+      <div class="track"><div class="fill" data-width="50.0" style="width:0;"></div></div>
+      <div class="pct">50.0% · 1 post</div>
+    </div>
+    </div>
+    <p class="reveal">Both Creator Tagged Posts come from creators who weren't really posting about the product. <a href="https://www.instagram.com/bigboxvegan/" class="post-link-inline" target="_blank" rel="noopener">@bigboxvegan</a> (114K followers) was running a vegan grocery round-up that happened to surface a new Helper teriyaki variant at Grocery Outlet, and <a href="https://www.instagram.com/alexiatomasik/" class="post-link-inline" target="_blank" rel="noopener">@alexiatomasik</a> (4.9K followers) cooked a Tuna Helper inside a wider day-in-the-life vlog. Neither is a partnership, neither is a creator who's chosen Hamburger Helper as a recurring product to talk about, and neither belongs to any of the creator-discovery patterns competitors run.</p>
+
+    <h3 class="reveal" style="margin-top:32px;margin-bottom:14px;">The two creators who did tag the brand</h3>
+    <ul style="list-style:none;padding:0;margin:0;">
+      <li style="margin-bottom:14px;">
+      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c958071e-8895-4d2d-83e8-78fc707d4104" alt="bigboxvegan" style="width:24px;height:24px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px;" onerror="this.style.display='none'"><a href="https://www.instagram.com/p/DYFzkidmmhz/" target="_blank" rel="noopener" class="post-link-inline" style="font-weight:600;color:var(--text);">@bigboxvegan</a>
+      <span style="color:var(--muted);font-size:13px;"> · 114,225 followers · 1,863 likes · 1.67% ER</span>
+      <div style="font-size:13.5px;color:var(--secondary);margin-top:6px;line-height:1.55;">A handheld photo of a &#x27;Sammich&#x27; brand Fluffernutter flavored crustless sandwich, emphasizing its nostalgic flavor profile and 10g protein co</div>
+    </li><li style="margin-bottom:14px;">
+      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/5aa4fd82-a3fa-4234-b663-f8d5bc78d822" alt="alexiatomasik" style="width:24px;height:24px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px;" onerror="this.style.display='none'"><a href="https://www.instagram.com/p/DYDM4ShsLNo/" target="_blank" rel="noopener" class="post-link-inline" style="font-weight:600;color:var(--text);">@alexiatomasik</a>
+      <span style="color:var(--muted);font-size:13px;"> · 4,908 followers · 36 likes · 1.04% ER</span>
+      <div style="font-size:13.5px;color:var(--secondary);margin-top:6px;line-height:1.55;">A realistic and relatable &#x27;day in the life&#x27; vlog documenting a creator&#x27;s evening routine after her 9-5 job, featuring skincare, cooking a si</div>
+    </li>
+    </ul>
+
+    <p class="reveal" style="margin-top:24px;">On TikTok, the picture is empty. The @helper handle on TikTok has not posted since 2015. Brand-name search across the window returned 14 results that all matched on the English word "helper" inside unrelated content (domestic-helper skits, geopolitical news, "destiny helper" relationship posts), none referencing the actual product. We kept looking for a real TikTok mention. We could not find one.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Earned Engine That Isn't</span>
+      <p>The category has a working earned-mentions pattern (Brami pulls 14 unique creators a quarter unprompted, Maruchan 17, Goodles 31). Hamburger Helper is at 2 IG and 0 TikTok across the same 84 days. The product is distinct, the mascot is recognisable, the SKU is everywhere on retail shelves; what isn't there is anything pulling creators into talking about it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="competitors">
+  <div class="container">
+    <div class="section-label reveal">03 · Competitor deep-dive</div>
+    <h2 class="reveal">One competitor runs six plays at once, most run two, you run zero.</h2>
+    <p class="reveal">The category map detects ten distinct creator strategies inside Boxed Meal Kits, and one brand (Goodles) is detected on six of them. Across the four direct competitors selected for this report, every one is detected on at least one creator strategy. Hamburger Helper is detected on zero. Below, the head-to-head numbers, then a narrative on what each competitor is actually doing differently.</p>
+
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Brand</th><th>Instagram followers</th><th>Creator Tagged Posts</th><th>Unique creators</th><th>Tagged-post views</th><th>Active Meta ads</th></tr>
+        </thead>
+        <tbody><tr class="target-row">
+      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/d41b2199-bed1-48f9-8868-27b22ab70cb2" alt="Hamburger Helper" onerror="this.style.display='none'"><div><div class="nm">Hamburger Helper</div><div style="font-size:11px;color:var(--muted);">@helper</div></div></div></td>
+      <td>11,235</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.1K</td>
+      <td>26</td>
+    </tr><tr>
+      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd" alt="Knorr" onerror="this.style.display='none'"><div><div class="nm">Knorr</div><div style="font-size:11px;color:var(--muted);">@knorr</div></div></div></td>
+      <td>75,012</td>
+      <td>36</td>
+      <td>31</td>
+      <td>26.8M</td>
+      <td>28</td>
+    </tr><tr>
+      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none'"><div><div class="nm">Goodles</div><div style="font-size:11px;color:var(--muted);">@allgoodles</div></div></div></td>
+      <td>141,480</td>
+      <td>86</td>
+      <td>77</td>
+      <td>988K</td>
+      <td>1</td>
+    </tr><tr>
+      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f" alt="Land O&#x27;Lakes Mac &amp; Cheese" onerror="this.style.display='none'"><div><div class="nm">Land O&#x27;Lakes Mac &amp; Cheese</div><div style="font-size:11px;color:var(--muted);">@landolakesktchn</div></div></div></td>
+      <td>96,447</td>
+      <td>16</td>
+      <td>12</td>
+      <td>1.4M</td>
+      <td>60</td>
+    </tr><tr>
+      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af" alt="Old El Paso" onerror="this.style.display='none'"><div><div class="nm">Old El Paso</div><div style="font-size:11px;color:var(--muted);">@oldelpaso</div></div></div></td>
+      <td>52,450</td>
+      <td>9</td>
+      <td>9</td>
+      <td>306K</td>
+      <td>46</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="comp-cards stagger">
+      <div class="cc">
+      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd" alt="Knorr" onerror="this.style.display='none'"><div><div class="nm">Knorr</div><div class="hd">@knorr</div></div></div>
+      <p>The category leader for earned creator volume. Knorr pulled 26.8M tagged-post views from 31 unique creators in the window   -   second-highest unique-creator count after Goodles, the highest views by a wide margin. Runs a long-term ambassador layer (@brooklynsbites, 200K) on top.</p>
+      <div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Long-Term Brand Ambassador</span></div>
+    </div><div class="cc">
+      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none'"><div><div class="nm">Goodles</div><div class="hd">@allgoodles</div></div></div>
+      <p>The multi-play operator of the category. Goodles is detected running six creator strategies simultaneously, including 31 unique creators tagging (rank 1 of 57), 11 geo-clustered micro-creators, and an ambassador layer anchored by @guacbites (874K followers, 2.8M views). Only one live Meta ad   -   the entire engine runs on creators.</p>
+      <div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Earned Organic Mentions</span><span class="pill">Creator Collective / Volume Model</span><span class="pill">Long-Term Brand Ambassador</span><span class="pill">Geo-Clustered Micro-Creators</span></div>
+    </div><div class="cc">
+      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f" alt="Land O&#x27;Lakes Mac &amp; Cheese" onerror="this.style.display='none'"><div><div class="nm">Land O&#x27;Lakes Mac &amp; Cheese</div><div class="hd">@landolakesktchn</div></div></div>
+      <p>Sits at the opposite end of the spectrum from Goodles. Land O&#x27;Lakes Mac &amp; Cheese commissions 60 live Meta creatives (rank 4 of 57) and pulls 1.4M tagged-post views   -   the heaviest paid-and-creator dual play in the category. Tagged creators are mostly mid-tier (12 unique across 16 posts).</p>
+      <div class="strats"><span class="lbl">Strategies in play:</span></div>
+    </div><div class="cc">
+      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af" alt="Old El Paso" onerror="this.style.display='none'"><div><div class="nm">Old El Paso</div><div class="hd">@oldelpaso</div></div></div>
+      <p>The closest direct boxed-meal-kit analog by SKU. Runs 46 live Meta creatives (rank 5 of 57) and 9 tagged posts from 9 unique creators   -   a quieter creator footprint than Land O&#x27;Lakes but a similar paid testing cadence.</p>
+      <div class="strats"><span class="lbl">Strategies in play:</span></div>
+    </div>
+    </div>
+
+    <div class="mpo">
+      <div class="mpo-head reveal">Multi-play operators · brands running 3+ plays</div>
+      <div class="stagger">
+        <div class="item">
+      <img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none'">
+      <div class="body">
+        <div class="nm">Goodles</div>
+        <div class="sum">Running 6 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
+      </div>
+      <div class="badge">6 plays</div>
+    </div><div class="item">
+      <img src="https://first-possum-672.convex.cloud/api/storage/553ea665-6015-4236-a9b7-be0a44fab591" alt="Brami" onerror="this.style.display='none'">
+      <div class="body">
+        <div class="nm">Brami</div>
+        <div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Earned Organic Mentions</div>
+      </div>
+      <div class="badge">3 plays</div>
+    </div><div class="item">
+      <img src="https://first-possum-672.convex.cloud/api/storage/8210a255-864e-483f-a1c3-5451bcdb3e94" alt="Goya" onerror="this.style.display='none'">
+      <div class="body">
+        <div class="nm">Goya</div>
+        <div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Long-Term Brand Ambassador</div>
+      </div>
+      <div class="badge">3 plays</div>
+    </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Multi-Play Stack</span>
+      <p>Goodles is running an earned-mention engine, an ambassador layer, geo-clusters, a UGC-for-brand-feed cadence, a creator collective at sub-10K micro level, and a press-trip pattern simultaneously. Brami runs an alt-handle resident creator plus a quiet retainer. The strategies in play in this category aren't single-tactic plays   -   the brands winning the creator side are stacking three to six.</p>
+    </div>
+  </div>
+</section>
+
+<section id="paid">
+  <div class="container">
+    <div class="section-label reveal">04 · Creator content in paid</div>
+    <h2 class="reveal">The category's paid spend is built on creator content. Yours is built on product photography.</h2>
+    <p class="reveal">Across the 62 active ad creatives in the Boxed Meal Kits category at time of analysis, 41.9% are creator-shot (UGC or Lifestyle styles where the camera is on a human, not a pack shot). Hamburger Helper's 16 active creatives in flight contain 2 that fit that definition. The rest are studio-shot food photography promoting the Helper Deluxe launch.</p>
+
+    <div class="stat-grid stagger">
+      <div class="stat"><div class="lbl">Active ad creatives in Boxed Meal Kits</div><div class="v" data-count="62" data-format="comma">62</div><div class="sub">across 0 advertisers</div></div>
+      <div class="stat"><div class="lbl">Active creatives that are creator-shot</div><div class="v" data-count="42" data-suffix="%">42%</div><div class="sub">UGC or Lifestyle (vs Product-Only / Polished Brand)</div></div>
+      <div class="stat dark"><div class="lbl">60+ day survival rate</div><div class="v" data-count="28" data-suffix="%">28%</div><div class="sub">of the top 100 creatives have survived more than 60 days · industry baseline 11%</div></div>
+      <div class="stat"><div class="lbl">Hamburger Helper active creator-shot ads</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">out of 16 unique active · longest runtime 25 days</div></div>
+      <div class="stat"><div class="lbl">UGC share of 60+ day winners</div><div class="v" data-count="24" data-suffix="%">24%</div><div class="sub">of the 25 ads surviving 60+ days in the category</div></div>
+      <div class="stat dark"><div class="lbl">Brands testing 10+ creator-cycle creatives</div><div class="v" data-count="0" data-format="comma">0</div><div class="sub">with 50%+ cycled in under 30 days · the "creator pipeline" cohort</div></div>
+    </div>
+
+    <div class="charts-side-by-side">
+      <div class="chart-wrap reveal">
+        <h3>Ad longevity distribution</h3>
+        <p class="ch-sub">Top 100 category creatives by max days running · still-active vs expired</p>
+        <div class="chart-canvas"><canvas id="chart-longevity"></canvas></div>
+      </div>
+      <div class="chart-wrap reveal">
+        <h3>Active creatives by brand · top 5</h3>
+        <p class="ch-sub">Of the top 100 creatives in the category map · target highlighted</p>
+        <div class="chart-canvas"><canvas id="chart-brand-active"></canvas></div>
+      </div>
+    </div>
+
+    <p class="reveal">The category's survival curve is unusual. Of the top 100 creatives in the category map, 21 have run more than 60 days   -   roughly 28%, against an industry baseline of about 11%. In that 60-plus-day pool, UGC outweighs every other style: 24% are creator-shot, against the 42% creator-shot share across all active creatives. Creator content survives at higher rates than studio content, in this category, by a large margin.</p>
+
+    <p class="reveal">The brands feeding that pool aren't testing one or two creator videos. They're cycling many. Four niche brands have 10 or more live creatives with the majority cycled in under 30 days   -   Ramen Bae, The Only Bean, Once Upon a Farm, and Land O'Lakes Mac & Cheese all show the high-volume, high-churn pattern of a creator pipeline producing fresh variants every week. The 8 UGC ads surviving 60+ days didn't appear on the first try; they emerged from a testing pool ten times their size.</p>
+
+    <h3 class="reveal" style="margin:32px 0 12px;">The 10 longest-running creator-shot ads in the category</h3>
+    <p class="reveal">These are the survivors. Every one is creator-shot (UGC or Lifestyle), every one is still active, every one has been running for 60+ days. Click any tile for the Meta Ad Library snapshot.</p>
+    <div class="ad-gallery stagger">
+      <a href="https://www.facebook.com/ads/library?id=3793354810945979" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4d7a54b4-ddbd-4af5-8962-96c096381121" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Ramen Bae" onerror="this.style.display='none'"><span class="nm">Ramen Bae</span></div>
+          <div class="days">729 days · UGC</div>
+          <div class="premise">A product developer announces the launch of two new ramen toppings  -  a kimchi mix and dried enoki mushrooms  -  while demonstrating how </div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=609291041732771" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/5dad923d-4c5b-418e-a568-1c6dba190bc8" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Ramen Bae" onerror="this.style.display='none'"><span class="nm">Ramen Bae</span></div>
+          <div class="days">459 days · UGC</div>
+          <div class="premise">A creator provides three compelling reasons  -  convenience, cost-effectiveness, and nutritional value  -  to use Ramen Bae&#x27;s dried t</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=1779498512714952" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://www.facebook.com/ads/library?id=1779498512714952" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Once Upon a Farm" onerror="this.style.display='none'"><span class="nm">Once Upon a Farm</span></div>
+          <div class="days">131 days · Lifestyle</div>
+          <div class="premise">A promotional graphic showcasing Once Upon A Farm&#x27;s product variety  -  pouches, pantry snacks, and oat bars  -  through vibrant life</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=1847545416636667" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://www.facebook.com/ads/library?id=1847545416636667" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Once Upon a Farm" onerror="this.style.display='none'"><span class="nm">Once Upon a Farm</span></div>
+          <div class="days">131 days · Lifestyle</div>
+          <div class="premise">A promotional lifestyle graphic for Once Upon A Farm&#x27;s Organic Immunity Blend, emphasizing health, fresh ingredients, and chi</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=2290955161315579" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/3e49ef34-0e83-49e0-8dc9-e2f59f8e5d37" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Tastee Choice" onerror="this.style.display='none'"><span class="nm">Tastee Choice</span></div>
+          <div class="days">116 days · UGC</div>
+          <div class="premise">A relatable video showing a woman quickly preparing a frozen chicken carbonara meal after her husband says he will be home in 10 m</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=802257768828060" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/bf9e1980-7e65-4a48-9d72-85d1946bf381" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Saffron Road" onerror="this.style.display='none'"><span class="nm">Saffron Road</span></div>
+          <div class="days">90 days · UGC</div>
+          <div class="premise">A creative food hack demonstrating how to repurpose a frozen Saffron Road Butter Chicken meal into fresh cucumber boats for a low-</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=1276230464413862" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/217535d5-bee2-4661-81b6-90ade47774c5" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Lovebird Foods" onerror="this.style.display='none'"><span class="nm">Lovebird Foods</span></div>
+          <div class="days">83 days · UGC</div>
+          <div class="premise">A creator visits Walmart to celebrate and promote the retail launch of Lovebird, a clean-ingredient, family-owned cereal brand.</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=27576745311927497" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/b3cc2598-488e-409a-adaf-b8198125d77e" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="The Only Bean" onerror="this.style.display='none'"><span class="nm">The Only Bean</span></div>
+          <div class="days">56 days · UGC</div>
+          <div class="premise">A creator uses a &#x27;fake apology&#x27; hook to announce a massive, limited-time sale on a healthy snack she previously recommen</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=952610527812867" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/f1a35803-0cef-4c59-a4b1-75912dd096dd" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="The Only Bean" onerror="this.style.display='none'"><span class="nm">The Only Bean</span></div>
+          <div class="days">56 days · UGC</div>
+          <div class="premise">A health-conscious creator reviews &#x27;The Only Bean&#x27; edamame snacks, claiming they helped her achieve a flat stomach and c</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a><a href="https://www.facebook.com/ads/library?id=1301682958493204" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="ad-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/ed64df4f-9557-47e6-9156-bcf36b900bc9" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
+        <div class="body">
+          <div class="b-row"><img src="" alt="Annie Chun&#x27;s Inc." onerror="this.style.display='none'"><span class="nm">Annie Chun&#x27;s Inc.</span></div>
+          <div class="days">49 days · UGC</div>
+          <div class="premise">A mother and daughter showcase the convenience and quality of Annie Chun&#x27;s ramen bowls as a quick, healthy, and delicious 3-m</div>
+          <span class="badge">Creator-shot</span>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <p class="reveal">Hamburger Helper has 2 creator-shot ads in flight out of 16 unique active creatives. All 16 promote the same Helper Deluxe launch (Brew Pub Cheeseburger and Sweet & Savory Teriyaki), with creative_type split 12 image / 4 video and Creative_Style split 10 Product-Only food photography / 4 Polished Brand promo / 2 UGC. The longest runtime in the brand's library is 25 days. Nothing is in the 60+ day pool where the category's survivors live.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Commissioning Gap</span>
+      <p>Four niche competitors are running 10+ active creatives with the majority cycled in under 30 days   -   they&#x27;re testing creator variants at category cadence. Hamburger Helper has 2 creator-shot ads in flight (out of 15 live), all under 26 days old. The gap isn&#x27;t ad budget   -   the brand is rank 9 of 57 on live creatives. The gap is a creator pipeline producing enough fresh creator-led variants to test continuously.</p>
+    </div>
+  </div>
+</section>
+
+<section id="feed">
+  <div class="container">
+    <div class="section-label reveal">05 · Feed content strategy</div>
+    <h2 class="reveal">Your best-performing pillar is the one you publish least.</h2>
+
+    <div class="stat-grid stagger">
+      <div class="stat"><div class="lbl">Top feed post likes</div><div class="v" data-count="660" data-format="comma">660</div><div class="sub">A Helper Deluxe Breakfast Hashbrowns giveaway carousel · 2026-05-06</div></div>
+      <div class="stat"><div class="lbl">Promotional avg likes per post</div><div class="v" data-count="384" data-format="comma">384</div><div class="sub">9.1× the Relatable/Meme average</div></div>
+      <div class="stat dark"><div class="lbl">Share of feed that is Promotional</div><div class="v" data-count="23" data-suffix="%">23%</div><div class="sub">3 of 13 posts</div></div>
+    </div>
+
+    <p class="reveal">Across the 80-day brand window, Hamburger Helper published 13 own-feed posts on Instagram. The format split skews to carousels (1), with a smaller number of videos and a single photo. Average likes per post sit at 121; median at 50. Underneath those averages, though, the per-pillar numbers tell a much sharper story.</p>
+
+    <p class="reveal">The Promotional posts (3 across the window) average 384 likes. The Relatable / Meme posts (10 across the window) average 42. The gap is 9.1×. The Promotional posts include the Helper Deluxe Breakfast Hashbrowns giveaway (660 likes, 2,760 comments   -   a giveaway mechanic), a Helper Deluxe launch teaser (413 likes), and a Helper Deluxe new-line announcement (81 likes). The Relatable / Meme posts include a Masters Champions Dinner satire (58 likes), a side-by-side "wordy ad vs meme ad" comparison (84 likes), and various Lefty-mascot meme drops in the 3 to 50 like range. The pattern is clear: the audience shows up for product launches and giveaway mechanics, and the brand publishes one of those for every seven memes.</p>
+
+    <div class="charts-side-by-side">
+      <div class="chart-wrap reveal">
+        <h3>Average likes by content pillar</h3>
+        <p class="ch-sub">13 own-feed posts · 80-day brand window</p>
+        <div class="chart-canvas"><canvas id="chart-pillar-likes"></canvas></div>
+      </div>
+      <div class="chart-wrap reveal">
+        <h3>Posts by pillar   -   the distribution gap</h3>
+        <p class="ch-sub">Production volume per pillar · same 80-day window</p>
+        <div class="chart-canvas"><canvas id="chart-pillar-counts"></canvas></div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin:36px 0 8px;">The five posts your audience picked</h3>
+    <p class="reveal">Ranked by likes. The top-ranked card is the canonical example   -   what the audience showed up for. Click any card for the post on Instagram.</p>
+    <div class="posts-grid stagger">
+      <a href="https://www.instagram.com/p/DYAegH9DoR_/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="post-card is-highlight">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4d9da427-0b30-4fa7-acd7-38b910c90ea5" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="rl">01 · Promotional</div>
+          <div class="likes">660 likes</div>
+          <div class="meta">2760 comments · Carousel</div>
+          <div class="desc">A promotional graphic announcing a giveaway for a Hamburger Helper Breakfast Cheesy Hashbrowns product.</div>
+          <span class="link">View post →</span>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DWmKOEGjlJJ/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="post-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/ec7f4659-7422-4a1d-a2c1-42ea838264be" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="rl">02 · Promotional</div>
+          <div class="likes">413 likes</div>
+          <div class="meta">14 comments · Carousel</div>
+          <div class="desc">A teaser graphic featuring the Hamburger Helper mascot, &#x27;Lefty,&#x27; announcing that he has a secret to share, likely preceding a new product or brand announcement.</div>
+          <span class="link">View post →</span>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DX-bRlfjWSg/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="post-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/370f726e-a7e8-42bf-ab84-e5d5426110db" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="rl">03 · Relatable/Meme</div>
+          <div class="likes">84 likes</div>
+          <div class="meta">7 comments · Carousel</div>
+          <div class="desc">A side-by-side comparison meme illustrating the difference between wordy, benefit-driven Millennial marketing copy and concise, slang-heavy Gen Z communication styles using Hamburger Helper as the sub</div>
+          <span class="link">View post →</span>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DXt5fUOFjGp/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="post-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/5756f2a6-b2e6-4914-84fb-a561ce65c2c3" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="rl">04 · Promotional</div>
+          <div class="likes">81 likes</div>
+          <div class="meta">5 comments · Carousel</div>
+          <div class="desc">A promotional graphic announcing the launch of a new &#x27;Helper Deluxe&#x27; product line, specifically the Brew Pub Cheeseburger flavor, featuring the iconic brand mascot.</div>
+          <span class="link">View post →</span>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DVMBUFEDkVk/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="post-card">
+        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/972cccaa-3597-4a16-9f35-623921cfefc6" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
+        <div class="body">
+          <div class="rl">05 · Relatable/Meme</div>
+          <div class="likes">66 likes</div>
+          <div class="meta">5 comments · Carousel</div>
+          <div class="desc">A nostalgic childhood photo of a boy at a birthday party, captioned to reveal that he grew up to be a professional chef or food creator.</div>
+          <span class="link">View post →</span>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <p class="reveal">Four of the top five posts are Carousels. The single Video in the top five (a Tuna Helper one-pan recipe with Chicken of the Sea, 49 likes) sits at rank 5. Production-wise, every post in the top five is Static Graphic or Polished Brand   -   the lower-production UGC-style videos in the feed underperform on engagement, which is the inverse of what the brand's paid creator content would suggest. The feed is not a UGC channel for this brand; it is a graphic-and-launch channel.</p>
+
+    <p class="reveal">The Helper Deluxe giveaway carousel pulled 11× the median like count of the rest of the feed. That single post is also 2,760 comments   -   the entire comment volume of the window concentrated into one promotional drop. The signal is direct: more promotional carousels, fewer untethered memes, and giveaway mechanics where the budget allows.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Biggest Miss</span>
+      <p>Hamburger Helper&#x27;s three Promotional posts average 384 likes. The ten Relatable/Meme posts that make up most of the feed average 42. The pillar producing the engagement is the one the feed barely uses   -   one Promotional drop for every 3.3 memes.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shortlist">
+  <div class="container">
+    <div class="section-label reveal">06 · The shortlist</div>
+    <h2 class="reveal">10 creators I'd brief this week if I ran your marketing.</h2>
+    <p class="reveal">Pulled from the 114 top creators across Instagram and TikTok in the category map. Selection logic: highest niche-attributable views as primary signal, unique competitor brand overlap as the first tiebreaker, average engagement rate as the second. Every name on this list has zero posting history with Hamburger Helper. The tier mix is three macro creators (100K+ followers), four mid-tier (10K to 100K), three micro (sub-10K with exceptional ER).</p>
+
+    <div class="sl-grid stagger">
+      <div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a80c6e7e-e0b2-412d-b5d0-679af7ab3362" class="av" alt="irisarellano_" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/irisarellano_/" target="_blank" rel="noopener">@irisarellano_</a><span class="plat">Instagram</span></div>
+          <div class="name"></div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="69817" data-format="compact">69.8K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="2675935" data-format="compact">2.7M</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="433" data-suffix="">43.34%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="24838519" data-format="compact">24.8M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">24.8MM niche-attributable views across 69,817 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Knorr</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ae67219-580b-44fe-b49a-9a6a14ebd1ac" class="av" alt="emmanuel.duverneau" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/emmanuel.duverneau/" target="_blank" rel="noopener">@emmanuel.duverneau</a><span class="plat">Instagram</span></div>
+          <div class="name">Emmanuel Duverneau</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="1508222" data-format="compact">1.5M</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="1175531" data-format="compact">1.2M</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="14" data-suffix="">1.40%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="8776541" data-format="compact">8.8M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">8.8MM niche-attributable views across 1,508,222 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Tillamook</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb54553c-e9d1-435b-b76a-e1ed034ef14d" class="av" alt="pinkapronshark" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/pinkapronshark/" target="_blank" rel="noopener">@pinkapronshark</a><span class="plat">Instagram</span></div>
+          <div class="name">Kennedy Sharko 🩷</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="2769" data-format="compact">2.8K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="877045" data-format="compact">877K</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="12376" data-suffix="">1237.61%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="6108367" data-format="compact">6.1M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">6.1MM niche-attributable views across 2,769 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Rao&#x27;s Homemade</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/84510b80-928d-4704-97b6-378cab249542" class="av" alt="guacbites" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.tiktok.com/@guacbites" target="_blank" rel="noopener">@guacbites</a><span class="plat">TikTok</span></div>
+          <div class="name">GuacBites</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="873600" data-format="compact">874K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="886780" data-format="compact">887K</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="94" data-suffix="">9.45%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="2800000" data-format="compact">2.8M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">2.8MM niche-attributable views across 873,600 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Goodles</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/ab837e17-4737-4701-a05d-05d4b762fcec" class="av" alt="luxelife9" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/luxelife9/" target="_blank" rel="noopener">@luxelife9</a><span class="plat">Instagram</span></div>
+          <div class="name">Marilyne Nix</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="1022080" data-format="compact">1M</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="1792706" data-format="compact">1.8M</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="0" data-suffix="">0.01%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="2111911" data-format="compact">2.1M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">2.1MM niche-attributable views across 1,022,080 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Goya</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f3a2cc63-0ae1-4d80-9359-920175a0a302" class="av" alt="bymarianabites" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/bymarianabites/" target="_blank" rel="noopener">@bymarianabites</a><span class="plat">Instagram</span></div>
+          <div class="name">Mari Bites 🌸</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="8674" data-format="compact">8.7K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="543470" data-format="compact">543K</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="4999" data-suffix="">499.97%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="1937384" data-format="compact">1.9M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">1.9MM niche-attributable views across 8,674 followers   -   top-tier reach pool. Already posted about 4 brands in the category.</div>
+      <div class="overlap">Already tagged: Barilla, SOMOS, Goya, Land O&#x27;Lakes Mac &amp; Cheese</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/38a0e99e-7c36-4de5-833a-e1056f2d1609" class="av" alt="cookingwithcar" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/cookingwithcar/" target="_blank" rel="noopener">@cookingwithcar</a><span class="plat">Instagram</span></div>
+          <div class="name">COOKING WITH CAR | HOT &amp; HEALTHY</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="45260" data-format="compact">45.3K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="168403" data-format="compact">168K</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="17" data-suffix="">1.77%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="1734318" data-format="compact">1.7M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">1.7MM niche-attributable views across 45,260 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Brami</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/44ef7bd7-179b-4a71-aadf-c0febe84d794" class="av" alt="bingewithanbu" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/bingewithanbu/" target="_blank" rel="noopener">@bingewithanbu</a><span class="plat">Instagram</span></div>
+          <div class="name">✨A N B U ✨</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="74272" data-format="compact">74.3K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="152287" data-format="compact">152K</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="0" data-suffix="">0.07%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="768533" data-format="compact">769K</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">769K niche-attributable views   -   proven the category will watch them. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Tasty Bite</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/29ff32c5-7d3f-4484-9ec7-a05eaa5941fc" class="av" alt="thejackiezee" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.instagram.com/thejackiezee/" target="_blank" rel="noopener">@thejackiezee</a><span class="plat">Instagram</span></div>
+          <div class="name">J A C K I E</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="12459" data-format="compact">12.5K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="70614" data-format="compact">70.6K</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="376" data-suffix="">37.63%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="603213" data-format="compact">603K</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">Engagement rate of 37.6% on 12,459 followers   -   small audience, real conversation. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Knorr</div>
+    </div><div class="sl">
+      <div class="h">
+        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/64f2db83-d51d-4043-bb1c-8513909bdb3e" class="av" alt="wellmadebykiley" onerror="this.style.display='none'">
+        <div class="meta">
+          <div class="handle"><a href="https://www.tiktok.com/@wellmadebykiley" target="_blank" rel="noopener">@wellmadebykiley</a><span class="plat">TikTok</span></div>
+          <div class="name">Well Made by Kiley</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="s"><div class="v" data-count="481100" data-format="compact">481K</div><div class="lb">Followers</div></div>
+        <div class="s"><div class="v" data-count="1177866" data-format="compact">1.2M</div><div class="lb">Avg views</div></div>
+        <div class="s"><div class="v" data-count="174" data-suffix="">17.49%</div><div class="lb">Engagement</div></div>
+        <div class="s"><div class="v" data-count="1200000" data-format="compact">1.2M</div><div class="lb">Total Creator Views</div></div>
+      </div>
+      <div class="why">1.2MM niche-attributable views across 481,100 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+      <div class="overlap">Already tagged: Tillamook</div>
+    </div>
+    </div>
+
+    <h3 class="reveal" style="margin:36px 0 12px;">What's winning in your category this month</h3>
+    <p class="reveal">Five of the highest-performing creator posts in the category, mixing Instagram and TikTok. Open any tile for the post.</p>
+    <div class="insp-grid stagger">
+      <a href="https://www.instagram.com/p/DXF1houDxWz/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="insp">
+        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a80c6e7e-e0b2-412d-b5d0-679af7ab3362" alt="" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="h">@irisarellano_</div>
+          <div class="m">24.8M views · Educational</div>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DVeTAGuEuUe/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="insp">
+        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ae67219-580b-44fe-b49a-9a6a14ebd1ac" alt="" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="h">@emmanuel.duverneau</div>
+          <div class="m">8.8M views · Educational</div>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DW0C8qViiAj/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="insp">
+        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb54553c-e9d1-435b-b76a-e1ed034ef14d" alt="" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="h">@pinkapronshark</div>
+          <div class="m">6.1M views · Inspirational</div>
+        </div>
+      </div>
+    </a><a href="https://www.tiktok.com/@guacbites/video/7611675276967185695" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="insp">
+        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/84510b80-928d-4704-97b6-378cab249542" alt="" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="h">@guacbites</div>
+          <div class="m">2.8M views · Relatable/Meme</div>
+        </div>
+      </div>
+    </a><a href="https://www.instagram.com/p/DWeN1uKEbMS/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="insp">
+        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/ab837e17-4737-4701-a05d-05d4b762fcec" alt="" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="h">@luxelife9</div>
+          <div class="m">2.1M views · Promotional</div>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Shortlist Verdict</span>
+      <p>Combined: <span data-count="4098253" data-format="compact">4.1M</span> followers across these 10 creators, with <span data-count="50878786" data-format="compact">50.9M</span> Total Creator Views attributed in the category window. 10 of the 10 have already posted about brands in the Boxed Meal Kits category. 0 have not yet been tagged by any brand here.</p>
+    </div>
+  </div>
+</section>
+
+<section id="opportunity">
+  <div class="container">
+    <div class="section-label reveal">07 · The opportunity</div>
+    <h2 class="reveal">Six moves that change the game for Hamburger Helper.</h2>
+    <p class="reveal">Each opportunity is pulled from the category strategy map   -   a play that's detected on two or more competitors and absent on Hamburger Helper. The strategy_id columns are internal taxonomy; the rendered names are plain English. The closing stat on each card is the category-attributable view count tied to that play, sourced from Table 17 in the audit dataset.</p>
+
+    <div class="opp-grid stagger">
+      <div class="opp">
+      <div class="eb">Opportunity 01</div>
+      <h4>Hero / category-leader play</h4>
+      <p>Contract 1-3 high-trust creators as multi-year ambassadors with annual fees, events, and product input.</p><p>In the Boxed Meal Kits map, 5 brands are running this play across 10 tracked posts and 5.7MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles, Knorr</p>
+      <div class="closer">
+        <div class="big">5.7MM</div>
+        <div class="lbl">category views attributable to Long-Term Brand Ambassador</div>
+      </div>
+      <div class="backed">Backed by: Long-Term Brand Ambassador</div>
+    </div><div class="opp">
+      <div class="eb">Opportunity 02</div>
+      <h4>Native brand-feed supply</h4>
+      <p>Pay UGC creators to deliver vertical video the brand publishes on its OWN feed   -   not as paid ads, not on the creator&#x27;s channel.</p><p>In the Boxed Meal Kits map, 8 brands are running this play across 54 tracked posts and 268.9MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+      <div class="closer">
+        <div class="big">268.9MM</div>
+        <div class="lbl">category views attributable to UGC for Brand Feed</div>
+      </div>
+      <div class="backed">Backed by: UGC for Brand Feed</div>
+    </div><div class="opp">
+      <div class="eb">Opportunity 03</div>
+      <h4>Earned organic   -   a strength, not a gap</h4>
+      <p>Product, packaging, and experience are so distinctive that creators tag, mention, and post without compensation.</p><p>In the Boxed Meal Kits map, 3 brands are running this play across 69 tracked posts and 8.0MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+      <div class="closer">
+        <div class="big">8.0MM</div>
+        <div class="lbl">category views attributable to Earned Organic Mentions</div>
+      </div>
+      <div class="backed">Backed by: Earned Organic Mentions</div>
+    </div><div class="opp">
+      <div class="eb">Opportunity 04</div>
+      <h4>Volume creator model (Cluely-style)</h4>
+      <p>20-100+ small creators each posting multiple short-form videos a day about the brand on their own channels.</p><p>In the Boxed Meal Kits map, 3 brands are running this play across 72 tracked posts and 6.4MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+      <div class="closer">
+        <div class="big">6.4MM</div>
+        <div class="lbl">category views attributable to Creator Collective / Volume Model</div>
+      </div>
+      <div class="backed">Backed by: Creator Collective / Volume Model</div>
+    </div><div class="opp">
+      <div class="eb">Opportunity 05</div>
+      <h4>Press / brand-trip activation</h4>
+      <p>Host a tight cluster of creators at a venue or destination   -   typically 8-30 creators inside a 3-7 day window, with content seeded across their channels.</p><p>In the Boxed Meal Kits map, 4 brands are running this play across 38 tracked posts and 1.0MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+      <div class="closer">
+        <div class="big">1.0MM</div>
+        <div class="lbl">category views attributable to Press &amp; Brand Trips</div>
+      </div>
+      <div class="backed">Backed by: Press &amp; Brand Trips</div>
+    </div><div class="opp">
+      <div class="eb">Opportunity 06</div>
+      <h4>Always-on Creator Engine</h4>
+      <p>Pay a roster of creators a monthly fee to post about the brand on their own audience, every month, for 6-12+ months.</p><p>In the Boxed Meal Kits map, 2 brands are running this play across 44 tracked posts and 2.3MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Brami, Goya</p>
+      <div class="closer">
+        <div class="big">2.3MM</div>
+        <div class="lbl">category views attributable to Always-On Creator Retainers</div>
+      </div>
+      <div class="backed">Backed by: Always-On Creator Retainers</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="closing reveal">
+    <p class="closing-lead">We built this report because Hamburger Helper's creator data sits at an unusual intersection   -   heavy paid investment, almost no organic creator pickup, and a category around it that's increasingly creator-led. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+    <h4>Who are we?</h4>
+    <p class="sup-intro"><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
+  </div>
+  <div class="booking-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank" rel="noopener">sup.co/meet</a></div>
+</div>
+<div class="report-footer"><span class="wave">👋</span> Sup · sup.co · Confidential · May 2026</div>
+
+<script>
+const BRAND_PRIMARY = '#C8102E';
+const PALETTE = ['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
+const CHART_DATA = {"longevity_labels": ["0-29d", "30-59d", "60-89d", "90-179d", "180+d"], "longevity_active": [28, 13, 6, 11, 4], "longevity_expired": [3, 6, 2, 2, 0], "brand_active_top5": [], "pillar_labels": ["Promotional", "Relatable/Meme"], "pillar_avg_likes": [384, 42], "pillar_post_counts": [3, 10]};
+
+function formatCompact(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(n >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K';
+  return n.toString();
+}
+function formatNumber(v, fmt) {
+  if (fmt === 'comma') return Math.round(v).toLocaleString();
+  if (fmt === 'compact') return formatCompact(Math.round(v));
+  return Math.round(v).toString();
+}
+
+function scrambleCount(el) {
+  const target = parseFloat(el.dataset.count);
+  const fmt = el.dataset.format;
+  const suffix = el.dataset.suffix || '';
+  const duration = (target < 100) ? 900 : 1400;
+  const scramblePhase = 0.65;
+  const sf = (target < 100) ? 0.3 : 0.5;
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    let v;
+    if (t < scramblePhase) {
+      const intensity = 1 - (t / scramblePhase);
+      const baseline = target * (t / scramblePhase);
+      const jitter = target * sf * intensity * (Math.random() - 0.3);
+      v = Math.max(0, baseline + jitter);
+    } else {
+      const settleT = (t - scramblePhase) / (1 - scramblePhase);
+      const eased = 1 - Math.pow(1 - settleT, 3);
+      const lastScrambled = target * scramblePhase;
+      v = lastScrambled + (target - lastScrambled) * eased;
+    }
+    el.textContent = formatNumber(v, fmt) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = formatNumber(target, fmt) + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+function animateBar(el) {
+  const w = el.dataset.width;
+  if (w) el.style.width = w + '%';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced) {
+    document.querySelectorAll('.reveal, .stagger').forEach(el => el.classList.add('is-in'));
+    document.querySelectorAll('section').forEach(el => el.classList.add('is-in'));
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const n = parseFloat(el.dataset.count);
+      const fmt = el.dataset.format;
+      const suffix = el.dataset.suffix || '';
+      el.textContent = formatNumber(n, fmt) + suffix;
+    });
+    document.querySelectorAll('[data-width]').forEach(animateBar);
+    document.querySelectorAll('.brand-emphasis').forEach(el => el.classList.add('is-painted'));
+    document.querySelectorAll('.rank-pill').forEach(el => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          if (entry.target.hasAttribute('data-count')) scrambleCount(entry.target);
+          if (entry.target.hasAttribute('data-width')) animateBar(entry.target);
+          if (entry.target.classList.contains('player-card')) {
+            entry.target.querySelectorAll('[data-count]').forEach(scrambleCount);
+            entry.target.querySelectorAll('.bar > span').forEach(animateBar);
+            setTimeout(() => {
+              entry.target.querySelectorAll('.rank-pill').forEach((el, i) => {
+                setTimeout(() => el.classList.add('is-in'), 1500 + i * 80);
+              });
+            }, 100);
+          }
+          if (entry.target.classList.contains('stagger')) {
+            entry.target.querySelectorAll('[data-count]').forEach(scrambleCount);
+            entry.target.querySelectorAll('[data-width]').forEach(animateBar);
+          }
+          if (entry.target.tagName === 'SECTION') {
+            const h = entry.target.querySelector('h2');
+            if (h) h.classList.add('is-in');
+          }
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .stagger, [data-count], [data-width], section, .player-card').forEach(el => io.observe(el));
+
+    setTimeout(() => {
+      document.querySelectorAll('.brand-emphasis').forEach(el => el.classList.add('is-painted'));
+    }, 800);
+  }
+
+  // Image fade-in
+  document.querySelectorAll('img').forEach(img => {
+    if (img.complete && img.naturalHeight !== 0) img.classList.add('loaded');
+    else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+      img.addEventListener('error', () => { img.style.opacity = 1; });
+    }
+  });
+
+  // Nav active section
+  const navIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.nav-mid a').forEach(a => a.classList.remove('is-active'));
+        const link = document.querySelector('.nav-mid a[href="#' + id + '"]');
+        if (link) link.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => navIO.observe(s));
+
+  // Wave wiggle
+  setInterval(() => {
+    document.querySelectorAll('.wave').forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetHeight;
+      el.style.animation = 'wave-wiggle 1.2s ease-in-out';
+    });
+  }, 10000);
+
+  // Build charts
+  buildCharts();
+});
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  const sp = document.getElementById('scroll-progress');
+  if (sp) sp.style.width = pct + '%';
+}, { passive: true });
+
+function buildCharts() {
+  const baseOpts = {
+    responsive: true, maintainAspectRatio: false,
+    animation: { duration: 1200, easing: 'easeOutCubic' },
+  };
+
+  // Longevity histogram
+  const lEl = document.getElementById('chart-longevity');
+  if (lEl) {
+    new Chart(lEl, {
+      type: 'bar',
+      data: {
+        labels: CHART_DATA.longevity_labels,
+        datasets: [
+          { label: 'Still active', data: CHART_DATA.longevity_active, backgroundColor: BRAND_PRIMARY, borderRadius: 6 },
+          { label: 'Expired', data: CHART_DATA.longevity_expired, backgroundColor: '#A1A1AA', borderRadius: 6 }
+        ]
+      },
+      options: {
+        ...baseOpts,
+        scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#F4F4F5' } } },
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 12 } } } },
+        animation: { duration: 1200, easing: 'easeOutCubic', delay: (ctx) => (ctx.dataIndex ?? 0) * 70 }
+      }
+    });
+  }
+
+  // Brand active top 5
+  const baEl = document.getElementById('chart-brand-active');
+  if (baEl) {
+    const labels = CHART_DATA.brand_active_top5.map(b => b.brand);
+    const data = CHART_DATA.brand_active_top5.map(b => b.active);
+    const colors = labels.map(l => l === 'helper' ? BRAND_PRIMARY : '#A1A1AA');
+    new Chart(baEl, {
+      type: 'bar',
+      data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 6 }] },
+      options: {
+        ...baseOpts, indexAxis: 'y',
+        scales: { x: { grid: { color: '#F4F4F5' }, beginAtZero: true }, y: { grid: { display: false } } },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ctx.parsed.x + ' active creatives' } } },
+        animation: { duration: 1200, easing: 'easeOutCubic', delay: (ctx) => (ctx.dataIndex ?? 0) * 80 }
+      }
+    });
+  }
+
+  // Pillar avg likes
+  const pAvgEl = document.getElementById('chart-pillar-likes');
+  if (pAvgEl) {
+    const labels = CHART_DATA.pillar_labels;
+    const data = CHART_DATA.pillar_avg_likes;
+    const colors = labels.map((_, i) => i === 0 ? BRAND_PRIMARY : '#A1A1AA');
+    new Chart(pAvgEl, {
+      type: 'bar',
+      data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 6 }] },
+      options: {
+        ...baseOpts, indexAxis: 'y',
+        scales: { x: { grid: { color: '#F4F4F5' }, beginAtZero: true }, y: { grid: { display: false } } },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ctx.parsed.x.toLocaleString() + ' avg likes' } } },
+        animation: { duration: 1200, easing: 'easeOutCubic', delay: (ctx) => (ctx.dataIndex ?? 0) * 80 }
+      }
+    });
+  }
+
+  // Pillar counts
+  const pCntEl = document.getElementById('chart-pillar-counts');
+  if (pCntEl) {
+    const labels = CHART_DATA.pillar_labels;
+    const data = CHART_DATA.pillar_post_counts;
+    const colors = labels.map((_, i) => i === 0 ? BRAND_PRIMARY : '#A1A1AA');
+    new Chart(pCntEl, {
+      type: 'bar',
+      data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 6 }] },
+      options: {
+        ...baseOpts, indexAxis: 'y',
+        scales: { x: { grid: { color: '#F4F4F5' }, beginAtZero: true }, y: { grid: { display: false } } },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ctx.parsed.x + ' posts' } } },
+        animation: { duration: 1200, easing: 'easeOutCubic', delay: (ctx) => (ctx.dataIndex ?? 0) * 80 }
+      }
+    });
+  }
+}
+</script>
+</body>
+</html>
