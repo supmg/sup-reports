@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="sup-brand-primary" content="#7d776f">
+<title>meCore · Influencer Marketing Intelligence Report · Sup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --brand-primary: #7d776f;
+  --brand-accent-dark: #4d4944;
+  --brand-tint: rgba(125, 119, 111, 0.08);
+  --bg: #FFFFFF;
+  --surface: #F4F4F5;
+  --surface-soft: #FAFAFA;
+  --text: #09090B;
+  --secondary: #52525B;
+  --muted: #71717A;
+  --hint: #A1A1AA;
+  --border: #E4E4E7;
+  --accent: #000000;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--bg); line-height: 1.55; font-size: 16px; }
+img { max-width: 100%; display: block; opacity: 0; transition: opacity 300ms ease; }
+img.loaded, img[loaded] { opacity: 1; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--brand-primary); }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+section { padding: 96px 0 120px; }
+
+/* Sticky Nav */
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); height: 56px; display: flex; align-items: center; }
+.nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.nav-left { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+.nav-left .sup-pill { background: #000; color: #fff; padding: 4px 10px; border-radius: 9999px; font-weight: 500; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; }
+.nav-left .divider { width: 1px; height: 18px; background: var(--border); }
+.nav-left .brand-logo { width: 24px; height: 24px; border-radius: 6px; overflow: hidden; }
+.nav-left .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+.nav-mid { display: flex; gap: 22px; font-size: 13.5px; }
+.nav-mid a { color: var(--secondary); transition: color 180ms ease; padding-bottom: 2px; position: relative; }
+.nav-mid a:hover { color: var(--text); }
+.nav-mid a.is-active { color: var(--brand-primary); }
+.nav-mid a.is-active::after { content:""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--brand-primary); border-radius: 2px; }
+.nav-cta a { background: #000; color: #fff; padding: 8px 16px; border-radius: 9999px; font-weight: 500; font-size: 13px; transition: transform 180ms cubic-bezier(0.16,1,0.3,1), filter 180ms ease; }
+.nav-cta a:hover { transform: scale(1.02); filter: brightness(1.15); color: #fff; }
+@media (max-width: 900px) { .nav-mid { display: none; } }
+
+/* Scroll progress */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--brand-primary); z-index: 200; transition: width 100ms linear; }
+
+/* Cover */
+.cover { padding: 80px 0 24px; }
+.cover .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 9999px; font-size: 12.5px; color: var(--secondary); font-weight: 500; }
+.cover .pill .dot { width: 7px; height: 7px; background: #1D9E75; border-radius: 50%; }
+.cover h1 { font-size: clamp(34px, 5vw, 60px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.08; margin: 24px 0 18px; }
+.cover h1 .s1, .cover h1 .s2 { display: block; }
+.cover h1 .s2 { color: var(--text); }
+.brand-emphasis { position: relative; color: var(--brand-primary); }
+.brand-emphasis::after { content:""; position: absolute; left: 0; bottom: 2px; width: 0; height: 8px; background: var(--brand-primary); opacity: 0.18; border-radius: 4px; transition: width 700ms cubic-bezier(0.16,1,0.3,1) 400ms; z-index: -1; }
+.brand-emphasis.is-painted::after { width: 100%; }
+.cover-sub { color: var(--secondary); font-size: 17px; max-width: 760px; margin-bottom: 40px; line-height: 1.55; }
+.cover-stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+.cover-stats > div { padding: 0 22px; border-right: 1px solid var(--border); }
+.cover-stats > div:last-child { border-right: none; }
+.cover-stats .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.cover-stats .cap { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+@media (max-width: 720px) {
+  .cover-stats { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .cover-stats > div { padding: 18px 16px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .cover-stats > div:nth-child(2n) { border-right: none; }
+  .cover-stats > div:nth-last-child(-n+2) { border-bottom: none; }
+}
+@media (max-width: 480px) {
+  .cover-stats { grid-template-columns: 1fr; padding: 0; margin-bottom: 32px; }
+  .cover-stats > div { padding: 16px 0; border-right: none !important; border-bottom: 1px solid var(--border); }
+  .cover-stats > div:first-child { padding-top: 0; }
+  .cover-stats > div:last-child { border-bottom: none; padding-bottom: 0; }
+}
+.hero-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.hero-card { position: relative; border-radius: 16px; border: 1px solid var(--border); overflow: hidden; aspect-ratio: 4/5; max-height: 320px; transition: transform 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms ease; }
+.hero-card:nth-child(2) { border-top: 3px solid var(--brand-primary); }
+.hero-card .img-slot { width: 100%; height: 100%; overflow: hidden; background: var(--surface); }
+.hero-card .img-slot img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.hero-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.hero-card:hover .img-slot img { transform: scale(1.03); }
+.hero-card .footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 14px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%); color: #fff; font-size: 12.5px; font-weight: 500; }
+@media (max-width: 720px) { .hero-trio { grid-template-columns: 1fr; gap: 12px; } }
+
+/* What we analysed */
+.wwa-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 0; }
+.wwa-label { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 16px; }
+.wwa-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+.wwa-row > div { padding: 0 22px; border-right: 1px solid var(--border); min-width: 0; }
+.wwa-row > div:first-child { padding-left: 0; }
+.wwa-row > div:last-child { border-right: none; padding-right: 0; }
+.wwa-row .v { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.wwa-row .cap { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+@media (max-width: 900px) {
+  .wwa-row { grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .wwa-row > div { padding: 18px 18px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .wwa-row > div:nth-child(3n) { border-right: none; }
+  .wwa-row > div:nth-child(4) { grid-column: 1 / 3; }
+  .wwa-row > div:nth-child(5) { grid-column: 3 / 4; }
+  .wwa-row > div:nth-last-child(-n+2) { border-bottom: none; }
+}
+@media (max-width: 560px) {
+  .wwa-row { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .wwa-row > div { padding: 18px 16px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); grid-column: auto; }
+  .wwa-row > div:nth-child(2n) { border-right: none; }
+  .wwa-row > div:nth-child(5) { grid-column: 1 / -1; border-right: none; }
+  .wwa-row > div:nth-last-child(-n+1) { border-bottom: none; }
+}
+@media (max-width: 480px) {
+  .wwa-row { grid-template-columns: 1fr; gap: 0; }
+  .wwa-row > div { padding: 16px 0; border-right: none !important; border-bottom: 1px solid var(--border); grid-column: auto !important; }
+  .wwa-row > div:first-child { padding-top: 0; }
+  .wwa-row > div:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+/* Section headings */
+.section-label { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 12px; }
+section h2 { font-size: clamp(22px, 4vw, 38px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 32px; position: relative; padding-bottom: 14px; }
+section h2::after { content:""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--brand-primary); border-radius: 2px; transition: width 700ms cubic-bezier(0.16,1,0.3,1) 200ms; }
+section.is-in h2::after { width: 48px; }
+section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-bottom: 16px; }
+
+/* Section 01 inline stats */
+.section-stats { display: grid; grid-template-columns: repeat(6, 1fr); padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 56px; }
+.section-stats > div { padding: 0 22px; border-right: 1px solid var(--border); }
+.section-stats > div:last-child { border-right: none; }
+.section-stats .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; color: var(--text); font-variant-numeric: tabular-nums; }
+.section-stats .ctx { font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+.section-stats .lbl { font-size: 12px; color: var(--muted); margin-top: 8px; font-weight: 500; }
+@media (max-width: 900px) {
+  .section-stats { grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .section-stats > div { padding: 18px 18px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section-stats > div:nth-child(3n) { border-right: none; }
+  .section-stats > div:nth-last-child(-n+3) { border-bottom: none; }
+}
+@media (max-width: 560px) {
+  .section-stats { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .section-stats > div { padding: 18px 16px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section-stats > div:nth-child(2n) { border-right: none; }
+  .section-stats > div:nth-last-child(-n+2) { border-bottom: none; }
+  .section-stats .v { font-size: 24px; }
+}
+
+/* Player cards */
+.player-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 36px; }
+.player-card { position: relative; padding: 20px; border: 1px solid var(--border); border-radius: 24px; background: #fff; transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease; }
+.player-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.target-tag { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 14px; }
+.target-tag .dot { width: 6px; height: 6px; border-radius: 50%; }
+.card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.card-head .logo { width: 36px; height: 36px; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid var(--border); }
+.card-head .logo img { width: 100%; height: 100%; object-fit: contain; }
+.card-head .initials { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 13px; }
+.card-head .brand-name { font-size: 14.5px; font-weight: 600; line-height: 1.15; }
+.card-head .handle { font-size: 11px; color: var(--muted); }
+.stat-row { margin-bottom: 12px; }
+.stat-row:last-child { margin-bottom: 0; }
+.stat-row .row-top { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.stat-row .row-mid { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.stat-row .val { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.rank-pill { display: inline-block; font-size: 10px; font-weight: 500; color: var(--text); border: 1px solid var(--border); background: #fff; padding: 3px 8px; border-radius: 9999px; font-variant-numeric: tabular-nums; transition: transform 400ms cubic-bezier(0.34,1.56,0.64,1); }
+.rank-pill.top { background: var(--brand-primary); color: #fff; border-color: transparent; }
+.bar { height: 5px; background: var(--surface); border-radius: 4px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; width: 0; border-radius: 4px; transition: width 900ms cubic-bezier(0.16,1,0.3,1); }
+@media (max-width: 900px) { .player-row { grid-template-columns: repeat(2, 1fr); } .player-card.target { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .player-row { grid-template-columns: 1fr; } .player-card.target { grid-column: auto; } }
+
+/* Callouts */
+.callout { position: relative; background: var(--surface); border-radius: 16px; padding: 22px 24px 22px 28px; border: 1px solid var(--border); margin: 32px 0; }
+.callout::before { content:""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 4px; background: var(--brand-primary); border-radius: 4px; }
+.callout-label { display: block; font-size: 13px; font-weight: 500; color: var(--brand-primary); margin-bottom: 10px; }
+.callout p { font-size: 15.5px; color: var(--text); margin: 0; line-height: 1.55; }
+
+/* Section 02 components */
+.theme-bar { margin-bottom: 12px; }
+.theme-bar .lbl { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.theme-bar .bar { height: 10px; }
+.theme-bar .bar-fill { background: var(--brand-primary); }
+.po-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+.po-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+.po-card .v { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.po-card .lbl { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+@media (max-width: 720px) { .po-grid { grid-template-columns: 1fr; } }
+
+/* Competitor cards */
+.cc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 24px; }
+.cc { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; transition: transform 200ms ease, box-shadow 200ms ease; }
+.cc:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.cc-head { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.cc-logo { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.cc-logo.small { width: 32px; height: 32px; }
+.cc-logo img { width: 100%; height: 100%; object-fit: contain; }
+.cc-logo .initials { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #71717A; color: #fff; font-weight: 700; font-size: 12px; }
+.cc-name { font-weight: 600; font-size: 16px; }
+.cc-handle { font-size: 12px; color: var(--muted); }
+.cc-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.cc-stat .ccv { display: block; font-size: 16px; font-weight: 600; }
+.cc-stat .ccl { font-size: 11px; color: var(--muted); }
+.cc p { margin-bottom: 14px; font-size: 14.5px; }
+.cc-strats { font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cc-strats .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.cc-strats.muted { color: var(--hint); font-style: italic; }
+@media (max-width: 780px) { .cc-grid { grid-template-columns: 1fr; } }
+
+/* Multi-play operators */
+.mpo-block { margin-top: 36px; }
+.mpo-header { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 16px; }
+.mpo-list-wrap { display: flex; flex-direction: column; gap: 12px; }
+.mpo-item { display: flex; gap: 14px; align-items: center; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-radius: 16px; transition: transform 200ms ease, box-shadow 200ms ease; }
+.mpo-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.mpo-name { font-size: 14.5px; font-weight: 600; }
+.mpo-list { font-size: 12.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.muted { color: var(--muted); }
+
+/* Section 04 paid */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+.stat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: transform 200ms ease, box-shadow 200ms ease; }
+.stat:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.stat.dark { background: #09090B; color: #fff; border-color: transparent; }
+.stat.dark .ctx, .stat.dark .lbl { color: rgba(255,255,255,0.7); }
+.stat .abs { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat .ctx { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+.stat .lbl { font-size: 12px; color: var(--muted); margin-top: 10px; font-weight: 500; }
+@media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .stat-grid { grid-template-columns: 1fr; } }
+
+.ad-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 32px 0; overflow-x: auto; }
+.ad-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 200ms ease, box-shadow 200ms ease; min-width: 0; }
+.ad-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.ad-card .thumb { aspect-ratio: 1; overflow: hidden; background: var(--surface); display: flex; align-items: center; justify-content: center; }
+.ad-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.ad-card .thumb img.logo-fallback { object-fit: contain; padding: 24px; }
+.ad-card:hover .thumb img { transform: scale(1.03); }
+.ad-card .thumb-badge { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; }
+.ad-card .ad-meta { padding: 12px; }
+.ad-card .ad-brand { font-size: 13px; font-weight: 600; line-height: 1.2; }
+.ad-card .ad-days { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.ad-tag { display: inline-block; margin-top: 8px; font-size: 9.5px; font-weight: 500; padding: 3px 8px; border-radius: 9999px; }
+.ad-tag.creator { background: rgba(125, 119, 111, 0.15); color: var(--brand-accent-dark); }
+.ad-tag.brand-produced { background: var(--surface); color: var(--muted); }
+@media (max-width: 980px) { .ad-gallery { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .ad-gallery { grid-template-columns: repeat(2, 1fr); } }
+
+.chart-wrap { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 24px 0; }
+.chart-wrap h3 { font-size: 16px; font-weight: 500; margin-bottom: 16px; }
+.chart-canvas-wrap { height: 340px; position: relative; }
+.chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 900px) { .chart-grid-2 { grid-template-columns: 1fr; } .chart-canvas-wrap { height: 280px; } }
+
+/* Top 5 posts */
+.post-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 24px 0; }
+.post-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease; }
+.post-card.is-highlight { border-color: var(--brand-primary); }
+.post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.post-card .thumb { aspect-ratio: 4/5; overflow: hidden; background: var(--surface); }
+.post-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.post-card .thumb.no-thumb::after { content: "no thumbnail"; display: flex; align-items: center; justify-content: center; height: 100%; font-size: 11px; color: var(--hint); }
+.post-card:hover .thumb img { transform: scale(1.03); }
+.post-card .post-meta { padding: 16px; }
+.post-card .post-eyebrow { font-size: 11px; font-weight: 500; color: var(--brand-primary); margin-bottom: 8px; }
+.post-card .post-likes { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.post-card .post-sub { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+.post-card .post-desc { font-size: 13px; color: var(--secondary); margin-top: 10px; line-height: 1.5; }
+.post-card .post-link { font-size: 12px; color: var(--brand-primary); margin-top: 12px; font-weight: 500; }
+@media (max-width: 980px) { .post-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .post-grid { grid-template-columns: 1fr; } }
+
+/* Shortlist */
+.sl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0; }
+.sl { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; transition: transform 200ms ease, box-shadow 200ms ease; }
+.sl:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.sl-top { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+.avatar-circle { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: var(--surface); flex-shrink: 0; border: 1px solid var(--border); }
+.avatar-circle.small { width: 32px; height: 32px; }
+.avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-circle .ag-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--brand-primary); color: #fff; font-weight: 700; font-size: 14px; }
+.sl-handle { font-size: 16px; font-weight: 600; }
+.sl-handle a { color: var(--text); transition: color 180ms; }
+.sl-handle a:hover { color: var(--brand-primary); }
+.sl-name { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.plat-badge, .tier-badge { display: inline-block; padding: 3px 8px; border-radius: 9999px; font-size: 10.5px; font-weight: 500; margin-top: 6px; margin-right: 6px; }
+.plat-badge { background: rgba(125,119,111,0.12); color: var(--brand-accent-dark); }
+.tier-badge { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+.sl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+.sl-stats > div { display: flex; flex-direction: column; }
+.sl-stats .sv { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.sl-stats .sl { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+.why { font-size: 14px; color: var(--secondary); line-height: 1.55; margin-bottom: 8px; }
+.overlap { font-size: 12px; color: var(--muted); }
+@media (max-width: 780px) { .sl-grid { grid-template-columns: 1fr; } .sl-stats { grid-template-columns: repeat(2, 1fr); } }
+
+/* Inspiration gallery */
+.insp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 24px 0 36px; }
+.insp { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px; transition: transform 200ms ease, box-shadow 200ms ease; min-width: 0; }
+.insp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.insp-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.i-handle { font-size: 13px; font-weight: 600; }
+.i-plat { font-size: 10.5px; color: var(--muted); }
+.i-stats { font-size: 13px; font-weight: 500; color: var(--text); }
+.i-divider { color: var(--hint); margin: 0 4px; }
+.i-pillar { font-size: 11.5px; color: var(--muted); margin-top: 8px; }
+@media (max-width: 980px) { .insp-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .insp-grid { grid-template-columns: 1fr; } }
+
+/* Opportunities */
+.opp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0; }
+.opp { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 26px; transition: transform 200ms ease, box-shadow 200ms ease; }
+.opp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
+.opp-eyebrow { font-size: 11.5px; font-weight: 500; color: var(--brand-primary); letter-spacing: 0.05em; margin-bottom: 10px; }
+.opp-title { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 8px; }
+.opp-framing { display: inline-block; font-size: 11px; padding: 3px 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 9999px; color: var(--muted); margin-bottom: 14px; }
+.opp ul.ev-list { list-style: none; padding: 0; margin-bottom: 18px; }
+.opp ul.ev-list li { font-size: 14.5px; color: var(--secondary); line-height: 1.6; margin-bottom: 8px; padding-left: 14px; position: relative; }
+.opp ul.ev-list li::before { content: "·"; position: absolute; left: 0; color: var(--brand-primary); font-weight: 700; }
+.opp-close { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+.opp-stat { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; color: var(--brand-primary); }
+.opp-stat-label { font-size: 13px; color: var(--secondary); line-height: 1.4; }
+.opp-footer { font-size: 11px; color: var(--muted); }
+@media (max-width: 880px) { .opp-grid { grid-template-columns: 1fr; } }
+
+/* Closing */
+.closing-block { max-width: 720px; margin: 48px auto 0; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 48px 40px; text-align: left; }
+.closing-lead { font-size: 18px; color: var(--text); line-height: 1.55; margin-bottom: 28px; }
+.closing-block h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.closing-block p { font-size: 15px; color: var(--muted); line-height: 1.65; margin-bottom: 0; }
+.booking-line { text-align: center; font-size: 14.5px; color: var(--secondary); font-weight: 500; margin: 32px auto 80px; padding: 0 32px; }
+.booking-line a { color: var(--secondary); text-decoration: underline; text-decoration-color: var(--brand-primary); text-underline-offset: 3px; }
+.booking-line a:hover { color: var(--brand-primary); }
+@media (max-width: 720px) { .closing-block { max-width: calc(100% - 40px); padding: 32px 24px; } }
+
+/* Footer */
+.report-footer { text-align: center; padding: 28px 0 56px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+.wave { display: inline-block; transform-origin: 70% 70%; }
+
+/* Animations base */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 600ms cubic-bezier(0.16,1,0.3,1), transform 600ms cubic-bezier(0.16,1,0.3,1); }
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+.stagger > * { opacity: 0; transform: translateY(12px); transition: opacity 500ms cubic-bezier(0.16,1,0.3,1), transform 500ms cubic-bezier(0.16,1,0.3,1); }
+.stagger.is-in > * { opacity: 1; transform: translateY(0); }
+.stagger.is-in > *:nth-child(1) { transition-delay: 0ms; }
+.stagger.is-in > *:nth-child(2) { transition-delay: 80ms; }
+.stagger.is-in > *:nth-child(3) { transition-delay: 160ms; }
+.stagger.is-in > *:nth-child(4) { transition-delay: 240ms; }
+.stagger.is-in > *:nth-child(5) { transition-delay: 320ms; }
+.stagger.is-in > *:nth-child(6) { transition-delay: 400ms; }
+.stagger.is-in > *:nth-child(n+7) { transition-delay: 480ms; }
+
+@keyframes wave-wiggle {
+  0% { transform: rotate(0); }
+  15% { transform: rotate(-20deg); }
+  30% { transform: rotate(20deg); }
+  45% { transform: rotate(-10deg); }
+  60% { transform: rotate(10deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0); }
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <span class="sup-pill"><span class="wave">👋</span> Sup</span>
+      <span class="divider"></span>
+      <span class="brand-logo"><img src="https://first-possum-672.convex.cloud/api/storage/5fbf5809-e6f3-4434-8205-836df014c867" alt="meCore logo" onerror="this.style.display='none'"></span>
+      <span class="brand-name-text" style="font-size: 14px; font-weight: 500">meCore</span>
+    </div>
+    <div class="nav-mid">
+      <a href="#benchmark">Benchmark</a><a href="#influencer">Influencer</a><a href="#competitors">Competitors</a><a href="#paid">Paid</a><a href="#feed">Feed</a><a href="#shortlist">Shortlist</a><a href="#opportunity">Opportunity</a>
+    </div>
+    <div class="nav-cta"><a href="#opportunity">View opportunity</a></div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="container">
+    <span class="pill reveal"><span class="dot"></span> Influencer marketing intelligence report</span>
+    <h1 class="reveal"><span class="s1">meCore and the fashion &amp; creator apps niche.</span><span class="s2">Where it sits, <span class='brand-emphasis'>what is moving around it</span>.</span></h1>
+    <p class="cover-sub reveal">A look at where meCore stands across paid, organic, content, and the creator landscape inside the global Fashion &amp; Creator Apps niche. Sourced from a 84-day brand window (2026-02-22 to 2026-05-14), benchmarked against 92 niche brands and 100 top creators.</p>
+    <div class="cover-stats reveal">
+      
+    <div>
+      <div class="v" data-count="266" data-format="compact">266</div>
+      <div class="cap">Instagram followers</div>
+    </div>
+    <div>
+      <div class="v" data-count="1" data-format="comma">1</div>
+      <div class="cap">Creator Tagged Posts in window</div>
+    </div>
+    <div>
+      <div class="v" data-count="39" data-format="comma">39</div>
+      <div class="cap">Own-feed posts in window</div>
+    </div>
+    <div>
+      <div class="v" data-count="0" data-format="comma">0</div>
+      <div class="cap">Active Meta ads (20-country sweep)</div>
+    </div>
+    </div>
+    <div class="hero-trio">
+      <div class="hero-card reveal"><div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/9a2c1b8e-4d8c-40c3-a7c5-df2479a1781f" alt="meCore post 1" onerror="this.style.display='none'"></div><div class="footer">1,053 likes · Relatable/Inspirational</div></div><div class="hero-card reveal"><div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/1ce8f16d-e7cb-4d7d-a657-89f87cdefedd" alt="meCore post 2" onerror="this.style.display='none'"></div><div class="footer">391 likes · Relatable/Meme</div></div><div class="hero-card reveal"><div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/20f41e54-a596-4b8c-a864-2f7087a4d688" alt="meCore post 3" onerror="this.style.display='none'"></div><div class="footer">289 likes · Inspirational</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE ANALYSED -->
+<div class="wwa-strip">
+  <div class="container">
+    <div class="wwa-label">What we analysed</div>
+    <div class="wwa-row">
+      
+    <div>
+      <div class="v" data-count="92" data-format="comma">92</div>
+      <div class="cap">brands in the Fashion &amp; Creator Apps category</div>
+    </div>
+    <div>
+      <div class="v" data-count="100" data-format="comma">100</div>
+      <div class="cap">top creators across Instagram and TikTok</div>
+    </div>
+    <div>
+      <div class="v" data-count="76" data-format="comma">76</div>
+      <div class="cap">top niche ad creatives analysed</div>
+    </div>
+    <div>
+      <div class="v">84-day</div>
+      <div class="cap">category window · 2026-02-20 to 2026-05-15</div>
+    </div>
+    <div>
+      <div class="v">84-day</div>
+      <div class="cap">brand window · own feed and Creator Tagged Posts</div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 — MARKET BENCHMARK -->
+<section id="benchmark">
+  <div class="container">
+    <div class="section-label reveal">01 · Market Benchmark</div>
+    <h2 class="reveal">Bottom of the niche on followers, on the floor on creator conversation.</h2>
+
+    <div class="section-stats">
+      
+        <div class="reveal">
+          <div class="v" data-count="266" data-format="comma">266</div>
+          <div class="ctx">rank 53 of 92 (bottom 50%)</div>
+          <div class="lbl">Instagram followers</div>
+        </div>
+        <div class="reveal is-dark-card">
+          <div class="v" data-count="1" data-format="comma">1</div>
+          <div class="ctx">rank 29 of 92 (top 32%) · 14 fashion-app competitors have more</div>
+          <div class="lbl">Creator Tagged Posts (84-day niche window)</div>
+        </div>
+        <div class="reveal">
+          <div class="v" data-count="1" data-format="comma">1</div>
+          <div class="ctx">vs Doji at 24, Indyx at 13, Whering at 5</div>
+          <div class="lbl">Unique creators tagging</div>
+        </div>
+        <div class="reveal is-dark-card">
+          <div class="v" data-count="0" data-format="comma">0</div>
+          <div class="ctx">vs Adobe Lightroom&#x27;s longest-running ad at 613 days</div>
+          <div class="lbl">Active Meta ads (global sweep, 20 countries)</div>
+        </div>
+        <div class="reveal">
+          <div class="v" data-count="39" data-format="comma">39</div>
+          <div class="ctx">3.2 per week across both platforms</div>
+          <div class="lbl">Own-feed posts in window (IG + TikTok)</div>
+        </div>
+        <div class="reveal is-dark-card">
+          <div class="v" data-count="0" data-format="comma">0</div>
+          <div class="ctx">Doji runs 2, Indyx runs 0 visible · 4 niche operators run 6+</div>
+          <div class="lbl">Strategy plays detected on meCore</div>
+        </div>
+    </div>
+
+    <div class="player-row stagger">
+      
+      <div class="player-card target" style="border-color:#7d776f;background:linear-gradient(180deg,rgba(125,119,111,0.08) 0%,#fff 60%);border-width:1.5px">
+        <div class="target-tag"><span class="dot" style="background:#7d776f"></span>Target brand</div>
+        <div class="card-head">
+          <div class="logo"><img src="https://first-possum-672.convex.cloud/api/storage/5fbf5809-e6f3-4434-8205-836df014c867" alt="meCore logo" onerror="this.style.display='none'"></div>
+          <div class="name-block">
+            <div class="brand-name" style="color:#7d776f;">meCore</div>
+            <div class="handle">@mecore.ai</div>
+          </div>
+        </div>
+        
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="266" data-format="comma">266</span>
+            <span class="rank-pill">#53 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="0.1" style="background:#7d776f;--target-width:0.1%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Creator Tagged Posts</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="1" data-format="comma">1</span>
+            <span class="rank-pill">#29 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="3.6999999999999997" style="background:#7d776f;--target-width:3.6999999999999997%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Locations</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="0" data-format="comma">0</span>
+            <span class="rank-pill top">#1 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="0.0" style="background:#7d776f;--target-width:0.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Total Creator Views</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="25304" data-format="compact">25K</span>
+            <span class="rank-pill">#21 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="10.299999999999999" style="background:#7d776f;--target-width:10.299999999999999%"></span></div>
+        </div>
+      </div>
+      <div class="player-card" style="">
+        
+        <div class="card-head">
+          <div class="logo"><img src="https://first-possum-672.convex.cloud/api/storage/96bca32b-a3f3-4532-8c1d-4274dd0c25a0" alt="Doji logo" onerror="this.style.display='none'"></div>
+          <div class="name-block">
+            <div class="brand-name" style="">Doji</div>
+            <div class="handle">@doji_com</div>
+          </div>
+        </div>
+        
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="15638" data-format="compact">16K</span>
+            <span class="rank-pill">#38 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="6.9" style="background:#534AB7;--target-width:6.9%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Creator Tagged Posts</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="27" data-format="comma">27</span>
+            <span class="rank-pill">#8 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="100.0" style="background:#534AB7;--target-width:100.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Locations</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="0" data-format="comma">0</span>
+            <span class="rank-pill top">#1 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="0.0" style="background:#534AB7;--target-width:0.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Total Creator Views</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="45046" data-format="compact">45K</span>
+            <span class="rank-pill">#19 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="18.4" style="background:#534AB7;--target-width:18.4%"></span></div>
+        </div>
+      </div>
+      <div class="player-card" style="">
+        
+        <div class="card-head">
+          <div class="logo"><img src="https://first-possum-672.convex.cloud/api/storage/2f1e30c1-ca36-45cd-b258-2706c9e6eec4" alt="Indyx logo" onerror="this.style.display='none'"></div>
+          <div class="name-block">
+            <div class="brand-name" style="">Indyx</div>
+            <div class="handle">@myindyx</div>
+          </div>
+        </div>
+        
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="30204" data-format="compact">30K</span>
+            <span class="rank-pill">#30 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="13.3" style="background:#1D9E75;--target-width:13.3%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Creator Tagged Posts</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="27" data-format="comma">27</span>
+            <span class="rank-pill">#8 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="100.0" style="background:#1D9E75;--target-width:100.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Locations</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="0" data-format="comma">0</span>
+            <span class="rank-pill top">#1 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="0.0" style="background:#1D9E75;--target-width:0.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Total Creator Views</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="245336" data-format="compact">245K</span>
+            <span class="rank-pill">#10 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="100.0" style="background:#1D9E75;--target-width:100.0%"></span></div>
+        </div>
+      </div>
+      <div class="player-card" style="">
+        
+        <div class="card-head">
+          <div class="logo"><img src="https://first-possum-672.convex.cloud/api/storage/98eaa2ab-870f-4d41-a216-b2da17bda798" alt="Dressly logo" onerror="this.style.display='none'"></div>
+          <div class="name-block">
+            <div class="brand-name" style="">Dressly</div>
+            <div class="handle">@dressly.app</div>
+          </div>
+        </div>
+        
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="226933" data-format="compact">227K</span>
+            <span class="rank-pill">#16 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="100.0" style="background:#D85A30;--target-width:100.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Creator Tagged Posts</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="3" data-format="comma">3</span>
+            <span class="rank-pill">#24 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="11.1" style="background:#D85A30;--target-width:11.1%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Locations</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="0" data-format="comma">0</span>
+            <span class="rank-pill top">#1 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="0.0" style="background:#D85A30;--target-width:0.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Total Creator Views</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="4496" data-format="compact">4K</span>
+            <span class="rank-pill">#26 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="1.7999999999999998" style="background:#D85A30;--target-width:1.7999999999999998%"></span></div>
+        </div>
+      </div>
+      <div class="player-card" style="">
+        
+        <div class="card-head">
+          <div class="logo"><img src="https://first-possum-672.convex.cloud/api/storage/ad17ce4c-5881-427e-a49a-d30bc2b624e0" alt="Whering logo" onerror="this.style.display='none'"></div>
+          <div class="name-block">
+            <div class="brand-name" style="">Whering</div>
+            <div class="handle">@whering__</div>
+          </div>
+        </div>
+        
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="42069" data-format="compact">42K</span>
+            <span class="rank-pill">#28 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="18.5" style="background:#378ADD;--target-width:18.5%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Creator Tagged Posts</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="5" data-format="comma">5</span>
+            <span class="rank-pill">#20 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="18.5" style="background:#378ADD;--target-width:18.5%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Locations</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="0" data-format="comma">0</span>
+            <span class="rank-pill top">#1 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="0.0" style="background:#378ADD;--target-width:0.0%"></span></div>
+        </div>
+        <div class="stat-row">
+          <div class="row-top">
+            <span class="lbl">Total Creator Views</span>
+          </div>
+          <div class="row-mid">
+            <span class="val" data-count="4361" data-format="compact">4K</span>
+            <span class="rank-pill">#27 of 92</span>
+          </div>
+          <div class="bar"><span class="bar-fill" data-width="1.7999999999999998" style="background:#378ADD;--target-width:1.7999999999999998%"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="reveal">meCore is one of 92 brands in the global Fashion &amp; Creator Apps niche. Across the 84-day niche window (2026-02-20 to 2026-05-15), the brand sits at rank 53 of 92 on Instagram followers (266 followers, bottom half of the niche) and rank 29 of 92 on Creator Tagged Posts (one tagged post in the window). Direct fashion-styling-app peers (Doji, Indyx, Dressly, Whering) are all running visible creator pipelines while meCore is in waitlist mode.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Benchmark Verdict</span>
+      <p>meCore is a pre-launch brand sitting below most of the niche on every external signal. The numbers are not a strategic gap to close, they are a starting line. The interesting question is which competitor pattern meCore should adopt first, and the data already points to one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02 — INFLUENCER INTELLIGENCE -->
+<section id="influencer">
+  <div class="container">
+    <div class="section-label reveal">02 · Influencer Intelligence</div>
+    <h2 class="reveal">One creator did the work of fifteen brand posts.</h2>
+
+    
+      <p>Across the 84-day brand window (2026-02-22 to 2026-05-14), meCore picked up one Creator Tagged Post (Instagram and TikTok posts where a creator tagged the brand inside the window). One creator, Anna Figueroa at 15,840 Instagram followers, posted a UGC-style brand story positioned around her habit of photographing random walls. The video pulled 1,053 likes and 25,304 views, a 6.83% engagement rate, with the meCore app appearing as the unlock that translates the wall textures into outfits.</p>
+
+      <p>That single post is the highest-performing piece of content in meCore's window across both platforms. Reposted to TikTok it pulled another 33,900 plays. Average likes on the brand's own polished and animated feed posts sit at 46. The one creator-led narrative outperforms the dominant Aesthetic-Montage pillar 16 to 1.</p>
+
+      <p>The pattern in the niche is harder to ignore. Doji, at 15,638 Instagram followers, has 24 unique creators tagging it unpaid in the same window. Indyx at 30,204 followers has 13. Whering at 42,069 has 5. meCore, at 266 followers, has the one. The category around meCore already runs on creator pipelines, just not for meCore.</p>
+
+      <p>The Anna activation reads as gifted or partner content (the caption ends with a clean waitlist CTA, no explicit disclosure), placing the brand's organic calibration at sparse, fewer than 3 unique creators tagging unpaid means the earned-mention engine is not yet running. The good news: the prototype already works. The hook score on Anna's video is 8 of 10, the audience response is real, and the format is repeatable.</p>
+
+
+    <div class="po-grid stagger">
+      <div class="po-card reveal"><div class="v" data-count="1" data-format="comma">1</div><div class="lbl">Unique creator tagging meCore (84-day window)</div></div>
+      <div class="po-card reveal"><div class="v" data-count="25304" data-format="comma">25,304</div><div class="lbl">Views on the one Creator Tagged Post (Instagram)</div></div>
+      <div class="po-card reveal"><div class="v" data-count="6.83" data-format="comma" data-suffix="%">6.83%</div><div class="lbl">Engagement rate on the Anna Figueroa activation</div></div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Earned Engine</span>
+      <p>One UGC-style creator activation produced the highest-performing piece of content in the brand's window across both platforms, 1,053 likes on Instagram and 33,900 plays on TikTok. Doji at 15,638 followers has 24 unique creators tagging unpaid in the same window. The category around meCore already runs on creator pipelines and the format Anna used is the prototype to industrialise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03 — COMPETITOR DEEP-DIVE -->
+<section id="competitors">
+  <div class="container">
+    <div class="section-label reveal">03 · Competitor Deep-Dive</div>
+    <h2 class="reveal">The category's loudest operators run a stack of plays at once.</h2>
+
+    <p class="reveal">Across the 84-day niche window, nine of the 25 catalogued creator-marketing strategies are detectable in the global Fashion &amp; Creator Apps niche. The four dominant operators (Influenster, Adobe Lightroom, CapCut, AirBrush) each run six or seven plays at once. The fashion-app subset of competitors closest to meCore by product is narrower, and only one of them, Doji, currently trips Table 17 strategy thresholds.</p>
+
+    <div class="cc-grid stagger">
+      
+      <div class="cc reveal">
+        <div class="cc-head">
+          <div class="cc-logo"><img src="https://first-possum-672.convex.cloud/api/storage/96bca32b-a3f3-4532-8c1d-4274dd0c25a0" alt="Doji" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="cc-name">Doji</div>
+            <div class="cc-handle">@doji_com</div>
+          </div>
+        </div>
+        <div class="cc-stats"><div class="cc-stat"><span class="ccv">16K</span><span class="ccl">Followers</span></div><div class="cc-stat"><span class="ccv">27</span><span class="ccl">Creator Tagged Posts</span></div><div class="cc-stat"><span class="ccv">0</span><span class="ccl">Locations</span></div><div class="cc-stat"><span class="ccv">45K</span><span class="ccl">Total Creator Views</span></div></div>
+        <p>Doji is the only fashion-app peer running the playbook visibly. 24 unique creators tagging in the niche window, no explicit partnership disclosures, and a 9-creator activation in a single 7-day window in early May, the textbook Press & Brand Trips pattern.</p>
+        <div class="cc-strats"><span class="dot" style="background:#7d776f"></span> Strategies in play: Earned Organic Mentions, Press &amp; Brand Trips</div>
+      </div>
+      <div class="cc reveal">
+        <div class="cc-head">
+          <div class="cc-logo"><img src="https://first-possum-672.convex.cloud/api/storage/2f1e30c1-ca36-45cd-b258-2706c9e6eec4" alt="Indyx" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="cc-name">Indyx</div>
+            <div class="cc-handle">@myindyx</div>
+          </div>
+        </div>
+        <div class="cc-stats"><div class="cc-stat"><span class="ccv">30K</span><span class="ccl">Followers</span></div><div class="cc-stat"><span class="ccv">27</span><span class="ccl">Creator Tagged Posts</span></div><div class="cc-stat"><span class="ccv">0</span><span class="ccl">Locations</span></div><div class="cc-stat"><span class="ccv">245K</span><span class="ccl">Total Creator Views</span></div></div>
+        <p>Indyx runs the highest creator-tagged volume in the fashion-app subset (27 posts from 13 creators) but doesn't yet trip Table 17 strategy detection. The signal is consistent micro-creator gifting, not yet retainer-shaped.</p>
+        <div class="cc-strats muted">No strategy plays detected at table-17 thresholds.</div>
+      </div>
+      <div class="cc reveal">
+        <div class="cc-head">
+          <div class="cc-logo"><img src="https://first-possum-672.convex.cloud/api/storage/98eaa2ab-870f-4d41-a216-b2da17bda798" alt="Dressly" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="cc-name">Dressly</div>
+            <div class="cc-handle">@dressly.app</div>
+          </div>
+        </div>
+        <div class="cc-stats"><div class="cc-stat"><span class="ccv">227K</span><span class="ccl">Followers</span></div><div class="cc-stat"><span class="ccv">3</span><span class="ccl">Creator Tagged Posts</span></div><div class="cc-stat"><span class="ccv">0</span><span class="ccl">Locations</span></div><div class="cc-stat"><span class="ccv">4K</span><span class="ccl">Total Creator Views</span></div></div>
+        <p>Dressly is the biggest in the subset by Instagram followers (226K) but the smallest by creator-tagged activity. Three creator posts from two creators in the window. Audience scale without creator distribution.</p>
+        <div class="cc-strats muted">No strategy plays detected at table-17 thresholds.</div>
+      </div>
+      <div class="cc reveal">
+        <div class="cc-head">
+          <div class="cc-logo"><img src="https://first-possum-672.convex.cloud/api/storage/ad17ce4c-5881-427e-a49a-d30bc2b624e0" alt="Whering" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="cc-name">Whering</div>
+            <div class="cc-handle">@whering__</div>
+          </div>
+        </div>
+        <div class="cc-stats"><div class="cc-stat"><span class="ccv">42K</span><span class="ccl">Followers</span></div><div class="cc-stat"><span class="ccv">5</span><span class="ccl">Creator Tagged Posts</span></div><div class="cc-stat"><span class="ccv">0</span><span class="ccl">Locations</span></div><div class="cc-stat"><span class="ccv">4K</span><span class="ccl">Total Creator Views</span></div></div>
+        <p>Whering shows up as a quieter steady-state in this niche. Five unique creators tagging in the window, no detected strategy plays at thresholds, but a stable footprint that suggests an organic conversation rather than a managed programme.</p>
+        <div class="cc-strats muted">No strategy plays detected at table-17 thresholds.</div>
+      </div>
+    </div>
+
+    
+      <div class="mpo-block">
+        <div class="mpo-header">Multi-play operators · brands running 3+ plays</div>
+        <div class="mpo-list-wrap stagger"><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/e061929c-42a6-4c64-8130-19ea87d42175" alt="Influenster" onerror="this.style.display='none'"></div><div><div class="mpo-name">Influenster <span class="muted">·</span> running 7 plays</div><div class="mpo-list">Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Press &amp; Brand Trips, Alt-Handle / Brand-Affiliated Creator Channel, High-Value Gifting &amp; Seeding</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/2c44c650-4a7b-45ea-8e39-3605685ba3d4" alt="Adobe Lightroom" onerror="this.style.display='none'"></div><div><div class="mpo-name">Adobe Lightroom <span class="muted">·</span> running 7 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Press &amp; Brand Trips, Alt-Handle / Brand-Affiliated Creator Channel</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/dd2c0f62-138e-4b52-b380-4c81976a9efc" alt="AirBrush" onerror="this.style.display='none'"></div><div><div class="mpo-name">AirBrush <span class="muted">·</span> running 6 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Press &amp; Brand Trips</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/0919c41f-d6a0-41f8-a2ed-c5cdcfb4b1f0" alt="CapCut" onerror="this.style.display='none'"></div><div><div class="mpo-name">CapCut <span class="muted">·</span> running 6 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Alt-Handle / Brand-Affiliated Creator Channel</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/ef016481-6352-4c6e-8667-6841c1b26f7e" alt="BeautyPlus" onerror="this.style.display='none'"></div><div><div class="mpo-name">BeautyPlus <span class="muted">·</span> running 3 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Long-Term Brand Ambassador</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/4fbdccb4-6662-480c-9e20-5e66c936026d" alt="Meitu" onerror="this.style.display='none'"></div><div><div class="mpo-name">Meitu <span class="muted">·</span> running 3 plays</div><div class="mpo-list">Earned Organic Mentions, Long-Term Brand Ambassador, Press &amp; Brand Trips</div></div></div></div>
+      </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Multi-Play Stack</span>
+      <p>The brands with the most visible footprint in this niche are not winning on one tactic, they are running stacks of six or seven plays simultaneously. The competitors closest to meCore by product (the wardrobe and styling apps) are running between zero and two detectable strategies. The gap meCore has to close first is volume, not sophistication.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04 — CREATOR CONTENT IN PAID -->
+<section id="paid">
+  <div class="container">
+    <div class="section-label reveal">04 · Creator Content in Paid</div>
+    <h2 class="reveal">The category's paid spend runs on creator content. meCore is not yet in it.</h2>
+
+    <p class="reveal">Of the 76 top niche ad creatives we analysed in the Meta Ad Library, 32 (42%) are tagged as UGC creator-shot or Lifestyle, the highest-share creative style among the long-runners. Adobe Lightroom's longest-running active ad in this niche reached 613 days, with three of the top ten longest-lifetime creatives belonging to Captions and another three to Adobe Lightroom. meCore has zero active Meta ads across a 20-country sweep on 2026-05-19.</p>
+
+    <div class="stat-grid stagger">
+        <div class="stat reveal">
+          <div class="abs" data-count="76" data-format="comma" data-suffix="">76</div>
+          <div class="ctx">top niche creatives analysed in window</div>
+          <div class="lbl">Niche ad creatives</div>
+        </div>
+        <div class="stat reveal">
+          <div class="abs" data-count="50" data-format="comma" data-suffix="%">50%</div>
+          <div class="ctx">tagged UGC or Lifestyle creator-shot</div>
+          <div class="lbl">Creator-shot share</div>
+        </div>
+        <div class="stat reveal">
+          <div class="abs" data-count="53" data-format="comma" data-suffix="%">53%</div>
+          <div class="ctx">of 60-day+ survivors are UGC</div>
+          <div class="lbl">UGC in winners</div>
+        </div>
+        <div class="stat reveal">
+          <div class="abs" data-count="0" data-format="comma" data-suffix="">0</div>
+          <div class="ctx">across 20 surveyed countries</div>
+          <div class="lbl">meCore active Meta ads</div>
+        </div>
+        <div class="stat reveal">
+          <div class="abs" data-count="0" data-format="comma" data-suffix="">0</div>
+          <div class="ctx">Case B, pre-launch</div>
+          <div class="lbl">meCore creator-shot ads</div>
+        </div>
+        <div class="stat reveal">
+          <div class="abs" data-count="613" data-format="comma" data-suffix="">613</div>
+          <div class="ctx">Adobe Lightroom&#x27;s longest-runner</div>
+          <div class="lbl">Max ad lifetime in niche</div>
+        </div></div>
+
+    <p class="reveal">Looking at what survives 60-plus days in this niche, the pattern is consistent enough to call. UGC creator-shot creatives over-index by 7.9 percentage points in the long-tail pool versus the full set. Production complexity skews toward Medium (the phone-plus-light-edits register), not High (cinematic). Funnel stage is overwhelmingly TOFU (broad awareness). The winners look like one person on camera, telling a problem story, with the app entering as the unlock.</p>
+
+    <p class="reveal">We kept looking for a single niche competitor running a high-volume creator-shot testing programme on Meta and found Adobe Lightroom, Captions, and AirBrush all doing it at scale. The pattern across the three: between five and twelve unique creator-shot creatives in flight at any given time, refreshed roughly every 30 to 60 days. The cycle is what makes the survivors stick.</p>
+
+    <h3 class="reveal" style="font-size: 18px; font-weight: 500; margin: 32px 0 16px;">Ten longest-running ad creatives in the niche</h3>
+    <div class="ad-gallery stagger">
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1209906890227390" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/036fb4a4-ded5-4470-9aab-b73724618ce7" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Adobe Lightroom</div>
+            <div class="ad-days">613 days running</div>
+            <span class="ad-tag brand-produced">BRAND-PRODUCED</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1182977169641716" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/b346820b-e236-48ae-b464-f623afa23371" alt="Adobe Lightroom" class="logo-fallback" onerror="this.style.display='none'"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Adobe Lightroom</div>
+            <div class="ad-days">613 days running</div>
+            <span class="ad-tag brand-produced">BRAND-PRODUCED</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1186612479304967" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/2d646d76-75fc-463a-a36b-c68ab52267b2" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Captions: For Talking Videos</div>
+            <div class="ad-days">384 days running</div>
+            <span class="ad-tag creator">CREATOR-SHOT</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=591989787340370" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/85d7d0f7-acb1-402c-ac0d-a42ba86fa92f" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Adobe Lightroom</div>
+            <div class="ad-days">373 days running</div>
+            <span class="ad-tag brand-produced">BRAND-PRODUCED</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=596611256166448" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/a8ac5b5e-6368-4e8d-85bc-428438e5e9c6" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Captions: For Talking Videos</div>
+            <div class="ad-days">364 days running</div>
+            <span class="ad-tag creator">CREATOR-SHOT</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1167652328383640" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/faec84ce-c350-4242-894a-3908d7f47255" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Captions: For Talking Videos</div>
+            <div class="ad-days">354 days running</div>
+            <span class="ad-tag creator">CREATOR-SHOT</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1519669356039881" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/a819d183-52fe-43ed-93f7-6d21c9bfdf6e" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Savee</div>
+            <div class="ad-days">276 days running</div>
+            <span class="ad-tag brand-produced">BRAND-PRODUCED</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1985992992157595" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/c472144c-a22a-4c96-b8f2-e7b9b82de845" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Savee</div>
+            <div class="ad-days">276 days running</div>
+            <span class="ad-tag brand-produced">BRAND-PRODUCED</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1890952578429142" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/c3267a91-14c0-4441-a5ec-fef77d948547" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Savee</div>
+            <div class="ad-days">275 days running</div>
+            <span class="ad-tag brand-produced">BRAND-PRODUCED</span>
+          </div>
+        </a>
+        <a class="ad-card reveal" href="https://www.facebook.com/ads/library?id=1866266640596717" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/0a5d5ace-3c28-428a-ac54-955fac176154" alt="Influenster" class="logo-fallback" onerror="this.style.display='none'"></div>
+          <div class="ad-meta">
+            <div class="ad-brand">Influenster</div>
+            <div class="ad-days">244 days running</div>
+            <span class="ad-tag creator">CREATOR-SHOT</span>
+          </div>
+        </a></div>
+
+    <p class="reveal">meCore's Meta page itself has one like. Across the 20 countries we swept (US, GB, CA, AU, IT, KR, DE, FR, ES, MX, BR, IN, NL, SE, JP, PH, SG, IE, NZ, CH), zero ads return. This is Case B in the analysis frame, the absence is explicit, the category is already commissioning creator content at testing cadence. The gap is the pipeline that produces enough variants to test at category cadence.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Commissioning Gap</span>
+      <p>Of the 76 top niche ad creatives we analysed, 32 (42%) are UGC creator-shot. That creator-led format dominates the surviving paid creative. meCore has zero Meta ads anywhere globally. The gap is not budget. It is a commissioned-creator pipeline that produces UGC variants fast enough to feed paid testing the way Lightroom, Captions, and AirBrush already do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05 — FEED CONTENT STRATEGY -->
+<section id="feed">
+  <div class="container">
+    <div class="section-label reveal">05 · Feed Content Strategy</div>
+    <h2 class="reveal">Your single UGC post outperforms your dominant pillar 16 to 1.</h2>
+
+    <div class="stat-grid stagger">
+        <div class="stat reveal">
+          <div class="abs" data-count="1053" data-format="comma" data-suffix="">1053</div>
+          <div class="ctx">Anna Figueroa UGC repost</div>
+          <div class="lbl">Top feed post likes</div>
+        </div>
+        <div class="stat reveal">
+          <div class="abs" data-count="16" data-format="comma" data-suffix="">16×</div>
+          <div class="ctx">Relatable/UGC-style content vs Inspirational (Aesthetic Montage)</div>
+          <div class="lbl">Best vs dominant pillar</div>
+        </div>
+        <div class="stat dark reveal">
+          <div class="abs" data-count="85" data-format="comma" data-suffix="%">85%</div>
+          <div class="ctx">33 of 39 own-feed posts</div>
+          <div class="lbl">Inspirational share</div>
+        </div></div>
+
+    <p class="reveal">Across the 84-day brand window, meCore published 39 own-feed posts: 21 on Instagram and 18 on TikTok. The split is video-heavy (38 of 39 are video, one carousel) and skewed toward TikTok on actual views (avg 9,600 plays on TT, Instagram does not surface plays publicly). Average likes per post sit at 80, median at 23. Those averages hide the shape underneath.</p>
+
+    <p class="reveal">The dominant pillar across both feeds is Inspirational Aesthetic Montage, 33 of the 39 posts, averaging 46 likes. The two posts categorised as Relatable or UGC-style sit at 722 average likes, a 16x lift over the dominant pillar. Behind-the-Scenes content (one carousel of two stylish people outside a boutique) cleared 54 likes. The pattern is consistent with the niche's paid-ads winners: UGC outperforms polished brand and animation across both organic and paid in this category.</p>
+
+    <div class="chart-grid-2 reveal">
+      <div class="chart-wrap"><h3>Average likes by content pillar</h3><div class="chart-canvas-wrap"><canvas id="pillarAvgChart"></canvas></div></div>
+      <div class="chart-wrap"><h3>Posts published by pillar</h3><div class="chart-canvas-wrap"><canvas id="pillarCountChart"></canvas></div></div>
+    </div>
+
+    <h3 class="reveal" style="font-size: 18px; font-weight: 500; margin: 36px 0 16px;">The five posts your audience picked</h3>
+    <p class="reveal" style="font-size: 14px; margin-bottom: 20px;">A creative brief in five pieces, from the brand's own feed in the window.</p>
+    <div class="post-grid stagger">
+        <a class="post-card is-highlight reveal" href="https://www.instagram.com/p/DW0BszJDv7w/" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/9a2c1b8e-4d8c-40c3-a7c5-df2479a1781f" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="post-meta">
+            <div class="post-eyebrow">01 · Relatable/Inspirational</div>
+            <div class="post-likes" data-count="1053" data-format="comma">1,053</div>
+            <div class="post-sub">40 comments · Video</div>
+            <p class="post-desc">A UGC-style brand story starring Ana Figueroa, a creative (the wall-photographer character) showing how meCore translates those textures into curated outfits.</p>
+            <div class="post-link">View post ↗</div>
+          </div>
+        </a>
+        <a class="post-card  reveal" href="https://www.tiktok.com/@mecore.ai/video/7630666055068798221" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/1ce8f16d-e7cb-4d7d-a657-89f87cdefedd" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="post-meta">
+            <div class="post-eyebrow">02 · Relatable/Meme</div>
+            <div class="post-likes" data-count="391" data-format="comma">391</div>
+            <div class="post-sub">5 comments · Video</div>
+            <p class="post-desc">TikTok repost of the Anna Figueroa creator narrative. Same character premise as the top IG post, syndicated to a higher-discovery platform.</p>
+            <div class="post-link">View post ↗</div>
+          </div>
+        </a>
+        <a class="post-card  reveal" href="https://www.tiktok.com/@mecore.ai/video/7621969690335644941" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/20f41e54-a596-4b8c-a864-2f7087a4d688" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="post-meta">
+            <div class="post-eyebrow">03 · Inspirational</div>
+            <div class="post-likes" data-count="289" data-format="comma">289</div>
+            <div class="post-sub">12 comments · Video</div>
+            <p class="post-desc">The video introduces &#x27;Frutiger Aero Core&#x27; as a new aesthetic and showcases fashion items curated by the meCore app that fit this specific visual style.</p>
+            <div class="post-link">View post ↗</div>
+          </div>
+        </a>
+        <a class="post-card  reveal" href="https://www.tiktok.com/@mecore.ai/video/7628466619353681165" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/6fe7ab12-d9fe-4a4f-b621-a51518ed33b9" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="post-meta">
+            <div class="post-eyebrow">04 · Inspirational</div>
+            <div class="post-likes" data-count="215" data-format="comma">215</div>
+            <div class="post-sub">4 comments · Video</div>
+            <p class="post-desc">The video defines the &#x27;Core&#x27; aesthetic of Sabrina Carpenter and provides specific product recommendations from the meCore brand to help viewers achieve that look for future events like Coachella.</p>
+            <div class="post-link">View post ↗</div>
+          </div>
+        </a>
+        <a class="post-card  reveal" href="https://www.tiktok.com/@mecore.ai/video/7638479312789802253" target="_blank">
+          <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4e53f739-4571-4915-ba27-b60ac3bcbc49" alt="" onerror="this.parentNode.classList.add('no-thumb')"></div>
+          <div class="post-meta">
+            <div class="post-eyebrow">05 · Inspirational</div>
+            <div class="post-likes" data-count="151" data-format="comma">151</div>
+            <div class="post-sub">2 comments · Video</div>
+            <p class="post-desc">A demonstration of meCore&#x27;s AI converting an abstract &#x27;bubble dress&#x27; concept into shoppable gala-ready outfits.</p>
+            <div class="post-link">View post ↗</div>
+          </div>
+        </a></div>
+
+    <p class="reveal">Format matters less than register. Twenty of the top five are videos, but the qualitative split is sharper: the rank-1 post is a UGC repost with a named human at the centre. Rank 2 reads as a gamified aesthetic teaser. Rank 3 leans pure aesthetic montage. The audience is voting for the post that has a character before the product.</p>
+
+    <p class="reveal">The numerical gap between the rank-1 post and the average Inspirational post is 23x on likes. The interesting question this raises is not whether to make more UGC, but how to industrialise the Anna template so the next four pieces of content in that pillar do not depend on Anna's specific quirk.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Biggest Miss</span>
+      <p>Your single UGC-style creator repost pulled 722 average likes across IG and TikTok, 16× the typical 46-like floor of your polished Aesthetic-Montage content. You make one UGC-style post for every fifteen polished or animated brand posts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06 — SHORTLIST -->
+<section id="shortlist">
+  <div class="container">
+    <div class="section-label reveal">06 · The Shortlist</div>
+    <h2 class="reveal">Nine creators I'd contact this week if I ran your marketing.</h2>
+
+    <p class="reveal">From a 90-day pool of 100 top niche creators on Instagram (the TikTok pool surfaced only two qualifying creators, so the shortlist tilts to Instagram), nine cleared the selection bar: at least one niche-window post, audience match to the fashion-discovery use case, and either a direct fashion-app history or top-tier engagement. Five have prior fashion-app partnerships, the other four are creators whose work pattern transfers cleanly.</p>
+
+    <div class="sl-grid stagger">
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/27626e63-c0e2-443f-b236-4deb6ac271d5" alt="@readwritethrift" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/readwritethrift/" target="_blank">@readwritethrift</a></div>
+            <div class="sl-name">readwritethrift</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Macro</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="126298" data-format="compact">126K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="72781" data-format="compact">73K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="2.23" data-format="comma" data-suffix="%">2.23%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="1" data-format="comma">1</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">A thrifting-and-outfit UGC creator who already partnered with Indyx in the niche window. Proven fashion-app fit.</p>
+        <div class="overlap">Has posted about: Indyx</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7041c02c-4b49-4177-ad86-d59b1a93aa34" alt="@alexismarie" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/alexismarie/" target="_blank">@alexismarie</a></div>
+            <div class="sl-name">alexismarie</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Macro</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="277849" data-format="compact">278K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="184617" data-format="compact">185K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="15.38" data-format="comma" data-suffix="%">15.38%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="2" data-format="comma">2</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">15% ER on an account that already pulls AirBrush brand partnerships, a high-engagement creator who delivers paid-style content with native voice.</p>
+        <div class="overlap">Has posted about: AirBrush</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d951c418-f290-4849-94ab-ea09f8ab45c1" alt="@ariannecamila" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/ariannecamila/" target="_blank">@ariannecamila</a></div>
+            <div class="sl-name">Arianne Camila</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Macro</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="113752" data-format="compact">114K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="250285" data-format="compact">250K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="15.61" data-format="comma" data-suffix="%">15.61%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="3" data-format="comma">3</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">Spanish-language audience with 15.6% engagement on creative-app tutorials. Strong fit for meCore&#x27;s LATAM-friendly aesthetic and app-onboarding format.</p>
+        <div class="overlap">Has posted about: CapCut, Meitu</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cd974660-3a21-4702-ac7b-21ec458bc971" alt="@slowfashionsoph" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/slowfashionsoph/" target="_blank">@slowfashionsoph</a></div>
+            <div class="sl-name">slowfashionsoph</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Mid</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="29759" data-format="compact">30K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="12340" data-format="compact">12K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="1.5" data-format="comma" data-suffix="%">1.5%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="5" data-format="comma">5</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">Slow-fashion micro-creator with a tagged-Indyx history, already in the wardrobe-app conversation, would adopt meCore as a natural extension.</p>
+        <div class="overlap">Has posted about: Indyx</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/972abe65-810c-40dc-9eb2-1c9d99ea352b" alt="@three_styling_" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/three_styling_/" target="_blank">@three_styling_</a></div>
+            <div class="sl-name">three_styling_</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Mid</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="29492" data-format="compact">29K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="10370" data-format="compact">10K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="4.24" data-format="comma" data-suffix="%">4.24%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="8" data-format="comma">8</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">A styling-tutorial creator (8 niche-window posts) who has partnered with Indyx and posts Pinterest-aesthetic Spring outfit content. Exact audience match.</p>
+        <div class="overlap">Has posted about: Indyx</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f18076b3-2145-40e7-bd9d-ef06587cbb08" alt="@maribarbutti" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/maribarbutti/" target="_blank">@maribarbutti</a></div>
+            <div class="sl-name">Mariana Barbutti</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Mid</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="60441" data-format="compact">60K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="200989" data-format="compact">201K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="19.62" data-format="comma" data-suffix="%">19.62%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="3" data-format="comma">3</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">19.6% engagement rate on creator-app partnerships, among the highest-conversion creators in the niche on a follower-count basis.</p>
+        <div class="overlap">Has posted about: AirBrush</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/820748b3-dfd9-46ff-94f7-71152dcddfd3" alt="@creative.him" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/creative.him/" target="_blank">@creative.him</a></div>
+            <div class="sl-name">Himanshu Ranjan</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Micro</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="13626" data-format="compact">14K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="117563" data-format="compact">118K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="33.5" data-format="comma" data-suffix="%">33.5%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="11" data-format="comma">11</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">33% engagement rate, 11 niche posts, visual-artist creator working in Adobe, a &#x27;taste translator&#x27; aesthetic that maps to meCore&#x27;s core proposition of turning visual references into outfits.</p>
+        <div class="overlap">Has posted about: Adobe Lightroom, Photoshop</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cdac14f1-3bce-4e23-b619-999bd0df5c09" alt="@whatsofiawears_" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/whatsofiawears_/" target="_blank">@whatsofiawears_</a></div>
+            <div class="sl-name">whatsofiawears_</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Micro</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="16906" data-format="compact">17K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="11366" data-format="compact">11K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="2.39" data-format="comma" data-suffix="%">2.39%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="4" data-format="comma">4</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">Personal-style creator with Indyx-tagged history, small but pre-validated for the wardrobe-app pitch.</p>
+        <div class="overlap">Has posted about: Indyx</div>
+      </div>
+      <div class="sl reveal">
+        <div class="sl-top">
+          <div class="avatar-circle"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/543085d7-89b3-49c0-8394-139ed197734e" alt="@grace.shots" onerror="this.style.display='none'"></div>
+          <div class="sl-id">
+            <div class="sl-handle"><a href="https://www.instagram.com/grace.shots/" target="_blank">@grace.shots</a></div>
+            <div class="sl-name">Grace Chermarn</div>
+            <span class="plat-badge">Instagram</span>
+            <span class="tier-badge">Micro</span>
+          </div>
+        </div>
+        <div class="sl-stats">
+          <div><span class="sv" data-count="19380" data-format="compact">19K</span><span class="sl">Followers</span></div>
+          <div><span class="sv" data-count="28111" data-format="compact">28K</span><span class="sl">Avg views</span></div>
+          <div><span class="sv" data-count="11.06" data-format="comma" data-suffix="%">11.06%</span><span class="sl">Engagement</span></div>
+          <div><span class="sv" data-count="16" data-format="comma">16</span><span class="sl">Niche posts</span></div>
+        </div>
+        <p class="why">11% ER and the highest niche-post-volume in this shortlist (16 posts), a high-cadence creator who covers Lightroom-and-photography territory adjacent to meCore&#x27;s aesthetic-translation angle.</p>
+        <div class="overlap">Has posted about: Adobe Lightroom, Sony Alpha</div>
+      </div></div>
+
+    <h3 class="reveal" style="font-size: 18px; font-weight: 500; margin: 40px 0 12px;">What's winning in your niche this month</h3>
+    <div class="insp-grid stagger">
+      <a class="insp reveal" href="https://www.instagram.com/p/DX9gduAtrzW/" target="_blank">
+        <div class="insp-meta">
+          <div class="avatar-circle small"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/14a0ca26-1738-456d-9f74-ec6c2af218f2" alt="@soarescreator" onerror="this.style.display='none'"></div>
+          <div><div class="i-handle">@soarescreator</div><div class="i-plat">Instagram</div></div>
+        </div>
+        <div class="i-stats">
+          <span class="iv" data-count="2654410" data-format="compact">2.7M</span> views
+          <span class="i-divider">·</span>
+          0.0% ER
+        </div>
+        <div class="i-pillar">Inspirational</div>
+      </a>
+      <a class="insp reveal" href="https://www.instagram.com/p/DX9VKq_TXxV/" target="_blank">
+        <div class="insp-meta">
+          <div class="avatar-circle small"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/682ba4d5-8aed-4788-81d0-d5cc3c18f680" alt="@ma.nna.t" onerror="this.style.display='none'"></div>
+          <div><div class="i-handle">@ma.nna.t</div><div class="i-plat">Instagram</div></div>
+        </div>
+        <div class="i-stats">
+          <span class="iv" data-count="1610949" data-format="compact">1.6M</span> views
+          <span class="i-divider">·</span>
+          17.6% ER
+        </div>
+        <div class="i-pillar">Educational</div>
+      </a>
+      <a class="insp reveal" href="https://www.instagram.com/p/DYPd6ZjAtXk/" target="_blank">
+        <div class="insp-meta">
+          <div class="avatar-circle small"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f00870fc-a642-429e-878a-ee9c00ea2422" alt="@rico.timm" onerror="this.style.display='none'"></div>
+          <div><div class="i-handle">@rico.timm</div><div class="i-plat">Instagram</div></div>
+        </div>
+        <div class="i-stats">
+          <span class="iv" data-count="1289708" data-format="compact">1.3M</span> views
+          <span class="i-divider">·</span>
+          3.44% ER
+        </div>
+        <div class="i-pillar">Educational</div>
+      </a></div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Shortlist Verdict</span>
+      <p>Combined reach across the nine: <span data-count="687503" data-format="compact">688K</span> followers. Five of the nine have prior partnerships with fashion-app peers (Indyx, AirBrush, Adobe creative tools). None has posted about meCore yet, which is the actionable headline: a 5-creator first round at meCore's current scale costs less than a single paid creative cycle in this category.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07 — OPPORTUNITY -->
+<section id="opportunity">
+  <div class="container">
+    <div class="section-label reveal">07 · The Opportunity</div>
+    <h2 class="reveal">Six moves that change the game for meCore.</h2>
+
+    <p class="reveal">These six are ordered by strategic leverage at meCore's current scale. The first two amplify the working signal (Anna proved the format). The next four open new plays the niche is already running and meCore is not. Each card backs onto one of the 25 catalogued creator-marketing strategies.</p>
+
+    <div class="opp-grid stagger">
+      <div class="opp reveal">
+        <div class="opp-eyebrow">OPPORTUNITY 01</div>
+        <h3 class="opp-title">Build a 10-creator UGC bench around the Anna pattern</h3>
+        <div class="opp-framing">Amplification</div>
+        <ul class="ev-list"><li>Anna Figueroa&#x27;s UGC-style brand story is the single biggest piece of content in meCore&#x27;s 84-day window. 1,053 likes on IG and 33,900 plays on TikTok.</li><li>Doji, at 15.6K IG followers, already runs this play at 24 unique creators tagging in the same niche window. Indyx runs it at 13.</li><li>The category&#x27;s surviving paid creative tilts 42% UGC. The format works at every step of the funnel.</li></ul>
+        <div class="opp-close">
+          <span class="opp-stat">24</span>
+          <span class="opp-stat-label">creators tagging Doji</span>
+        </div>
+        <div class="opp-footer">Backed by: Always-On Creator Retainers</div>
+      </div>
+      <div class="opp reveal">
+        <div class="opp-eyebrow">OPPORTUNITY 02</div>
+        <h3 class="opp-title">Launch a 5-creator TikTok styling squad</h3>
+        <div class="opp-framing">New play</div>
+        <ul class="ev-list"><li>meCore&#x27;s own TikTok feed already outperforms IG on views (9,600 avg vs 0 plays exposed on IG), but Supabase has zero Creator Tagged Posts on TikTok in the window.</li><li>Doji&#x27;s TikTok program puts the brand in front of 24 unique creators&#x27; audiences. meCore is invisible there.</li><li>Top niche TikToks in the last 30 days clear 53,000 views. A single placement on the right creator&#x27;s feed beats anything meCore is producing on its own channel.</li></ul>
+        <div class="opp-close">
+          <span class="opp-stat">0</span>
+          <span class="opp-stat-label">TikTok creator placements</span>
+        </div>
+        <div class="opp-footer">Backed by: Creator Collective / Volume Model</div>
+      </div>
+      <div class="opp reveal">
+        <div class="opp-eyebrow">OPPORTUNITY 03</div>
+        <h3 class="opp-title">Ship the first Meta UGC paid creative slate</h3>
+        <div class="opp-framing">New play</div>
+        <ul class="ev-list"><li>meCore is running zero Meta ads across 20 surveyed countries. Adobe Lightroom, in the same niche, has creatives that have been live for 613 days.</li><li>32 of the top 76 surviving niche ad creatives (42%) are UGC creator-shot. That format dominates the winners.</li><li>Without paid distribution, meCore is asking algorithmic luck to do the job a structured creative testing cycle would do deliberately.</li></ul>
+        <div class="opp-close">
+          <span class="opp-stat">42%</span>
+          <span class="opp-stat-label">of niche-winning ad creatives are UGC</span>
+        </div>
+        <div class="opp-footer">Backed by: UGC for Paid Ads</div>
+      </div>
+      <div class="opp reveal">
+        <div class="opp-eyebrow">OPPORTUNITY 04</div>
+        <h3 class="opp-title">Run a curated press / brand trip for 6 mid-tier stylists</h3>
+        <div class="opp-framing">New play</div>
+        <ul class="ev-list"><li>Doji ran a 9-creator activation in a single 7-day window (May 5 to May 12) that generated 36,153 views, the Press &amp; Brand Trips pattern in execution.</li><li>meCore can replicate the format at a tiny fraction of the cost: invite 6 fashion-styling micro-creators to test the app pre-launch and brief them around the &#x27;translate your aesthetic&#x27; premise.</li><li>The Anna Figueroa post is the proof of concept for what 6 of those would produce.</li></ul>
+        <div class="opp-close">
+          <span class="opp-stat">9</span>
+          <span class="opp-stat-label">creators in Doji&#x27;s last brand-trip cluster</span>
+        </div>
+        <div class="opp-footer">Backed by: Press &amp; Brand Trips</div>
+      </div>
+      <div class="opp reveal">
+        <div class="opp-eyebrow">OPPORTUNITY 05</div>
+        <h3 class="opp-title">Convert the Anna template into a creator-led ambassador</h3>
+        <div class="opp-framing">Amplification</div>
+        <ul class="ev-list"><li>The Anna Figueroa creator narrative (&#x27;I photograph random walls&#x27;) is meCore&#x27;s only piece of mythology in the wild. It generated 8/10 hook score in our analysis and a Relatable/UGC pillar 16× the dominant pillar&#x27;s likes.</li><li>Six niche brands run formal Long-Term Brand Ambassador programs (S10), with Lightroom and CapCut at the top.</li><li>An ambassador deal with Anna at 6-month minimum locks in repeatable storytelling on a proven hook before the brand even launches publicly.</li></ul>
+        <div class="opp-close">
+          <span class="opp-stat">16×</span>
+          <span class="opp-stat-label">likes lift on UGC vs polished-brand posts</span>
+        </div>
+        <div class="opp-footer">Backed by: Long-Term Brand Ambassador</div>
+      </div>
+      <div class="opp reveal">
+        <div class="opp-eyebrow">OPPORTUNITY 06</div>
+        <h3 class="opp-title">Commission an aesthetic-translation content series for owned feed</h3>
+        <div class="opp-framing">Amplification</div>
+        <ul class="ev-list"><li>meCore&#x27;s own-feed content is 84.6% Inspirational Aesthetic Montage. Visually beautiful but interchangeable with the rest of the fashion-app niche.</li><li>Eight niche brands (S02 UGC for Brand Feed) commission creators to produce content for the brand&#x27;s own channel. Influenster, Lightroom, CapCut, AirBrush all do this.</li><li>Recasting the meCore feed as a series of creator-authored &#x27;how I translate&#x27; shorts (each creator picks one aesthetic, translates it via the app) trades polish for distinctiveness.</li></ul>
+        <div class="opp-close">
+          <span class="opp-stat">8</span>
+          <span class="opp-stat-label">niche brands running UGC-for-feed</span>
+        </div>
+        <div class="opp-footer">Backed by: UGC for Brand Feed</div>
+      </div></div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="container">
+  <div class="closing-block">
+    <p class="closing-lead">We built this report because meCore's creator data is genuinely interesting. The Anna activation is the cleanest single piece of evidence we have seen in a pre-launch fashion-AI brand in this niche, and we wanted to share what we found. If any of this is useful, or you would like the full creator list behind the numbers, happy to send it over.</p>
+    <h3>Who are we?</h3>
+    <p><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
+  </div>
+  <div class="booking-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank">sup.co/meet</a></div>
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <span class="wave">👋</span> Sup · sup.co · Confidential · May 2026
+</div>
+
+<script>
+const BRAND_PRIMARY = '#7d776f';
+const BRAND_ACCENT_DARK = '#4d4944';
+const PALETTE = ['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
+
+function formatCompact(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(n >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K';
+  return n.toString();
+}
+function formatNumber(v, fmt) {
+  if (fmt === 'comma') return v.toLocaleString();
+  if (fmt === 'compact') return formatCompact(v);
+  return v.toString();
+}
+function scrambleCount(el) {
+  const target = parseFloat(el.dataset.count);
+  if (isNaN(target)) return;
+  const fmt = el.dataset.format || 'comma';
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  const scramblePhase = 0.65;
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    let v;
+    if (t < scramblePhase) {
+      const intensity = 1 - (t / scramblePhase);
+      const baseline = target * (t / scramblePhase);
+      const jitter = target * 0.5 * intensity * (Math.random() - 0.3);
+      v = Math.max(0, Math.floor(baseline + jitter));
+    } else {
+      const settleT = (t - scramblePhase) / (1 - scramblePhase);
+      const eased = 1 - Math.pow(1 - settleT, 3);
+      const lastScrambled = target * scramblePhase;
+      v = Math.floor(lastScrambled + (target - lastScrambled) * eased);
+    }
+    el.textContent = formatNumber(v, fmt) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = formatNumber(target, fmt) + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
+    document.querySelectorAll('.reveal, .stagger').forEach(el => el.classList.add('is-in'));
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const n = parseFloat(el.dataset.count);
+      const fmt = el.dataset.format || 'comma';
+      const suffix = el.dataset.suffix || '';
+      if (!isNaN(n)) el.textContent = formatNumber(n, fmt) + suffix;
+    });
+    document.querySelectorAll('.brand-emphasis').forEach(el => el.classList.add('is-painted'));
+    document.querySelectorAll('.bar-fill').forEach(el => { const w = el.dataset.width; if (w) el.style.width = w + '%'; });
+    document.querySelectorAll('.rank-pill').forEach(el => el.classList.add('is-in'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      if (entry.target.hasAttribute('data-count')) scrambleCount(entry.target);
+      // bar-fill within
+      entry.target.querySelectorAll('.bar-fill[data-width]').forEach(b => { b.style.width = b.dataset.width + '%'; });
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .stagger, [data-count]').forEach(el => io.observe(el));
+
+  // section.is-in for h2 underline
+  const secIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('section').forEach(s => secIO.observe(s));
+
+  // Cover emphasis paint
+  setTimeout(() => document.querySelectorAll('.brand-emphasis').forEach(el => el.classList.add('is-painted')), 900);
+
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('scroll-progress').style.width = pct + '%';
+  }, { passive: true });
+
+  // Image fade-in
+  document.querySelectorAll('img').forEach(img => {
+    if (img.complete && img.naturalHeight !== 0) img.classList.add('loaded');
+    else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+      img.addEventListener('error', () => img.style.opacity = 1);
+    }
+  });
+
+  // Wave wiggle every 10s
+  setInterval(() => {
+    document.querySelectorAll('.wave').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = 'wave-wiggle 1.2s ease-in-out';
+    });
+  }, 10000);
+
+  // Nav active state
+  const navIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.nav-mid a').forEach(a => a.classList.remove('is-active'));
+        const link = document.querySelector('.nav-mid a[href="#' + id + '"]');
+        if (link) link.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => navIO.observe(s));
+
+  // Charts
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = '#71717A';
+
+  const pillarLabels = ["Relatable/Inspirational", "Relatable/Meme", "Behind-the-Scenes", "Inspirational", "Entertaining", "Seasonal/Timely"];
+  const pillarAvgs = [1053, 391, 54, 47, 6, 4];
+  const pillarCounts = [1, 1, 1, 33, 1, 1];
+  const winningIdx = pillarAvgs.indexOf(Math.max(...pillarAvgs));
+  const avgColors = pillarAvgs.map((_, i) => i === winningIdx ? BRAND_PRIMARY : '#A1A1AA');
+  const countColors = pillarCounts.map((_, i) => i === winningIdx ? BRAND_PRIMARY : '#A1A1AA');
+
+  new Chart(document.getElementById('pillarAvgChart'), {
+    type: 'bar',
+    data: { labels: pillarLabels, datasets: [{ data: pillarAvgs, backgroundColor: avgColors, borderRadius: 6 }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true, grid: { color: '#F4F4F5' } }, y: { grid: { display: false } } },
+      animation: { duration: 1200, easing: 'easeOutCubic', delay: (ctx) => (ctx.dataIndex ?? 0) * 70 }
+    }
+  });
+
+  new Chart(document.getElementById('pillarCountChart'), {
+    type: 'bar',
+    data: { labels: pillarLabels, datasets: [{ data: pillarCounts, backgroundColor: countColors, borderRadius: 6 }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true, grid: { color: '#F4F4F5' } }, y: { grid: { display: false } } },
+      animation: { duration: 1200, easing: 'easeOutCubic', delay: (ctx) => (ctx.dataIndex ?? 0) * 70 }
+    }
+  });
+
+  // Rank pill pop-in
+  setTimeout(() => document.querySelectorAll('.rank-pill').forEach((el,i) => setTimeout(() => el.classList.add('is-in'), 1600 + i*30)), 100);
+});
+</script>
+</body>
+</html>
