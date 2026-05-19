@@ -381,6 +381,23 @@
 }
 /* Kill the old cover-stats and old hero-trio CSS that may still reference dead classes */
 .cover-stats, .hero-trio, .hero-card, .wwa-strip:not(.kept), .wwa-row, .wwa-label { /* unused, kept for safety */ }
+
+/* sx-link — subtle dotted underline that signals deep-link to the Signals
+   Playbook strategy explainer. Hover lifts to a solid underline + brand colour.
+   Injected by tools/link_strategies.py. Safe to leave; the linker is idempotent. */
+.sx-link{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-color:var(--brand-primary,#0F172A);
+  text-decoration-style:dotted;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  transition:color 150ms ease,text-decoration-style 150ms ease;
+}
+.sx-link:hover{
+  color:var(--brand-primary,#0F172A);
+  text-decoration-style:solid;
+}
 </style>
 </head>
 <body>
@@ -608,10 +625,10 @@
 </div>
 </div>
 <div class="cc-body">
-<p>Top of the niche on Instagram reach, second on physical footprint. 51 unique creators tagged the brand unprompted in 37 days. The single detected strategy is UGC for Brand Feed, where GAIL's ranks 7 against competitors running it at scale.</p>
+<p>Top of the niche on Instagram reach, second on physical footprint. 51 unique creators tagged the brand unprompted in 37 days. The single detected strategy is <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, where GAIL's ranks 7 against competitors running it at scale.</p>
 <div class="cc-strats">
 <div class="lbl">Strategies in play</div>
-<span class="s">UGC for Brand Feed</span>
+<span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></span>
 </div>
 </div>
 </div>
@@ -624,10 +641,10 @@
 </div>
 </div>
 <div class="cc-body">
-<p>The category's pace-setter on creator infrastructure. Detected on nine separate strategies in the window, retainers, earned mentions, a creator collective, gifting and seeding, geo-clusters, ambassadors, press trips, plus its own brand-affiliated channels. Its TikTok-Gen-Z dynamic drove a ~$500M valuation in 2025, and 268 unique creators tagged it in the 37-day window.</p>
+<p>The category's pace-setter on creator infrastructure. Detected on nine separate strategies in the window, retainers, earned mentions, a <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, gifting and seeding, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clusters</a>, ambassadors, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">press trips</a>, plus its own brand-affiliated channels. Its TikTok-Gen-Z dynamic drove a ~$500M valuation in 2025, and 268 unique creators tagged it in the 37-day window.</p>
 <div class="cc-strats">
 <div class="lbl">Strategies in play</div>
-<span class="s">UGC for Brand Feed</span> <span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Always-On Creator Retainers</span>
+<span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></span>
 </div>
 </div>
 </div>
@@ -640,10 +657,10 @@
 </div>
 </div>
 <div class="cc-body">
-<p>Belgravia premium bakery running an aesthetic Instagram play. Detected on three strategies including always-on retainers and earned mentions, with creator @danixlemon posting four times in the window, the kind of single-creator volume that flags a contracted relationship.</p>
+<p>Belgravia premium bakery running an aesthetic Instagram play. Detected on three strategies including <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">always-on retainers</a> and earned mentions, with creator @danixlemon posting four times in the window, the kind of single-creator volume that flags a contracted relationship.</p>
 <div class="cc-strats">
 <div class="lbl">Strategies in play</div>
-<span class="s">Earned Organic Mentions</span> <span class="s">Always-On Creator Retainers</span> <span class="s">Alt-Handle / Brand-Affiliated Creator Channel</span>
+<span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a></span>
 </div>
 </div>
 </div>
@@ -656,10 +673,10 @@
 </div>
 </div>
 <div class="cc-body">
-<p>Holborn-anchored modern bakery running four plays: creator collective, geo-clustered micro-creators, press trips, and the UGC-for-brand-feed pattern GAIL's also runs. 77 Creator Tagged Posts in the window from 70 different creators.</p>
+<p>Holborn-anchored modern bakery running four plays: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clustered micro-creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">press trips</a>, and the UGC-for-brand-feed pattern GAIL's also runs. 77 Creator Tagged Posts in the window from 70 different creators.</p>
 <div class="cc-strats">
 <div class="lbl">Strategies in play</div>
-<span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Press &amp; Brand Trips</span> <span class="s">Geo-Clustered Micro-Creators</span>
+<span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a></span>
 </div>
 </div>
 </div>
@@ -672,10 +689,10 @@
 </div>
 </div>
 <div class="cc-body">
-<p>South Kensington artisan bakery with a doughnut-school proposition. Running three plays, geo-clustered micros, long-term ambassador, press and brand trips. One of the named brands inside the top-100 longest-running creator-shot ads (129 days still-active).</p>
+<p>South Kensington artisan bakery with a doughnut-school proposition. Running three plays, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clustered</a> micros, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">long-term ambassador</a>, press and <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">brand trips</a>. One of the named brands inside the top-100 longest-running creator-shot ads (129 days still-active).</p>
 <div class="cc-strats">
 <div class="lbl">Strategies in play</div>
-<span class="s">Press &amp; Brand Trips</span> <span class="s">Long-Term Brand Ambassador</span> <span class="s">Geo-Clustered Micro-Creators</span>
+<span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a></span>
 </div>
 </div>
 </div>
@@ -688,10 +705,10 @@
 </div>
 </div>
 <div class="cc-body">
-<p>Pink-aesthetic café chain across London running three plays, earned organic mentions, creator collective, press trips. Instagram-native; 39 Creator Tagged Posts from 34 creators in the same 37-day window.</p>
+<p>Pink-aesthetic café chain across London running three plays, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned organic mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">press trips</a>. Instagram-native; 39 Creator Tagged Posts from 34 creators in the same 37-day window.</p>
 <div class="cc-strats">
 <div class="lbl">Strategies in play</div>
-<span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Press &amp; Brand Trips</span>
+<span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></span> <span class="s"><a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></span>
 </div>
 </div>
 </div>
@@ -702,42 +719,42 @@
 <img alt="Blank Street Coffee - Monument" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2"/>
 <div>
 <div class="pname">Blank Street Coffee - Monument</div>
-<div class="pdesc">Running 9 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
+<div class="pdesc">Running 9 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-Value Gifting &amp; Seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
 </div>
 </div>
 <div class="item">
 <img alt="Capilungo Restaurant" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/e19708d4-667d-485e-ba3a-ff3d9669f8b1"/>
 <div>
 <div class="pname">Capilungo Restaurant</div>
-<div class="pdesc">Running 5 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding, Press &amp; Brand Trips</div>
+<div class="pdesc">Running 5 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-Value Gifting &amp; Seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
 </div>
 </div>
 <div class="item">
 <img alt="Fred Bakery Holborn" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391"/>
 <div>
 <div class="pname">Fred Bakery Holborn</div>
-<div class="pdesc">Running 4 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Press &amp; Brand Trips</div>
+<div class="pdesc">Running 4 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
 </div>
 </div>
 <div class="item">
 <img alt="Bread Ahead Bakery South Kensington" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce"/>
 <div>
 <div class="pname">Bread Ahead Bakery South Kensington</div>
-<div class="pdesc">Running 3 plays: Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips</div>
+<div class="pdesc">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
 </div>
 </div>
 <div class="item">
 <img alt="EL&amp;N London - Brompton Road" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484"/>
 <div>
 <div class="pname">EL&amp;N London - Brompton Road</div>
-<div class="pdesc">Running 3 plays: Creator Collective / Volume Model, Earned Organic Mentions, Press &amp; Brand Trips</div>
+<div class="pdesc">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
 </div>
 </div>
 <div class="item">
 <img alt="Feya" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e4226c96-a7ff-4041-9237-a84a04826668"/>
 <div>
 <div class="pname">Feya</div>
-<div class="pdesc">Running 3 plays: Earned Organic Mentions, Geo-Clustered Micro-Creators, UGC for Brand Feed</div>
+<div class="pdesc">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
 </div>
 </div>
 </div>
@@ -748,7 +765,7 @@
 </div>
 <div class="callout reveal">
 <span class="callout-label">The Multi-Play Stack</span>
-<p>Blank Street Coffee is running nine plays simultaneously: a retainer bench, an earned-mention engine, a creator collective, gifting, geo-clusters across new openings, an ambassador layer, press trips, a UGC-for-feed pattern, and an alt-handle creator channel. The category's most visible competitor isn't winning on one tactic; it's running a stack.</p>
+<p>Blank Street Coffee is running nine plays simultaneously: a retainer bench, an <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned-mention engine</a>, a <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, gifting, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clusters</a> across new openings, an ambassador layer, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">press trips</a>, a UGC-for-feed pattern, and an <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">alt-handle</a> creator channel. The category's most visible competitor isn't winning on one tactic; it's running a stack.</p>
 </div>
 </section>
 <section id="paid">
@@ -890,7 +907,7 @@
 </div>
 </div></a>
 </div>
-<p class="reveal">M.Manze's pie and mash close-up has been live 1,708 days. Origin Coffee Roasters has a UGC reel running at 514 days. Huffkins runs three creator-shot variants at 114 days each, one per town, all offering a free cake, a textbook geo-cluster micro-creator template. The pattern across the survivors is consistent: low-friction creator-shot content with a single hook either outlives polished brand-produced cinema or runs alongside it in the long-tail.</p>
+<p class="reveal">M.Manze's pie and mash close-up has been live 1,708 days. Origin Coffee Roasters has a UGC reel running at 514 days. Huffkins runs three creator-shot variants at 114 days each, one per town, all offering a free cake, a textbook <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-cluster</a> micro-creator template. The pattern across the survivors is consistent: low-friction creator-shot content with a single hook either outlives polished brand-produced cinema or runs alongside it in the long-tail.</p>
 <div class="callout reveal">
 <span class="callout-label">The Commissioning Gap</span>
 <p>21% of the top 100 niche ad creatives are creator-shot, and 16% of the full 539-ad pool has survived 60+ days still-active, well above the ~11% industry benchmark. GAIL's commissions zero creator content for paid: one Meta ad that ran eight days against competitors maintaining 10+ live creatives with creator-led variants surviving 100-1,700 days. The gap is not budget; it is a creator pipeline producing enough variants to test at category cadence.</p>
@@ -1188,17 +1205,17 @@
 <div class="close">
 <div class="bignum">1.1×</div>
 <div class="lbl">current posts-per-creator ratio; retainer competitors run 3-8×</div>
-<div class="backed">Backed by: Always-On Creator Retainers</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></div>
 </div>
 </div>
 <div class="opp">
 <div class="eyebrow">Opportunity 02</div>
-<h3>Geo-Clustered Micro-Creator Layer Across the 170-Store Estate</h3>
-<p>GAIL's has 170 verified UK locations, rank 2 of 642 in the niche, and is opening 40 more by February 2026.</p><p>8 competitors (Blank Street, Bombolone, Bread Ahead, TAB X TAB, Capilungo, Fred, Feya, Fortitude) are running Geo-Clustered Micro-Creators on smaller estates.</p><p>Huffkins runs a 3-variant 'FREE cake in [town]' template, one creator per town, 114-day survival in paid. This is the geo-cluster template GAIL's could clone at scale.</p>
+<h3><a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creator</a> Layer Across the 170-Store Estate</h3>
+<p>GAIL's has 170 verified UK locations, rank 2 of 642 in the niche, and is opening 40 more by February 2026.</p><p>8 competitors (Blank Street, Bombolone, Bread Ahead, TAB X TAB, Capilungo, Fred, Feya, Fortitude) are running <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a> on smaller estates.</p><p>Huffkins runs a 3-variant 'FREE cake in [town]' template, one creator per town, 114-day survival in paid. This is the <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-cluster</a> template GAIL's could clone at scale.</p>
 <div class="close">
 <div class="bignum">40</div>
 <div class="lbl">new GAIL's stores by Feb 2026, each one a geo-creator brief</div>
-<div class="backed">Backed by: Geo-Clustered Micro-Creators</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a></div>
 </div>
 </div>
 <div class="opp">
@@ -1208,17 +1225,17 @@
 <div class="close">
 <div class="bignum">0</div>
 <div class="lbl">GAIL's creator-shot ads in active rotation; category top runners survive 100-1,700 days</div>
-<div class="backed">Backed by: UGC for Paid Ads</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for Paid Ads</a></div>
 </div>
 </div>
 <div class="opp">
 <div class="eyebrow">Opportunity 04</div>
-<h3>Long-Term Brand Ambassador Layer</h3>
-<p>7 niche competitors run named long-term ambassador relationships, Blank Street, Le Swine, Theacaigirls, Lola's Cupcakes, Brasserie Zedel, Abuelo, Bread Ahead.</p><p>GAIL's has 5 creators with 2+ unpaid mentions in the window already, natural ambassador candidates surfaced by behaviour, not by RFP.</p><p>Convert Tanya Burr (4.2M followers, organic life-lately mention) and Leonora Smee (139K, Mother's Day reel) into multi-quarter ambassador relationships rather than one-off tags.</p>
+<h3><a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a> Layer</h3>
+<p>7 niche competitors run named <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">long-term ambassador</a> relationships, Blank Street, Le Swine, Theacaigirls, Lola's Cupcakes, Brasserie Zedel, Abuelo, Bread Ahead.</p><p>GAIL's has 5 creators with 2+ unpaid mentions in the window already, natural ambassador candidates surfaced by behaviour, not by RFP.</p><p>Convert Tanya Burr (4.2M followers, organic life-lately mention) and Leonora Smee (139K, Mother's Day reel) into multi-quarter ambassador relationships rather than one-off tags.</p>
 <div class="close">
 <div class="bignum">5</div>
 <div class="lbl">creators who've tagged GAIL's 2+ times unprompted, already ambassador-shaped</div>
-<div class="backed">Backed by: Long-Term Brand Ambassador</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div>
 </div>
 </div>
 <div class="opp">

@@ -457,6 +457,23 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 }
 /* Kill the old cover-stats and old hero-trio CSS that may still reference dead classes */
 .cover-stats, .hero-trio, .hero-card, .wwa-strip:not(.kept), .wwa-row, .wwa-label { /* unused, kept for safety */ }
+
+/* sx-link — subtle dotted underline that signals deep-link to the Signals
+   Playbook strategy explainer. Hover lifts to a solid underline + brand colour.
+   Injected by tools/link_strategies.py. Safe to leave; the linker is idempotent. */
+.sx-link{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-color:var(--brand-primary,#0F172A);
+  text-decoration-style:dotted;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  transition:color 150ms ease,text-decoration-style 150ms ease;
+}
+.sx-link:hover{
+  color:var(--brand-primary,#0F172A);
+  text-decoration-style:solid;
+}
 </style>
 </head>
 <body>
@@ -757,7 +774,7 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p class="reveal" style="margin-top:24px;">On TikTok, the picture is empty. The @helper handle on TikTok has not posted since 2015. Brand-name search across the window returned 14 results that all matched on the English word "helper" inside unrelated content (domestic-helper skits, geopolitical news, "destiny helper" relationship posts), none referencing the actual product. We kept looking for a real TikTok mention. We could not find one.</p>
 <div class="callout reveal">
 <span class="callout-label">The Earned Engine That Isn't</span>
-<p>The category has a working earned-mentions pattern (Brami pulls 14 unique creators a quarter unprompted, Maruchan 17, Goodles 31). Hamburger Helper is at 2 IG and 0 TikTok across the same 84 days. The product is distinct, the mascot is recognisable, the SKU is everywhere on retail shelves; what isn't there is anything pulling creators into talking about it.</p>
+<p>The category has a working <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned-mentions pattern</a> (Brami pulls 14 unique creators a quarter unprompted, Maruchan 17, Goodles 31). Hamburger Helper is at 2 IG and 0 TikTok across the same 84 days. The product is distinct, the mascot is recognisable, the SKU is everywhere on retail shelves; what isn't there is anything pulling creators into talking about it.</p>
 </div>
 </div>
 </section>
@@ -812,12 +829,12 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <div class="comp-cards stagger">
 <div class="cc">
 <div class="h"><img alt="Knorr" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd"/><div><div class="nm">Knorr</div><div class="hd">@knorr</div></div></div>
-<p>The category leader for earned creator volume. Knorr pulled 26.8M tagged-post views from 31 unique creators in the window   -   second-highest unique-creator count after Goodles, the highest views by a wide margin. Runs a long-term ambassador layer (@brooklynsbites, 200K) on top.</p>
-<div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Long-Term Brand Ambassador</span></div>
+<p>The category leader for earned creator volume. Knorr pulled 26.8M tagged-post views from 31 unique creators in the window   -   second-highest unique-creator count after Goodles, the highest views by a wide margin. Runs a <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">long-term ambassador</a> layer (@brooklynsbites, 200K) on top.</p>
+<div class="strats"><span class="lbl">Strategies in play:</span><span class="pill"><a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></span></div>
 </div><div class="cc">
 <div class="h"><img alt="Goodles" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9"/><div><div class="nm">Goodles</div><div class="hd">@allgoodles</div></div></div>
-<p>The multi-play operator of the category. Goodles is detected running six creator strategies simultaneously, including 31 unique creators tagging (rank 1 of 57), 11 geo-clustered micro-creators, and an ambassador layer anchored by @guacbites (874K followers, 2.8M views). Only one live Meta ad   -   the entire engine runs on creators.</p>
-<div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Earned Organic Mentions</span><span class="pill">Creator Collective / Volume Model</span><span class="pill">Long-Term Brand Ambassador</span><span class="pill">Geo-Clustered Micro-Creators</span></div>
+<p>The multi-play operator of the category. Goodles is detected running six creator strategies simultaneously, including 31 unique creators tagging (rank 1 of 57), 11 <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clustered micro-creators</a>, and an ambassador layer anchored by @guacbites (874K followers, 2.8M views). Only one live Meta ad   -   the entire engine runs on creators.</p>
+<div class="strats"><span class="lbl">Strategies in play:</span><span class="pill"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></span><span class="pill"><a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></span><span class="pill"><a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></span><span class="pill"><a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a></span></div>
 </div><div class="cc">
 <div class="h"><img alt="Land O'Lakes Mac &amp; Cheese" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f"/><div><div class="nm">Land O'Lakes Mac &amp; Cheese</div><div class="hd">@landolakesktchn</div></div></div>
 <p>Sits at the opposite end of the spectrum from Goodles. Land O'Lakes Mac &amp; Cheese commissions 60 live Meta creatives (rank 4 of 57) and pulls 1.4M tagged-post views   -   the heaviest paid-and-creator dual play in the category. Tagged creators are mostly mid-tier (12 unique across 16 posts).</p>
@@ -835,21 +852,21 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <img alt="Goodles" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9"/>
 <div class="body">
 <div class="nm">Goodles</div>
-<div class="sum">Running 6 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
+<div class="sum">Running 6 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">Geo-Clustered Micro-Creators</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
 </div>
 <div class="badge">6 plays</div>
 </div><div class="item">
 <img alt="Brami" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/553ea665-6015-4236-a9b7-be0a44fab591"/>
 <div class="body">
 <div class="nm">Brami</div>
-<div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Earned Organic Mentions</div>
+<div class="sum">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></div>
 </div>
 <div class="badge">3 plays</div>
 </div><div class="item">
 <img alt="Goya" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/8210a255-864e-483f-a1c3-5451bcdb3e94"/>
 <div class="body">
 <div class="nm">Goya</div>
-<div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Long-Term Brand Ambassador</div>
+<div class="sum">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div>
 </div>
 <div class="badge">3 plays</div>
 </div>
@@ -857,7 +874,7 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 </div>
 <div class="callout reveal">
 <span class="callout-label">The Multi-Play Stack</span>
-<p>Goodles is running an earned-mention engine, an ambassador layer, geo-clusters, a UGC-for-brand-feed cadence, a creator collective at sub-10K micro level, and a press-trip pattern simultaneously. Brami runs an alt-handle resident creator plus a quiet retainer. The strategies in play in this category aren't single-tactic plays   -   the brands winning the creator side are stacking three to six.</p>
+<p>Goodles is running an <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned-mention engine</a>, an ambassador layer, <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clusters</a>, a UGC-for-brand-feed cadence, a <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a> at sub-10K micro level, and a press-trip pattern simultaneously. Brami runs an <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">alt-handle</a> resident creator plus a quiet retainer. The strategies in play in this category aren't single-tactic plays   -   the brands winning the creator side are stacking three to six.</p>
 </div>
 </div>
 </section>
@@ -1323,9 +1340,9 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles, Knorr</p>
 <div class="closer">
 <div class="big">5.7MM</div>
-<div class="lbl">category views attributable to Long-Term Brand Ambassador</div>
+<div class="lbl">category views attributable to <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div>
 </div>
-<div class="backed">Backed by: Long-Term Brand Ambassador</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div>
 </div><div class="opp">
 <div class="eb">Opportunity 02</div>
 <h4>Native brand-feed supply</h4>
@@ -1333,9 +1350,9 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
 <div class="closer">
 <div class="big">268.9MM</div>
-<div class="lbl">category views attributable to UGC for Brand Feed</div>
+<div class="lbl">category views attributable to <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
 </div>
-<div class="backed">Backed by: UGC for Brand Feed</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
 </div><div class="opp">
 <div class="eb">Opportunity 03</div>
 <h4>Earned organic   -   a strength, not a gap</h4>
@@ -1343,9 +1360,9 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
 <div class="closer">
 <div class="big">8.0MM</div>
-<div class="lbl">category views attributable to Earned Organic Mentions</div>
+<div class="lbl">category views attributable to <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></div>
 </div>
-<div class="backed">Backed by: Earned Organic Mentions</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a></div>
 </div><div class="opp">
 <div class="eb">Opportunity 04</div>
 <h4>Volume creator model (Cluely-style)</h4>
@@ -1353,9 +1370,9 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
 <div class="closer">
 <div class="big">6.4MM</div>
-<div class="lbl">category views attributable to Creator Collective / Volume Model</div>
+<div class="lbl">category views attributable to <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></div>
 </div>
-<div class="backed">Backed by: Creator Collective / Volume Model</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></div>
 </div><div class="opp">
 <div class="eb">Opportunity 05</div>
 <h4>Press / brand-trip activation</h4>
@@ -1363,9 +1380,9 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
 <div class="closer">
 <div class="big">1.0MM</div>
-<div class="lbl">category views attributable to Press &amp; Brand Trips</div>
+<div class="lbl">category views attributable to <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
 </div>
-<div class="backed">Backed by: Press &amp; Brand Trips</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
 </div><div class="opp">
 <div class="eb">Opportunity 06</div>
 <h4>Always-on Creator Engine</h4>
@@ -1373,9 +1390,9 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
 <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Brami, Goya</p>
 <div class="closer">
 <div class="big">2.3MM</div>
-<div class="lbl">category views attributable to Always-On Creator Retainers</div>
+<div class="lbl">category views attributable to <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></div>
 </div>
-<div class="backed">Backed by: Always-On Creator Retainers</div>
+<div class="backed">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></div>
 </div>
 </div>
 </div>

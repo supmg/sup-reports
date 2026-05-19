@@ -352,6 +352,23 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
   75% { transform: rotate(-5deg); }
   100% { transform: rotate(0); }
 }
+
+/* sx-link — subtle dotted underline that signals deep-link to the Signals
+   Playbook strategy explainer. Hover lifts to a solid underline + brand colour.
+   Injected by tools/link_strategies.py. Safe to leave; the linker is idempotent. */
+.sx-link{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-color:var(--brand-primary,#0F172A);
+  text-decoration-style:dotted;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  transition:color 150ms ease,text-decoration-style 150ms ease;
+}
+.sx-link:hover{
+  color:var(--brand-primary,#0F172A);
+  text-decoration-style:solid;
+}
 </style>
 </head>
 <body>
@@ -733,7 +750,7 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
 
       <p>The pattern in the niche is harder to ignore. Doji, at 15,638 Instagram followers, has 24 unique creators tagging it unpaid in the same window. Indyx at 30,204 followers has 13. Whering at 42,069 has 5. meCore, at 266 followers, has the one. The category around meCore already runs on creator pipelines, just not for meCore.</p>
 
-      <p>The Anna activation reads as gifted or partner content (the caption ends with a clean waitlist CTA, no explicit disclosure), placing the brand's organic calibration at sparse, fewer than 3 unique creators tagging unpaid means the earned-mention engine is not yet running. The good news: the prototype already works. The hook score on Anna's video is 8 of 10, the audience response is real, and the format is repeatable.</p>
+      <p>The Anna activation reads as gifted or partner content (the caption ends with a clean waitlist CTA, no explicit disclosure), placing the brand's organic calibration at sparse, fewer than 3 unique creators tagging unpaid means the <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned-mention engine</a> is not yet running. The good news: the prototype already works. The hook score on Anna's video is 8 of 10, the audience response is real, and the format is repeatable.</p>
 
 
     <div class="po-grid stagger">
@@ -768,8 +785,8 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
           </div>
         </div>
         <div class="cc-stats"><div class="cc-stat"><span class="ccv">16K</span><span class="ccl">Followers</span></div><div class="cc-stat"><span class="ccv">27</span><span class="ccl">Creator Tagged Posts</span></div><div class="cc-stat"><span class="ccv">0</span><span class="ccl">Locations</span></div><div class="cc-stat"><span class="ccv">45K</span><span class="ccl">Total Creator Views</span></div></div>
-        <p>Doji is the only fashion-app peer running the playbook visibly. 24 unique creators tagging in the niche window, no explicit partnership disclosures, and a 9-creator activation in a single 7-day window in early May, the textbook Press & Brand Trips pattern.</p>
-        <div class="cc-strats"><span class="dot" style="background:#7d776f"></span> Strategies in play: Earned Organic Mentions, Press &amp; Brand Trips</div>
+        <p>Doji is the only fashion-app peer running the playbook visibly. 24 unique creators tagging in the niche window, no explicit partnership disclosures, and a 9-creator activation in a single 7-day window in early May, the textbook Press & <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Brand Trips</a> pattern.</p>
+        <div class="cc-strats"><span class="dot" style="background:#7d776f"></span> Strategies in play: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
       </div>
       <div class="cc reveal">
         <div class="cc-head">
@@ -812,7 +829,7 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
     
       <div class="mpo-block">
         <div class="mpo-header">Multi-play operators · brands running 3+ plays</div>
-        <div class="mpo-list-wrap stagger"><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/e061929c-42a6-4c64-8130-19ea87d42175" alt="Influenster" onerror="this.style.display='none'"></div><div><div class="mpo-name">Influenster <span class="muted">·</span> running 7 plays</div><div class="mpo-list">Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Press &amp; Brand Trips, Alt-Handle / Brand-Affiliated Creator Channel, High-Value Gifting &amp; Seeding</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/2c44c650-4a7b-45ea-8e39-3605685ba3d4" alt="Adobe Lightroom" onerror="this.style.display='none'"></div><div><div class="mpo-name">Adobe Lightroom <span class="muted">·</span> running 7 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Press &amp; Brand Trips, Alt-Handle / Brand-Affiliated Creator Channel</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/dd2c0f62-138e-4b52-b380-4c81976a9efc" alt="AirBrush" onerror="this.style.display='none'"></div><div><div class="mpo-name">AirBrush <span class="muted">·</span> running 6 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Press &amp; Brand Trips</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/0919c41f-d6a0-41f8-a2ed-c5cdcfb4b1f0" alt="CapCut" onerror="this.style.display='none'"></div><div><div class="mpo-name">CapCut <span class="muted">·</span> running 6 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Creator Collective / Volume Model, Long-Term Brand Ambassador, UGC for Brand Feed, Alt-Handle / Brand-Affiliated Creator Channel</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/ef016481-6352-4c6e-8667-6841c1b26f7e" alt="BeautyPlus" onerror="this.style.display='none'"></div><div><div class="mpo-name">BeautyPlus <span class="muted">·</span> running 3 plays</div><div class="mpo-list">Earned Organic Mentions, Always-On Creator Retainers, Long-Term Brand Ambassador</div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/4fbdccb4-6662-480c-9e20-5e66c936026d" alt="Meitu" onerror="this.style.display='none'"></div><div><div class="mpo-name">Meitu <span class="muted">·</span> running 3 plays</div><div class="mpo-list">Earned Organic Mentions, Long-Term Brand Ambassador, Press &amp; Brand Trips</div></div></div></div>
+        <div class="mpo-list-wrap stagger"><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/e061929c-42a6-4c64-8130-19ea87d42175" alt="Influenster" onerror="this.style.display='none'"></div><div><div class="mpo-name">Influenster <span class="muted">·</span> running 7 plays</div><div class="mpo-list"><a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-Value Gifting &amp; Seeding</a></div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/2c44c650-4a7b-45ea-8e39-3605685ba3d4" alt="Adobe Lightroom" onerror="this.style.display='none'"></div><div><div class="mpo-name">Adobe Lightroom <span class="muted">·</span> running 7 plays</div><div class="mpo-list"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a></div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/dd2c0f62-138e-4b52-b380-4c81976a9efc" alt="AirBrush" onerror="this.style.display='none'"></div><div><div class="mpo-name">AirBrush <span class="muted">·</span> running 6 plays</div><div class="mpo-list"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/0919c41f-d6a0-41f8-a2ed-c5cdcfb4b1f0" alt="CapCut" onerror="this.style.display='none'"></div><div><div class="mpo-name">CapCut <span class="muted">·</span> running 6 plays</div><div class="mpo-list"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a></div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/ef016481-6352-4c6e-8667-6841c1b26f7e" alt="BeautyPlus" onerror="this.style.display='none'"></div><div><div class="mpo-name">BeautyPlus <span class="muted">·</span> running 3 plays</div><div class="mpo-list"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div></div></div><div class="mpo-item"><div class="cc-logo small"><img src="https://first-possum-672.convex.cloud/api/storage/4fbdccb4-6662-480c-9e20-5e66c936026d" alt="Meitu" onerror="this.style.display='none'"></div><div><div class="mpo-name">Meitu <span class="muted">·</span> running 3 plays</div><div class="mpo-list"><a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned Organic Mentions</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div></div></div></div>
       </div>
 
     <div class="callout reveal">
@@ -1300,7 +1317,7 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
           <span class="opp-stat">24</span>
           <span class="opp-stat-label">creators tagging Doji</span>
         </div>
-        <div class="opp-footer">Backed by: Always-On Creator Retainers</div>
+        <div class="opp-footer">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></div>
       </div>
       <div class="opp reveal">
         <div class="opp-eyebrow">OPPORTUNITY 02</div>
@@ -1311,7 +1328,7 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
           <span class="opp-stat">0</span>
           <span class="opp-stat-label">TikTok creator placements</span>
         </div>
-        <div class="opp-footer">Backed by: Creator Collective / Volume Model</div>
+        <div class="opp-footer">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></div>
       </div>
       <div class="opp reveal">
         <div class="opp-eyebrow">OPPORTUNITY 03</div>
@@ -1322,40 +1339,40 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
           <span class="opp-stat">42%</span>
           <span class="opp-stat-label">of niche-winning ad creatives are UGC</span>
         </div>
-        <div class="opp-footer">Backed by: UGC for Paid Ads</div>
+        <div class="opp-footer">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for Paid Ads</a></div>
       </div>
       <div class="opp reveal">
         <div class="opp-eyebrow">OPPORTUNITY 04</div>
-        <h3 class="opp-title">Run a curated press / brand trip for 6 mid-tier stylists</h3>
+        <h3 class="opp-title">Run a curated press / <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">brand trip</a> for 6 mid-tier stylists</h3>
         <div class="opp-framing">New play</div>
-        <ul class="ev-list"><li>Doji ran a 9-creator activation in a single 7-day window (May 5 to May 12) that generated 36,153 views, the Press &amp; Brand Trips pattern in execution.</li><li>meCore can replicate the format at a tiny fraction of the cost: invite 6 fashion-styling micro-creators to test the app pre-launch and brief them around the &#x27;translate your aesthetic&#x27; premise.</li><li>The Anna Figueroa post is the proof of concept for what 6 of those would produce.</li></ul>
+        <ul class="ev-list"><li>Doji ran a 9-creator activation in a single 7-day window (May 5 to May 12) that generated 36,153 views, the <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a> pattern in execution.</li><li>meCore can replicate the format at a tiny fraction of the cost: invite 6 fashion-styling micro-creators to test the app pre-launch and brief them around the &#x27;translate your aesthetic&#x27; premise.</li><li>The Anna Figueroa post is the proof of concept for what 6 of those would produce.</li></ul>
         <div class="opp-close">
           <span class="opp-stat">9</span>
           <span class="opp-stat-label">creators in Doji&#x27;s last brand-trip cluster</span>
         </div>
-        <div class="opp-footer">Backed by: Press &amp; Brand Trips</div>
+        <div class="opp-footer">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
       </div>
       <div class="opp reveal">
         <div class="opp-eyebrow">OPPORTUNITY 05</div>
         <h3 class="opp-title">Convert the Anna template into a creator-led ambassador</h3>
         <div class="opp-framing">Amplification</div>
-        <ul class="ev-list"><li>The Anna Figueroa creator narrative (&#x27;I photograph random walls&#x27;) is meCore&#x27;s only piece of mythology in the wild. It generated 8/10 hook score in our analysis and a Relatable/UGC pillar 16× the dominant pillar&#x27;s likes.</li><li>Six niche brands run formal Long-Term Brand Ambassador programs (S10), with Lightroom and CapCut at the top.</li><li>An ambassador deal with Anna at 6-month minimum locks in repeatable storytelling on a proven hook before the brand even launches publicly.</li></ul>
+        <ul class="ev-list"><li>The Anna Figueroa creator narrative (&#x27;I photograph random walls&#x27;) is meCore&#x27;s only piece of mythology in the wild. It generated 8/10 hook score in our analysis and a Relatable/UGC pillar 16× the dominant pillar&#x27;s likes.</li><li>Six niche brands run formal <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a> programs (S10), with Lightroom and CapCut at the top.</li><li>An ambassador deal with Anna at 6-month minimum locks in repeatable storytelling on a proven hook before the brand even launches publicly.</li></ul>
         <div class="opp-close">
           <span class="opp-stat">16×</span>
           <span class="opp-stat-label">likes lift on UGC vs polished-brand posts</span>
         </div>
-        <div class="opp-footer">Backed by: Long-Term Brand Ambassador</div>
+        <div class="opp-footer">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div>
       </div>
       <div class="opp reveal">
         <div class="opp-eyebrow">OPPORTUNITY 06</div>
         <h3 class="opp-title">Commission an aesthetic-translation content series for owned feed</h3>
         <div class="opp-framing">Amplification</div>
-        <ul class="ev-list"><li>meCore&#x27;s own-feed content is 84.6% Inspirational Aesthetic Montage. Visually beautiful but interchangeable with the rest of the fashion-app niche.</li><li>Eight niche brands (S02 UGC for Brand Feed) commission creators to produce content for the brand&#x27;s own channel. Influenster, Lightroom, CapCut, AirBrush all do this.</li><li>Recasting the meCore feed as a series of creator-authored &#x27;how I translate&#x27; shorts (each creator picks one aesthetic, translates it via the app) trades polish for distinctiveness.</li></ul>
+        <ul class="ev-list"><li>meCore&#x27;s own-feed content is 84.6% Inspirational Aesthetic Montage. Visually beautiful but interchangeable with the rest of the fashion-app niche.</li><li>Eight niche brands (S02 <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>) commission creators to produce content for the brand&#x27;s own channel. Influenster, Lightroom, CapCut, AirBrush all do this.</li><li>Recasting the meCore feed as a series of creator-authored &#x27;how I translate&#x27; shorts (each creator picks one aesthetic, translates it via the app) trades polish for distinctiveness.</li></ul>
         <div class="opp-close">
           <span class="opp-stat">8</span>
           <span class="opp-stat-label">niche brands running UGC-for-feed</span>
         </div>
-        <div class="opp-footer">Backed by: UGC for Brand Feed</div>
+        <div class="opp-footer">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
       </div></div>
   </div>
 </section>
