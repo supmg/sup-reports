@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GAIL's cover — v4 (vertical, brand-id + subtle finding kicker)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background: #18181B;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px;
+  }
+
+  .row {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  /* ---------- vertical cover, 800x1200 (2:3) ---------- */
+  .cover {
+    width: 800px;
+    height: 1200px;
+    background: #CF2030;
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 56px 56px 56px;
+    box-sizing: border-box;
+  }
+
+  /* tiled croissant wallpaper, cream colour, low alpha */
+  .pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><g fill='none' stroke='%23F5F5ED' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' opacity='0.18'><path d='M30 90 C 28 56, 64 36, 96 44 C 120 50, 130 66, 122 80 C 116 90, 100 90, 92 80 C 86 72, 90 62, 98 60 C 106 58, 114 64, 112 72' transform='rotate(-15 70 70)'/></g></svg>");
+    background-size: 180px 180px;
+    background-repeat: repeat;
+    pointer-events: none;
+  }
+
+  /* a single LARGE feature croissant bottom-right */
+  .feature {
+    position: absolute;
+    right: -160px;
+    bottom: -160px;
+    width: 720px;
+    height: 720px;
+    pointer-events: none;
+    opacity: 0.34;
+    transform: rotate(-22deg);
+  }
+  .feature svg { width: 100%; height: 100%; }
+
+  /* faint corner glow top-left */
+  .glow {
+    position: absolute;
+    top: -260px;
+    left: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 60%);
+    pointer-events: none;
+  }
+
+  .top {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .sup-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .sup-mark .wave { font-size: 22px; }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .center {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: -40px 0;
+  }
+
+  /* tiny masthead kicker — this is the SUBTLE finding reference */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.82;
+    margin-bottom: 22px;
+  }
+  .kicker::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: rgba(255,255,255,0.7);
+  }
+
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 220px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    font-style: italic;
+  }
+  .wordmark .apostrophe {
+    color: rgba(255,255,255,0.55);
+  }
+  .wordmark-sub {
+    margin-top: 20px;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    opacity: 0.78;
+  }
+
+  .bottom {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    width: 100%;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .brand-logo {
+    width: 64px;
+    height: 64px;
+    background: #FFFFFF;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .brand-logo img {
+    max-width: 72%;
+    max-height: 72%;
+    object-fit: contain;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .brand-name {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand-meta {
+    font-size: 14px;
+    opacity: 0.78;
+  }
+
+  /* annotations + thumbnail preview */
+  .meta {
+    color: #71717A;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+  .meta strong { color: #fff; }
+
+  .thumb-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  .thumb-stage .label {
+    color: #71717A;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .thumb {
+    transform: scale(0.27);
+    transform-origin: top left;
+    width: 800px;
+    height: 1200px;
+  }
+  .thumb-frame {
+    width: calc(800px * 0.27);
+    height: calc(1200px * 0.27);
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+<div class="row">
+  <!-- the cover -->
+  <div>
+    <div class="cover">
+      <div class="pattern"></div>
+      <div class="glow"></div>
+      <div class="feature">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#F5F5ED" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M30 110 C 26 60, 78 28, 130 40 C 168 48, 184 78, 172 100 C 160 120, 130 122, 116 108 C 104 96, 110 80, 122 78 C 134 76, 146 86, 142 100" />
+            <path d="M52 96 C 56 84, 70 76, 90 80" opacity="0.6"/>
+            <path d="M62 110 C 66 100, 80 96, 100 100" opacity="0.6"/>
+            <path d="M78 124 C 82 116, 96 112, 116 116" opacity="0.6"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="top">
+        <div class="sup-mark">
+          <span class="wave">👋</span>
+          <span>Sup</span>
+        </div>
+        <div class="eyebrow">Signal Report<br>April 2026</div>
+      </div>
+
+      <div class="center">
+        <div class="kicker">The fashion backdrop edition</div>
+        <div class="wordmark">GAIL<span class="apostrophe">&rsquo;</span>s</div>
+        <div class="wordmark-sub">London bakery &middot; Vol. 01</div>
+      </div>
+
+      <div class="bottom">
+        <div class="divider"></div>
+        <div class="brand-row">
+          <div class="brand-logo">
+            <img src="https://gails.com/cdn/shop/files/gails-logo_1.png?v=1678900193" alt="GAIL's">
+          </div>
+          <div class="brand-text">
+            <div class="brand-name">GAIL's Bakery</div>
+            <div class="brand-meta">F&amp;B &middot; Bakeries &middot; London</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- thumbnail at framer card size -->
+  <div class="thumb-stage">
+    <div class="label">At Framer card size</div>
+    <div class="thumb-frame">
+      <div class="thumb">
+        <div class="cover" style="margin:0">
+          <div class="pattern"></div>
+          <div class="glow"></div>
+          <div class="feature">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" stroke="#F5F5ED" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M30 110 C 26 60, 78 28, 130 40 C 168 48, 184 78, 172 100 C 160 120, 130 122, 116 108 C 104 96, 110 80, 122 78 C 134 76, 146 86, 142 100" />
+                <path d="M52 96 C 56 84, 70 76, 90 80" opacity="0.6"/>
+                <path d="M62 110 C 66 100, 80 96, 100 100" opacity="0.6"/>
+                <path d="M78 124 C 82 116, 96 112, 116 116" opacity="0.6"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="top">
+            <div class="sup-mark"><span class="wave">👋</span><span>Sup</span></div>
+            <div class="eyebrow">Signal Report<br>April 2026</div>
+          </div>
+
+          <div class="center">
+            <div class="kicker">The fashion backdrop edition</div>
+            <div class="wordmark">GAIL<span class="apostrophe">&rsquo;</span>s</div>
+            <div class="wordmark-sub">London bakery &middot; Vol. 01</div>
+          </div>
+
+          <div class="bottom">
+            <div class="divider"></div>
+            <div class="brand-row">
+              <div class="brand-logo">
+                <img src="https://gails.com/cdn/shop/files/gails-logo_1.png?v=1678900193" alt="GAIL's">
+              </div>
+              <div class="brand-text">
+                <div class="brand-name">GAIL's Bakery</div>
+                <div class="brand-meta">F&amp;B &middot; Bakeries &middot; London</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="meta">
+  <strong>v4 &middot; brand-id first, finding shown subtly as magazine kicker</strong> &mdash; vertical 800 &times; 1200 (2:3)<br>
+  Top: Sup mark + date &middot; Center: tiny uppercase kicker line ("The fashion backdrop edition") + huge italic wordmark + subtitle &middot; Bottom: logo + brand block<br>
+  The finding hides inside the kicker &mdash; no numbers, just a thematic label. Reads like a magazine issue title, not a data card.<br><br>
+  <strong>What the skill auto-fills per brand:</strong><br>
+  Background colour = brand primary &middot; Wordmark = short brand name (italic Fraunces) &middot; Subtitle = location + sub-category + volume<br>
+  Kicker = thematic tag derived from the report's punchline (e.g. "The fashion backdrop edition", "The quiet cult edition", "The influencer graveyard edition")<br>
+  Pattern = sub-category map (Bakeries &rarr; croissants &middot; Coffee Roasters &rarr; beans &middot; Skincare &rarr; bottles &middot; Sneakers &rarr; laces &middot; Activewear &rarr; dumbbells&hellip;)<br>
+  Logo + brand name + Industry &middot; Sub-cat &middot; Location = all from Notion fields
+</div>
+
+</body>
+</html>
