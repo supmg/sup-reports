@@ -83,15 +83,39 @@ section { padding: 96px 0 120px; }
   .cover-stats > div:first-child { padding-top: 0; }
   .cover-stats > div:last-child { border-bottom: none; padding-bottom: 0; }
 }
-.hero-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.hero-card { position: relative; border-radius: 16px; border: 1px solid var(--border); overflow: hidden; aspect-ratio: 4/5; max-height: 320px; transition: transform 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms ease; }
-.hero-card:nth-child(2) { border-top: 3px solid var(--brand-primary); }
-.hero-card .img-slot { width: 100%; height: 100%; overflow: hidden; background: var(--surface); }
-.hero-card .img-slot img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
-.hero-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(9,9,11,0.12); }
-.hero-card:hover .img-slot img { transform: scale(1.03); }
-.hero-card .footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 14px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%); color: #fff; font-size: 12.5px; font-weight: 500; }
-@media (max-width: 720px) { .hero-trio { grid-template-columns: 1fr; gap: 12px; } }
+/* Cover hero — tilted-square stack to the right of the headline */
+.cover-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 56px; align-items: center; margin-bottom: 56px; }
+.cover-thumbs { position: relative; width: 100%; height: 360px; }
+.thumb-tilt { position: absolute; width: 168px; height: 168px; border-radius: 22px; overflow: hidden; background: var(--surface); border: 5px solid #fff; box-shadow: 0 18px 42px -12px rgba(9,9,11,0.22), 0 6px 14px -4px rgba(9,9,11,0.08); transition: transform 320ms cubic-bezier(0.16,1,0.3,1), box-shadow 320ms ease; cursor: pointer; }
+.thumb-tilt img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.thumb-tilt .stamp { position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; background: rgba(9,9,11,0.7); color: #fff; font-size: 10.5px; font-weight: 500; letter-spacing: -0.005em; border-radius: 9999px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.thumb-1 { top: 22px;  left: 8px;   transform: rotate(-9deg); z-index: 1; }
+.thumb-2 { top: 92px;  left: 138px; transform: rotate(6deg);  z-index: 3; }
+.thumb-3 { top: 168px; left: 8px;   transform: rotate(-3deg); z-index: 2; }
+.thumb-tilt:hover { transform: rotate(0deg) scale(1.06); z-index: 4; box-shadow: 0 22px 50px -14px rgba(9,9,11,0.28), 0 8px 18px -4px rgba(9,9,11,0.1); }
+.thumb-tilt:hover img { transform: scale(1.04); }
+@media (max-width: 1080px) {
+  .cover-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; }
+  .thumb-tilt { width: 144px; height: 144px; }
+  .thumb-2 { left: 118px; }
+  .thumb-3 { top: 148px; }
+  .cover-thumbs { height: 320px; }
+}
+@media (max-width: 900px) {
+  .cover-grid { grid-template-columns: 1fr; gap: 36px; margin-bottom: 40px; }
+  .cover-thumbs { height: 280px; max-width: 380px; margin: 0 auto; }
+  .thumb-tilt { width: 150px; height: 150px; }
+  .thumb-1 { top: 0;   left: 4%;  }
+  .thumb-2 { top: 56px; left: 36%; }
+  .thumb-3 { top: 112px; left: 4%; }
+}
+@media (max-width: 480px) {
+  .cover-thumbs { height: 260px; max-width: 320px; }
+  .thumb-tilt { width: 128px; height: 128px; border-width: 4px; border-radius: 18px; }
+  .thumb-1 { left: 0; top: 0; }
+  .thumb-2 { left: 42%; top: 48px; }
+  .thumb-3 { left: 0; top: 112px; }
+}
 
 /* What we analysed */
 .wwa-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 0; }
@@ -388,9 +412,27 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
 <!-- COVER -->
 <section class="cover">
   <div class="container">
-    <span class="pill reveal"><span class="dot"></span> Influencer marketing intelligence report</span>
-    <h1 class="reveal"><span class="s1">meCore and the fashion &amp; creator apps niche.</span><span class="s2">Where it sits, <span class='brand-emphasis'>what is moving around it</span>.</span></h1>
-    <p class="cover-sub reveal">A look at where meCore stands across paid, organic, content, and the creator landscape inside the global Fashion &amp; Creator Apps niche. Sourced from a 84-day brand window (2026-02-22 to 2026-05-14), benchmarked against 92 niche brands and 100 top creators.</p>
+    <div class="cover-grid">
+      <div class="cover-text">
+        <span class="pill reveal"><span class="dot"></span> Influencer marketing intelligence report</span>
+        <h1 class="reveal"><span class="s1">meCore and the fashion &amp; creator apps niche.</span><span class="s2">Where it sits, <span class='brand-emphasis'>what is moving around it</span>.</span></h1>
+        <p class="cover-sub reveal">A look at where meCore stands across paid, organic, content, and the creator landscape inside the global Fashion &amp; Creator Apps niche. Sourced from a 84-day brand window (2026-02-22 to 2026-05-14), benchmarked against 92 niche brands and 100 top creators.</p>
+      </div>
+      <div class="cover-thumbs reveal">
+        <a class="thumb-tilt thumb-1" href="https://www.instagram.com/p/DW0BszJDv7w/" target="_blank">
+          <img src="https://first-possum-672.convex.cloud/api/storage/9a2c1b8e-4d8c-40c3-a7c5-df2479a1781f" alt="meCore top post" onerror="this.style.display='none'">
+          <span class="stamp">1,053 likes</span>
+        </a>
+        <a class="thumb-tilt thumb-2" href="https://www.tiktok.com/@mecore.ai/video/7630666055068798221" target="_blank">
+          <img src="https://first-possum-672.convex.cloud/api/storage/1ce8f16d-e7cb-4d7d-a657-89f87cdefedd" alt="meCore Anna TikTok repost" onerror="this.style.display='none'">
+          <span class="stamp">391 likes</span>
+        </a>
+        <a class="thumb-tilt thumb-3" href="https://www.tiktok.com/@mecore.ai/video/7621969690335644941" target="_blank">
+          <img src="https://first-possum-672.convex.cloud/api/storage/20f41e54-a596-4b8c-a864-2f7087a4d688" alt="meCore Frutiger Aero post" onerror="this.style.display='none'">
+          <span class="stamp">289 likes</span>
+        </a>
+      </div>
+    </div>
     <div class="cover-stats reveal">
       
     <div>
@@ -409,9 +451,6 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
       <div class="v" data-count="0" data-format="comma">0</div>
       <div class="cap">Active Meta ads (20-country sweep)</div>
     </div>
-    </div>
-    <div class="hero-trio">
-      <div class="hero-card reveal"><div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/9a2c1b8e-4d8c-40c3-a7c5-df2479a1781f" alt="meCore post 1" onerror="this.style.display='none'"></div><div class="footer">1,053 likes · Relatable/Inspirational</div></div><div class="hero-card reveal"><div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/1ce8f16d-e7cb-4d7d-a657-89f87cdefedd" alt="meCore post 2" onerror="this.style.display='none'"></div><div class="footer">391 likes · Relatable/Meme</div></div><div class="hero-card reveal"><div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/20f41e54-a596-4b8c-a864-2f7087a4d688" alt="meCore post 3" onerror="this.style.display='none'"></div><div class="footer">289 likes · Inspirational</div></div>
     </div>
   </div>
 </section>
