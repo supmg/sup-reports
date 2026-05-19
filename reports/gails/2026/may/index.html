@@ -1,12 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>GAIL’s Bakery · Influencer Marketing Intelligence Report · Sup</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
@@ -333,941 +334,925 @@
   .stagger.is-in > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
   .stagger.is-in > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
   .stagger.is-in > *:nth-child(n+7) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+
+
+/* === RETROFIT: cover-grid + tilted polaroid stack === */
+.cover-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 56px; align-items: center; margin-bottom: 56px; }
+.cover-thumbs { position: relative; width: 100%; height: 360px; }
+.thumb-tilt { position: absolute; display: block; width: 168px; height: 168px; border-radius: 22px; overflow: hidden; background: var(--surface); border: 5px solid #fff; box-shadow: 0 18px 42px -12px rgba(9,9,11,0.22), 0 6px 14px -4px rgba(9,9,11,0.08); transition: transform 320ms cubic-bezier(0.16,1,0.3,1), box-shadow 320ms ease; cursor: pointer; }
+.thumb-tilt img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; opacity: 1; }
+.thumb-tilt .stamp { position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; background: rgba(9,9,11,0.7); color: #fff; font-size: 10.5px; font-weight: 500; border-radius: 9999px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.thumb-1 { top: 22px;  left: 8px;   transform: rotate(-9deg); z-index: 1; }
+.thumb-2 { top: 92px;  left: 138px; transform: rotate(6deg);  z-index: 3; }
+.thumb-3 { top: 168px; left: 8px;   transform: rotate(-3deg); z-index: 2; }
+.thumb-tilt:hover { transform: rotate(0deg) scale(1.06); z-index: 4; box-shadow: 0 22px 50px -14px rgba(9,9,11,0.28), 0 8px 18px -4px rgba(9,9,11,0.1); }
+.thumb-tilt:hover img { transform: scale(1.04); }
+@media (max-width: 1080px) {
+  .cover-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; }
+  .thumb-tilt { width: 144px; height: 144px; }
+  .thumb-2 { left: 118px; }
+  .thumb-3 { top: 148px; }
+  .cover-thumbs { height: 320px; }
+}
+@media (max-width: 900px) {
+  .cover-grid { grid-template-columns: 1fr; gap: 36px; margin-bottom: 40px; }
+  .cover-thumbs { height: 280px; max-width: 380px; margin: 0 auto; }
+  .thumb-tilt { width: 150px; height: 150px; }
+  .thumb-1 { top: 0;   left: 4%;  }
+  .thumb-2 { top: 56px; left: 36%; }
+  .thumb-3 { top: 112px; left: 4%; }
+}
+@media (max-width: 480px) {
+  .cover-thumbs { height: 260px; max-width: 320px; }
+  .thumb-tilt { width: 128px; height: 128px; border-width: 4px; border-radius: 18px; }
+  .thumb-1 { left: 0; top: 0; }
+  .thumb-2 { left: 42%; top: 48px; }
+  .thumb-3 { left: 0; top: 112px; }
+}
+/* === RETROFIT: editorial provenance byline === */
+.provenance-line { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; }
+.provenance-line .container, .provenance-line.inline-no-container { /* nothing */ }
+.provenance-line p { font-size: 14px; color: var(--secondary); line-height: 1.55; margin: 0; max-width: 920px; }
+.provenance-line .pv-label { color: var(--muted); font-weight: 500; margin-right: 8px; }
+.provenance-line .num { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) {
+  .provenance-line { padding: 18px 0; }
+  .provenance-line p { font-size: 13px; }
+}
+/* Kill the old cover-stats and old hero-trio CSS that may still reference dead classes */
+.cover-stats, .hero-trio, .hero-card, .wwa-strip:not(.kept), .wwa-row, .wwa-label { /* unused, kept for safety */ }
 </style>
 </head>
 <body>
 <div class="scroll-progress" id="scroll-progress"></div>
-
 <nav class="nav">
-  <div class="nav-left">
-    <span class="nav-pill"><span style="font-size:14px;">👋</span> Sup</span>
-    <span class="nav-divider"></span>
-    <span class="nav-brand"><span style="font-weight:600;letter-spacing:-0.01em;">GAIL's</span></span>
-  </div>
-  <div class="nav-mid">
-    <a href="#benchmark">Benchmark</a>
-    <a href="#influencer">Influencer</a>
-    <a href="#competitors">Competitors</a>
-    <a href="#paid">Paid</a>
-    <a href="#feed">Feed</a>
-    <a href="#shortlist">Shortlist</a>
-    <a href="#opportunity">Opportunity</a>
-  </div>
-  <div class="nav-cta"><a href="#opportunity">View Opportunity</a></div>
+<div class="nav-left">
+<span class="nav-pill"><span style="font-size:14px;">👋</span> Sup</span>
+<span class="nav-divider"></span>
+<span class="nav-brand"><span style="font-weight:600;letter-spacing:-0.01em;">GAIL's</span></span>
+</div>
+<div class="nav-mid">
+<a href="#benchmark">Benchmark</a>
+<a href="#influencer">Influencer</a>
+<a href="#competitors">Competitors</a>
+<a href="#paid">Paid</a>
+<a href="#feed">Feed</a>
+<a href="#shortlist">Shortlist</a>
+<a href="#opportunity">Opportunity</a>
+</div>
+<div class="nav-cta"><a href="#opportunity">View Opportunity</a></div>
 </nav>
-
 <main>
-
 <section class="cover">
-  <span class="cover-pill reveal">Influencer Marketing Intelligence Report</span>
-  <h1 class="reveal">
-    <span class="setup">170 bakeries.</span>
-    <span class="punch"><span class="brand-emphasis">One creator programme short</span> of the chain you're building.</span>
-  </h1>
-  <p class="cover-sub reveal">A look at where GAIL's sits in the London cafés and bakeries category across paid, organic, content, and creators. Built from 642 niche brands, 539 active ad creatives, and 56 Creator Tagged Posts to GAIL's across a 37-day category window.</p>
-  <div class="cover-stats reveal stagger">
-    <div class="v"><div class="num"><span data-count="166279" data-format="compact">166K</span></div><div class="lbl">IG followers · rank 19 of 642</div></div>
-    <div class="v"><div class="num"><span data-count="170" data-format="comma">170</span></div><div class="lbl">UK locations · rank 2 of 642</div></div>
-    <div class="v"><div class="num"><span data-count="51" data-format="comma">51</span></div><div class="lbl">Unique creators tagged in 37 days</div></div>
-    <div class="v"><div class="num"><span data-count="1" data-format="comma">1</span></div><div class="lbl">Live Meta ad in market</div></div>
-  </div>
-  <div class="hero-trio reveal stagger">
-    <div class="hero-card"><div class="img-slot"><a href="https://www.instagram.com/p/DWY7OoxDP6E/" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;"><img src="https://first-possum-672.convex.cloud/api/storage/5921f7b3-b761-4aea-95b3-7466f721cc53" alt="Top BTS / Recipe Reel" loading="lazy"></a></div><div class="fb"><span class="lk">10,084 likes</span><span>Recipe Reel</span></div></div>
-    <div class="hero-card lead"><div class="img-slot"><a href="https://www.instagram.com/p/DU0h545jLFu/" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;"><img src="https://first-possum-672.convex.cloud/api/storage/51955f70-1b7d-4a1a-bd66-01b52d1da079" alt="Monday Pick-Me-Up" loading="lazy"></a></div><div class="fb"><span class="lk">3,220 likes</span><span>Photo · Product</span></div></div>
-    <div class="hero-card"><div class="img-slot"><a href="https://www.instagram.com/p/DXd6q37jKSn/" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;"><img src="https://first-possum-672.convex.cloud/api/storage/249907fa-6258-4410-b49d-0e79c1f4980e" alt="Taleggio Brioche" loading="lazy"></a></div><div class="fb"><span class="lk">863 likes</span><span>Video · Product</span></div></div>
-  </div>
+
+
+
+
+<div class="cover-grid"><div class="cover-text"><span class="cover-pill reveal">Influencer Marketing Intelligence Report</span><h1 class="reveal">
+<span class="setup">170 bakeries.</span>
+<span class="punch"><span class="brand-emphasis">One creator programme short</span> of the chain you're building.</span>
+</h1><p class="cover-sub reveal">A look at where GAIL's sits in the London cafés and bakeries category across paid, organic, content, and creators. Built from 642 niche brands, 539 active ad creatives, and 56 Creator Tagged Posts to GAIL's across a 37-day category window.</p></div><div class="cover-thumbs reveal">
+<a class="thumb-tilt thumb-1" href="https://www.instagram.com/p/DWY7OoxDP6E/" rel="noopener" target="_blank"><img alt="Top BTS / Recipe Reel" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/5921f7b3-b761-4aea-95b3-7466f721cc53"/><span class="stamp">10,084 likes</span></a>
+<a class="thumb-tilt thumb-2" href="https://www.instagram.com/p/DU0h545jLFu/" rel="noopener" target="_blank"><img alt="Monday Pick-Me-Up" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/51955f70-1b7d-4a1a-bd66-01b52d1da079"/><span class="stamp">3,220 likes</span></a>
+<a class="thumb-tilt thumb-3" href="https://www.instagram.com/p/DXd6q37jKSn/" rel="noopener" target="_blank"><img alt="Taleggio Brioche" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/249907fa-6258-4410-b49d-0e79c1f4980e"/><span class="stamp">863 likes</span></a>
+</div></div>
 </section>
-
-<div class="wwa-strip reveal">
-  <div class="wwa-label">What we analysed</div>
-  <div class="wwa-row">
-    <div><div class="v"><span data-count="642" data-format="comma">642</span></div><div class="cap">brands in the London Cafés &amp; Bakeries category</div></div>
-    <div><div class="v"><span data-count="171" data-format="comma">171</span></div><div class="cap">top creators across Instagram and TikTok</div></div>
-    <div><div class="v"><span data-count="539" data-format="comma">539</span></div><div class="cap">paid ad creatives active in the category</div></div>
-    <div><div class="v"><span data-count="37" data-format="comma" data-suffix="-day">37-day</span></div><div class="cap">category window · 13 Feb to 22 Mar 2026</div></div>
-    <div><div class="v"><span data-count="90" data-format="comma" data-suffix="-day">90-day</span></div><div class="cap">brand window, own feed and Creator Tagged Posts</div></div>
-  </div>
-</div>
-
+<div class="provenance-line reveal"><p><span class="pv-label">What we analysed:</span> <span class="num">642</span> brands in the London Cafés &amp; Bakeries niche, <span class="num">171</span> top creators across Instagram and TikTok, and <span class="num">539</span> paid niche ad creatives, over a <span class="num">37-day</span> category window (13 Feb to 22 Mar 2026) and a <span class="num">90-day</span> brand window covering GAIL’s Bakery's own feed and Creator Tagged Posts.</p></div>
 <section id="benchmark">
-  <div class="sec-label reveal">01 · Market Benchmark</div>
-  <h2 class="sec-headline reveal">Top of the niche on reach, quieter on the creator pipeline.</h2>
-
-  <div class="section-stats reveal">
-    <div>
-      <div class="v"><span data-count="166000" data-format="compact" data-suffix="">166K</span></div>
-      <div class="ctx">rank 19 of 642 (top 3%)</div>
-      <div class="lbl">Instagram followers</div>
-    </div>
-    <div>
-      <div class="v"><span data-count="170" data-format="comma" data-suffix="">170</span></div>
-      <div class="ctx">rank 2 of 642, among the largest in the niche</div>
-      <div class="lbl">UK locations</div>
-    </div>
-    <div>
-      <div class="v"><span data-count="117000" data-format="compact" data-suffix="">117K</span></div>
-      <div class="ctx">rank 20 of 642 (top 4%)</div>
-      <div class="lbl">Total Instagram views</div>
-    </div>
-    <div>
-      <div class="v"><span data-count="24300" data-format="compact" data-suffix="">24.3K</span></div>
-      <div class="ctx">rank 9 of 642 (top 2%)</div>
-      <div class="lbl">Instagram likes earned</div>
-    </div>
-    <div>
-      <div class="v"><span data-count="56" data-format="comma" data-suffix="">56</span></div>
-      <div class="ctx">from 51 unique creators (96% unpaid)</div>
-      <div class="lbl">Creator Tagged Posts in 37-day window</div>
-    </div>
-    <div>
-      <div class="v"><span data-count="1" data-format="comma" data-suffix="">1</span></div>
-      <div class="ctx">vs category typical of 8 active per advertiser</div>
-      <div class="lbl">Active Meta ads</div>
-    </div>
-  </div>
-
-  <div class="player-cards-wrap reveal">
-    <div class="pc-caption">
-      <h4>The bakery cohort, brand by brand · 37-day niche window</h4>
-      <p class="sub">Four direct competitors compared on four metrics. Target brand highlighted.</p>
-    </div>
-    <div class="player-card-row stagger">
-<div class="player-card is-target" style="--card-color:#CF2030;"><span class="pc-eyebrow">Target brand</span><div class="pc-head"><div class="pc-logo" style="background:#CF2030;"><img src="https://first-possum-672.convex.cloud/api/storage/64aaa003-ce7c-4c22-96cc-9d9c39a9ca48" alt="GAIL&#x27;s Bakery" onerror="this.style.display='none';this.parentElement.innerHTML='GA'"></div><div class="pc-id"><div class="pc-name">GAIL&#x27;s Bakery</div><div class="pc-handle">@gailsbakery</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="166279" data-format="compact">166K</span></div><div class="pc-bar"><span class="bar-fill" data-width="17" style="background:#CF2030;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="55" data-format="comma">55</span></div><div class="pc-bar"><span class="bar-fill" data-width="19" style="background:#CF2030;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="170" data-format="comma">170</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#CF2030;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="116982" data-format="compact">117K</span></div><div class="pc-bar"><span class="bar-fill" data-width="9" style="background:#CF2030;"></span></div></div></div>
-<div class="player-card" style="--card-color:#534AB7;"><div class="pc-head"><div class="pc-logo" style="background:#534AB7;"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street" onerror="this.style.display='none';this.parentElement.innerHTML='BS'"></div><div class="pc-id"><div class="pc-name">Blank Street</div><div class="pc-handle">@blankstreet</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="169340" data-format="compact">169K</span></div><div class="pc-bar"><span class="bar-fill" data-width="18" style="background:#534AB7;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="296" data-format="comma">296</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#534AB7;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="40" data-format="comma">40</span></div><div class="pc-bar"><span class="bar-fill" data-width="24" style="background:#534AB7;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="1273157" data-format="compact">1.3M</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#534AB7;"></span></div></div></div>
-<div class="player-card" style="--card-color:#1D9E75;"><div class="pc-head"><div class="pc-logo" style="background:#1D9E75;"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391" alt="Fred Bakery" onerror="this.style.display='none';this.parentElement.innerHTML='FB'"></div><div class="pc-id"><div class="pc-name">Fred Bakery</div><div class="pc-handle">@fredbakery</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="39918" data-format="compact">40K</span></div><div class="pc-bar"><span class="bar-fill" data-width="4" style="background:#1D9E75;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="77" data-format="comma">77</span></div><div class="pc-bar"><span class="bar-fill" data-width="26" style="background:#1D9E75;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="1" data-format="comma">1</span></div><div class="pc-bar"><span class="bar-fill" data-width="1" style="background:#1D9E75;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="230614" data-format="compact">231K</span></div><div class="pc-bar"><span class="bar-fill" data-width="18" style="background:#1D9E75;"></span></div></div></div>
-<div class="player-card" style="--card-color:#D85A30;"><div class="pc-head"><div class="pc-logo" style="background:#D85A30;"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead" onerror="this.style.display='none';this.parentElement.innerHTML='BA'"></div><div class="pc-id"><div class="pc-name">Bread Ahead</div><div class="pc-handle">@breadaheadbakery</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="423830" data-format="compact">424K</span></div><div class="pc-bar"><span class="bar-fill" data-width="44" style="background:#D85A30;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="18" data-format="comma">18</span></div><div class="pc-bar"><span class="bar-fill" data-width="6" style="background:#D85A30;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="6" data-format="comma">6</span></div><div class="pc-bar"><span class="bar-fill" data-width="4" style="background:#D85A30;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="494264" data-format="compact">494K</span></div><div class="pc-bar"><span class="bar-fill" data-width="39" style="background:#D85A30;"></span></div></div></div>
-<div class="player-card" style="--card-color:#378ADD;"><div class="pc-head"><div class="pc-logo" style="background:#378ADD;"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484" alt="EL&amp;N London" onerror="this.style.display='none';this.parentElement.innerHTML='EL'"></div><div class="pc-id"><div class="pc-name">EL&amp;N London</div><div class="pc-handle">@elan_cafe</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="956526" data-format="compact">957K</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#378ADD;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="39" data-format="comma">39</span></div><div class="pc-bar"><span class="bar-fill" data-width="13" style="background:#378ADD;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="10" data-format="comma">10</span></div><div class="pc-bar"><span class="bar-fill" data-width="6" style="background:#378ADD;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="120960" data-format="compact">121K</span></div><div class="pc-bar"><span class="bar-fill" data-width="10" style="background:#378ADD;"></span></div></div></div>
-    </div>
-  </div>
-
-  <p class="reveal">GAIL's Bakery sits in the top 3% of the niche by Instagram followers (rank 19 of 642), top 4% by total Instagram views (rank 20), and top 2% by likes and comments (rank 9 and rank 7). The 170-store estate is rank 2 in the category. Across the direct cohort, the footprint dominates: GAIL's outranks every named competitor on Locations, while Blank Street outpaces GAIL's on Creator Tagged Posts and Total Creator Views.</p>
-
-  <div class="callout reveal">
-    <span class="callout-label">The Benchmark Verdict</span>
-    <p>GAIL's already wins the audience-size lap of this niche. The question Section 02 picks up is whether the 51 unique creators tagging GAIL's unprompted are being turned into a managed rhythm or left to drift.</p>
-  </div>
+<div class="sec-label reveal">01 · Market Benchmark</div>
+<h2 class="sec-headline reveal">Top of the niche on reach, quieter on the creator pipeline.</h2>
+<div class="section-stats reveal">
+<div>
+<div class="v"><span data-count="166000" data-format="compact" data-suffix="">166K</span></div>
+<div class="ctx">rank 19 of 642 (top 3%)</div>
+<div class="lbl">Instagram followers</div>
+</div>
+<div>
+<div class="v"><span data-count="170" data-format="comma" data-suffix="">170</span></div>
+<div class="ctx">rank 2 of 642, among the largest in the niche</div>
+<div class="lbl">UK locations</div>
+</div>
+<div>
+<div class="v"><span data-count="117000" data-format="compact" data-suffix="">117K</span></div>
+<div class="ctx">rank 20 of 642 (top 4%)</div>
+<div class="lbl">Total Instagram views</div>
+</div>
+<div>
+<div class="v"><span data-count="24300" data-format="compact" data-suffix="">24.3K</span></div>
+<div class="ctx">rank 9 of 642 (top 2%)</div>
+<div class="lbl">Instagram likes earned</div>
+</div>
+<div>
+<div class="v"><span data-count="56" data-format="comma" data-suffix="">56</span></div>
+<div class="ctx">from 51 unique creators (96% unpaid)</div>
+<div class="lbl">Creator Tagged Posts in 37-day window</div>
+</div>
+<div>
+<div class="v"><span data-count="1" data-format="comma" data-suffix="">1</span></div>
+<div class="ctx">vs category typical of 8 active per advertiser</div>
+<div class="lbl">Active Meta ads</div>
+</div>
+</div>
+<div class="player-cards-wrap reveal">
+<div class="pc-caption">
+<h4>The bakery cohort, brand by brand · 37-day niche window</h4>
+<p class="sub">Four direct competitors compared on four metrics. Target brand highlighted.</p>
+</div>
+<div class="player-card-row stagger">
+<div class="player-card is-target" style="--card-color:#CF2030;"><span class="pc-eyebrow">Target brand</span><div class="pc-head"><div class="pc-logo" style="background:#CF2030;"><img alt="GAIL's Bakery" onerror="this.style.display='none';this.parentElement.innerHTML='GA'" src="https://first-possum-672.convex.cloud/api/storage/64aaa003-ce7c-4c22-96cc-9d9c39a9ca48"/></div><div class="pc-id"><div class="pc-name">GAIL's Bakery</div><div class="pc-handle">@gailsbakery</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="166279" data-format="compact">166K</span></div><div class="pc-bar"><span class="bar-fill" data-width="17" style="background:#CF2030;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="55" data-format="comma">55</span></div><div class="pc-bar"><span class="bar-fill" data-width="19" style="background:#CF2030;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="170" data-format="comma">170</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#CF2030;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="116982" data-format="compact">117K</span></div><div class="pc-bar"><span class="bar-fill" data-width="9" style="background:#CF2030;"></span></div></div></div>
+<div class="player-card" style="--card-color:#534AB7;"><div class="pc-head"><div class="pc-logo" style="background:#534AB7;"><img alt="Blank Street" onerror="this.style.display='none';this.parentElement.innerHTML='BS'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2"/></div><div class="pc-id"><div class="pc-name">Blank Street</div><div class="pc-handle">@blankstreet</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="169340" data-format="compact">169K</span></div><div class="pc-bar"><span class="bar-fill" data-width="18" style="background:#534AB7;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="296" data-format="comma">296</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#534AB7;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="40" data-format="comma">40</span></div><div class="pc-bar"><span class="bar-fill" data-width="24" style="background:#534AB7;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="1273157" data-format="compact">1.3M</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#534AB7;"></span></div></div></div>
+<div class="player-card" style="--card-color:#1D9E75;"><div class="pc-head"><div class="pc-logo" style="background:#1D9E75;"><img alt="Fred Bakery" onerror="this.style.display='none';this.parentElement.innerHTML='FB'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391"/></div><div class="pc-id"><div class="pc-name">Fred Bakery</div><div class="pc-handle">@fredbakery</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="39918" data-format="compact">40K</span></div><div class="pc-bar"><span class="bar-fill" data-width="4" style="background:#1D9E75;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="77" data-format="comma">77</span></div><div class="pc-bar"><span class="bar-fill" data-width="26" style="background:#1D9E75;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="1" data-format="comma">1</span></div><div class="pc-bar"><span class="bar-fill" data-width="1" style="background:#1D9E75;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="230614" data-format="compact">231K</span></div><div class="pc-bar"><span class="bar-fill" data-width="18" style="background:#1D9E75;"></span></div></div></div>
+<div class="player-card" style="--card-color:#D85A30;"><div class="pc-head"><div class="pc-logo" style="background:#D85A30;"><img alt="Bread Ahead" onerror="this.style.display='none';this.parentElement.innerHTML='BA'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce"/></div><div class="pc-id"><div class="pc-name">Bread Ahead</div><div class="pc-handle">@breadaheadbakery</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="423830" data-format="compact">424K</span></div><div class="pc-bar"><span class="bar-fill" data-width="44" style="background:#D85A30;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#5</span></div><div class="pc-val"><span data-count="18" data-format="comma">18</span></div><div class="pc-bar"><span class="bar-fill" data-width="6" style="background:#D85A30;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="6" data-format="comma">6</span></div><div class="pc-bar"><span class="bar-fill" data-width="4" style="background:#D85A30;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#2</span></div><div class="pc-val"><span data-count="494264" data-format="compact">494K</span></div><div class="pc-bar"><span class="bar-fill" data-width="39" style="background:#D85A30;"></span></div></div></div>
+<div class="player-card" style="--card-color:#378ADD;"><div class="pc-head"><div class="pc-logo" style="background:#378ADD;"><img alt="EL&amp;N London" onerror="this.style.display='none';this.parentElement.innerHTML='EL'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484"/></div><div class="pc-id"><div class="pc-name">EL&amp;N London</div><div class="pc-handle">@elan_cafe</div></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Followers</span><span class="rank-pill rank-1">#1</span></div><div class="pc-val"><span data-count="956526" data-format="compact">957K</span></div><div class="pc-bar"><span class="bar-fill" data-width="100" style="background:#378ADD;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Creator Tagged Posts</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="39" data-format="comma">39</span></div><div class="pc-bar"><span class="bar-fill" data-width="13" style="background:#378ADD;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Locations</span><span class="rank-pill">#3</span></div><div class="pc-val"><span data-count="10" data-format="comma">10</span></div><div class="pc-bar"><span class="bar-fill" data-width="6" style="background:#378ADD;"></span></div></div><div class="pc-stat"><div class="pc-row-top"><span class="pc-lbl">Total Creator Views</span><span class="rank-pill">#4</span></div><div class="pc-val"><span data-count="120960" data-format="compact">121K</span></div><div class="pc-bar"><span class="bar-fill" data-width="10" style="background:#378ADD;"></span></div></div></div>
+</div>
+</div>
+<p class="reveal">GAIL's Bakery sits in the top 3% of the niche by Instagram followers (rank 19 of 642), top 4% by total Instagram views (rank 20), and top 2% by likes and comments (rank 9 and rank 7). The 170-store estate is rank 2 in the category. Across the direct cohort, the footprint dominates: GAIL's outranks every named competitor on Locations, while Blank Street outpaces GAIL's on Creator Tagged Posts and Total Creator Views.</p>
+<div class="callout reveal">
+<span class="callout-label">The Benchmark Verdict</span>
+<p>GAIL's already wins the audience-size lap of this niche. The question Section 02 picks up is whether the 51 unique creators tagging GAIL's unprompted are being turned into a managed rhythm or left to drift.</p>
+</div>
 </section>
-
 <section id="influencer">
-  <div class="sec-label reveal">02 · Influencer Intelligence</div>
-  <h2 class="sec-headline reveal">Fifty-one creators tagged GAIL's without prompting. That's already the headline.</h2>
-  <p class="sec-lead reveal">Across the 37-day category window (13 Feb to 22 Mar 2026), 56 Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) landed for GAIL's. They came from 51 distinct creators, and 53 of the 56 carried no partnership signal. That is earned creator media at a volume most competitors spend paid budgets trying to reach.</p>
-
-  <div class="stat-grid-3 reveal stagger">
-    <div class="stat">
-      <div class="lbl">Creator Tagged Posts</div>
-      <div class="abs"><span data-count="56" data-format="comma">56</span></div>
-      <div class="ctx">37-day category window, GAIL's specific</div>
-    </div>
-    <div class="stat">
-      <div class="lbl">Unique creators</div>
-      <div class="abs"><span data-count="51" data-format="comma">51</span></div>
-      <div class="ctx">96% with no partnership tag in caption</div>
-    </div>
-    <div class="stat dark">
-      <div class="lbl">Posts per creator</div>
-      <div class="abs"><span data-count="1.1" data-format="comma" data-suffix="×">1.1×</span></div>
-      <div class="ctx">Retainer competitors run 3 to 8 posts per creator</div>
-    </div>
-  </div>
-
-  <h4 style="font-size:14px;font-weight:500;margin:32px 0 12px;letter-spacing:-0.01em;">The themes creators land on when they tag GAIL's</h4>
-  <div class="theme-grid reveal stagger">
-    <div class="theme-row">
-      <div class="name">Food, pastry and bakery picks</div>
-      <div class="bar"><span data-width="100.0"></span></div>
-      <div class="pct">22 · 39%</div>
-    </div>
-    <div class="theme-row">
-      <div class="name">London lifestyle and neighbourhood guides</div>
-      <div class="bar"><span data-width="63.6"></span></div>
-      <div class="pct">14 · 25%</div>
-    </div>
-    <div class="theme-row">
-      <div class="name">Coffee and matcha culture</div>
-      <div class="bar"><span data-width="49.9"></span></div>
-      <div class="pct">11 · 20%</div>
-    </div>
-    <div class="theme-row">
-      <div class="name">Book club, community and friends</div>
-      <div class="bar"><span data-width="45.5"></span></div>
-      <div class="pct">10 · 18%</div>
-    </div>
-    <div class="theme-row">
-      <div class="name">Mum, family and motherhood moments</div>
-      <div class="bar"><span data-width="41.0"></span></div>
-      <div class="pct">9 · 16%</div>
-    </div>
-    <div class="theme-row">
-      <div class="name">Day-in-life vlogs and daily routines</div>
-      <div class="bar"><span data-width="36.4"></span></div>
-      <div class="pct">8 · 14%</div>
-    </div>
-    <div class="theme-row">
-      <div class="name">Birthday and celebration treats</div>
-      <div class="bar"><span data-width="22.6"></span></div>
-      <div class="pct">5 · 9%</div>
-    </div>
-  </div>
-
-  <p class="reveal">The conversation does what GAIL's might hope it would. Food, pastry and bakery picks lead, then London neighbourhood guides, then coffee and matcha rituals. Mum and family moments and book club community content stack on top. The brand is the recurring stop inside lifestyle vlogs, not a product to be reviewed. We kept looking for a partnership disclosure pattern and couldn't find one, only three of the 56 captions read as paid.</p>
-
-  <p class="reveal">The pull is visible at every reach tier. Tanya Burr (4.2M Instagram followers) included GAIL's in an organic <a class="post-link-inline" href="https://www.instagram.com/p/DVfs29cDc00/" target="_blank">Life Lately</a> reel for 11,995 likes. Leonora Smee (139K) made GAIL's the prop in a <a class="post-link-inline" href="https://www.instagram.com/p/DVyy6p5M0AC/" target="_blank">Mother's Day Favourite Child</a> reel for 46K views. Ben Magee, with just 10,502 followers, hit 21% engagement on a <a class="post-link-inline" href="https://www.instagram.com/p/DViL9nPDE-n/" target="_blank">Marylebone neighbourhood</a> guide. The comment-density signal, where 30% or more of likes have a matching comment, turns up on smaller community-led accounts like London Girls Book Club (33% on a single GAIL's post) and Jess Keeps Cooking (29%).</p>
-
-  <p class="reveal">The interesting question this raises: with this many creators choosing GAIL's, why isn't the same name showing up twice? Across the 56 posts, the average creator posts about GAIL's once. Across the competitive set, the retainer-running brands (Blank Street, Peggy Porschen, Nkora Coffee) have specific creator pairs at three, four, eight repeat posts. The earned signal is here. The repeat cadence is what would make it a programme.</p>
-
-  <div class="callout reveal">
-    <span class="callout-label">The Earned Engine</span>
-    <p>Fifty-one unique creators tagged GAIL's unprompted in 37 days. Most brands in the London Cafés &amp; Bakeries category run paid budgets trying to reach that number. The next step is the rhythm: turn the earned voices into a repeatable bench.</p>
-  </div>
+<div class="sec-label reveal">02 · Influencer Intelligence</div>
+<h2 class="sec-headline reveal">Fifty-one creators tagged GAIL's without prompting. That's already the headline.</h2>
+<p class="sec-lead reveal">Across the 37-day category window (13 Feb to 22 Mar 2026), 56 Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) landed for GAIL's. They came from 51 distinct creators, and 53 of the 56 carried no partnership signal. That is earned creator media at a volume most competitors spend paid budgets trying to reach.</p>
+<div class="stat-grid-3 reveal stagger">
+<div class="stat">
+<div class="lbl">Creator Tagged Posts</div>
+<div class="abs"><span data-count="56" data-format="comma">56</span></div>
+<div class="ctx">37-day category window, GAIL's specific</div>
+</div>
+<div class="stat">
+<div class="lbl">Unique creators</div>
+<div class="abs"><span data-count="51" data-format="comma">51</span></div>
+<div class="ctx">96% with no partnership tag in caption</div>
+</div>
+<div class="stat dark">
+<div class="lbl">Posts per creator</div>
+<div class="abs"><span data-count="1.1" data-format="comma" data-suffix="×">1.1×</span></div>
+<div class="ctx">Retainer competitors run 3 to 8 posts per creator</div>
+</div>
+</div>
+<h4 style="font-size:14px;font-weight:500;margin:32px 0 12px;letter-spacing:-0.01em;">The themes creators land on when they tag GAIL's</h4>
+<div class="theme-grid reveal stagger">
+<div class="theme-row">
+<div class="name">Food, pastry and bakery picks</div>
+<div class="bar"><span data-width="100.0"></span></div>
+<div class="pct">22 · 39%</div>
+</div>
+<div class="theme-row">
+<div class="name">London lifestyle and neighbourhood guides</div>
+<div class="bar"><span data-width="63.6"></span></div>
+<div class="pct">14 · 25%</div>
+</div>
+<div class="theme-row">
+<div class="name">Coffee and matcha culture</div>
+<div class="bar"><span data-width="49.9"></span></div>
+<div class="pct">11 · 20%</div>
+</div>
+<div class="theme-row">
+<div class="name">Book club, community and friends</div>
+<div class="bar"><span data-width="45.5"></span></div>
+<div class="pct">10 · 18%</div>
+</div>
+<div class="theme-row">
+<div class="name">Mum, family and motherhood moments</div>
+<div class="bar"><span data-width="41.0"></span></div>
+<div class="pct">9 · 16%</div>
+</div>
+<div class="theme-row">
+<div class="name">Day-in-life vlogs and daily routines</div>
+<div class="bar"><span data-width="36.4"></span></div>
+<div class="pct">8 · 14%</div>
+</div>
+<div class="theme-row">
+<div class="name">Birthday and celebration treats</div>
+<div class="bar"><span data-width="22.6"></span></div>
+<div class="pct">5 · 9%</div>
+</div>
+</div>
+<p class="reveal">The conversation does what GAIL's might hope it would. Food, pastry and bakery picks lead, then London neighbourhood guides, then coffee and matcha rituals. Mum and family moments and book club community content stack on top. The brand is the recurring stop inside lifestyle vlogs, not a product to be reviewed. We kept looking for a partnership disclosure pattern and couldn't find one, only three of the 56 captions read as paid.</p>
+<p class="reveal">The pull is visible at every reach tier. Tanya Burr (4.2M Instagram followers) included GAIL's in an organic <a class="post-link-inline" href="https://www.instagram.com/p/DVfs29cDc00/" target="_blank">Life Lately</a> reel for 11,995 likes. Leonora Smee (139K) made GAIL's the prop in a <a class="post-link-inline" href="https://www.instagram.com/p/DVyy6p5M0AC/" target="_blank">Mother's Day Favourite Child</a> reel for 46K views. Ben Magee, with just 10,502 followers, hit 21% engagement on a <a class="post-link-inline" href="https://www.instagram.com/p/DViL9nPDE-n/" target="_blank">Marylebone neighbourhood</a> guide. The comment-density signal, where 30% or more of likes have a matching comment, turns up on smaller community-led accounts like London Girls Book Club (33% on a single GAIL's post) and Jess Keeps Cooking (29%).</p>
+<p class="reveal">The interesting question this raises: with this many creators choosing GAIL's, why isn't the same name showing up twice? Across the 56 posts, the average creator posts about GAIL's once. Across the competitive set, the retainer-running brands (Blank Street, Peggy Porschen, Nkora Coffee) have specific creator pairs at three, four, eight repeat posts. The earned signal is here. The repeat cadence is what would make it a programme.</p>
+<div class="callout reveal">
+<span class="callout-label">The Earned Engine</span>
+<p>Fifty-one unique creators tagged GAIL's unprompted in 37 days. Most brands in the London Cafés &amp; Bakeries category run paid budgets trying to reach that number. The next step is the rhythm: turn the earned voices into a repeatable bench.</p>
+</div>
 </section>
-
 <section id="competitors">
-  <div class="sec-label reveal">03 · Competitor Deep-Dive</div>
-  <h2 class="sec-headline reveal">Blank Street is running a stack of nine plays; most of the niche runs one or two; GAIL's runs one.</h2>
-  <p class="sec-lead reveal">Across the same 37-day window, the brands GAIL's is benchmarked against are detected on a measurable count of recognised creator strategies. The category's most visible competitor isn't winning on a single tactic, it's running a stack.</p>
-
-  <table class="ctable reveal">
-    <thead>
-      <tr>
-        <th>Brand</th>
-        <th class="num">IG followers</th>
-        <th class="num">UK locations</th>
-        <th class="num">Strategies detected</th>
-        <th class="num">Active ad creatives</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="target">
-        <td><img src="https://first-possum-672.convex.cloud/api/storage/64aaa003-ce7c-4c22-96cc-9d9c39a9ca48" alt="GAIL&#x27;s Bakery" onerror="this.style.display='none'">GAIL&#x27;s Bakery</td>
-        <td class="num">166K</td>
-        <td class="num">170</td>
-        <td class="num">1</td>
-        <td class="num">1</td>
-      </tr>
-      <tr>
-        <td><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street Coffee" onerror="this.style.display='none'">Blank Street Coffee</td>
-        <td class="num">169K</td>
-        <td class="num">40</td>
-        <td class="num">9</td>
-        <td class="num">0</td>
-      </tr>
-      <tr>
-        <td><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/396bef03-263d-46a0-88d2-57ebc966d747" alt="Peggy Porschen" onerror="this.style.display='none'">Peggy Porschen</td>
-        <td class="num">749K</td>
-        <td class="num">2</td>
-        <td class="num">3</td>
-        <td class="num">0</td>
-      </tr>
-      <tr>
-        <td><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391" alt="Fred Bakery" onerror="this.style.display='none'">Fred Bakery</td>
-        <td class="num">40K</td>
-        <td class="num">1</td>
-        <td class="num">4</td>
-        <td class="num">0</td>
-      </tr>
-      <tr>
-        <td><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead Bakery" onerror="this.style.display='none'">Bread Ahead Bakery</td>
-        <td class="num">424K</td>
-        <td class="num">6</td>
-        <td class="num">3</td>
-        <td class="num">11</td>
-      </tr>
-      <tr>
-        <td><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484" alt="EL&amp;N London" onerror="this.style.display='none'">EL&amp;N London</td>
-        <td class="num">957K</td>
-        <td class="num">10</td>
-        <td class="num">3</td>
-        <td class="num">1</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="sec-label reveal">03 · Competitor Deep-Dive</div>
+<h2 class="sec-headline reveal">Blank Street is running a stack of nine plays; most of the niche runs one or two; GAIL's runs one.</h2>
+<p class="sec-lead reveal">Across the same 37-day window, the brands GAIL's is benchmarked against are detected on a measurable count of recognised creator strategies. The category's most visible competitor isn't winning on a single tactic, it's running a stack.</p>
+<table class="ctable reveal">
+<thead>
+<tr>
+<th>Brand</th>
+<th class="num">IG followers</th>
+<th class="num">UK locations</th>
+<th class="num">Strategies detected</th>
+<th class="num">Active ad creatives</th>
+</tr>
+</thead>
+<tbody>
+<tr class="target">
+<td><img alt="GAIL's Bakery" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/64aaa003-ce7c-4c22-96cc-9d9c39a9ca48"/>GAIL's Bakery</td>
+<td class="num">166K</td>
+<td class="num">170</td>
+<td class="num">1</td>
+<td class="num">1</td>
+</tr>
+<tr>
+<td><img alt="Blank Street Coffee" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2"/>Blank Street Coffee</td>
+<td class="num">169K</td>
+<td class="num">40</td>
+<td class="num">9</td>
+<td class="num">0</td>
+</tr>
+<tr>
+<td><img alt="Peggy Porschen" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/396bef03-263d-46a0-88d2-57ebc966d747"/>Peggy Porschen</td>
+<td class="num">749K</td>
+<td class="num">2</td>
+<td class="num">3</td>
+<td class="num">0</td>
+</tr>
+<tr>
+<td><img alt="Fred Bakery" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391"/>Fred Bakery</td>
+<td class="num">40K</td>
+<td class="num">1</td>
+<td class="num">4</td>
+<td class="num">0</td>
+</tr>
+<tr>
+<td><img alt="Bread Ahead Bakery" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce"/>Bread Ahead Bakery</td>
+<td class="num">424K</td>
+<td class="num">6</td>
+<td class="num">3</td>
+<td class="num">11</td>
+</tr>
+<tr>
+<td><img alt="EL&amp;N London" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484"/>EL&amp;N London</td>
+<td class="num">957K</td>
+<td class="num">10</td>
+<td class="num">3</td>
+<td class="num">1</td>
+</tr>
+</tbody>
+</table>
 <div class="comp-grid reveal stagger">
-  <div class="cc cc-target">
-    <div class="cc-hdr">
-      <img src="https://first-possum-672.convex.cloud/api/storage/64aaa003-ce7c-4c22-96cc-9d9c39a9ca48" alt="GAIL's" onerror="this.style.display='none'">
-      <div>
-        <div class="cc-name">GAIL's Bakery</div>
-        <div class="cc-handle">@gailsbakery · 166K followers · 170 locations</div>
-      </div>
-    </div>
-    <div class="cc-body">
-      <p>Top of the niche on Instagram reach, second on physical footprint. 51 unique creators tagged the brand unprompted in 37 days. The single detected strategy is UGC for Brand Feed, where GAIL's ranks 7 against competitors running it at scale.</p>
-      <div class="cc-strats">
-        <div class="lbl">Strategies in play</div>
-        <span class="s">UGC for Brand Feed</span>
-      </div>
-    </div>
-  </div>
-  <div class="cc">
-    <div class="cc-hdr">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street Coffee" onerror="this.style.display='none'">
-      <div>
-        <div class="cc-name">Blank Street Coffee</div>
-        <div class="cc-handle">@blankstreet</div>
-      </div>
-    </div>
-    <div class="cc-body">
-      <p>The category&#x27;s pace-setter on creator infrastructure. Detected on nine separate strategies in the window, retainers, earned mentions, a creator collective, gifting and seeding, geo-clusters, ambassadors, press trips, plus its own brand-affiliated channels. Its TikTok-Gen-Z dynamic drove a ~$500M valuation in 2025, and 268 unique creators tagged it in the 37-day window.</p>
-      <div class="cc-strats">
-        <div class="lbl">Strategies in play</div>
-        <span class="s">UGC for Brand Feed</span> <span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Always-On Creator Retainers</span>
-      </div>
-    </div>
-  </div>
-  <div class="cc">
-    <div class="cc-hdr">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/396bef03-263d-46a0-88d2-57ebc966d747" alt="Peggy Porschen" onerror="this.style.display='none'">
-      <div>
-        <div class="cc-name">Peggy Porschen</div>
-        <div class="cc-handle">@peggyporschenofficial</div>
-      </div>
-    </div>
-    <div class="cc-body">
-      <p>Belgravia premium bakery running an aesthetic Instagram play. Detected on three strategies including always-on retainers and earned mentions, with creator @danixlemon posting four times in the window, the kind of single-creator volume that flags a contracted relationship.</p>
-      <div class="cc-strats">
-        <div class="lbl">Strategies in play</div>
-        <span class="s">Earned Organic Mentions</span> <span class="s">Always-On Creator Retainers</span> <span class="s">Alt-Handle / Brand-Affiliated Creator Channel</span>
-      </div>
-    </div>
-  </div>
-  <div class="cc">
-    <div class="cc-hdr">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391" alt="Fred Bakery" onerror="this.style.display='none'">
-      <div>
-        <div class="cc-name">Fred Bakery</div>
-        <div class="cc-handle">@fredbakery</div>
-      </div>
-    </div>
-    <div class="cc-body">
-      <p>Holborn-anchored modern bakery running four plays: creator collective, geo-clustered micro-creators, press trips, and the UGC-for-brand-feed pattern GAIL&#x27;s also runs. 77 Creator Tagged Posts in the window from 70 different creators.</p>
-      <div class="cc-strats">
-        <div class="lbl">Strategies in play</div>
-        <span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Press &amp; Brand Trips</span> <span class="s">Geo-Clustered Micro-Creators</span>
-      </div>
-    </div>
-  </div>
-  <div class="cc">
-    <div class="cc-hdr">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead Bakery" onerror="this.style.display='none'">
-      <div>
-        <div class="cc-name">Bread Ahead Bakery</div>
-        <div class="cc-handle">@breadaheadbakery</div>
-      </div>
-    </div>
-    <div class="cc-body">
-      <p>South Kensington artisan bakery with a doughnut-school proposition. Running three plays, geo-clustered micros, long-term ambassador, press and brand trips. One of the named brands inside the top-100 longest-running creator-shot ads (129 days still-active).</p>
-      <div class="cc-strats">
-        <div class="lbl">Strategies in play</div>
-        <span class="s">Press &amp; Brand Trips</span> <span class="s">Long-Term Brand Ambassador</span> <span class="s">Geo-Clustered Micro-Creators</span>
-      </div>
-    </div>
-  </div>
-  <div class="cc">
-    <div class="cc-hdr">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484" alt="EL&amp;N London" onerror="this.style.display='none'">
-      <div>
-        <div class="cc-name">EL&amp;N London</div>
-        <div class="cc-handle">@elan_cafe</div>
-      </div>
-    </div>
-    <div class="cc-body">
-      <p>Pink-aesthetic café chain across London running three plays, earned organic mentions, creator collective, press trips. Instagram-native; 39 Creator Tagged Posts from 34 creators in the same 37-day window.</p>
-      <div class="cc-strats">
-        <div class="lbl">Strategies in play</div>
-        <span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Press &amp; Brand Trips</span>
-      </div>
-    </div>
-  </div>
+<div class="cc cc-target">
+<div class="cc-hdr">
+<img alt="GAIL's" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/64aaa003-ce7c-4c22-96cc-9d9c39a9ca48"/>
+<div>
+<div class="cc-name">GAIL's Bakery</div>
+<div class="cc-handle">@gailsbakery · 166K followers · 170 locations</div>
 </div>
-
-  <div class="mpo reveal">
-    <div class="mpo-hdr">Multi-play operators · Brands running 3+ plays</div>
-    <div class="item">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2" alt="Blank Street Coffee - Monument" onerror="this.style.display='none'">
-      <div>
-        <div class="pname">Blank Street Coffee - Monument</div>
-        <div class="pdesc">Running 9 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
-      </div>
-    </div>
-    <div class="item">
-      <img src="https://first-possum-672.convex.cloud/api/storage/e19708d4-667d-485e-ba3a-ff3d9669f8b1" alt="Capilungo Restaurant" onerror="this.style.display='none'">
-      <div>
-        <div class="pname">Capilungo Restaurant</div>
-        <div class="pdesc">Running 5 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding, Press &amp; Brand Trips</div>
-      </div>
-    </div>
-    <div class="item">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391" alt="Fred Bakery Holborn" onerror="this.style.display='none'">
-      <div>
-        <div class="pname">Fred Bakery Holborn</div>
-        <div class="pdesc">Running 4 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Press &amp; Brand Trips</div>
-      </div>
-    </div>
-    <div class="item">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce" alt="Bread Ahead Bakery South Kensington" onerror="this.style.display='none'">
-      <div>
-        <div class="pname">Bread Ahead Bakery South Kensington</div>
-        <div class="pdesc">Running 3 plays: Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips</div>
-      </div>
-    </div>
-    <div class="item">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484" alt="EL&amp;N London - Brompton Road" onerror="this.style.display='none'">
-      <div>
-        <div class="pname">EL&amp;N London - Brompton Road</div>
-        <div class="pdesc">Running 3 plays: Creator Collective / Volume Model, Earned Organic Mentions, Press &amp; Brand Trips</div>
-      </div>
-    </div>
-    <div class="item">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e4226c96-a7ff-4041-9237-a84a04826668" alt="Feya" onerror="this.style.display='none'">
-      <div>
-        <div class="pname">Feya</div>
-        <div class="pdesc">Running 3 plays: Earned Organic Mentions, Geo-Clustered Micro-Creators, UGC for Brand Feed</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="chart-wrap reveal">
-    <h4>Total Instagram views in the niche window, GAIL's against the named set</h4>
-    <p class="sub">Each brand a distinct colour. Source: Table 01 brand aggregates.</p>
-    <div style="height:300px;"><canvas id="chartCompViews"></canvas></div>
-  </div>
-
-  <div class="callout reveal">
-    <span class="callout-label">The Multi-Play Stack</span>
-    <p>Blank Street Coffee is running nine plays simultaneously: a retainer bench, an earned-mention engine, a creator collective, gifting, geo-clusters across new openings, an ambassador layer, press trips, a UGC-for-feed pattern, and an alt-handle creator channel. The category's most visible competitor isn't winning on one tactic; it's running a stack.</p>
-  </div>
+</div>
+<div class="cc-body">
+<p>Top of the niche on Instagram reach, second on physical footprint. 51 unique creators tagged the brand unprompted in 37 days. The single detected strategy is UGC for Brand Feed, where GAIL's ranks 7 against competitors running it at scale.</p>
+<div class="cc-strats">
+<div class="lbl">Strategies in play</div>
+<span class="s">UGC for Brand Feed</span>
+</div>
+</div>
+</div>
+<div class="cc">
+<div class="cc-hdr">
+<img alt="Blank Street Coffee" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2"/>
+<div>
+<div class="cc-name">Blank Street Coffee</div>
+<div class="cc-handle">@blankstreet</div>
+</div>
+</div>
+<div class="cc-body">
+<p>The category's pace-setter on creator infrastructure. Detected on nine separate strategies in the window, retainers, earned mentions, a creator collective, gifting and seeding, geo-clusters, ambassadors, press trips, plus its own brand-affiliated channels. Its TikTok-Gen-Z dynamic drove a ~$500M valuation in 2025, and 268 unique creators tagged it in the 37-day window.</p>
+<div class="cc-strats">
+<div class="lbl">Strategies in play</div>
+<span class="s">UGC for Brand Feed</span> <span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Always-On Creator Retainers</span>
+</div>
+</div>
+</div>
+<div class="cc">
+<div class="cc-hdr">
+<img alt="Peggy Porschen" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/396bef03-263d-46a0-88d2-57ebc966d747"/>
+<div>
+<div class="cc-name">Peggy Porschen</div>
+<div class="cc-handle">@peggyporschenofficial</div>
+</div>
+</div>
+<div class="cc-body">
+<p>Belgravia premium bakery running an aesthetic Instagram play. Detected on three strategies including always-on retainers and earned mentions, with creator @danixlemon posting four times in the window, the kind of single-creator volume that flags a contracted relationship.</p>
+<div class="cc-strats">
+<div class="lbl">Strategies in play</div>
+<span class="s">Earned Organic Mentions</span> <span class="s">Always-On Creator Retainers</span> <span class="s">Alt-Handle / Brand-Affiliated Creator Channel</span>
+</div>
+</div>
+</div>
+<div class="cc">
+<div class="cc-hdr">
+<img alt="Fred Bakery" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391"/>
+<div>
+<div class="cc-name">Fred Bakery</div>
+<div class="cc-handle">@fredbakery</div>
+</div>
+</div>
+<div class="cc-body">
+<p>Holborn-anchored modern bakery running four plays: creator collective, geo-clustered micro-creators, press trips, and the UGC-for-brand-feed pattern GAIL's also runs. 77 Creator Tagged Posts in the window from 70 different creators.</p>
+<div class="cc-strats">
+<div class="lbl">Strategies in play</div>
+<span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Press &amp; Brand Trips</span> <span class="s">Geo-Clustered Micro-Creators</span>
+</div>
+</div>
+</div>
+<div class="cc">
+<div class="cc-hdr">
+<img alt="Bread Ahead Bakery" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce"/>
+<div>
+<div class="cc-name">Bread Ahead Bakery</div>
+<div class="cc-handle">@breadaheadbakery</div>
+</div>
+</div>
+<div class="cc-body">
+<p>South Kensington artisan bakery with a doughnut-school proposition. Running three plays, geo-clustered micros, long-term ambassador, press and brand trips. One of the named brands inside the top-100 longest-running creator-shot ads (129 days still-active).</p>
+<div class="cc-strats">
+<div class="lbl">Strategies in play</div>
+<span class="s">Press &amp; Brand Trips</span> <span class="s">Long-Term Brand Ambassador</span> <span class="s">Geo-Clustered Micro-Creators</span>
+</div>
+</div>
+</div>
+<div class="cc">
+<div class="cc-hdr">
+<img alt="EL&amp;N London" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484"/>
+<div>
+<div class="cc-name">EL&amp;N London</div>
+<div class="cc-handle">@elan_cafe</div>
+</div>
+</div>
+<div class="cc-body">
+<p>Pink-aesthetic café chain across London running three plays, earned organic mentions, creator collective, press trips. Instagram-native; 39 Creator Tagged Posts from 34 creators in the same 37-day window.</p>
+<div class="cc-strats">
+<div class="lbl">Strategies in play</div>
+<span class="s">Earned Organic Mentions</span> <span class="s">Creator Collective / Volume Model</span> <span class="s">Press &amp; Brand Trips</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mpo reveal">
+<div class="mpo-hdr">Multi-play operators · Brands running 3+ plays</div>
+<div class="item">
+<img alt="Blank Street Coffee - Monument" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/25d63497-6afa-43d5-ae90-4276cd5e85f2"/>
+<div>
+<div class="pname">Blank Street Coffee - Monument</div>
+<div class="pdesc">Running 9 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
+</div>
+</div>
+<div class="item">
+<img alt="Capilungo Restaurant" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/e19708d4-667d-485e-ba3a-ff3d9669f8b1"/>
+<div>
+<div class="pname">Capilungo Restaurant</div>
+<div class="pdesc">Running 5 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, High-Value Gifting &amp; Seeding, Press &amp; Brand Trips</div>
+</div>
+</div>
+<div class="item">
+<img alt="Fred Bakery Holborn" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/398db0c0-95f8-48f9-bc36-9bb6eed93391"/>
+<div>
+<div class="pname">Fred Bakery Holborn</div>
+<div class="pdesc">Running 4 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Press &amp; Brand Trips</div>
+</div>
+</div>
+<div class="item">
+<img alt="Bread Ahead Bakery South Kensington" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ceacca2-f7d8-4b83-950b-16d863237cce"/>
+<div>
+<div class="pname">Bread Ahead Bakery South Kensington</div>
+<div class="pdesc">Running 3 plays: Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips</div>
+</div>
+</div>
+<div class="item">
+<img alt="EL&amp;N London - Brompton Road" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d15fbfc2-0541-4b69-aaf0-7b19fc861484"/>
+<div>
+<div class="pname">EL&amp;N London - Brompton Road</div>
+<div class="pdesc">Running 3 plays: Creator Collective / Volume Model, Earned Organic Mentions, Press &amp; Brand Trips</div>
+</div>
+</div>
+<div class="item">
+<img alt="Feya" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e4226c96-a7ff-4041-9237-a84a04826668"/>
+<div>
+<div class="pname">Feya</div>
+<div class="pdesc">Running 3 plays: Earned Organic Mentions, Geo-Clustered Micro-Creators, UGC for Brand Feed</div>
+</div>
+</div>
+</div>
+<div class="chart-wrap reveal">
+<h4>Total Instagram views in the niche window, GAIL's against the named set</h4>
+<p class="sub">Each brand a distinct colour. Source: Table 01 brand aggregates.</p>
+<div style="height:300px;"><canvas id="chartCompViews"></canvas></div>
+</div>
+<div class="callout reveal">
+<span class="callout-label">The Multi-Play Stack</span>
+<p>Blank Street Coffee is running nine plays simultaneously: a retainer bench, an earned-mention engine, a creator collective, gifting, geo-clusters across new openings, an ambassador layer, press trips, a UGC-for-feed pattern, and an alt-handle creator channel. The category's most visible competitor isn't winning on one tactic; it's running a stack.</p>
+</div>
 </section>
-
 <section id="paid">
-  <div class="sec-label reveal">04 · Creator Content in Paid</div>
-  <h2 class="sec-headline reveal">The category's paid budget runs on creator-shot content. GAIL's commissions none.</h2>
-  <p class="sec-lead reveal">Across the niche window, 539 ad creatives entered the Meta Ad Library and 363 are still active at time of analysis. 21% of the top-100 creatives by longevity are creator-shot. The 60+ day still-active survival rate sits at 16%, above the ~11% industry benchmark, meaning the bakeries and cafés that commission creator content in paid are getting an above-average return on the creatives they ship.</p>
-
-  <div class="stat-grid-6b reveal stagger">
-    <div class="stat"><div class="abs"><span data-count="363" data-format="comma">363</span></div><div class="lbl">Live ad creatives in niche</div></div>
-    <div class="stat"><div class="abs"><span data-count="21" data-format="comma" data-suffix="%">21%</span></div><div class="lbl">Of top 100 are creator-shot</div></div>
-    <div class="stat dark"><div class="abs"><span data-count="16" data-format="comma" data-suffix="%">16%</span></div><div class="lbl">60+ day survival vs 11% benchmark</div></div>
-    <div class="stat"><div class="abs"><span data-count="17" data-format="comma" data-suffix="%">17%</span></div><div class="lbl">Of 60+ day winners are UGC / lifestyle</div></div>
-    <div class="stat"><div class="abs"><span data-count="0" data-format="comma">0</span></div><div class="lbl">GAIL's creator-shot ads active</div></div>
-    <div class="stat dark"><div class="abs"><span data-count="7.5" data-format="comma">7.5</span></div><div class="lbl">Median competitor active creatives</div></div>
-  </div>
-
-  <p class="reveal">The volume side of the category is dominated by a handful of brands: Grind with 41 live creatives, Origin Coffee Roasters with 37, Wenzel's the Baker with 28, Brigit's Bakery with 27, Volcano Coffee Works with 17. Who commissions creator content sits in a different group entirely. Across the top-100 ad creatives by longevity, GayaBakeryLondon and Huffkins both run 19% creator-shot mix, then The Tolpuddle Café and Pieminister at 12.5% each. Lola's Cupcakes and Bread Ahead carry creator content forward into paid at lower volume but with high longevity.</p>
-
-  <div class="chart-pair reveal">
-    <div class="chart-wrap" style="margin:0;">
-      <h4>Longevity buckets across all 539 creatives</h4>
-      <p class="sub">Still-active vs expired by max days running.</p>
-      <div style="height:280px;"><canvas id="chartLongevity"></canvas></div>
-    </div>
-    <div class="chart-wrap" style="margin:0;">
-      <h4>Winner DNA: 60+ day survivors vs the full pool</h4>
-      <p class="sub">Where survivor creative leans (in percentage points).</p>
-      <div style="height:280px;"><canvas id="chartWinnerDNA"></canvas></div>
-    </div>
-  </div>
-
-  <p class="reveal">Low-production creative over-indexes by 11 percentage points in the survivor pool versus the full pool. Image creative over-indexes by 6 points, Static Graphic by 4, and Bottom-of-Funnel direct-offer creative by 5.6. The pattern: cheap, fast, decision-stage creative tends to outlast cinematic brand campaigns. Carousel formats under-index by 8.7 points in survivors, the format that performs in organic isn't the format that survives in paid.</p>
-
-  <h4 style="font-size:14px;font-weight:500;margin:32px 0 12px;letter-spacing:-0.01em;">Top 10 longest-running still-active creative, flagged for creator-shot</h4>
-  <div class="ad-grid reveal stagger">
-    <a href="https://www.facebook.com/ads/library?id=191329249760774" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge creator">Creator-shot</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/f489f236-7fe6-4f96-8c06-cc18767c2183" alt="M.Manze Pie and Mash, Tower Bridge Road SE1" onerror="this.style.display='none'">
-      </div>
-      <div class="body">
-        <div class="brand">M.Manze Pie and Mash, Tower Bridge Road SE1</div>
-        <div class="days">1708 days</div>
-        <div class="meta">Lifestyle · image</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=470661439001042" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge creator">Creator-shot</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/abe15435-c11e-4e68-8a6e-3b8cb7c63747" alt="Origin Coffee Roasters ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/9b30aebb-8d80-47c6-89bc-137a5cc33855';">
-      </div>
-      <div class="body">
-        <div class="brand">Origin Coffee Roasters</div>
-        <div class="days">514 days</div>
-        <div class="meta">UGC · video</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=1447927442864649" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge ">Brand-produced</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/9b30aebb-8d80-47c6-89bc-137a5cc33855" alt="Origin Coffee Roasters" onerror="this.style.display='none'">
-      </div>
-      <div class="body">
-        <div class="brand">Origin Coffee Roasters</div>
-        <div class="days">394 days</div>
-        <div class="meta">Static Graphic · carousel</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=1128638549023136" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge creator">Creator-shot</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/428f579f-321a-4f20-9edb-1c320871dae2" alt="Jack and Beyond" onerror="this.style.display='none'">
-      </div>
-      <div class="body">
-        <div class="brand">Jack and Beyond</div>
-        <div class="days">364 days</div>
-        <div class="meta">Lifestyle · carousel</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=600945578984878" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge ">Brand-produced</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/428f579f-321a-4f20-9edb-1c320871dae2" alt="Jack and Beyond" onerror="this.style.display='none'">
-      </div>
-      <div class="body">
-        <div class="brand">Jack and Beyond</div>
-        <div class="days">363 days</div>
-        <div class="meta">Product-Only · carousel</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=691262070156165" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge ">Brand-produced</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/3cd4d75b-f043-4a7d-b367-057d007bfdec" alt="Origin Coffee Roasters ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/9b30aebb-8d80-47c6-89bc-137a5cc33855';">
-      </div>
-      <div class="body">
-        <div class="brand">Origin Coffee Roasters</div>
-        <div class="days">360 days</div>
-        <div class="meta">Polished Brand · video</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=1036195778701648" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge ">Brand-produced</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/d6eb6983-45d2-4744-ac5d-e78cefe776ec" alt="Chai Guys" onerror="this.style.display='none'">
-      </div>
-      <div class="body">
-        <div class="brand">Chai Guys</div>
-        <div class="days">318 days</div>
-        <div class="meta">Product-Only · carousel</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=1141434057969226" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge creator">Creator-shot</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/6d086c8a-7863-4861-8de5-2828981b34ba" alt="Studio Tiramisù" onerror="this.style.display='none'">
-      </div>
-      <div class="body">
-        <div class="brand">Studio Tiramisù</div>
-        <div class="days">213 days</div>
-        <div class="meta">UGC · image</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=1580226112980791" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge ">Brand-produced</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/92b83bcb-52af-4de5-ab2e-5a0d4c08f290" alt="Limebistrocafe ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/06555c28-02a2-409d-83ac-b97cb2d25f7a';">
-      </div>
-      <div class="body">
-        <div class="brand">Limebistrocafe</div>
-        <div class="days">135 days</div>
-        <div class="meta">Polished Brand · video</div>
-      </div>
-    </div></a>
-    <a href="https://www.facebook.com/ads/library?id=872825792112999" target="_blank" style="text-decoration:none;color:inherit;display:block;"><div class="ad-card">
-      <div class="thumb">
-        <span class="badge ">Brand-produced</span>
-        <img src="https://first-possum-672.convex.cloud/api/storage/a327cea4-dff7-4fcf-a9af-095ab95994cb" alt="Bread Ahead Bakery &amp; School ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/ba3d5450-dcd6-42c9-98a1-48cb9261606b';">
-      </div>
-      <div class="body">
-        <div class="brand">Bread Ahead Bakery &amp; School</div>
-        <div class="days">129 days</div>
-        <div class="meta">Polished Brand · video</div>
-      </div>
-    </div></a>
-  </div>
-
-  <p class="reveal">M.Manze's pie and mash close-up has been live 1,708 days. Origin Coffee Roasters has a UGC reel running at 514 days. Huffkins runs three creator-shot variants at 114 days each, one per town, all offering a free cake, a textbook geo-cluster micro-creator template. The pattern across the survivors is consistent: low-friction creator-shot content with a single hook either outlives polished brand-produced cinema or runs alongside it in the long-tail.</p>
-
-  <div class="callout reveal">
-    <span class="callout-label">The Commissioning Gap</span>
-    <p>21% of the top 100 niche ad creatives are creator-shot, and 16% of the full 539-ad pool has survived 60+ days still-active, well above the ~11% industry benchmark. GAIL&#x27;s commissions zero creator content for paid: one Meta ad that ran eight days against competitors maintaining 10+ live creatives with creator-led variants surviving 100-1,700 days. The gap is not budget; it is a creator pipeline producing enough variants to test at category cadence.</p>
-  </div>
-</section>
-
-<section id="feed">
-  <div class="sec-label reveal">05 · Feed Content Strategy</div>
-  <h2 class="sec-headline reveal">Recipe content wins by 5.4×. GAIL's makes it once every sixteen posts.</h2>
-
-  <div class="stat-grid-3 reveal stagger">
-    <div class="stat">
-      <div class="lbl">Top own-feed post</div>
-      <div class="abs"><span data-count="10084" data-format="comma">10,084</span></div>
-      <div class="ctx">Carrot cake recipe Reel, 27 March</div>
-    </div>
-    <div class="stat">
-      <div class="lbl">Winning pillar</div>
-      <div class="abs"><span data-count="3700" data-format="comma">3,700</span></div>
-      <div class="ctx">Recipe / How-To avg likes · 5.4× Product Storytelling</div>
-    </div>
-    <div class="stat dark">
-      <div class="lbl">Share of feed</div>
-      <div class="abs"><span data-count="6" data-format="comma" data-suffix="%">6%</span></div>
-      <div class="ctx">3 of 47 own-feed posts in 90-day window</div>
-    </div>
-  </div>
-
-  <p class="reveal">Across the 90-day brand window, GAIL's published 47 own-feed posts on Instagram. 22 of them are carousels, 20 are videos, and 5 are photos. The average post pulled 623 likes, with the median sitting lower at 354, the kind of distribution where a small number of standout posts carry the engagement and the rest sit in the workmanlike middle. The averages obscure a more useful signal: the pillar mix.</p>
-
-  <p class="reveal">Recipe and How-To posts averaged 3,700 likes apiece, the highest of any pillar GAIL's runs. Behind-the-Scenes content sat at 1,654. Product Storytelling, the dominant pillar by volume with 18 of 47 posts, averaged 680. Seasonal and Promotional posts ran 434. Lifestyle and Neighbourhood content landed at 421. The pillar that wins per post is the one the brand publishes least, and the pillar that dominates volume is the lowest performer in the set.</p>
-
-  <div class="chart-pair reveal">
-    <div class="chart-wrap" style="margin:0;">
-      <h4>Average likes by content pillar</h4>
-      <p class="sub">Recipe / How-To highlighted in BRAND_PRIMARY.</p>
-      <div style="height:260px;"><canvas id="chartPillarAvg"></canvas></div>
-    </div>
-    <div class="chart-wrap" style="margin:0;">
-      <h4>Posts by pillar, the distribution gap</h4>
-      <p class="sub">High-volume pillars are low-performance; low-volume are high-performance.</p>
-      <div style="height:260px;"><canvas id="chartPillarCount"></canvas></div>
-    </div>
-  </div>
-
-  <h4 style="font-size:14px;font-weight:500;margin:32px 0 12px;letter-spacing:-0.01em;">The five posts your audience picked</h4>
-  <p class="reveal">A brief creative read on the five posts that pulled the most likes in the window. The middle card carries the canonical example the rest of the section builds on.</p>
-
-  <div class="post-grid reveal stagger">
-    <div class="post-card is-highlight">
-      <div class="thumb">VIDEO</div>
-      <div class="body">
-        <div class="rk">01 · Recipe / How-To</div>
-        <div class="lk"><span data-count="10084" data-format="comma">10,084</span></div>
-        <div class="meta"><span data-count="251" data-format="comma">251</span> comments · Video</div>
-        <div class="desc">Step-by-step carrot cake recipe Reel filmed on countertop. Muscovado, cinnamon, walnuts, the GAIL&#x27;s tin in shot. Published 27 March, 251 comments below the line.</div>
-        <a href="https://www.instagram.com/p/DWY7OoxDP6E/" target="_blank" class="link">View post ↗</a>
-      </div>
-    </div>
-    <div class="post-card">
-      <div class="thumb">PHOTO</div>
-      <div class="body">
-        <div class="rk">02 · Product Storytelling</div>
-        <div class="lk"><span data-count="3220" data-format="comma">3,220</span></div>
-        <div class="meta"><span data-count="56" data-format="comma">56</span> comments · Photo</div>
-        <div class="desc">Monday pick-me-up flatlay of espresso drinks under soft window light. Three coffees, three textures, the choose-your-own-character framing. 56 comments.</div>
-        <a href="https://www.instagram.com/p/DU0h545jLFu/" target="_blank" class="link">View post ↗</a>
-      </div>
-    </div>
-    <div class="post-card">
-      <div class="thumb">VIDEO</div>
-      <div class="body">
-        <div class="rk">03 · Product Storytelling</div>
-        <div class="lk"><span data-count="863" data-format="comma">863</span></div>
-        <div class="meta"><span data-count="24" data-format="comma">24</span> comments · Video</div>
-        <div class="desc">Taleggio and mushroom brioche close-up Reel. Cheese pull, indulgent-lunch positioning, savoury rotation rather than the usual sweets reel.</div>
-        <a href="https://www.instagram.com/p/DXd6q37jKSn/" target="_blank" class="link">View post ↗</a>
-      </div>
-    </div>
-    <div class="post-card">
-      <div class="thumb">CAROUSEL</div>
-      <div class="body">
-        <div class="rk">04 · Product Storytelling</div>
-        <div class="lk"><span data-count="827" data-format="comma">827</span></div>
-        <div class="meta"><span data-count="16" data-format="comma">16</span> comments · Carousel</div>
-        <div class="desc">Pistachio and chocolate croissant carousel. Glaze pour, laminated layers, demerara syrup, fudgy breakfast framing across four slides.</div>
-        <a href="https://www.instagram.com/p/DXjUohHjPI7/" target="_blank" class="link">View post ↗</a>
-      </div>
-    </div>
-    <div class="post-card">
-      <div class="thumb">VIDEO</div>
-      <div class="body">
-        <div class="rk">05 · Seasonal / Promotional</div>
-        <div class="lk"><span data-count="778" data-format="comma">778</span></div>
-        <div class="meta"><span data-count="16" data-format="comma">16</span> comments · Video</div>
-        <div class="desc">Seasonal-menu sizzle reel. Sunflower seed butter cookies, stout cakes, mushroom and Taleggio buns. The flavour-doubling-down quarter intro.</div>
-        <a href="https://www.instagram.com/p/DV3CYdAFJAW/" target="_blank" class="link">View post ↗</a>
-      </div>
-    </div>
-  </div>
-
-  <p class="reveal">Video carries the top of the leaderboard. The five highest-liked own-feed posts include three Reels and two image-led posts, with the carrot cake Reel doing 14× the median post. Across the full 47-post window, Video averaged 864 likes per post and Carousel averaged 351, a 2.5× gap on production format alone before any content-pillar adjustment. Low-production-complexity creative (countertop shots, simple b-roll) tends to outperform polished brand campaigns in this window, which mirrors the survivor pattern in Section 04.</p>
-
-  <p class="reveal">The carrot cake Reel pulled 10,084 likes on a feed where the average is 623. That's a 16× outlier from a pillar that has run three times in the window. The instruction the data is giving the content team is direct: more recipe content, on Reel format, at countertop production cost.</p>
-
-  <div class="callout reveal">
-    <span class="callout-label">The Biggest Miss</span>
-    <p>Recipe and How-To content averages 5.4× the likes of GAIL's dominant Product Storytelling pillar. The brand makes it 6% of the time. Flip that ratio and the own feed becomes the most-watched bakery channel in the niche before the next 40 openings hit.</p>
-  </div>
-</section>
-
-<section id="shortlist">
-  <div class="sec-label reveal">06 · The Shortlist</div>
-  <h2 class="sec-headline reveal">8 creators I'd contact this week if I ran GAIL's marketing.</h2>
-  <p class="sec-lead reveal">A pool of 169 vetted candidates after removing creators with two or more existing tags to GAIL's. Ranked by Total Creator Views attributable to the category in the 37-day window, with competitor-overlap and engagement rate as tiebreakers. The mix is weighted to ambassador-tier reach with mid-tier conversation density underneath.</p>
-
-  <div class="sl-grid reveal stagger">
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dac4550c-ace1-492f-9bce-77064f417bda" alt="@quisitaffia" onerror="this.style.display='none';this.parentElement.innerHTML='@Q'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/quisitaffia/" target="_blank">@quisitaffia</a></span>
-          <span class="sl-plat">IG · macro</span>
-        </div>
-        <div class="sl-name">Alex, Filippo e Gianmarco</div>
-        <div class="sl-stats">
-          <span><b><span data-count="198639" data-format="compact">198,639</span></b> followers</span>
-          <span><b><span data-count="323388" data-format="compact">323,388</span></b> avg views</span>
-          <span><b><span data-count="1.3" data-format="comma" data-suffix="%">1.3%</span></b> ER</span>
-          <span><b><span data-count="424133" data-format="compact">424,133</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram macro-creator with 424,133 creator views and 1 category overlap (@marchesi1824). Overlap: @marchesi1824.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/570e30bd-450c-4bf3-8be2-c23bc0f94513" alt="@bitetwicefoodreviews" onerror="this.style.display='none';this.parentElement.innerHTML='@B'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/bitetwicefoodreviews/" target="_blank">@bitetwicefoodreviews</a></span>
-          <span class="sl-plat">IG · macro</span>
-        </div>
-        <div class="sl-name">Bite Twice 🍕🍕</div>
-        <div class="sl-stats">
-          <span><b><span data-count="222956" data-format="compact">222,956</span></b> followers</span>
-          <span><b><span data-count="149409" data-format="compact">149,409</span></b> avg views</span>
-          <span><b><span data-count="0.7" data-format="comma" data-suffix="%">0.7%</span></b> ER</span>
-          <span><b><span data-count="293080" data-format="compact">293,080</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram macro-creator with 293,080 creator views and 2 category overlap (@breadaheadbakery, @happyskybakery). Overlap: @breadaheadbakery, @happyskybakery.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/df66b458-e4d1-44fb-961e-1658011ca33b" alt="@exploringlondon" onerror="this.style.display='none';this.parentElement.innerHTML='@E'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/exploringlondon/" target="_blank">@exploringlondon</a></span>
-          <span class="sl-plat">IG · macro</span>
-        </div>
-        <div class="sl-name">Exploring London</div>
-        <div class="sl-stats">
-          <span><b><span data-count="770752" data-format="compact">770,752</span></b> followers</span>
-          <span><b><span data-count="116466" data-format="compact">116,466</span></b> avg views</span>
-          <span><b><span data-count="0.2" data-format="comma" data-suffix="%">0.2%</span></b> ER</span>
-          <span><b><span data-count="281098" data-format="compact">281,098</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram macro-creator with 281,098 creator views and 2 category overlap (@bombolone.london, @qima.cafe). Overlap: @bombolone.london, @qima.cafe.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b" alt="@rowzzaa" onerror="this.style.display='none';this.parentElement.innerHTML='@R'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/rowzzaa/" target="_blank">@rowzzaa</a></span>
-          <span class="sl-plat">IG · mid</span>
-        </div>
-        <div class="sl-name">Row</div>
-        <div class="sl-stats">
-          <span><b><span data-count="22398" data-format="compact">22,398</span></b> followers</span>
-          <span><b><span data-count="295575" data-format="compact">295,575</span></b> avg views</span>
-          <span><b><span data-count="4.2" data-format="comma" data-suffix="%">4.2%</span></b> ER</span>
-          <span><b><span data-count="762381" data-format="compact">762,381</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram mid-creator with 762,381 creator views and 1 category overlap (@lolas_cupcakes). Overlap: @lolas_cupcakes.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="@emmamyattsmithxo" onerror="this.style.display='none';this.parentElement.innerHTML='@E'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.tiktok.com/@emmamyattsmithxo" target="_blank">@emmamyattsmithxo</a></span>
-          <span class="sl-plat">TT · mid</span>
-        </div>
-        <div class="sl-name">Emma Myatt-Smith</div>
-        <div class="sl-stats">
-          <span><b><span data-count="10100" data-format="compact">10,100</span></b> followers</span>
-          <span><b><span data-count="51476" data-format="compact">51,476</span></b> avg views</span>
-          <span><b><span data-count="14.4" data-format="comma" data-suffix="%">14.4%</span></b> ER</span>
-          <span><b><span data-count="762116" data-format="compact">762,116</span></b> creator views</span>
-        </div>
-        <div class="sl-why">TikTok mid-creator with 762,116 creator views and 1 category overlap (@blankstreet). Overlap: @blankstreet.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt="@sarahxgriffiths" onerror="this.style.display='none';this.parentElement.innerHTML='@S'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/sarahxgriffiths/" target="_blank">@sarahxgriffiths</a></span>
-          <span class="sl-plat">IG · mid</span>
-        </div>
-        <div class="sl-name">Sarah Griffiths</div>
-        <div class="sl-stats">
-          <span><b><span data-count="21140" data-format="compact">21,140</span></b> followers</span>
-          <span><b><span data-count="55631" data-format="compact">55,631</span></b> avg views</span>
-          <span><b><span data-count="1.9" data-format="comma" data-suffix="%">1.9%</span></b> ER</span>
-          <span><b><span data-count="517487" data-format="compact">517,487</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram mid-creator with 517,487 creator views and 2 category overlap (@blankstreet, @patisserievalerie). Overlap: @blankstreet, @patisserievalerie.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a00d5669-8d59-4c75-8a23-e40ab8cb4d40" alt="@jessdoestravels" onerror="this.style.display='none';this.parentElement.innerHTML='@J'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/jessdoestravels/" target="_blank">@jessdoestravels</a></span>
-          <span class="sl-plat">IG · mid</span>
-        </div>
-        <div class="sl-name">Jess | London life &amp; travel</div>
-        <div class="sl-stats">
-          <span><b><span data-count="48015" data-format="compact">48,015</span></b> followers</span>
-          <span><b><span data-count="466974" data-format="compact">466,974</span></b> avg views</span>
-          <span><b><span data-count="129.1" data-format="comma" data-suffix="%">129.1%</span></b> ER</span>
-          <span><b><span data-count="278582" data-format="compact">278,582</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram mid-creator with 278,582 creator views and 4 category overlap (@biscuiteersltd, @hermanoscolombiancoffee). Overlap: @biscuiteersltd, @hermanoscolombiancoffee, @howmatchaofficial.</div>
-      </div>
-    </div>
-    <div class="sl">
-      <div class="sl-avatar"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/37e4b4b0-e758-4702-a94e-1020b6e4fabb" alt="@mbarabanshchykovaa" onerror="this.style.display='none';this.parentElement.innerHTML='@M'"></div>
-      <div class="sl-body">
-        <div class="sl-head">
-          <span class="sl-handle"><a href="https://www.instagram.com/mbarabanshchykovaa/" target="_blank">@mbarabanshchykovaa</a></span>
-          <span class="sl-plat">IG · micro</span>
-        </div>
-        <div class="sl-name">Маsha</div>
-        <div class="sl-stats">
-          <span><b><span data-count="1581" data-format="compact">1,581</span></b> followers</span>
-          <span><b><span data-count="37057" data-format="compact">37,057</span></b> avg views</span>
-          <span><b><span data-count="43.2" data-format="comma" data-suffix="%">43.2%</span></b> ER</span>
-          <span><b><span data-count="406477" data-format="compact">406,477</span></b> creator views</span>
-        </div>
-        <div class="sl-why">Instagram micro-creator with 406,477 creator views and 1 category overlap (@blankstreet). Overlap: @blankstreet.</div>
-      </div>
-    </div>
-  </div>
-
-  <h4 style="font-size:14px;font-weight:500;margin:48px 0 12px;letter-spacing:-0.01em;">What's winning in your niche this month</h4>
-  <div class="insp-grid reveal stagger">
-    <a href="https://www.instagram.com/p/DVT9AO1jvG0/" target="_blank" style="text-decoration:none;color:inherit;"><div class="insp">
-      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b" alt="@rowzzaa" onerror="this.style.display='none'"><span class="badge">IG · 762K views</span></div>
-      <div class="body">
-        <div class="h">@rowzzaa</div>
-        <div class="v">Niche post</div>
-      </div>
-    </div></a>
-    <a href="https://www.instagram.com/p/DVjDdrPCGuB/" target="_blank" style="text-decoration:none;color:inherit;"><div class="insp">
-      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4" alt="@sarahxgriffiths" onerror="this.style.display='none'"><span class="badge">IG · 452K views</span></div>
-      <div class="body">
-        <div class="h">@sarahxgriffiths</div>
-        <div class="v">Relatable/Entertaining</div>
-      </div>
-    </div></a>
-    <a href="https://www.instagram.com/p/DVDUshZCM03/" target="_blank" style="text-decoration:none;color:inherit;"><div class="insp">
-      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dac4550c-ace1-492f-9bce-77064f417bda" alt="@quisitaffia" onerror="this.style.display='none'"><span class="badge">IG · 424K views</span></div>
-      <div class="body">
-        <div class="h">@quisitaffia</div>
-        <div class="v">Entertaining</div>
-      </div>
-    </div></a>
-    <a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" target="_blank" style="text-decoration:none;color:inherit;"><div class="insp">
-      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d" alt="@emmamyattsmithxo" onerror="this.style.display='none'"><span class="badge">TT · 760K views</span></div>
-      <div class="body">
-        <div class="h">@emmamyattsmithxo</div>
-        <div class="v">Relatable/Meme</div>
-      </div>
-    </div></a>
-    <a href="https://www.tiktok.com/@evamils_/video/7611908367899987222" target="_blank" style="text-decoration:none;color:inherit;"><div class="insp">
-      <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/1fb17cc9-5ef9-4802-9a00-d8639bffe1e8" alt="@evamils_" onerror="this.style.display='none'"><span class="badge">TT · 273K views</span></div>
-      <div class="body">
-        <div class="h">@evamils_</div>
-        <div class="v">Relatable/Meme</div>
-      </div>
-    </div></a>
-  </div>
-
-  <div class="callout reveal">
-    <span class="callout-label">The Shortlist Verdict</span>
-    <p>Combined: <span data-count="1295581" data-format="compact">1,295,581</span> followers across these <span data-count="8" data-format="comma">8</span>. <span data-count="3725354" data-format="compact">3,725,354</span> creator views in the last 30 days. <span data-count="8" data-format="comma">8</span> have already posted about your direct competitors. <span data-count="0" data-format="comma">0</span> have never been hired by a brand in this category yet.</p>
-  </div>
-</section>
-
-<section id="opportunity">
-  <div class="sec-label reveal">07 · The Opportunity</div>
-  <h2 class="sec-headline reveal">Six moves that change the game for GAIL's.</h2>
-  <p class="sec-lead reveal">Ranked by strategic leverage against the strategy matrix and the brand's current position. The amplification cards scale what's already working; the new cards name the two-or-more competitors running the play.</p>
-
-  <div class="opp-grid reveal stagger">
-    <div class="opp">
-      <div class="eyebrow">Opportunity 01</div>
-      <h3>Always-On Creator Retainer Bench</h3>
-      <p>51 unique creators tagged GAIL&#x27;s unpaid in a 37-day window, the ratio is 1.1× (one post per creator). Earned demand without amplification.</p><p>Blank Street, Peggy Porschen and Nkora Coffee run creator pairs at 3-8 posts each in the same window. That is what a retainer bench looks like in this category.</p><p>Convert the highest-affinity London food / lifestyle creators (londongirlsbookclub_, jesskeepscooking, letsget.em, sweethouseliving) into a 6-12 person rolling bench.</p>
-      <div class="close">
-        <div class="bignum">1.1×</div>
-        <div class="lbl">current posts-per-creator ratio; retainer competitors run 3-8×</div>
-        <div class="backed">Backed by: Always-On Creator Retainers</div>
-      </div>
-    </div>
-    <div class="opp">
-      <div class="eyebrow">Opportunity 02</div>
-      <h3>Geo-Clustered Micro-Creator Layer Across the 170-Store Estate</h3>
-      <p>GAIL&#x27;s has 170 verified UK locations, rank 2 of 642 in the niche, and is opening 40 more by February 2026.</p><p>8 competitors (Blank Street, Bombolone, Bread Ahead, TAB X TAB, Capilungo, Fred, Feya, Fortitude) are running Geo-Clustered Micro-Creators on smaller estates.</p><p>Huffkins runs a 3-variant &#x27;FREE cake in [town]&#x27; template, one creator per town, 114-day survival in paid. This is the geo-cluster template GAIL&#x27;s could clone at scale.</p>
-      <div class="close">
-        <div class="bignum">40</div>
-        <div class="lbl">new GAIL&#x27;s stores by Feb 2026, each one a geo-creator brief</div>
-        <div class="backed">Backed by: Geo-Clustered Micro-Creators</div>
-      </div>
-    </div>
-    <div class="opp">
-      <div class="eyebrow">Opportunity 03</div>
-      <h3>Creator-Shot UGC Pipeline for Paid Distribution</h3>
-      <p>21% of the top 100 niche ad creatives are creator-shot. 16% of the full pool survives 60+ days still-active vs ~11% industry benchmark.</p><p>Manze&#x27;s runs a lifestyle-style image creative that has survived 1,708 days still-active. Origin Coffee&#x27;s UGC reel: 514 days. Huffkins&#x27;s creator-led offer reels: 114 days each.</p><p>GAIL&#x27;s commissions zero creator content for paid. The gap isn&#x27;t budget, it&#x27;s a pipeline producing variants at the cadence competitors test at.</p>
-      <div class="close">
-        <div class="bignum">0</div>
-        <div class="lbl">GAIL&#x27;s creator-shot ads in active rotation; category top runners survive 100-1,700 days</div>
-        <div class="backed">Backed by: UGC for Paid Ads</div>
-      </div>
-    </div>
-    <div class="opp">
-      <div class="eyebrow">Opportunity 04</div>
-      <h3>Long-Term Brand Ambassador Layer</h3>
-      <p>7 niche competitors run named long-term ambassador relationships, Blank Street, Le Swine, Theacaigirls, Lola&#x27;s Cupcakes, Brasserie Zedel, Abuelo, Bread Ahead.</p><p>GAIL&#x27;s has 5 creators with 2+ unpaid mentions in the window already, natural ambassador candidates surfaced by behaviour, not by RFP.</p><p>Convert Tanya Burr (4.2M followers, organic life-lately mention) and Leonora Smee (139K, Mother&#x27;s Day reel) into multi-quarter ambassador relationships rather than one-off tags.</p>
-      <div class="close">
-        <div class="bignum">5</div>
-        <div class="lbl">creators who&#x27;ve tagged GAIL&#x27;s 2+ times unprompted, already ambassador-shaped</div>
-        <div class="backed">Backed by: Long-Term Brand Ambassador</div>
-      </div>
-    </div>
-    <div class="opp">
-      <div class="eyebrow">Opportunity 05</div>
-      <h3>Recipe / How-To Content Engine (Own Feed Amplification)</h3>
-      <p>Recipe / How-To posts average 3,700 likes, 5.4× GAIL&#x27;s dominant Product Storytelling pillar at 680 likes/post.</p><p>Only 3 of 47 own-feed posts in the window are recipe-led. The carrot cake Reel pulled 10,084 likes, the highest of the window.</p><p>Brief 6-8 niche creators per month to film GAIL&#x27;s recipes at home, repost the best to brand channels, syndicate the rest to creator-shot paid.</p>
-      <div class="close">
-        <div class="bignum">5.4×</div>
-        <div class="lbl">likes per Recipe / How-To post vs Product Storytelling, underweighted at 6.4% share</div>
-        <div class="backed">Backed by: Creator-Led Drops &amp; Collabs</div>
-      </div>
-    </div>
-    <div class="opp">
-      <div class="eyebrow">Opportunity 06</div>
-      <h3>TikTok Launch with Creator Squad</h3>
-      <p>GAIL&#x27;s has no TikTok brand account and 9 TikTok tagged creator posts in the window, vs Blank Street&#x27;s TikTok-driven matcha franchise.</p><p>Blank Street&#x27;s matcha menu reached $500M valuation in 2025 partly on TikTok-Gen-Z dynamics; Feya, Bombolone, EL&amp;N are TikTok-native.</p><p>Launch a brand TikTok with a 6-8 person creator squad, bakery educational content, daily routines, Mother&#x27;s Day moments, modelled on the existing IG theme mix.</p>
-      <div class="close">
-        <div class="bignum">0</div>
-        <div class="lbl">GAIL&#x27;s TikTok presence; competitors at $500M valuations partly on TikTok</div>
-        <div class="backed">Backed by: TikTok Creator Squad</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="closing-wrap reveal">
-  <div class="closing">
-    <p class="closing-lead">We built this report because GAIL's creator data is genuinely interesting and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
-    <h4>Who are we?</h4>
-    <p class="closing-intro">👋 Sup is an AI-native influencer marketing platform built around data and performance. We source local creators per location, run campaigns centrally, and track results per site.</p>
-  </div>
-  <p class="booking-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank">sup.co/meet</a></p>
+<div class="sec-label reveal">04 · Creator Content in Paid</div>
+<h2 class="sec-headline reveal">The category's paid budget runs on creator-shot content. GAIL's commissions none.</h2>
+<p class="sec-lead reveal">Across the niche window, 539 ad creatives entered the Meta Ad Library and 363 are still active at time of analysis. 21% of the top-100 creatives by longevity are creator-shot. The 60+ day still-active survival rate sits at 16%, above the ~11% industry benchmark, meaning the bakeries and cafés that commission creator content in paid are getting an above-average return on the creatives they ship.</p>
+<div class="stat-grid-6b reveal stagger">
+<div class="stat"><div class="abs"><span data-count="363" data-format="comma">363</span></div><div class="lbl">Live ad creatives in niche</div></div>
+<div class="stat"><div class="abs"><span data-count="21" data-format="comma" data-suffix="%">21%</span></div><div class="lbl">Of top 100 are creator-shot</div></div>
+<div class="stat dark"><div class="abs"><span data-count="16" data-format="comma" data-suffix="%">16%</span></div><div class="lbl">60+ day survival vs 11% benchmark</div></div>
+<div class="stat"><div class="abs"><span data-count="17" data-format="comma" data-suffix="%">17%</span></div><div class="lbl">Of 60+ day winners are UGC / lifestyle</div></div>
+<div class="stat"><div class="abs"><span data-count="0" data-format="comma">0</span></div><div class="lbl">GAIL's creator-shot ads active</div></div>
+<div class="stat dark"><div class="abs"><span data-count="7.5" data-format="comma">7.5</span></div><div class="lbl">Median competitor active creatives</div></div>
 </div>
-
+<p class="reveal">The volume side of the category is dominated by a handful of brands: Grind with 41 live creatives, Origin Coffee Roasters with 37, Wenzel's the Baker with 28, Brigit's Bakery with 27, Volcano Coffee Works with 17. Who commissions creator content sits in a different group entirely. Across the top-100 ad creatives by longevity, GayaBakeryLondon and Huffkins both run 19% creator-shot mix, then The Tolpuddle Café and Pieminister at 12.5% each. Lola's Cupcakes and Bread Ahead carry creator content forward into paid at lower volume but with high longevity.</p>
+<div class="chart-pair reveal">
+<div class="chart-wrap" style="margin:0;">
+<h4>Longevity buckets across all 539 creatives</h4>
+<p class="sub">Still-active vs expired by max days running.</p>
+<div style="height:280px;"><canvas id="chartLongevity"></canvas></div>
+</div>
+<div class="chart-wrap" style="margin:0;">
+<h4>Winner DNA: 60+ day survivors vs the full pool</h4>
+<p class="sub">Where survivor creative leans (in percentage points).</p>
+<div style="height:280px;"><canvas id="chartWinnerDNA"></canvas></div>
+</div>
+</div>
+<p class="reveal">Low-production creative over-indexes by 11 percentage points in the survivor pool versus the full pool. Image creative over-indexes by 6 points, Static Graphic by 4, and Bottom-of-Funnel direct-offer creative by 5.6. The pattern: cheap, fast, decision-stage creative tends to outlast cinematic brand campaigns. Carousel formats under-index by 8.7 points in survivors, the format that performs in organic isn't the format that survives in paid.</p>
+<h4 style="font-size:14px;font-weight:500;margin:32px 0 12px;letter-spacing:-0.01em;">Top 10 longest-running still-active creative, flagged for creator-shot</h4>
+<div class="ad-grid reveal stagger">
+<a href="https://www.facebook.com/ads/library?id=191329249760774" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge creator">Creator-shot</span>
+<img alt="M.Manze Pie and Mash, Tower Bridge Road SE1" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/f489f236-7fe6-4f96-8c06-cc18767c2183"/>
+</div>
+<div class="body">
+<div class="brand">M.Manze Pie and Mash, Tower Bridge Road SE1</div>
+<div class="days">1708 days</div>
+<div class="meta">Lifestyle · image</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=470661439001042" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge creator">Creator-shot</span>
+<img alt="Origin Coffee Roasters ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/9b30aebb-8d80-47c6-89bc-137a5cc33855';" src="https://first-possum-672.convex.cloud/api/storage/abe15435-c11e-4e68-8a6e-3b8cb7c63747"/>
+</div>
+<div class="body">
+<div class="brand">Origin Coffee Roasters</div>
+<div class="days">514 days</div>
+<div class="meta">UGC · video</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=1447927442864649" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge">Brand-produced</span>
+<img alt="Origin Coffee Roasters" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/9b30aebb-8d80-47c6-89bc-137a5cc33855"/>
+</div>
+<div class="body">
+<div class="brand">Origin Coffee Roasters</div>
+<div class="days">394 days</div>
+<div class="meta">Static Graphic · carousel</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=1128638549023136" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge creator">Creator-shot</span>
+<img alt="Jack and Beyond" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/428f579f-321a-4f20-9edb-1c320871dae2"/>
+</div>
+<div class="body">
+<div class="brand">Jack and Beyond</div>
+<div class="days">364 days</div>
+<div class="meta">Lifestyle · carousel</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=600945578984878" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge">Brand-produced</span>
+<img alt="Jack and Beyond" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/428f579f-321a-4f20-9edb-1c320871dae2"/>
+</div>
+<div class="body">
+<div class="brand">Jack and Beyond</div>
+<div class="days">363 days</div>
+<div class="meta">Product-Only · carousel</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=691262070156165" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge">Brand-produced</span>
+<img alt="Origin Coffee Roasters ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/9b30aebb-8d80-47c6-89bc-137a5cc33855';" src="https://first-possum-672.convex.cloud/api/storage/3cd4d75b-f043-4a7d-b367-057d007bfdec"/>
+</div>
+<div class="body">
+<div class="brand">Origin Coffee Roasters</div>
+<div class="days">360 days</div>
+<div class="meta">Polished Brand · video</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=1036195778701648" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge">Brand-produced</span>
+<img alt="Chai Guys" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/d6eb6983-45d2-4744-ac5d-e78cefe776ec"/>
+</div>
+<div class="body">
+<div class="brand">Chai Guys</div>
+<div class="days">318 days</div>
+<div class="meta">Product-Only · carousel</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=1141434057969226" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge creator">Creator-shot</span>
+<img alt="Studio Tiramisù" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/6d086c8a-7863-4861-8de5-2828981b34ba"/>
+</div>
+<div class="body">
+<div class="brand">Studio Tiramisù</div>
+<div class="days">213 days</div>
+<div class="meta">UGC · image</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=1580226112980791" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge">Brand-produced</span>
+<img alt="Limebistrocafe ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/06555c28-02a2-409d-83ac-b97cb2d25f7a';" src="https://first-possum-672.convex.cloud/api/storage/92b83bcb-52af-4de5-ab2e-5a0d4c08f290"/>
+</div>
+<div class="body">
+<div class="brand">Limebistrocafe</div>
+<div class="days">135 days</div>
+<div class="meta">Polished Brand · video</div>
+</div>
+</div></a>
+<a href="https://www.facebook.com/ads/library?id=872825792112999" style="text-decoration:none;color:inherit;display:block;" target="_blank"><div class="ad-card">
+<div class="thumb">
+<span class="badge">Brand-produced</span>
+<img alt="Bread Ahead Bakery &amp; School ad" onerror="this.src='https://first-possum-672.convex.cloud/api/storage/ba3d5450-dcd6-42c9-98a1-48cb9261606b';" src="https://first-possum-672.convex.cloud/api/storage/a327cea4-dff7-4fcf-a9af-095ab95994cb"/>
+</div>
+<div class="body">
+<div class="brand">Bread Ahead Bakery &amp; School</div>
+<div class="days">129 days</div>
+<div class="meta">Polished Brand · video</div>
+</div>
+</div></a>
+</div>
+<p class="reveal">M.Manze's pie and mash close-up has been live 1,708 days. Origin Coffee Roasters has a UGC reel running at 514 days. Huffkins runs three creator-shot variants at 114 days each, one per town, all offering a free cake, a textbook geo-cluster micro-creator template. The pattern across the survivors is consistent: low-friction creator-shot content with a single hook either outlives polished brand-produced cinema or runs alongside it in the long-tail.</p>
+<div class="callout reveal">
+<span class="callout-label">The Commissioning Gap</span>
+<p>21% of the top 100 niche ad creatives are creator-shot, and 16% of the full 539-ad pool has survived 60+ days still-active, well above the ~11% industry benchmark. GAIL's commissions zero creator content for paid: one Meta ad that ran eight days against competitors maintaining 10+ live creatives with creator-led variants surviving 100-1,700 days. The gap is not budget; it is a creator pipeline producing enough variants to test at category cadence.</p>
+</div>
+</section>
+<section id="feed">
+<div class="sec-label reveal">05 · Feed Content Strategy</div>
+<h2 class="sec-headline reveal">Recipe content wins by 5.4×. GAIL's makes it once every sixteen posts.</h2>
+<div class="stat-grid-3 reveal stagger">
+<div class="stat">
+<div class="lbl">Top own-feed post</div>
+<div class="abs"><span data-count="10084" data-format="comma">10,084</span></div>
+<div class="ctx">Carrot cake recipe Reel, 27 March</div>
+</div>
+<div class="stat">
+<div class="lbl">Winning pillar</div>
+<div class="abs"><span data-count="3700" data-format="comma">3,700</span></div>
+<div class="ctx">Recipe / How-To avg likes · 5.4× Product Storytelling</div>
+</div>
+<div class="stat dark">
+<div class="lbl">Share of feed</div>
+<div class="abs"><span data-count="6" data-format="comma" data-suffix="%">6%</span></div>
+<div class="ctx">3 of 47 own-feed posts in 90-day window</div>
+</div>
+</div>
+<p class="reveal">Across the 90-day brand window, GAIL's published 47 own-feed posts on Instagram. 22 of them are carousels, 20 are videos, and 5 are photos. The average post pulled 623 likes, with the median sitting lower at 354, the kind of distribution where a small number of standout posts carry the engagement and the rest sit in the workmanlike middle. The averages obscure a more useful signal: the pillar mix.</p>
+<p class="reveal">Recipe and How-To posts averaged 3,700 likes apiece, the highest of any pillar GAIL's runs. Behind-the-Scenes content sat at 1,654. Product Storytelling, the dominant pillar by volume with 18 of 47 posts, averaged 680. Seasonal and Promotional posts ran 434. Lifestyle and Neighbourhood content landed at 421. The pillar that wins per post is the one the brand publishes least, and the pillar that dominates volume is the lowest performer in the set.</p>
+<div class="chart-pair reveal">
+<div class="chart-wrap" style="margin:0;">
+<h4>Average likes by content pillar</h4>
+<p class="sub">Recipe / How-To highlighted in BRAND_PRIMARY.</p>
+<div style="height:260px;"><canvas id="chartPillarAvg"></canvas></div>
+</div>
+<div class="chart-wrap" style="margin:0;">
+<h4>Posts by pillar, the distribution gap</h4>
+<p class="sub">High-volume pillars are low-performance; low-volume are high-performance.</p>
+<div style="height:260px;"><canvas id="chartPillarCount"></canvas></div>
+</div>
+</div>
+<h4 style="font-size:14px;font-weight:500;margin:32px 0 12px;letter-spacing:-0.01em;">The five posts your audience picked</h4>
+<p class="reveal">A brief creative read on the five posts that pulled the most likes in the window. The middle card carries the canonical example the rest of the section builds on.</p>
+<div class="post-grid reveal stagger">
+<div class="post-card is-highlight">
+<div class="thumb">VIDEO</div>
+<div class="body">
+<div class="rk">01 · Recipe / How-To</div>
+<div class="lk"><span data-count="10084" data-format="comma">10,084</span></div>
+<div class="meta"><span data-count="251" data-format="comma">251</span> comments · Video</div>
+<div class="desc">Step-by-step carrot cake recipe Reel filmed on countertop. Muscovado, cinnamon, walnuts, the GAIL's tin in shot. Published 27 March, 251 comments below the line.</div>
+<a class="link" href="https://www.instagram.com/p/DWY7OoxDP6E/" target="_blank">View post ↗</a>
+</div>
+</div>
+<div class="post-card">
+<div class="thumb">PHOTO</div>
+<div class="body">
+<div class="rk">02 · Product Storytelling</div>
+<div class="lk"><span data-count="3220" data-format="comma">3,220</span></div>
+<div class="meta"><span data-count="56" data-format="comma">56</span> comments · Photo</div>
+<div class="desc">Monday pick-me-up flatlay of espresso drinks under soft window light. Three coffees, three textures, the choose-your-own-character framing. 56 comments.</div>
+<a class="link" href="https://www.instagram.com/p/DU0h545jLFu/" target="_blank">View post ↗</a>
+</div>
+</div>
+<div class="post-card">
+<div class="thumb">VIDEO</div>
+<div class="body">
+<div class="rk">03 · Product Storytelling</div>
+<div class="lk"><span data-count="863" data-format="comma">863</span></div>
+<div class="meta"><span data-count="24" data-format="comma">24</span> comments · Video</div>
+<div class="desc">Taleggio and mushroom brioche close-up Reel. Cheese pull, indulgent-lunch positioning, savoury rotation rather than the usual sweets reel.</div>
+<a class="link" href="https://www.instagram.com/p/DXd6q37jKSn/" target="_blank">View post ↗</a>
+</div>
+</div>
+<div class="post-card">
+<div class="thumb">CAROUSEL</div>
+<div class="body">
+<div class="rk">04 · Product Storytelling</div>
+<div class="lk"><span data-count="827" data-format="comma">827</span></div>
+<div class="meta"><span data-count="16" data-format="comma">16</span> comments · Carousel</div>
+<div class="desc">Pistachio and chocolate croissant carousel. Glaze pour, laminated layers, demerara syrup, fudgy breakfast framing across four slides.</div>
+<a class="link" href="https://www.instagram.com/p/DXjUohHjPI7/" target="_blank">View post ↗</a>
+</div>
+</div>
+<div class="post-card">
+<div class="thumb">VIDEO</div>
+<div class="body">
+<div class="rk">05 · Seasonal / Promotional</div>
+<div class="lk"><span data-count="778" data-format="comma">778</span></div>
+<div class="meta"><span data-count="16" data-format="comma">16</span> comments · Video</div>
+<div class="desc">Seasonal-menu sizzle reel. Sunflower seed butter cookies, stout cakes, mushroom and Taleggio buns. The flavour-doubling-down quarter intro.</div>
+<a class="link" href="https://www.instagram.com/p/DV3CYdAFJAW/" target="_blank">View post ↗</a>
+</div>
+</div>
+</div>
+<p class="reveal">Video carries the top of the leaderboard. The five highest-liked own-feed posts include three Reels and two image-led posts, with the carrot cake Reel doing 14× the median post. Across the full 47-post window, Video averaged 864 likes per post and Carousel averaged 351, a 2.5× gap on production format alone before any content-pillar adjustment. Low-production-complexity creative (countertop shots, simple b-roll) tends to outperform polished brand campaigns in this window, which mirrors the survivor pattern in Section 04.</p>
+<p class="reveal">The carrot cake Reel pulled 10,084 likes on a feed where the average is 623. That's a 16× outlier from a pillar that has run three times in the window. The instruction the data is giving the content team is direct: more recipe content, on Reel format, at countertop production cost.</p>
+<div class="callout reveal">
+<span class="callout-label">The Biggest Miss</span>
+<p>Recipe and How-To content averages 5.4× the likes of GAIL's dominant Product Storytelling pillar. The brand makes it 6% of the time. Flip that ratio and the own feed becomes the most-watched bakery channel in the niche before the next 40 openings hit.</p>
+</div>
+</section>
+<section id="shortlist">
+<div class="sec-label reveal">06 · The Shortlist</div>
+<h2 class="sec-headline reveal">8 creators I'd contact this week if I ran GAIL's marketing.</h2>
+<p class="sec-lead reveal">A pool of 169 vetted candidates after removing creators with two or more existing tags to GAIL's. Ranked by Total Creator Views attributable to the category in the 37-day window, with competitor-overlap and engagement rate as tiebreakers. The mix is weighted to ambassador-tier reach with mid-tier conversation density underneath.</p>
+<div class="sl-grid reveal stagger">
+<div class="sl">
+<div class="sl-avatar"><img alt="@quisitaffia" onerror="this.style.display='none';this.parentElement.innerHTML='@Q'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dac4550c-ace1-492f-9bce-77064f417bda"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/quisitaffia/" target="_blank">@quisitaffia</a></span>
+<span class="sl-plat">IG · macro</span>
+</div>
+<div class="sl-name">Alex, Filippo e Gianmarco</div>
+<div class="sl-stats">
+<span><b><span data-count="198639" data-format="compact">198,639</span></b> followers</span>
+<span><b><span data-count="323388" data-format="compact">323,388</span></b> avg views</span>
+<span><b><span data-count="1.3" data-format="comma" data-suffix="%">1.3%</span></b> ER</span>
+<span><b><span data-count="424133" data-format="compact">424,133</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram macro-creator with 424,133 creator views and 1 category overlap (@marchesi1824). Overlap: @marchesi1824.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@bitetwicefoodreviews" onerror="this.style.display='none';this.parentElement.innerHTML='@B'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/570e30bd-450c-4bf3-8be2-c23bc0f94513"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/bitetwicefoodreviews/" target="_blank">@bitetwicefoodreviews</a></span>
+<span class="sl-plat">IG · macro</span>
+</div>
+<div class="sl-name">Bite Twice 🍕🍕</div>
+<div class="sl-stats">
+<span><b><span data-count="222956" data-format="compact">222,956</span></b> followers</span>
+<span><b><span data-count="149409" data-format="compact">149,409</span></b> avg views</span>
+<span><b><span data-count="0.7" data-format="comma" data-suffix="%">0.7%</span></b> ER</span>
+<span><b><span data-count="293080" data-format="compact">293,080</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram macro-creator with 293,080 creator views and 2 category overlap (@breadaheadbakery, @happyskybakery). Overlap: @breadaheadbakery, @happyskybakery.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@exploringlondon" onerror="this.style.display='none';this.parentElement.innerHTML='@E'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/df66b458-e4d1-44fb-961e-1658011ca33b"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/exploringlondon/" target="_blank">@exploringlondon</a></span>
+<span class="sl-plat">IG · macro</span>
+</div>
+<div class="sl-name">Exploring London</div>
+<div class="sl-stats">
+<span><b><span data-count="770752" data-format="compact">770,752</span></b> followers</span>
+<span><b><span data-count="116466" data-format="compact">116,466</span></b> avg views</span>
+<span><b><span data-count="0.2" data-format="comma" data-suffix="%">0.2%</span></b> ER</span>
+<span><b><span data-count="281098" data-format="compact">281,098</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram macro-creator with 281,098 creator views and 2 category overlap (@bombolone.london, @qima.cafe). Overlap: @bombolone.london, @qima.cafe.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@rowzzaa" onerror="this.style.display='none';this.parentElement.innerHTML='@R'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/rowzzaa/" target="_blank">@rowzzaa</a></span>
+<span class="sl-plat">IG · mid</span>
+</div>
+<div class="sl-name">Row</div>
+<div class="sl-stats">
+<span><b><span data-count="22398" data-format="compact">22,398</span></b> followers</span>
+<span><b><span data-count="295575" data-format="compact">295,575</span></b> avg views</span>
+<span><b><span data-count="4.2" data-format="comma" data-suffix="%">4.2%</span></b> ER</span>
+<span><b><span data-count="762381" data-format="compact">762,381</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram mid-creator with 762,381 creator views and 1 category overlap (@lolas_cupcakes). Overlap: @lolas_cupcakes.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@emmamyattsmithxo" onerror="this.style.display='none';this.parentElement.innerHTML='@E'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.tiktok.com/@emmamyattsmithxo" target="_blank">@emmamyattsmithxo</a></span>
+<span class="sl-plat">TT · mid</span>
+</div>
+<div class="sl-name">Emma Myatt-Smith</div>
+<div class="sl-stats">
+<span><b><span data-count="10100" data-format="compact">10,100</span></b> followers</span>
+<span><b><span data-count="51476" data-format="compact">51,476</span></b> avg views</span>
+<span><b><span data-count="14.4" data-format="comma" data-suffix="%">14.4%</span></b> ER</span>
+<span><b><span data-count="762116" data-format="compact">762,116</span></b> creator views</span>
+</div>
+<div class="sl-why">TikTok mid-creator with 762,116 creator views and 1 category overlap (@blankstreet). Overlap: @blankstreet.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@sarahxgriffiths" onerror="this.style.display='none';this.parentElement.innerHTML='@S'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/sarahxgriffiths/" target="_blank">@sarahxgriffiths</a></span>
+<span class="sl-plat">IG · mid</span>
+</div>
+<div class="sl-name">Sarah Griffiths</div>
+<div class="sl-stats">
+<span><b><span data-count="21140" data-format="compact">21,140</span></b> followers</span>
+<span><b><span data-count="55631" data-format="compact">55,631</span></b> avg views</span>
+<span><b><span data-count="1.9" data-format="comma" data-suffix="%">1.9%</span></b> ER</span>
+<span><b><span data-count="517487" data-format="compact">517,487</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram mid-creator with 517,487 creator views and 2 category overlap (@blankstreet, @patisserievalerie). Overlap: @blankstreet, @patisserievalerie.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@jessdoestravels" onerror="this.style.display='none';this.parentElement.innerHTML='@J'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a00d5669-8d59-4c75-8a23-e40ab8cb4d40"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/jessdoestravels/" target="_blank">@jessdoestravels</a></span>
+<span class="sl-plat">IG · mid</span>
+</div>
+<div class="sl-name">Jess | London life &amp; travel</div>
+<div class="sl-stats">
+<span><b><span data-count="48015" data-format="compact">48,015</span></b> followers</span>
+<span><b><span data-count="466974" data-format="compact">466,974</span></b> avg views</span>
+<span><b><span data-count="129.1" data-format="comma" data-suffix="%">129.1%</span></b> ER</span>
+<span><b><span data-count="278582" data-format="compact">278,582</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram mid-creator with 278,582 creator views and 4 category overlap (@biscuiteersltd, @hermanoscolombiancoffee). Overlap: @biscuiteersltd, @hermanoscolombiancoffee, @howmatchaofficial.</div>
+</div>
+</div>
+<div class="sl">
+<div class="sl-avatar"><img alt="@mbarabanshchykovaa" onerror="this.style.display='none';this.parentElement.innerHTML='@M'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/37e4b4b0-e758-4702-a94e-1020b6e4fabb"/></div>
+<div class="sl-body">
+<div class="sl-head">
+<span class="sl-handle"><a href="https://www.instagram.com/mbarabanshchykovaa/" target="_blank">@mbarabanshchykovaa</a></span>
+<span class="sl-plat">IG · micro</span>
+</div>
+<div class="sl-name">Маsha</div>
+<div class="sl-stats">
+<span><b><span data-count="1581" data-format="compact">1,581</span></b> followers</span>
+<span><b><span data-count="37057" data-format="compact">37,057</span></b> avg views</span>
+<span><b><span data-count="43.2" data-format="comma" data-suffix="%">43.2%</span></b> ER</span>
+<span><b><span data-count="406477" data-format="compact">406,477</span></b> creator views</span>
+</div>
+<div class="sl-why">Instagram micro-creator with 406,477 creator views and 1 category overlap (@blankstreet). Overlap: @blankstreet.</div>
+</div>
+</div>
+</div>
+<h4 style="font-size:14px;font-weight:500;margin:48px 0 12px;letter-spacing:-0.01em;">What's winning in your niche this month</h4>
+<div class="insp-grid reveal stagger">
+<a href="https://www.instagram.com/p/DVT9AO1jvG0/" style="text-decoration:none;color:inherit;" target="_blank"><div class="insp">
+<div class="visual"><img alt="@rowzzaa" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3360f112-8d06-4c59-9fee-11ca2b13700b"/><span class="badge">IG · 762K views</span></div>
+<div class="body">
+<div class="h">@rowzzaa</div>
+<div class="v">Niche post</div>
+</div>
+</div></a>
+<a href="https://www.instagram.com/p/DVjDdrPCGuB/" style="text-decoration:none;color:inherit;" target="_blank"><div class="insp">
+<div class="visual"><img alt="@sarahxgriffiths" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e13fa24b-74a4-40e3-837a-595ce97affb4"/><span class="badge">IG · 452K views</span></div>
+<div class="body">
+<div class="h">@sarahxgriffiths</div>
+<div class="v">Relatable/Entertaining</div>
+</div>
+</div></a>
+<a href="https://www.instagram.com/p/DVDUshZCM03/" style="text-decoration:none;color:inherit;" target="_blank"><div class="insp">
+<div class="visual"><img alt="@quisitaffia" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dac4550c-ace1-492f-9bce-77064f417bda"/><span class="badge">IG · 424K views</span></div>
+<div class="body">
+<div class="h">@quisitaffia</div>
+<div class="v">Entertaining</div>
+</div>
+</div></a>
+<a href="https://www.tiktok.com/@emmamyattsmithxo/video/7615244980793167126" style="text-decoration:none;color:inherit;" target="_blank"><div class="insp">
+<div class="visual"><img alt="@emmamyattsmithxo" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3963cb0e-3e97-4849-bfff-4356c9c3308d"/><span class="badge">TT · 760K views</span></div>
+<div class="body">
+<div class="h">@emmamyattsmithxo</div>
+<div class="v">Relatable/Meme</div>
+</div>
+</div></a>
+<a href="https://www.tiktok.com/@evamils_/video/7611908367899987222" style="text-decoration:none;color:inherit;" target="_blank"><div class="insp">
+<div class="visual"><img alt="@evamils_" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/1fb17cc9-5ef9-4802-9a00-d8639bffe1e8"/><span class="badge">TT · 273K views</span></div>
+<div class="body">
+<div class="h">@evamils_</div>
+<div class="v">Relatable/Meme</div>
+</div>
+</div></a>
+</div>
+<div class="callout reveal">
+<span class="callout-label">The Shortlist Verdict</span>
+<p>Combined: <span data-count="1295581" data-format="compact">1,295,581</span> followers across these <span data-count="8" data-format="comma">8</span>. <span data-count="3725354" data-format="compact">3,725,354</span> creator views in the last 30 days. <span data-count="8" data-format="comma">8</span> have already posted about your direct competitors. <span data-count="0" data-format="comma">0</span> have never been hired by a brand in this category yet.</p>
+</div>
+</section>
+<section id="opportunity">
+<div class="sec-label reveal">07 · The Opportunity</div>
+<h2 class="sec-headline reveal">Six moves that change the game for GAIL's.</h2>
+<p class="sec-lead reveal">Ranked by strategic leverage against the strategy matrix and the brand's current position. The amplification cards scale what's already working; the new cards name the two-or-more competitors running the play.</p>
+<div class="opp-grid reveal stagger">
+<div class="opp">
+<div class="eyebrow">Opportunity 01</div>
+<h3>Always-On Creator Retainer Bench</h3>
+<p>51 unique creators tagged GAIL's unpaid in a 37-day window, the ratio is 1.1× (one post per creator). Earned demand without amplification.</p><p>Blank Street, Peggy Porschen and Nkora Coffee run creator pairs at 3-8 posts each in the same window. That is what a retainer bench looks like in this category.</p><p>Convert the highest-affinity London food / lifestyle creators (londongirlsbookclub_, jesskeepscooking, letsget.em, sweethouseliving) into a 6-12 person rolling bench.</p>
+<div class="close">
+<div class="bignum">1.1×</div>
+<div class="lbl">current posts-per-creator ratio; retainer competitors run 3-8×</div>
+<div class="backed">Backed by: Always-On Creator Retainers</div>
+</div>
+</div>
+<div class="opp">
+<div class="eyebrow">Opportunity 02</div>
+<h3>Geo-Clustered Micro-Creator Layer Across the 170-Store Estate</h3>
+<p>GAIL's has 170 verified UK locations, rank 2 of 642 in the niche, and is opening 40 more by February 2026.</p><p>8 competitors (Blank Street, Bombolone, Bread Ahead, TAB X TAB, Capilungo, Fred, Feya, Fortitude) are running Geo-Clustered Micro-Creators on smaller estates.</p><p>Huffkins runs a 3-variant 'FREE cake in [town]' template, one creator per town, 114-day survival in paid. This is the geo-cluster template GAIL's could clone at scale.</p>
+<div class="close">
+<div class="bignum">40</div>
+<div class="lbl">new GAIL's stores by Feb 2026, each one a geo-creator brief</div>
+<div class="backed">Backed by: Geo-Clustered Micro-Creators</div>
+</div>
+</div>
+<div class="opp">
+<div class="eyebrow">Opportunity 03</div>
+<h3>Creator-Shot UGC Pipeline for Paid Distribution</h3>
+<p>21% of the top 100 niche ad creatives are creator-shot. 16% of the full pool survives 60+ days still-active vs ~11% industry benchmark.</p><p>Manze's runs a lifestyle-style image creative that has survived 1,708 days still-active. Origin Coffee's UGC reel: 514 days. Huffkins's creator-led offer reels: 114 days each.</p><p>GAIL's commissions zero creator content for paid. The gap isn't budget, it's a pipeline producing variants at the cadence competitors test at.</p>
+<div class="close">
+<div class="bignum">0</div>
+<div class="lbl">GAIL's creator-shot ads in active rotation; category top runners survive 100-1,700 days</div>
+<div class="backed">Backed by: UGC for Paid Ads</div>
+</div>
+</div>
+<div class="opp">
+<div class="eyebrow">Opportunity 04</div>
+<h3>Long-Term Brand Ambassador Layer</h3>
+<p>7 niche competitors run named long-term ambassador relationships, Blank Street, Le Swine, Theacaigirls, Lola's Cupcakes, Brasserie Zedel, Abuelo, Bread Ahead.</p><p>GAIL's has 5 creators with 2+ unpaid mentions in the window already, natural ambassador candidates surfaced by behaviour, not by RFP.</p><p>Convert Tanya Burr (4.2M followers, organic life-lately mention) and Leonora Smee (139K, Mother's Day reel) into multi-quarter ambassador relationships rather than one-off tags.</p>
+<div class="close">
+<div class="bignum">5</div>
+<div class="lbl">creators who've tagged GAIL's 2+ times unprompted, already ambassador-shaped</div>
+<div class="backed">Backed by: Long-Term Brand Ambassador</div>
+</div>
+</div>
+<div class="opp">
+<div class="eyebrow">Opportunity 05</div>
+<h3>Recipe / How-To Content Engine (Own Feed Amplification)</h3>
+<p>Recipe / How-To posts average 3,700 likes, 5.4× GAIL's dominant Product Storytelling pillar at 680 likes/post.</p><p>Only 3 of 47 own-feed posts in the window are recipe-led. The carrot cake Reel pulled 10,084 likes, the highest of the window.</p><p>Brief 6-8 niche creators per month to film GAIL's recipes at home, repost the best to brand channels, syndicate the rest to creator-shot paid.</p>
+<div class="close">
+<div class="bignum">5.4×</div>
+<div class="lbl">likes per Recipe / How-To post vs Product Storytelling, underweighted at 6.4% share</div>
+<div class="backed">Backed by: Creator-Led Drops &amp; Collabs</div>
+</div>
+</div>
+<div class="opp">
+<div class="eyebrow">Opportunity 06</div>
+<h3>TikTok Launch with Creator Squad</h3>
+<p>GAIL's has no TikTok brand account and 9 TikTok tagged creator posts in the window, vs Blank Street's TikTok-driven matcha franchise.</p><p>Blank Street's matcha menu reached $500M valuation in 2025 partly on TikTok-Gen-Z dynamics; Feya, Bombolone, EL&amp;N are TikTok-native.</p><p>Launch a brand TikTok with a 6-8 person creator squad, bakery educational content, daily routines, Mother's Day moments, modelled on the existing IG theme mix.</p>
+<div class="close">
+<div class="bignum">0</div>
+<div class="lbl">GAIL's TikTok presence; competitors at $500M valuations partly on TikTok</div>
+<div class="backed">Backed by: TikTok Creator Squad</div>
+</div>
+</div>
+</div>
+</section>
+<div class="closing-wrap reveal">
+<div class="closing">
+<p class="closing-lead">We built this report because GAIL's creator data is genuinely interesting and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+<h4>Who are we?</h4>
+<p class="closing-intro">👋 Sup is an AI-native influencer marketing platform built around data and performance. We source local creators per location, run campaigns centrally, and track results per site.</p>
+</div>
+<p class="booking-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank">sup.co/meet</a></p>
+</div>
 <footer>👋 Sup · sup.co · Confidential · May 2026</footer>
-
 </main>
-
 <script>
 const BRAND_PRIMARY = '#CF2030';
 const PALETTE = ["#CF2030", "#534AB7", "#1D9E75", "#D85A30", "#378ADD", "#71717A"];
@@ -1531,6 +1516,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
 </body>
 </html>

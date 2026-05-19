@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="sup-brand-primary" content="#C8102E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#C8102E" name="sup-brand-primary"/>
 <title>Hamburger Helper · Signal Report · Boxed Meal Kits</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
@@ -409,1012 +410,985 @@ a.post-link-inline:hover, .opp p a:hover, .cc p a:hover, .sl .why a:hover {
   color: var(--brand-primary); text-decoration-color: var(--brand-primary);
   text-decoration-thickness: 2px;
 }
+
+
+/* === RETROFIT: cover-grid + tilted polaroid stack === */
+.cover-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 56px; align-items: center; margin-bottom: 56px; }
+.cover-thumbs { position: relative; width: 100%; height: 360px; }
+.thumb-tilt { position: absolute; display: block; width: 168px; height: 168px; border-radius: 22px; overflow: hidden; background: var(--surface); border: 5px solid #fff; box-shadow: 0 18px 42px -12px rgba(9,9,11,0.22), 0 6px 14px -4px rgba(9,9,11,0.08); transition: transform 320ms cubic-bezier(0.16,1,0.3,1), box-shadow 320ms ease; cursor: pointer; }
+.thumb-tilt img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; opacity: 1; }
+.thumb-tilt .stamp { position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; background: rgba(9,9,11,0.7); color: #fff; font-size: 10.5px; font-weight: 500; border-radius: 9999px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.thumb-1 { top: 22px;  left: 8px;   transform: rotate(-9deg); z-index: 1; }
+.thumb-2 { top: 92px;  left: 138px; transform: rotate(6deg);  z-index: 3; }
+.thumb-3 { top: 168px; left: 8px;   transform: rotate(-3deg); z-index: 2; }
+.thumb-tilt:hover { transform: rotate(0deg) scale(1.06); z-index: 4; box-shadow: 0 22px 50px -14px rgba(9,9,11,0.28), 0 8px 18px -4px rgba(9,9,11,0.1); }
+.thumb-tilt:hover img { transform: scale(1.04); }
+@media (max-width: 1080px) {
+  .cover-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; }
+  .thumb-tilt { width: 144px; height: 144px; }
+  .thumb-2 { left: 118px; }
+  .thumb-3 { top: 148px; }
+  .cover-thumbs { height: 320px; }
+}
+@media (max-width: 900px) {
+  .cover-grid { grid-template-columns: 1fr; gap: 36px; margin-bottom: 40px; }
+  .cover-thumbs { height: 280px; max-width: 380px; margin: 0 auto; }
+  .thumb-tilt { width: 150px; height: 150px; }
+  .thumb-1 { top: 0;   left: 4%;  }
+  .thumb-2 { top: 56px; left: 36%; }
+  .thumb-3 { top: 112px; left: 4%; }
+}
+@media (max-width: 480px) {
+  .cover-thumbs { height: 260px; max-width: 320px; }
+  .thumb-tilt { width: 128px; height: 128px; border-width: 4px; border-radius: 18px; }
+  .thumb-1 { left: 0; top: 0; }
+  .thumb-2 { left: 42%; top: 48px; }
+  .thumb-3 { left: 0; top: 112px; }
+}
+/* === RETROFIT: editorial provenance byline === */
+.provenance-line { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; }
+.provenance-line .container, .provenance-line.inline-no-container { /* nothing */ }
+.provenance-line p { font-size: 14px; color: var(--secondary); line-height: 1.55; margin: 0; max-width: 920px; }
+.provenance-line .pv-label { color: var(--muted); font-weight: 500; margin-right: 8px; }
+.provenance-line .num { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) {
+  .provenance-line { padding: 18px 0; }
+  .provenance-line p { font-size: 13px; }
+}
+/* Kill the old cover-stats and old hero-trio CSS that may still reference dead classes */
+.cover-stats, .hero-trio, .hero-card, .wwa-strip:not(.kept), .wwa-row, .wwa-label { /* unused, kept for safety */ }
 </style>
 </head>
 <body>
 <div class="scroll-progress" id="scroll-progress"></div>
 <nav class="nav">
-  <div class="container nav-inner">
-    <div class="nav-left">
-      <span class="nav-pill"><span class="wave">👋</span> Sup</span>
-      <div class="nav-divider"></div>
-      <div class="nav-brand">
-        <img src="https://www.hamburgerhelper.com/wp-content/themes/idea-hamburgerhelper/library/img/logo.png" alt="Hamburger Helper logo" onerror="this.style.display='none'">
-      </div>
-    </div>
-    <div class="nav-mid"><a href="#benchmark">Benchmark</a><a href="#influencer">Influencer</a><a href="#competitors">Competitors</a><a href="#paid">Paid</a><a href="#feed">Feed</a><a href="#shortlist">Shortlist</a><a href="#opportunity">Opportunity</a></div>
-    <div class="nav-cta"><a href="#opportunity">View Opportunity</a></div>
-  </div>
+<div class="container nav-inner">
+<div class="nav-left">
+<span class="nav-pill"><span class="wave">👋</span> Sup</span>
+<div class="nav-divider"></div>
+<div class="nav-brand">
+<img alt="Hamburger Helper logo" onerror="this.style.display='none'" src="https://www.hamburgerhelper.com/wp-content/themes/idea-hamburgerhelper/library/img/logo.png"/>
+</div>
+</div>
+<div class="nav-mid"><a href="#benchmark">Benchmark</a><a href="#influencer">Influencer</a><a href="#competitors">Competitors</a><a href="#paid">Paid</a><a href="#feed">Feed</a><a href="#shortlist">Shortlist</a><a href="#opportunity">Opportunity</a></div>
+<div class="nav-cta"><a href="#opportunity">View Opportunity</a></div>
+</div>
 </nav>
 <section class="cover">
-  <div class="container">
-    <div class="green-dot-pill reveal">Influencer Marketing Intelligence Report</div>
-    <h1 class="reveal">
-      <span class="s1">Hamburger Helper and the Boxed Meal Kits category.</span>
-      <span class="s2">Where the brand sits, <span class="brand-emphasis">what is moving around it</span>.</span>
-    </h1>
-    <p class="cover-sub reveal">Where the brand sits across the 57-brand category map, what is moving on Meta and the creator side, and the strategies competitors are running.</p>
-
-    <div class="cover-stats reveal">
-      <div><div class="v" data-count="57" data-format="comma">57</div><div class="lbl">Brands in the Boxed Meal Kits category</div></div>
-      <div><div class="v" data-count="62" data-format="comma">62</div><div class="lbl">Active ad creatives surfaced</div></div>
-      <div><div class="v" data-count="26" data-format="comma">26</div><div class="lbl">Hamburger Helper live Meta creatives</div></div>
-      <div><div class="v" data-count="2" data-format="comma">2</div><div class="lbl">Creators tagging the brand in the window</div></div>
-    </div>
-
-    <div class="hero-trio reveal">
-      <a href="https://www.instagram.com/p/DYAegH9DoR_/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="hero-card">
-        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/4d9da427-0b30-4fa7-acd7-38b910c90ea5" alt="Promotional" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="ft">660 likes · Promotional</div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DWmKOEGjlJJ/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="hero-card middle">
-        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/ec7f4659-7422-4a1d-a2c1-42ea838264be" alt="Promotional" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="ft">413 likes · Promotional</div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DX-bRlfjWSg/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="hero-card">
-        <div class="img-slot"><img src="https://first-possum-672.convex.cloud/api/storage/370f726e-a7e8-42bf-ab84-e5d5426110db" alt="Relatable/Meme" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="ft">84 likes · Relatable/Meme</div>
-      </div>
-    </a>
-    </div>
-  </div>
-</section>
-
-<div class="wwa-strip">
-  <div class="container">
-    <div class="wwa-label">What we analysed</div>
-    <div class="wwa-row">
-      <div><div class="v" data-count="57" data-format="comma">57</div><div class="cap">brands in the Boxed Meal Kits category</div></div>
-      <div><div class="v" data-count="114" data-format="comma">114</div><div class="cap">top creators across Instagram and TikTok</div></div>
-      <div><div class="v" data-count="62" data-format="comma">62</div><div class="cap">paid ad creatives active in the category</div></div>
-      <div><div class="v">84-day</div><div class="cap">category window · 2026-02-20 to 2026-05-15</div></div>
-      <div><div class="v">80-day</div><div class="cap">brand window   -   own feed and Creator Tagged Posts</div></div>
-    </div>
-  </div>
-</div>
-
-<section id="benchmark">
-  <div class="container">
-    <div class="section-label reveal">01 · Market benchmark</div>
-    <h2 class="reveal">Heavy paid presence, light creator footprint.</h2>
-    <p class="reveal">Hamburger Helper sits in the top 10 of the 57-brand Boxed Meal Kits category on active Meta ad volume (rank 9 of 57) but in the bottom half on Instagram followers (rank 43 of 57) and on Creator Tagged Posts (rank 34 of 57). Across the 84-day category window, the brand's ad budget shows up; the creator side does not.</p>
-    <div class="section-stats stagger">
-      <div>
-      <div class="v" data-count="26" data-format="comma">26</div>
-      <div class="ctx">rank 9 of 57 (top 16%)</div>
-      <div class="lbl">Active Meta ads</div>
-    </div><div>
-      <div class="v" data-count="2" data-format="comma">2</div>
-      <div class="ctx">rank 34 of 57 (top 60%)</div>
-      <div class="lbl">Creator Tagged Posts (84d)</div>
-    </div><div>
-      <div class="v" data-count="2" data-format="comma">2</div>
-      <div class="ctx">vs category top of 77 (@goodles)</div>
-      <div class="lbl">Unique tagging creators</div>
-    </div><div>
-      <div class="v" data-count="11000" data-format="comma">11K</div>
-      <div class="ctx">rank 43 of 57 (top 76%)</div>
-      <div class="lbl">Instagram followers</div>
-    </div><div>
-      <div class="v" data-count="0" data-format="comma">0</div>
-      <div class="ctx">vs category leader @allgoodles at 6</div>
-      <div class="lbl">Strategies detected in category map</div>
-    </div><div>
-      <div class="v" data-count="0" data-format="comma">0</div>
-      <div class="ctx">of 26 live creatives   -   heavy short-cycle testing, no long-runners</div>
-      <div class="lbl">Ads surviving 30+ days</div>
-    </div>
-    </div>
-    <div class="players-row stagger">
-      <div class="player-card target">
-      <div class="target-tag">Target brand</div>
-      <div class="head">
-        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/d41b2199-bed1-48f9-8868-27b22ab70cb2" alt="Hamburger Helper" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#C8102E';this.parentElement.textContent='HH'"></div>
-        <div>
-          <div class="b-name">Hamburger Helper</div>
-          <div class="b-handle">@helper</div>
-        </div>
-      </div>
-      <div class="stat-row">
-          <div class="label">Instagram followers</div>
-          <div class="val-rank">
-            <span class="val" data-count="11235" data-format="compact">11.2KK</span>
-            <span class="rank-pill">#43 of 57</span>
-          </div>
-          <div class="bar"><span data-width="7.9" style="background:#C8102E;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Creator Tagged Posts</div>
-          <div class="val-rank">
-            <span class="val" data-count="2" data-format="comma">2</span>
-            <span class="rank-pill">#34 of 57</span>
-          </div>
-          <div class="bar"><span data-width="2.3" style="background:#C8102E;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Active Meta ads</div>
-          <div class="val-rank">
-            <span class="val" data-count="26" data-format="comma">26</span>
-            <span class="rank-pill">#9 of 57</span>
-          </div>
-          <div class="bar"><span data-width="43.3" style="background:#C8102E;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Total Creator Views</div>
-          <div class="val-rank">
-            <span class="val" data-count="1099" data-format="compact">1.1KK</span>
-            <span class="rank-pill">#37 of 57</span>
-          </div>
-          <div class="bar"><span data-width="0.0" style="background:#C8102E;"></span></div>
-        </div>
-    </div><div class="player-card">
-      
-      <div class="head">
-        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd" alt="Knorr" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#534AB7';this.parentElement.textContent='KN'"></div>
-        <div>
-          <div class="b-name">Knorr</div>
-          <div class="b-handle">@knorr</div>
-        </div>
-      </div>
-      <div class="stat-row">
-          <div class="label">Instagram followers</div>
-          <div class="val-rank">
-            <span class="val" data-count="75012" data-format="compact">75.0KK</span>
-            <span class="rank-pill">#18 of 57</span>
-          </div>
-          <div class="bar"><span data-width="53.0" style="background:#534AB7;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Creator Tagged Posts</div>
-          <div class="val-rank">
-            <span class="val" data-count="36" data-format="comma">36</span>
-            <span class="rank-pill">#5 of 57</span>
-          </div>
-          <div class="bar"><span data-width="41.9" style="background:#534AB7;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Active Meta ads</div>
-          <div class="val-rank">
-            <span class="val" data-count="28" data-format="comma">28</span>
-            <span class="rank-pill">#8 of 57</span>
-          </div>
-          <div class="bar"><span data-width="46.7" style="background:#534AB7;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Total Creator Views</div>
-          <div class="val-rank">
-            <span class="val" data-count="26845852" data-format="compact">26.8MM</span>
-            <span class="rank-pill first">#1 of 57</span>
-          </div>
-          <div class="bar"><span data-width="100.0" style="background:#534AB7;"></span></div>
-        </div>
-    </div><div class="player-card">
-      
-      <div class="head">
-        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#1D9E75';this.parentElement.textContent='GO'"></div>
-        <div>
-          <div class="b-name">Goodles</div>
-          <div class="b-handle">@allgoodles</div>
-        </div>
-      </div>
-      <div class="stat-row">
-          <div class="label">Instagram followers</div>
-          <div class="val-rank">
-            <span class="val" data-count="141480" data-format="compact">141K</span>
-            <span class="rank-pill">#7 of 57</span>
-          </div>
-          <div class="bar"><span data-width="100.0" style="background:#1D9E75;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Creator Tagged Posts</div>
-          <div class="val-rank">
-            <span class="val" data-count="86" data-format="comma">86</span>
-            <span class="rank-pill first">#1 of 57</span>
-          </div>
-          <div class="bar"><span data-width="100.0" style="background:#1D9E75;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Active Meta ads</div>
-          <div class="val-rank">
-            <span class="val" data-count="1" data-format="comma">1</span>
-            <span class="rank-pill">#23 of 57</span>
-          </div>
-          <div class="bar"><span data-width="1.7" style="background:#1D9E75;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Total Creator Views</div>
-          <div class="val-rank">
-            <span class="val" data-count="988297" data-format="compact">988K</span>
-            <span class="rank-pill">#11 of 57</span>
-          </div>
-          <div class="bar"><span data-width="3.7" style="background:#1D9E75;"></span></div>
-        </div>
-    </div><div class="player-card">
-      
-      <div class="head">
-        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f" alt="Land O&#x27;Lakes Mac &amp; Cheese" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#D85A30';this.parentElement.textContent='LO'"></div>
-        <div>
-          <div class="b-name">Land O&#x27;Lakes Mac &amp; Cheese</div>
-          <div class="b-handle">@landolakesktchn</div>
-        </div>
-      </div>
-      <div class="stat-row">
-          <div class="label">Instagram followers</div>
-          <div class="val-rank">
-            <span class="val" data-count="96447" data-format="compact">96.4KK</span>
-            <span class="rank-pill">#14 of 57</span>
-          </div>
-          <div class="bar"><span data-width="68.2" style="background:#D85A30;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Creator Tagged Posts</div>
-          <div class="val-rank">
-            <span class="val" data-count="16" data-format="comma">16</span>
-            <span class="rank-pill">#17 of 57</span>
-          </div>
-          <div class="bar"><span data-width="18.6" style="background:#D85A30;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Active Meta ads</div>
-          <div class="val-rank">
-            <span class="val" data-count="60" data-format="comma">60</span>
-            <span class="rank-pill">#4 of 57</span>
-          </div>
-          <div class="bar"><span data-width="100.0" style="background:#D85A30;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Total Creator Views</div>
-          <div class="val-rank">
-            <span class="val" data-count="1385976" data-format="compact">1.4MM</span>
-            <span class="rank-pill">#7 of 57</span>
-          </div>
-          <div class="bar"><span data-width="5.2" style="background:#D85A30;"></span></div>
-        </div>
-    </div><div class="player-card">
-      
-      <div class="head">
-        <div class="logo-tile"><img src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af" alt="Old El Paso" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#378ADD';this.parentElement.textContent='OE'"></div>
-        <div>
-          <div class="b-name">Old El Paso</div>
-          <div class="b-handle">@oldelpaso</div>
-        </div>
-      </div>
-      <div class="stat-row">
-          <div class="label">Instagram followers</div>
-          <div class="val-rank">
-            <span class="val" data-count="52450" data-format="compact">52.5KK</span>
-            <span class="rank-pill">#22 of 57</span>
-          </div>
-          <div class="bar"><span data-width="37.1" style="background:#378ADD;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Creator Tagged Posts</div>
-          <div class="val-rank">
-            <span class="val" data-count="9" data-format="comma">9</span>
-            <span class="rank-pill">#22 of 57</span>
-          </div>
-          <div class="bar"><span data-width="10.5" style="background:#378ADD;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Active Meta ads</div>
-          <div class="val-rank">
-            <span class="val" data-count="46" data-format="comma">46</span>
-            <span class="rank-pill">#5 of 57</span>
-          </div>
-          <div class="bar"><span data-width="76.7" style="background:#378ADD;"></span></div>
-        </div><div class="stat-row">
-          <div class="label">Total Creator Views</div>
-          <div class="val-rank">
-            <span class="val" data-count="305843" data-format="compact">306K</span>
-            <span class="rank-pill">#21 of 57</span>
-          </div>
-          <div class="bar"><span data-width="1.1" style="background:#378ADD;"></span></div>
-        </div>
-    </div>
-    </div>
-    <p class="players-cap">Four direct competitors compared on four metrics. Hamburger Helper highlighted. Active Meta ads substituted for the standard locations metric since every brand in this CPG category has zero physical footprint.</p>
-
-    <div class="callout reveal">
-      <span class="callout-label">The Benchmark Verdict</span>
-      <p>Goodles is the category's anomaly. It runs six different creator plays at once (the highest count in the category map), pulls in 988K creator-attributable views, and only spends on a single live Meta ad. Hamburger Helper runs none of the six and concentrates the entire ad budget on a Helper Deluxe launch instead.</p>
-    </div>
-  </div>
-</section>
-
-<section id="influencer">
-  <div class="container">
-    <div class="section-label reveal">02 · Influencer intelligence</div>
-    <h2 class="reveal">Only two creators tagged the brand all quarter.</h2>
-    <p class="reveal">Across the 80-day brand window, just two Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) on Instagram, zero on TikTok, from two different creators. 2 unique creators places Hamburger Helper at rank 35 of 57 on creator tagging volume in the category, and at rank 39 of 57 on unique tagging creators. The category leader, Goodles, pulls in 77 unique creators in the same window.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;">
-      <div class="stat reveal"><div class="lbl">Unique tagging creators</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">vs Goodles at 77 (the category top)</div></div>
-      <div class="stat reveal"><div class="lbl">Total Creator Tagged Posts (84d)</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">Goodles: 86 · Annie's: 38 · Knorr: 36</div></div>
-      <div class="stat dark reveal"><div class="lbl">Tagged-post views in window</div><div class="v" data-count="1099" data-format="comma">1,099</div><div class="sub">vs Knorr's 26.8M (the category top)</div></div>
-    </div>
-
-    <h3 class="reveal" style="margin-top:36px;margin-bottom:14px;">What creators do say, when they say it</h3>
-    <div class="theme-bars reveal">
-      <div class="theme-bar">
-      <div class="name">Vegan grocery finds round-ups</div>
-      <div class="track"><div class="fill" data-width="50.0" style="width:0;"></div></div>
-      <div class="pct">50.0% · 1 post</div>
-    </div><div class="theme-bar">
-      <div class="name">Day-in-the-life evening routines</div>
-      <div class="track"><div class="fill" data-width="50.0" style="width:0;"></div></div>
-      <div class="pct">50.0% · 1 post</div>
-    </div>
-    </div>
-    <p class="reveal">Both Creator Tagged Posts come from creators who weren't really posting about the product. <a href="https://www.instagram.com/bigboxvegan/" class="post-link-inline" target="_blank" rel="noopener">@bigboxvegan</a> (114K followers) was running a vegan grocery round-up that happened to surface a new Helper teriyaki variant at Grocery Outlet, and <a href="https://www.instagram.com/alexiatomasik/" class="post-link-inline" target="_blank" rel="noopener">@alexiatomasik</a> (4.9K followers) cooked a Tuna Helper inside a wider day-in-the-life vlog. Neither is a partnership, neither is a creator who's chosen Hamburger Helper as a recurring product to talk about, and neither belongs to any of the creator-discovery patterns competitors run.</p>
-
-    <h3 class="reveal" style="margin-top:32px;margin-bottom:14px;">The two creators who did tag the brand</h3>
-    <ul style="list-style:none;padding:0;margin:0;">
-      <li style="margin-bottom:14px;">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c958071e-8895-4d2d-83e8-78fc707d4104" alt="bigboxvegan" style="width:24px;height:24px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px;" onerror="this.style.display='none'"><a href="https://www.instagram.com/p/DYFzkidmmhz/" target="_blank" rel="noopener" class="post-link-inline" style="font-weight:600;color:var(--text);">@bigboxvegan</a>
-      <span style="color:var(--muted);font-size:13px;"> · 114,225 followers · 1,863 likes · 1.67% ER</span>
-      <div style="font-size:13.5px;color:var(--secondary);margin-top:6px;line-height:1.55;">A handheld photo of a &#x27;Sammich&#x27; brand Fluffernutter flavored crustless sandwich, emphasizing its nostalgic flavor profile and 10g protein co</div>
-    </li><li style="margin-bottom:14px;">
-      <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/5aa4fd82-a3fa-4234-b663-f8d5bc78d822" alt="alexiatomasik" style="width:24px;height:24px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px;" onerror="this.style.display='none'"><a href="https://www.instagram.com/p/DYDM4ShsLNo/" target="_blank" rel="noopener" class="post-link-inline" style="font-weight:600;color:var(--text);">@alexiatomasik</a>
-      <span style="color:var(--muted);font-size:13px;"> · 4,908 followers · 36 likes · 1.04% ER</span>
-      <div style="font-size:13.5px;color:var(--secondary);margin-top:6px;line-height:1.55;">A realistic and relatable &#x27;day in the life&#x27; vlog documenting a creator&#x27;s evening routine after her 9-5 job, featuring skincare, cooking a si</div>
-    </li>
-    </ul>
-
-    <p class="reveal" style="margin-top:24px;">On TikTok, the picture is empty. The @helper handle on TikTok has not posted since 2015. Brand-name search across the window returned 14 results that all matched on the English word "helper" inside unrelated content (domestic-helper skits, geopolitical news, "destiny helper" relationship posts), none referencing the actual product. We kept looking for a real TikTok mention. We could not find one.</p>
-
-    <div class="callout reveal">
-      <span class="callout-label">The Earned Engine That Isn't</span>
-      <p>The category has a working earned-mentions pattern (Brami pulls 14 unique creators a quarter unprompted, Maruchan 17, Goodles 31). Hamburger Helper is at 2 IG and 0 TikTok across the same 84 days. The product is distinct, the mascot is recognisable, the SKU is everywhere on retail shelves; what isn't there is anything pulling creators into talking about it.</p>
-    </div>
-  </div>
-</section>
-
-<section id="competitors">
-  <div class="container">
-    <div class="section-label reveal">03 · Competitor deep-dive</div>
-    <h2 class="reveal">One competitor runs six plays at once, most run two, you run zero.</h2>
-    <p class="reveal">The category map detects ten distinct creator strategies inside Boxed Meal Kits, and one brand (Goodles) is detected on six of them. Across the four direct competitors selected for this report, every one is detected on at least one creator strategy. Hamburger Helper is detected on zero. Below, the head-to-head numbers, then a narrative on what each competitor is actually doing differently.</p>
-
-    <div class="comp-table-wrap reveal">
-      <table class="comp-table">
-        <thead>
-          <tr><th>Brand</th><th>Instagram followers</th><th>Creator Tagged Posts</th><th>Unique creators</th><th>Tagged-post views</th><th>Active Meta ads</th></tr>
-        </thead>
-        <tbody><tr class="target-row">
-      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/d41b2199-bed1-48f9-8868-27b22ab70cb2" alt="Hamburger Helper" onerror="this.style.display='none'"><div><div class="nm">Hamburger Helper</div><div style="font-size:11px;color:var(--muted);">@helper</div></div></div></td>
-      <td>11,235</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1.1K</td>
-      <td>26</td>
-    </tr><tr>
-      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd" alt="Knorr" onerror="this.style.display='none'"><div><div class="nm">Knorr</div><div style="font-size:11px;color:var(--muted);">@knorr</div></div></div></td>
-      <td>75,012</td>
-      <td>36</td>
-      <td>31</td>
-      <td>26.8M</td>
-      <td>28</td>
-    </tr><tr>
-      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none'"><div><div class="nm">Goodles</div><div style="font-size:11px;color:var(--muted);">@allgoodles</div></div></div></td>
-      <td>141,480</td>
-      <td>86</td>
-      <td>77</td>
-      <td>988K</td>
-      <td>1</td>
-    </tr><tr>
-      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f" alt="Land O&#x27;Lakes Mac &amp; Cheese" onerror="this.style.display='none'"><div><div class="nm">Land O&#x27;Lakes Mac &amp; Cheese</div><div style="font-size:11px;color:var(--muted);">@landolakesktchn</div></div></div></td>
-      <td>96,447</td>
-      <td>16</td>
-      <td>12</td>
-      <td>1.4M</td>
-      <td>60</td>
-    </tr><tr>
-      <td><div class="b-cell"><img src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af" alt="Old El Paso" onerror="this.style.display='none'"><div><div class="nm">Old El Paso</div><div style="font-size:11px;color:var(--muted);">@oldelpaso</div></div></div></td>
-      <td>52,450</td>
-      <td>9</td>
-      <td>9</td>
-      <td>306K</td>
-      <td>46</td>
-    </tr></tbody>
-      </table>
-    </div>
-
-    <div class="comp-cards stagger">
-      <div class="cc">
-      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd" alt="Knorr" onerror="this.style.display='none'"><div><div class="nm">Knorr</div><div class="hd">@knorr</div></div></div>
-      <p>The category leader for earned creator volume. Knorr pulled 26.8M tagged-post views from 31 unique creators in the window   -   second-highest unique-creator count after Goodles, the highest views by a wide margin. Runs a long-term ambassador layer (@brooklynsbites, 200K) on top.</p>
-      <div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Long-Term Brand Ambassador</span></div>
-    </div><div class="cc">
-      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none'"><div><div class="nm">Goodles</div><div class="hd">@allgoodles</div></div></div>
-      <p>The multi-play operator of the category. Goodles is detected running six creator strategies simultaneously, including 31 unique creators tagging (rank 1 of 57), 11 geo-clustered micro-creators, and an ambassador layer anchored by @guacbites (874K followers, 2.8M views). Only one live Meta ad   -   the entire engine runs on creators.</p>
-      <div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Earned Organic Mentions</span><span class="pill">Creator Collective / Volume Model</span><span class="pill">Long-Term Brand Ambassador</span><span class="pill">Geo-Clustered Micro-Creators</span></div>
-    </div><div class="cc">
-      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f" alt="Land O&#x27;Lakes Mac &amp; Cheese" onerror="this.style.display='none'"><div><div class="nm">Land O&#x27;Lakes Mac &amp; Cheese</div><div class="hd">@landolakesktchn</div></div></div>
-      <p>Sits at the opposite end of the spectrum from Goodles. Land O&#x27;Lakes Mac &amp; Cheese commissions 60 live Meta creatives (rank 4 of 57) and pulls 1.4M tagged-post views   -   the heaviest paid-and-creator dual play in the category. Tagged creators are mostly mid-tier (12 unique across 16 posts).</p>
-      <div class="strats"><span class="lbl">Strategies in play:</span></div>
-    </div><div class="cc">
-      <div class="h"><img src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af" alt="Old El Paso" onerror="this.style.display='none'"><div><div class="nm">Old El Paso</div><div class="hd">@oldelpaso</div></div></div>
-      <p>The closest direct boxed-meal-kit analog by SKU. Runs 46 live Meta creatives (rank 5 of 57) and 9 tagged posts from 9 unique creators   -   a quieter creator footprint than Land O&#x27;Lakes but a similar paid testing cadence.</p>
-      <div class="strats"><span class="lbl">Strategies in play:</span></div>
-    </div>
-    </div>
-
-    <div class="mpo">
-      <div class="mpo-head reveal">Multi-play operators · brands running 3+ plays</div>
-      <div class="stagger">
-        <div class="item">
-      <img src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9" alt="Goodles" onerror="this.style.display='none'">
-      <div class="body">
-        <div class="nm">Goodles</div>
-        <div class="sum">Running 6 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
-      </div>
-      <div class="badge">6 plays</div>
-    </div><div class="item">
-      <img src="https://first-possum-672.convex.cloud/api/storage/553ea665-6015-4236-a9b7-be0a44fab591" alt="Brami" onerror="this.style.display='none'">
-      <div class="body">
-        <div class="nm">Brami</div>
-        <div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Earned Organic Mentions</div>
-      </div>
-      <div class="badge">3 plays</div>
-    </div><div class="item">
-      <img src="https://first-possum-672.convex.cloud/api/storage/8210a255-864e-483f-a1c3-5451bcdb3e94" alt="Goya" onerror="this.style.display='none'">
-      <div class="body">
-        <div class="nm">Goya</div>
-        <div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Long-Term Brand Ambassador</div>
-      </div>
-      <div class="badge">3 plays</div>
-    </div>
-      </div>
-    </div>
-
-    <div class="callout reveal">
-      <span class="callout-label">The Multi-Play Stack</span>
-      <p>Goodles is running an earned-mention engine, an ambassador layer, geo-clusters, a UGC-for-brand-feed cadence, a creator collective at sub-10K micro level, and a press-trip pattern simultaneously. Brami runs an alt-handle resident creator plus a quiet retainer. The strategies in play in this category aren't single-tactic plays   -   the brands winning the creator side are stacking three to six.</p>
-    </div>
-  </div>
-</section>
-
-<section id="paid">
-  <div class="container">
-    <div class="section-label reveal">04 · Creator content in paid</div>
-    <h2 class="reveal">The category's paid spend is built on creator content. Yours is built on product photography.</h2>
-    <p class="reveal">Across the 62 active ad creatives in the Boxed Meal Kits category at time of analysis, 41.9% are creator-shot (UGC or Lifestyle styles where the camera is on a human, not a pack shot). Hamburger Helper's 16 active creatives in flight contain 2 that fit that definition. The rest are studio-shot food photography promoting the Helper Deluxe launch.</p>
-
-    <div class="stat-grid stagger">
-      <div class="stat"><div class="lbl">Active ad creatives in Boxed Meal Kits</div><div class="v" data-count="62" data-format="comma">62</div><div class="sub">across 0 advertisers</div></div>
-      <div class="stat"><div class="lbl">Active creatives that are creator-shot</div><div class="v" data-count="42" data-suffix="%">42%</div><div class="sub">UGC or Lifestyle (vs Product-Only / Polished Brand)</div></div>
-      <div class="stat dark"><div class="lbl">60+ day survival rate</div><div class="v" data-count="28" data-suffix="%">28%</div><div class="sub">of the top 100 creatives have survived more than 60 days · industry baseline 11%</div></div>
-      <div class="stat"><div class="lbl">Hamburger Helper active creator-shot ads</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">out of 16 unique active · longest runtime 25 days</div></div>
-      <div class="stat"><div class="lbl">UGC share of 60+ day winners</div><div class="v" data-count="24" data-suffix="%">24%</div><div class="sub">of the 25 ads surviving 60+ days in the category</div></div>
-      <div class="stat dark"><div class="lbl">Brands testing 10+ creator-cycle creatives</div><div class="v" data-count="0" data-format="comma">0</div><div class="sub">with 50%+ cycled in under 30 days · the "creator pipeline" cohort</div></div>
-    </div>
-
-    <div class="charts-side-by-side">
-      <div class="chart-wrap reveal">
-        <h3>Ad longevity distribution</h3>
-        <p class="ch-sub">Top 100 category creatives by max days running · still-active vs expired</p>
-        <div class="chart-canvas"><canvas id="chart-longevity"></canvas></div>
-      </div>
-      <div class="chart-wrap reveal">
-        <h3>Active creatives by brand · top 5</h3>
-        <p class="ch-sub">Of the top 100 creatives in the category map · target highlighted</p>
-        <div class="chart-canvas"><canvas id="chart-brand-active"></canvas></div>
-      </div>
-    </div>
-
-    <p class="reveal">The category's survival curve is unusual. Of the top 100 creatives in the category map, 21 have run more than 60 days   -   roughly 28%, against an industry baseline of about 11%. In that 60-plus-day pool, UGC outweighs every other style: 24% are creator-shot, against the 42% creator-shot share across all active creatives. Creator content survives at higher rates than studio content, in this category, by a large margin.</p>
-
-    <p class="reveal">The brands feeding that pool aren't testing one or two creator videos. They're cycling many. Four niche brands have 10 or more live creatives with the majority cycled in under 30 days   -   Ramen Bae, The Only Bean, Once Upon a Farm, and Land O'Lakes Mac & Cheese all show the high-volume, high-churn pattern of a creator pipeline producing fresh variants every week. The 8 UGC ads surviving 60+ days didn't appear on the first try; they emerged from a testing pool ten times their size.</p>
-
-    <h3 class="reveal" style="margin:32px 0 12px;">The 10 longest-running creator-shot ads in the category</h3>
-    <p class="reveal">These are the survivors. Every one is creator-shot (UGC or Lifestyle), every one is still active, every one has been running for 60+ days. Click any tile for the Meta Ad Library snapshot.</p>
-    <div class="ad-gallery stagger">
-      <a href="https://www.facebook.com/ads/library?id=3793354810945979" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4d7a54b4-ddbd-4af5-8962-96c096381121" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Ramen Bae" onerror="this.style.display='none'"><span class="nm">Ramen Bae</span></div>
-          <div class="days">729 days · UGC</div>
-          <div class="premise">A product developer announces the launch of two new ramen toppings  -  a kimchi mix and dried enoki mushrooms  -  while demonstrating how </div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=609291041732771" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/5dad923d-4c5b-418e-a568-1c6dba190bc8" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Ramen Bae" onerror="this.style.display='none'"><span class="nm">Ramen Bae</span></div>
-          <div class="days">459 days · UGC</div>
-          <div class="premise">A creator provides three compelling reasons  -  convenience, cost-effectiveness, and nutritional value  -  to use Ramen Bae&#x27;s dried t</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=1779498512714952" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://www.facebook.com/ads/library?id=1779498512714952" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Once Upon a Farm" onerror="this.style.display='none'"><span class="nm">Once Upon a Farm</span></div>
-          <div class="days">131 days · Lifestyle</div>
-          <div class="premise">A promotional graphic showcasing Once Upon A Farm&#x27;s product variety  -  pouches, pantry snacks, and oat bars  -  through vibrant life</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=1847545416636667" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://www.facebook.com/ads/library?id=1847545416636667" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Once Upon a Farm" onerror="this.style.display='none'"><span class="nm">Once Upon a Farm</span></div>
-          <div class="days">131 days · Lifestyle</div>
-          <div class="premise">A promotional lifestyle graphic for Once Upon A Farm&#x27;s Organic Immunity Blend, emphasizing health, fresh ingredients, and chi</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=2290955161315579" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/3e49ef34-0e83-49e0-8dc9-e2f59f8e5d37" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Tastee Choice" onerror="this.style.display='none'"><span class="nm">Tastee Choice</span></div>
-          <div class="days">116 days · UGC</div>
-          <div class="premise">A relatable video showing a woman quickly preparing a frozen chicken carbonara meal after her husband says he will be home in 10 m</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=802257768828060" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/bf9e1980-7e65-4a48-9d72-85d1946bf381" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Saffron Road" onerror="this.style.display='none'"><span class="nm">Saffron Road</span></div>
-          <div class="days">90 days · UGC</div>
-          <div class="premise">A creative food hack demonstrating how to repurpose a frozen Saffron Road Butter Chicken meal into fresh cucumber boats for a low-</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=1276230464413862" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/217535d5-bee2-4661-81b6-90ade47774c5" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Lovebird Foods" onerror="this.style.display='none'"><span class="nm">Lovebird Foods</span></div>
-          <div class="days">83 days · UGC</div>
-          <div class="premise">A creator visits Walmart to celebrate and promote the retail launch of Lovebird, a clean-ingredient, family-owned cereal brand.</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=27576745311927497" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/b3cc2598-488e-409a-adaf-b8198125d77e" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="The Only Bean" onerror="this.style.display='none'"><span class="nm">The Only Bean</span></div>
-          <div class="days">56 days · UGC</div>
-          <div class="premise">A creator uses a &#x27;fake apology&#x27; hook to announce a massive, limited-time sale on a healthy snack she previously recommen</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=952610527812867" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/f1a35803-0cef-4c59-a4b1-75912dd096dd" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="The Only Bean" onerror="this.style.display='none'"><span class="nm">The Only Bean</span></div>
-          <div class="days">56 days · UGC</div>
-          <div class="premise">A health-conscious creator reviews &#x27;The Only Bean&#x27; edamame snacks, claiming they helped her achieve a flat stomach and c</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a><a href="https://www.facebook.com/ads/library?id=1301682958493204" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="ad-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/ed64df4f-9557-47e6-9156-bcf36b900bc9" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">VIDEO</div></div>
-        <div class="body">
-          <div class="b-row"><img src="" alt="Annie Chun&#x27;s Inc." onerror="this.style.display='none'"><span class="nm">Annie Chun&#x27;s Inc.</span></div>
-          <div class="days">49 days · UGC</div>
-          <div class="premise">A mother and daughter showcase the convenience and quality of Annie Chun&#x27;s ramen bowls as a quick, healthy, and delicious 3-m</div>
-          <span class="badge">Creator-shot</span>
-        </div>
-      </div>
-    </a>
-    </div>
-
-    <p class="reveal">Hamburger Helper has 2 creator-shot ads in flight out of 16 unique active creatives. All 16 promote the same Helper Deluxe launch (Brew Pub Cheeseburger and Sweet & Savory Teriyaki), with creative_type split 12 image / 4 video and Creative_Style split 10 Product-Only food photography / 4 Polished Brand promo / 2 UGC. The longest runtime in the brand's library is 25 days. Nothing is in the 60+ day pool where the category's survivors live.</p>
-
-    <div class="callout reveal">
-      <span class="callout-label">The Commissioning Gap</span>
-      <p>Four niche competitors are running 10+ active creatives with the majority cycled in under 30 days   -   they&#x27;re testing creator variants at category cadence. Hamburger Helper has 2 creator-shot ads in flight (out of 15 live), all under 26 days old. The gap isn&#x27;t ad budget   -   the brand is rank 9 of 57 on live creatives. The gap is a creator pipeline producing enough fresh creator-led variants to test continuously.</p>
-    </div>
-  </div>
-</section>
-
-<section id="feed">
-  <div class="container">
-    <div class="section-label reveal">05 · Feed content strategy</div>
-    <h2 class="reveal">Your best-performing pillar is the one you publish least.</h2>
-
-    <div class="stat-grid stagger">
-      <div class="stat"><div class="lbl">Top feed post likes</div><div class="v" data-count="660" data-format="comma">660</div><div class="sub">A Helper Deluxe Breakfast Hashbrowns giveaway carousel · 2026-05-06</div></div>
-      <div class="stat"><div class="lbl">Promotional avg likes per post</div><div class="v" data-count="384" data-format="comma">384</div><div class="sub">9.1× the Relatable/Meme average</div></div>
-      <div class="stat dark"><div class="lbl">Share of feed that is Promotional</div><div class="v" data-count="23" data-suffix="%">23%</div><div class="sub">3 of 13 posts</div></div>
-    </div>
-
-    <p class="reveal">Across the 80-day brand window, Hamburger Helper published 13 own-feed posts on Instagram. The format split skews to carousels (1), with a smaller number of videos and a single photo. Average likes per post sit at 121; median at 50. Underneath those averages, though, the per-pillar numbers tell a much sharper story.</p>
-
-    <p class="reveal">The Promotional posts (3 across the window) average 384 likes. The Relatable / Meme posts (10 across the window) average 42. The gap is 9.1×. The Promotional posts include the Helper Deluxe Breakfast Hashbrowns giveaway (660 likes, 2,760 comments   -   a giveaway mechanic), a Helper Deluxe launch teaser (413 likes), and a Helper Deluxe new-line announcement (81 likes). The Relatable / Meme posts include a Masters Champions Dinner satire (58 likes), a side-by-side "wordy ad vs meme ad" comparison (84 likes), and various Lefty-mascot meme drops in the 3 to 50 like range. The pattern is clear: the audience shows up for product launches and giveaway mechanics, and the brand publishes one of those for every seven memes.</p>
-
-    <div class="charts-side-by-side">
-      <div class="chart-wrap reveal">
-        <h3>Average likes by content pillar</h3>
-        <p class="ch-sub">13 own-feed posts · 80-day brand window</p>
-        <div class="chart-canvas"><canvas id="chart-pillar-likes"></canvas></div>
-      </div>
-      <div class="chart-wrap reveal">
-        <h3>Posts by pillar   -   the distribution gap</h3>
-        <p class="ch-sub">Production volume per pillar · same 80-day window</p>
-        <div class="chart-canvas"><canvas id="chart-pillar-counts"></canvas></div>
-      </div>
-    </div>
-
-    <h3 class="reveal" style="margin:36px 0 8px;">The five posts your audience picked</h3>
-    <p class="reveal">Ranked by likes. The top-ranked card is the canonical example   -   what the audience showed up for. Click any card for the post on Instagram.</p>
-    <div class="posts-grid stagger">
-      <a href="https://www.instagram.com/p/DYAegH9DoR_/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="post-card is-highlight">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4d9da427-0b30-4fa7-acd7-38b910c90ea5" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="rl">01 · Promotional</div>
-          <div class="likes">660 likes</div>
-          <div class="meta">2760 comments · Carousel</div>
-          <div class="desc">A promotional graphic announcing a giveaway for a Hamburger Helper Breakfast Cheesy Hashbrowns product.</div>
-          <span class="link">View post →</span>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DWmKOEGjlJJ/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="post-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/ec7f4659-7422-4a1d-a2c1-42ea838264be" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="rl">02 · Promotional</div>
-          <div class="likes">413 likes</div>
-          <div class="meta">14 comments · Carousel</div>
-          <div class="desc">A teaser graphic featuring the Hamburger Helper mascot, &#x27;Lefty,&#x27; announcing that he has a secret to share, likely preceding a new product or brand announcement.</div>
-          <span class="link">View post →</span>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DX-bRlfjWSg/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="post-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/370f726e-a7e8-42bf-ab84-e5d5426110db" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="rl">03 · Relatable/Meme</div>
-          <div class="likes">84 likes</div>
-          <div class="meta">7 comments · Carousel</div>
-          <div class="desc">A side-by-side comparison meme illustrating the difference between wordy, benefit-driven Millennial marketing copy and concise, slang-heavy Gen Z communication styles using Hamburger Helper as the sub</div>
-          <span class="link">View post →</span>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DXt5fUOFjGp/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="post-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/5756f2a6-b2e6-4914-84fb-a561ce65c2c3" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="rl">04 · Promotional</div>
-          <div class="likes">81 likes</div>
-          <div class="meta">5 comments · Carousel</div>
-          <div class="desc">A promotional graphic announcing the launch of a new &#x27;Helper Deluxe&#x27; product line, specifically the Brew Pub Cheeseburger flavor, featuring the iconic brand mascot.</div>
-          <span class="link">View post →</span>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DVMBUFEDkVk/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="post-card">
-        <div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/972cccaa-3597-4a16-9f35-623921cfefc6" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;">CAROUSEL</div></div>
-        <div class="body">
-          <div class="rl">05 · Relatable/Meme</div>
-          <div class="likes">66 likes</div>
-          <div class="meta">5 comments · Carousel</div>
-          <div class="desc">A nostalgic childhood photo of a boy at a birthday party, captioned to reveal that he grew up to be a professional chef or food creator.</div>
-          <span class="link">View post →</span>
-        </div>
-      </div>
-    </a>
-    </div>
-
-    <p class="reveal">Four of the top five posts are Carousels. The single Video in the top five (a Tuna Helper one-pan recipe with Chicken of the Sea, 49 likes) sits at rank 5. Production-wise, every post in the top five is Static Graphic or Polished Brand   -   the lower-production UGC-style videos in the feed underperform on engagement, which is the inverse of what the brand's paid creator content would suggest. The feed is not a UGC channel for this brand; it is a graphic-and-launch channel.</p>
-
-    <p class="reveal">The Helper Deluxe giveaway carousel pulled 11× the median like count of the rest of the feed. That single post is also 2,760 comments   -   the entire comment volume of the window concentrated into one promotional drop. The signal is direct: more promotional carousels, fewer untethered memes, and giveaway mechanics where the budget allows.</p>
-
-    <div class="callout reveal">
-      <span class="callout-label">The Biggest Miss</span>
-      <p>Hamburger Helper&#x27;s three Promotional posts average 384 likes. The ten Relatable/Meme posts that make up most of the feed average 42. The pillar producing the engagement is the one the feed barely uses   -   one Promotional drop for every 3.3 memes.</p>
-    </div>
-  </div>
-</section>
-
-<section id="shortlist">
-  <div class="container">
-    <div class="section-label reveal">06 · The shortlist</div>
-    <h2 class="reveal">10 creators I'd brief this week if I ran your marketing.</h2>
-    <p class="reveal">Pulled from the 114 top creators across Instagram and TikTok in the category map. Selection logic: highest niche-attributable views as primary signal, unique competitor brand overlap as the first tiebreaker, average engagement rate as the second. Every name on this list has zero posting history with Hamburger Helper. The tier mix is three macro creators (100K+ followers), four mid-tier (10K to 100K), three micro (sub-10K with exceptional ER).</p>
-
-    <div class="sl-grid stagger">
-      <div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a80c6e7e-e0b2-412d-b5d0-679af7ab3362" class="av" alt="irisarellano_" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/irisarellano_/" target="_blank" rel="noopener">@irisarellano_</a><span class="plat">Instagram</span></div>
-          <div class="name"></div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="69817" data-format="compact">69.8K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="2675935" data-format="compact">2.7M</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="433" data-suffix="">43.34%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="24838519" data-format="compact">24.8M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">24.8MM niche-attributable views across 69,817 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Knorr</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ae67219-580b-44fe-b49a-9a6a14ebd1ac" class="av" alt="emmanuel.duverneau" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/emmanuel.duverneau/" target="_blank" rel="noopener">@emmanuel.duverneau</a><span class="plat">Instagram</span></div>
-          <div class="name">Emmanuel Duverneau</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="1508222" data-format="compact">1.5M</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="1175531" data-format="compact">1.2M</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="14" data-suffix="">1.40%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="8776541" data-format="compact">8.8M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">8.8MM niche-attributable views across 1,508,222 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Tillamook</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb54553c-e9d1-435b-b76a-e1ed034ef14d" class="av" alt="pinkapronshark" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/pinkapronshark/" target="_blank" rel="noopener">@pinkapronshark</a><span class="plat">Instagram</span></div>
-          <div class="name">Kennedy Sharko 🩷</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="2769" data-format="compact">2.8K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="877045" data-format="compact">877K</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="12376" data-suffix="">1237.61%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="6108367" data-format="compact">6.1M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">6.1MM niche-attributable views across 2,769 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Rao&#x27;s Homemade</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/84510b80-928d-4704-97b6-378cab249542" class="av" alt="guacbites" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.tiktok.com/@guacbites" target="_blank" rel="noopener">@guacbites</a><span class="plat">TikTok</span></div>
-          <div class="name">GuacBites</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="873600" data-format="compact">874K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="886780" data-format="compact">887K</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="94" data-suffix="">9.45%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="2800000" data-format="compact">2.8M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">2.8MM niche-attributable views across 873,600 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Goodles</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/ab837e17-4737-4701-a05d-05d4b762fcec" class="av" alt="luxelife9" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/luxelife9/" target="_blank" rel="noopener">@luxelife9</a><span class="plat">Instagram</span></div>
-          <div class="name">Marilyne Nix</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="1022080" data-format="compact">1M</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="1792706" data-format="compact">1.8M</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="0" data-suffix="">0.01%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="2111911" data-format="compact">2.1M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">2.1MM niche-attributable views across 1,022,080 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Goya</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f3a2cc63-0ae1-4d80-9359-920175a0a302" class="av" alt="bymarianabites" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/bymarianabites/" target="_blank" rel="noopener">@bymarianabites</a><span class="plat">Instagram</span></div>
-          <div class="name">Mari Bites 🌸</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="8674" data-format="compact">8.7K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="543470" data-format="compact">543K</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="4999" data-suffix="">499.97%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="1937384" data-format="compact">1.9M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">1.9MM niche-attributable views across 8,674 followers   -   top-tier reach pool. Already posted about 4 brands in the category.</div>
-      <div class="overlap">Already tagged: Barilla, SOMOS, Goya, Land O&#x27;Lakes Mac &amp; Cheese</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/38a0e99e-7c36-4de5-833a-e1056f2d1609" class="av" alt="cookingwithcar" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/cookingwithcar/" target="_blank" rel="noopener">@cookingwithcar</a><span class="plat">Instagram</span></div>
-          <div class="name">COOKING WITH CAR | HOT &amp; HEALTHY</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="45260" data-format="compact">45.3K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="168403" data-format="compact">168K</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="17" data-suffix="">1.77%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="1734318" data-format="compact">1.7M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">1.7MM niche-attributable views across 45,260 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Brami</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/44ef7bd7-179b-4a71-aadf-c0febe84d794" class="av" alt="bingewithanbu" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/bingewithanbu/" target="_blank" rel="noopener">@bingewithanbu</a><span class="plat">Instagram</span></div>
-          <div class="name">✨A N B U ✨</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="74272" data-format="compact">74.3K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="152287" data-format="compact">152K</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="0" data-suffix="">0.07%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="768533" data-format="compact">769K</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">769K niche-attributable views   -   proven the category will watch them. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Tasty Bite</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/29ff32c5-7d3f-4484-9ec7-a05eaa5941fc" class="av" alt="thejackiezee" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.instagram.com/thejackiezee/" target="_blank" rel="noopener">@thejackiezee</a><span class="plat">Instagram</span></div>
-          <div class="name">J A C K I E</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="12459" data-format="compact">12.5K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="70614" data-format="compact">70.6K</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="376" data-suffix="">37.63%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="603213" data-format="compact">603K</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">Engagement rate of 37.6% on 12,459 followers   -   small audience, real conversation. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Knorr</div>
-    </div><div class="sl">
-      <div class="h">
-        <img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/64f2db83-d51d-4043-bb1c-8513909bdb3e" class="av" alt="wellmadebykiley" onerror="this.style.display='none'">
-        <div class="meta">
-          <div class="handle"><a href="https://www.tiktok.com/@wellmadebykiley" target="_blank" rel="noopener">@wellmadebykiley</a><span class="plat">TikTok</span></div>
-          <div class="name">Well Made by Kiley</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="s"><div class="v" data-count="481100" data-format="compact">481K</div><div class="lb">Followers</div></div>
-        <div class="s"><div class="v" data-count="1177866" data-format="compact">1.2M</div><div class="lb">Avg views</div></div>
-        <div class="s"><div class="v" data-count="174" data-suffix="">17.49%</div><div class="lb">Engagement</div></div>
-        <div class="s"><div class="v" data-count="1200000" data-format="compact">1.2M</div><div class="lb">Total Creator Views</div></div>
-      </div>
-      <div class="why">1.2MM niche-attributable views across 481,100 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
-      <div class="overlap">Already tagged: Tillamook</div>
-    </div>
-    </div>
-
-    <h3 class="reveal" style="margin:36px 0 12px;">What's winning in your category this month</h3>
-    <p class="reveal">Five of the highest-performing creator posts in the category, mixing Instagram and TikTok. Open any tile for the post.</p>
-    <div class="insp-grid stagger">
-      <a href="https://www.instagram.com/p/DXF1houDxWz/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="insp">
-        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a80c6e7e-e0b2-412d-b5d0-679af7ab3362" alt="" onerror="this.style.display='none'"></div>
-        <div class="body">
-          <div class="h">@irisarellano_</div>
-          <div class="m">24.8M views · Educational</div>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DVeTAGuEuUe/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="insp">
-        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ae67219-580b-44fe-b49a-9a6a14ebd1ac" alt="" onerror="this.style.display='none'"></div>
-        <div class="body">
-          <div class="h">@emmanuel.duverneau</div>
-          <div class="m">8.8M views · Educational</div>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DW0C8qViiAj/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="insp">
-        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb54553c-e9d1-435b-b76a-e1ed034ef14d" alt="" onerror="this.style.display='none'"></div>
-        <div class="body">
-          <div class="h">@pinkapronshark</div>
-          <div class="m">6.1M views · Inspirational</div>
-        </div>
-      </div>
-    </a><a href="https://www.tiktok.com/@guacbites/video/7611675276967185695" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="insp">
-        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/84510b80-928d-4704-97b6-378cab249542" alt="" onerror="this.style.display='none'"></div>
-        <div class="body">
-          <div class="h">@guacbites</div>
-          <div class="m">2.8M views · Relatable/Meme</div>
-        </div>
-      </div>
-    </a><a href="https://www.instagram.com/p/DWeN1uKEbMS/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="insp">
-        <div class="visual"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/ab837e17-4737-4701-a05d-05d4b762fcec" alt="" onerror="this.style.display='none'"></div>
-        <div class="body">
-          <div class="h">@luxelife9</div>
-          <div class="m">2.1M views · Promotional</div>
-        </div>
-      </div>
-    </a>
-    </div>
-
-    <div class="callout reveal">
-      <span class="callout-label">The Shortlist Verdict</span>
-      <p>Combined: <span data-count="4098253" data-format="compact">4.1M</span> followers across these 10 creators, with <span data-count="50878786" data-format="compact">50.9M</span> Total Creator Views attributed in the category window. 10 of the 10 have already posted about brands in the Boxed Meal Kits category. 0 have not yet been tagged by any brand here.</p>
-    </div>
-  </div>
-</section>
-
-<section id="opportunity">
-  <div class="container">
-    <div class="section-label reveal">07 · The opportunity</div>
-    <h2 class="reveal">Six moves that change the game for Hamburger Helper.</h2>
-    <p class="reveal">Each opportunity is pulled from the category strategy map   -   a play that's detected on two or more competitors and absent on Hamburger Helper. The strategy_id columns are internal taxonomy; the rendered names are plain English. The closing stat on each card is the category-attributable view count tied to that play, sourced from Table 17 in the audit dataset.</p>
-
-    <div class="opp-grid stagger">
-      <div class="opp">
-      <div class="eb">Opportunity 01</div>
-      <h4>Hero / category-leader play</h4>
-      <p>Contract 1-3 high-trust creators as multi-year ambassadors with annual fees, events, and product input.</p><p>In the Boxed Meal Kits map, 5 brands are running this play across 10 tracked posts and 5.7MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles, Knorr</p>
-      <div class="closer">
-        <div class="big">5.7MM</div>
-        <div class="lbl">category views attributable to Long-Term Brand Ambassador</div>
-      </div>
-      <div class="backed">Backed by: Long-Term Brand Ambassador</div>
-    </div><div class="opp">
-      <div class="eb">Opportunity 02</div>
-      <h4>Native brand-feed supply</h4>
-      <p>Pay UGC creators to deliver vertical video the brand publishes on its OWN feed   -   not as paid ads, not on the creator&#x27;s channel.</p><p>In the Boxed Meal Kits map, 8 brands are running this play across 54 tracked posts and 268.9MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
-      <div class="closer">
-        <div class="big">268.9MM</div>
-        <div class="lbl">category views attributable to UGC for Brand Feed</div>
-      </div>
-      <div class="backed">Backed by: UGC for Brand Feed</div>
-    </div><div class="opp">
-      <div class="eb">Opportunity 03</div>
-      <h4>Earned organic   -   a strength, not a gap</h4>
-      <p>Product, packaging, and experience are so distinctive that creators tag, mention, and post without compensation.</p><p>In the Boxed Meal Kits map, 3 brands are running this play across 69 tracked posts and 8.0MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
-      <div class="closer">
-        <div class="big">8.0MM</div>
-        <div class="lbl">category views attributable to Earned Organic Mentions</div>
-      </div>
-      <div class="backed">Backed by: Earned Organic Mentions</div>
-    </div><div class="opp">
-      <div class="eb">Opportunity 04</div>
-      <h4>Volume creator model (Cluely-style)</h4>
-      <p>20-100+ small creators each posting multiple short-form videos a day about the brand on their own channels.</p><p>In the Boxed Meal Kits map, 3 brands are running this play across 72 tracked posts and 6.4MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
-      <div class="closer">
-        <div class="big">6.4MM</div>
-        <div class="lbl">category views attributable to Creator Collective / Volume Model</div>
-      </div>
-      <div class="backed">Backed by: Creator Collective / Volume Model</div>
-    </div><div class="opp">
-      <div class="eb">Opportunity 05</div>
-      <h4>Press / brand-trip activation</h4>
-      <p>Host a tight cluster of creators at a venue or destination   -   typically 8-30 creators inside a 3-7 day window, with content seeded across their channels.</p><p>In the Boxed Meal Kits map, 4 brands are running this play across 38 tracked posts and 1.0MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
-      <div class="closer">
-        <div class="big">1.0MM</div>
-        <div class="lbl">category views attributable to Press &amp; Brand Trips</div>
-      </div>
-      <div class="backed">Backed by: Press &amp; Brand Trips</div>
-    </div><div class="opp">
-      <div class="eb">Opportunity 06</div>
-      <h4>Always-on Creator Engine</h4>
-      <p>Pay a roster of creators a monthly fee to post about the brand on their own audience, every month, for 6-12+ months.</p><p>In the Boxed Meal Kits map, 2 brands are running this play across 44 tracked posts and 2.3MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand&#x27;s footprint in the category map.</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Brami, Goya</p>
-      <div class="closer">
-        <div class="big">2.3MM</div>
-        <div class="lbl">category views attributable to Always-On Creator Retainers</div>
-      </div>
-      <div class="backed">Backed by: Always-On Creator Retainers</div>
-    </div>
-    </div>
-  </div>
-</section>
-
 <div class="container">
-  <div class="closing reveal">
-    <p class="closing-lead">We built this report because Hamburger Helper's creator data sits at an unusual intersection   -   heavy paid investment, almost no organic creator pickup, and a category around it that's increasingly creator-led. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
-    <h4>Who are we?</h4>
-    <p class="sup-intro"><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
-  </div>
-  <div class="booking-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank" rel="noopener">sup.co/meet</a></div>
+
+
+
+
+<div class="cover-grid"><div class="cover-text"><div class="green-dot-pill reveal">Influencer Marketing Intelligence Report</div><h1 class="reveal">
+<span class="s1">Hamburger Helper and the Boxed Meal Kits category.</span>
+<span class="s2">Where the brand sits, <span class="brand-emphasis">what is moving around it</span>.</span>
+</h1><p class="cover-sub reveal">Where the brand sits across the 57-brand category map, what is moving on Meta and the creator side, and the strategies competitors are running.</p></div><div class="cover-thumbs reveal">
+<a class="thumb-tilt thumb-1" href="https://www.instagram.com/p/DYAegH9DoR_/" rel="noopener" target="_blank"><img alt="Promotional" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/4d9da427-0b30-4fa7-acd7-38b910c90ea5"/><span class="stamp">660 likes</span></a>
+<a class="thumb-tilt thumb-2" href="https://www.instagram.com/p/DWmKOEGjlJJ/" rel="noopener" target="_blank"><img alt="Promotional" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/ec7f4659-7422-4a1d-a2c1-42ea838264be"/><span class="stamp">413 likes</span></a>
+<a class="thumb-tilt thumb-3" href="https://www.instagram.com/p/DX-bRlfjWSg/" rel="noopener" target="_blank"><img alt="Relatable/Meme" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/370f726e-a7e8-42bf-ab84-e5d5426110db"/><span class="stamp">84 likes</span></a>
+</div></div>
+</div>
+</section>
+<div class="provenance-line reveal"><div class="container"><p><span class="pv-label">What we analysed:</span> <span class="num">57</span> brands in the Boxed Meal Kits niche, <span class="num">114</span> top creators across Instagram and TikTok, and <span class="num">62</span> paid niche ad creatives, over a <span class="num">84-day</span> category window (2026-02-20 to 2026-05-15) and a <span class="num">80-day</span> brand window covering Hamburger Helper's own feed and Creator Tagged Posts.</p></div></div>
+<section id="benchmark">
+<div class="container">
+<div class="section-label reveal">01 · Market benchmark</div>
+<h2 class="reveal">Heavy paid presence, light creator footprint.</h2>
+<p class="reveal">Hamburger Helper sits in the top 10 of the 57-brand Boxed Meal Kits category on active Meta ad volume (rank 9 of 57) but in the bottom half on Instagram followers (rank 43 of 57) and on Creator Tagged Posts (rank 34 of 57). Across the 84-day category window, the brand's ad budget shows up; the creator side does not.</p>
+<div class="section-stats stagger">
+<div>
+<div class="v" data-count="26" data-format="comma">26</div>
+<div class="ctx">rank 9 of 57 (top 16%)</div>
+<div class="lbl">Active Meta ads</div>
+</div><div>
+<div class="v" data-count="2" data-format="comma">2</div>
+<div class="ctx">rank 34 of 57 (top 60%)</div>
+<div class="lbl">Creator Tagged Posts (84d)</div>
+</div><div>
+<div class="v" data-count="2" data-format="comma">2</div>
+<div class="ctx">vs category top of 77 (@goodles)</div>
+<div class="lbl">Unique tagging creators</div>
+</div><div>
+<div class="v" data-count="11000" data-format="comma">11K</div>
+<div class="ctx">rank 43 of 57 (top 76%)</div>
+<div class="lbl">Instagram followers</div>
+</div><div>
+<div class="v" data-count="0" data-format="comma">0</div>
+<div class="ctx">vs category leader @allgoodles at 6</div>
+<div class="lbl">Strategies detected in category map</div>
+</div><div>
+<div class="v" data-count="0" data-format="comma">0</div>
+<div class="ctx">of 26 live creatives   -   heavy short-cycle testing, no long-runners</div>
+<div class="lbl">Ads surviving 30+ days</div>
+</div>
+</div>
+<div class="players-row stagger">
+<div class="player-card target">
+<div class="target-tag">Target brand</div>
+<div class="head">
+<div class="logo-tile"><img alt="Hamburger Helper" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#C8102E';this.parentElement.textContent='HH'" src="https://first-possum-672.convex.cloud/api/storage/d41b2199-bed1-48f9-8868-27b22ab70cb2"/></div>
+<div>
+<div class="b-name">Hamburger Helper</div>
+<div class="b-handle">@helper</div>
+</div>
+</div>
+<div class="stat-row">
+<div class="label">Instagram followers</div>
+<div class="val-rank">
+<span class="val" data-count="11235" data-format="compact">11.2KK</span>
+<span class="rank-pill">#43 of 57</span>
+</div>
+<div class="bar"><span data-width="7.9" style="background:#C8102E;"></span></div>
+</div><div class="stat-row">
+<div class="label">Creator Tagged Posts</div>
+<div class="val-rank">
+<span class="val" data-count="2" data-format="comma">2</span>
+<span class="rank-pill">#34 of 57</span>
+</div>
+<div class="bar"><span data-width="2.3" style="background:#C8102E;"></span></div>
+</div><div class="stat-row">
+<div class="label">Active Meta ads</div>
+<div class="val-rank">
+<span class="val" data-count="26" data-format="comma">26</span>
+<span class="rank-pill">#9 of 57</span>
+</div>
+<div class="bar"><span data-width="43.3" style="background:#C8102E;"></span></div>
+</div><div class="stat-row">
+<div class="label">Total Creator Views</div>
+<div class="val-rank">
+<span class="val" data-count="1099" data-format="compact">1.1KK</span>
+<span class="rank-pill">#37 of 57</span>
+</div>
+<div class="bar"><span data-width="0.0" style="background:#C8102E;"></span></div>
+</div>
+</div><div class="player-card">
+<div class="head">
+<div class="logo-tile"><img alt="Knorr" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#534AB7';this.parentElement.textContent='KN'" src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd"/></div>
+<div>
+<div class="b-name">Knorr</div>
+<div class="b-handle">@knorr</div>
+</div>
+</div>
+<div class="stat-row">
+<div class="label">Instagram followers</div>
+<div class="val-rank">
+<span class="val" data-count="75012" data-format="compact">75.0KK</span>
+<span class="rank-pill">#18 of 57</span>
+</div>
+<div class="bar"><span data-width="53.0" style="background:#534AB7;"></span></div>
+</div><div class="stat-row">
+<div class="label">Creator Tagged Posts</div>
+<div class="val-rank">
+<span class="val" data-count="36" data-format="comma">36</span>
+<span class="rank-pill">#5 of 57</span>
+</div>
+<div class="bar"><span data-width="41.9" style="background:#534AB7;"></span></div>
+</div><div class="stat-row">
+<div class="label">Active Meta ads</div>
+<div class="val-rank">
+<span class="val" data-count="28" data-format="comma">28</span>
+<span class="rank-pill">#8 of 57</span>
+</div>
+<div class="bar"><span data-width="46.7" style="background:#534AB7;"></span></div>
+</div><div class="stat-row">
+<div class="label">Total Creator Views</div>
+<div class="val-rank">
+<span class="val" data-count="26845852" data-format="compact">26.8MM</span>
+<span class="rank-pill first">#1 of 57</span>
+</div>
+<div class="bar"><span data-width="100.0" style="background:#534AB7;"></span></div>
+</div>
+</div><div class="player-card">
+<div class="head">
+<div class="logo-tile"><img alt="Goodles" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#1D9E75';this.parentElement.textContent='GO'" src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9"/></div>
+<div>
+<div class="b-name">Goodles</div>
+<div class="b-handle">@allgoodles</div>
+</div>
+</div>
+<div class="stat-row">
+<div class="label">Instagram followers</div>
+<div class="val-rank">
+<span class="val" data-count="141480" data-format="compact">141K</span>
+<span class="rank-pill">#7 of 57</span>
+</div>
+<div class="bar"><span data-width="100.0" style="background:#1D9E75;"></span></div>
+</div><div class="stat-row">
+<div class="label">Creator Tagged Posts</div>
+<div class="val-rank">
+<span class="val" data-count="86" data-format="comma">86</span>
+<span class="rank-pill first">#1 of 57</span>
+</div>
+<div class="bar"><span data-width="100.0" style="background:#1D9E75;"></span></div>
+</div><div class="stat-row">
+<div class="label">Active Meta ads</div>
+<div class="val-rank">
+<span class="val" data-count="1" data-format="comma">1</span>
+<span class="rank-pill">#23 of 57</span>
+</div>
+<div class="bar"><span data-width="1.7" style="background:#1D9E75;"></span></div>
+</div><div class="stat-row">
+<div class="label">Total Creator Views</div>
+<div class="val-rank">
+<span class="val" data-count="988297" data-format="compact">988K</span>
+<span class="rank-pill">#11 of 57</span>
+</div>
+<div class="bar"><span data-width="3.7" style="background:#1D9E75;"></span></div>
+</div>
+</div><div class="player-card">
+<div class="head">
+<div class="logo-tile"><img alt="Land O'Lakes Mac &amp; Cheese" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#D85A30';this.parentElement.textContent='LO'" src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f"/></div>
+<div>
+<div class="b-name">Land O'Lakes Mac &amp; Cheese</div>
+<div class="b-handle">@landolakesktchn</div>
+</div>
+</div>
+<div class="stat-row">
+<div class="label">Instagram followers</div>
+<div class="val-rank">
+<span class="val" data-count="96447" data-format="compact">96.4KK</span>
+<span class="rank-pill">#14 of 57</span>
+</div>
+<div class="bar"><span data-width="68.2" style="background:#D85A30;"></span></div>
+</div><div class="stat-row">
+<div class="label">Creator Tagged Posts</div>
+<div class="val-rank">
+<span class="val" data-count="16" data-format="comma">16</span>
+<span class="rank-pill">#17 of 57</span>
+</div>
+<div class="bar"><span data-width="18.6" style="background:#D85A30;"></span></div>
+</div><div class="stat-row">
+<div class="label">Active Meta ads</div>
+<div class="val-rank">
+<span class="val" data-count="60" data-format="comma">60</span>
+<span class="rank-pill">#4 of 57</span>
+</div>
+<div class="bar"><span data-width="100.0" style="background:#D85A30;"></span></div>
+</div><div class="stat-row">
+<div class="label">Total Creator Views</div>
+<div class="val-rank">
+<span class="val" data-count="1385976" data-format="compact">1.4MM</span>
+<span class="rank-pill">#7 of 57</span>
+</div>
+<div class="bar"><span data-width="5.2" style="background:#D85A30;"></span></div>
+</div>
+</div><div class="player-card">
+<div class="head">
+<div class="logo-tile"><img alt="Old El Paso" onerror="this.style.display='none';this.parentElement.classList.add('initials');this.parentElement.style.background='#378ADD';this.parentElement.textContent='OE'" src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af"/></div>
+<div>
+<div class="b-name">Old El Paso</div>
+<div class="b-handle">@oldelpaso</div>
+</div>
+</div>
+<div class="stat-row">
+<div class="label">Instagram followers</div>
+<div class="val-rank">
+<span class="val" data-count="52450" data-format="compact">52.5KK</span>
+<span class="rank-pill">#22 of 57</span>
+</div>
+<div class="bar"><span data-width="37.1" style="background:#378ADD;"></span></div>
+</div><div class="stat-row">
+<div class="label">Creator Tagged Posts</div>
+<div class="val-rank">
+<span class="val" data-count="9" data-format="comma">9</span>
+<span class="rank-pill">#22 of 57</span>
+</div>
+<div class="bar"><span data-width="10.5" style="background:#378ADD;"></span></div>
+</div><div class="stat-row">
+<div class="label">Active Meta ads</div>
+<div class="val-rank">
+<span class="val" data-count="46" data-format="comma">46</span>
+<span class="rank-pill">#5 of 57</span>
+</div>
+<div class="bar"><span data-width="76.7" style="background:#378ADD;"></span></div>
+</div><div class="stat-row">
+<div class="label">Total Creator Views</div>
+<div class="val-rank">
+<span class="val" data-count="305843" data-format="compact">306K</span>
+<span class="rank-pill">#21 of 57</span>
+</div>
+<div class="bar"><span data-width="1.1" style="background:#378ADD;"></span></div>
+</div>
+</div>
+</div>
+<p class="players-cap">Four direct competitors compared on four metrics. Hamburger Helper highlighted. Active Meta ads substituted for the standard locations metric since every brand in this CPG category has zero physical footprint.</p>
+<div class="callout reveal">
+<span class="callout-label">The Benchmark Verdict</span>
+<p>Goodles is the category's anomaly. It runs six different creator plays at once (the highest count in the category map), pulls in 988K creator-attributable views, and only spends on a single live Meta ad. Hamburger Helper runs none of the six and concentrates the entire ad budget on a Helper Deluxe launch instead.</p>
+</div>
+</div>
+</section>
+<section id="influencer">
+<div class="container">
+<div class="section-label reveal">02 · Influencer intelligence</div>
+<h2 class="reveal">Only two creators tagged the brand all quarter.</h2>
+<p class="reveal">Across the 80-day brand window, just two Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) on Instagram, zero on TikTok, from two different creators. 2 unique creators places Hamburger Helper at rank 35 of 57 on creator tagging volume in the category, and at rank 39 of 57 on unique tagging creators. The category leader, Goodles, pulls in 77 unique creators in the same window.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;">
+<div class="stat reveal"><div class="lbl">Unique tagging creators</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">vs Goodles at 77 (the category top)</div></div>
+<div class="stat reveal"><div class="lbl">Total Creator Tagged Posts (84d)</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">Goodles: 86 · Annie's: 38 · Knorr: 36</div></div>
+<div class="stat dark reveal"><div class="lbl">Tagged-post views in window</div><div class="v" data-count="1099" data-format="comma">1,099</div><div class="sub">vs Knorr's 26.8M (the category top)</div></div>
+</div>
+<h3 class="reveal" style="margin-top:36px;margin-bottom:14px;">What creators do say, when they say it</h3>
+<div class="theme-bars reveal">
+<div class="theme-bar">
+<div class="name">Vegan grocery finds round-ups</div>
+<div class="track"><div class="fill" data-width="50.0" style="width:0;"></div></div>
+<div class="pct">50.0% · 1 post</div>
+</div><div class="theme-bar">
+<div class="name">Day-in-the-life evening routines</div>
+<div class="track"><div class="fill" data-width="50.0" style="width:0;"></div></div>
+<div class="pct">50.0% · 1 post</div>
+</div>
+</div>
+<p class="reveal">Both Creator Tagged Posts come from creators who weren't really posting about the product. <a class="post-link-inline" href="https://www.instagram.com/bigboxvegan/" rel="noopener" target="_blank">@bigboxvegan</a> (114K followers) was running a vegan grocery round-up that happened to surface a new Helper teriyaki variant at Grocery Outlet, and <a class="post-link-inline" href="https://www.instagram.com/alexiatomasik/" rel="noopener" target="_blank">@alexiatomasik</a> (4.9K followers) cooked a Tuna Helper inside a wider day-in-the-life vlog. Neither is a partnership, neither is a creator who's chosen Hamburger Helper as a recurring product to talk about, and neither belongs to any of the creator-discovery patterns competitors run.</p>
+<h3 class="reveal" style="margin-top:32px;margin-bottom:14px;">The two creators who did tag the brand</h3>
+<ul style="list-style:none;padding:0;margin:0;">
+<li style="margin-bottom:14px;">
+<img alt="bigboxvegan" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c958071e-8895-4d2d-83e8-78fc707d4104" style="width:24px;height:24px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px;"/><a class="post-link-inline" href="https://www.instagram.com/p/DYFzkidmmhz/" rel="noopener" style="font-weight:600;color:var(--text);" target="_blank">@bigboxvegan</a>
+<span style="color:var(--muted);font-size:13px;"> · 114,225 followers · 1,863 likes · 1.67% ER</span>
+<div style="font-size:13.5px;color:var(--secondary);margin-top:6px;line-height:1.55;">A handheld photo of a 'Sammich' brand Fluffernutter flavored crustless sandwich, emphasizing its nostalgic flavor profile and 10g protein co</div>
+</li><li style="margin-bottom:14px;">
+<img alt="alexiatomasik" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/5aa4fd82-a3fa-4234-b663-f8d5bc78d822" style="width:24px;height:24px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px;"/><a class="post-link-inline" href="https://www.instagram.com/p/DYDM4ShsLNo/" rel="noopener" style="font-weight:600;color:var(--text);" target="_blank">@alexiatomasik</a>
+<span style="color:var(--muted);font-size:13px;"> · 4,908 followers · 36 likes · 1.04% ER</span>
+<div style="font-size:13.5px;color:var(--secondary);margin-top:6px;line-height:1.55;">A realistic and relatable 'day in the life' vlog documenting a creator's evening routine after her 9-5 job, featuring skincare, cooking a si</div>
+</li>
+</ul>
+<p class="reveal" style="margin-top:24px;">On TikTok, the picture is empty. The @helper handle on TikTok has not posted since 2015. Brand-name search across the window returned 14 results that all matched on the English word "helper" inside unrelated content (domestic-helper skits, geopolitical news, "destiny helper" relationship posts), none referencing the actual product. We kept looking for a real TikTok mention. We could not find one.</p>
+<div class="callout reveal">
+<span class="callout-label">The Earned Engine That Isn't</span>
+<p>The category has a working earned-mentions pattern (Brami pulls 14 unique creators a quarter unprompted, Maruchan 17, Goodles 31). Hamburger Helper is at 2 IG and 0 TikTok across the same 84 days. The product is distinct, the mascot is recognisable, the SKU is everywhere on retail shelves; what isn't there is anything pulling creators into talking about it.</p>
+</div>
+</div>
+</section>
+<section id="competitors">
+<div class="container">
+<div class="section-label reveal">03 · Competitor deep-dive</div>
+<h2 class="reveal">One competitor runs six plays at once, most run two, you run zero.</h2>
+<p class="reveal">The category map detects ten distinct creator strategies inside Boxed Meal Kits, and one brand (Goodles) is detected on six of them. Across the four direct competitors selected for this report, every one is detected on at least one creator strategy. Hamburger Helper is detected on zero. Below, the head-to-head numbers, then a narrative on what each competitor is actually doing differently.</p>
+<div class="comp-table-wrap reveal">
+<table class="comp-table">
+<thead>
+<tr><th>Brand</th><th>Instagram followers</th><th>Creator Tagged Posts</th><th>Unique creators</th><th>Tagged-post views</th><th>Active Meta ads</th></tr>
+</thead>
+<tbody><tr class="target-row">
+<td><div class="b-cell"><img alt="Hamburger Helper" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/d41b2199-bed1-48f9-8868-27b22ab70cb2"/><div><div class="nm">Hamburger Helper</div><div style="font-size:11px;color:var(--muted);">@helper</div></div></div></td>
+<td>11,235</td>
+<td>2</td>
+<td>2</td>
+<td>1.1K</td>
+<td>26</td>
+</tr><tr>
+<td><div class="b-cell"><img alt="Knorr" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd"/><div><div class="nm">Knorr</div><div style="font-size:11px;color:var(--muted);">@knorr</div></div></div></td>
+<td>75,012</td>
+<td>36</td>
+<td>31</td>
+<td>26.8M</td>
+<td>28</td>
+</tr><tr>
+<td><div class="b-cell"><img alt="Goodles" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9"/><div><div class="nm">Goodles</div><div style="font-size:11px;color:var(--muted);">@allgoodles</div></div></div></td>
+<td>141,480</td>
+<td>86</td>
+<td>77</td>
+<td>988K</td>
+<td>1</td>
+</tr><tr>
+<td><div class="b-cell"><img alt="Land O'Lakes Mac &amp; Cheese" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f"/><div><div class="nm">Land O'Lakes Mac &amp; Cheese</div><div style="font-size:11px;color:var(--muted);">@landolakesktchn</div></div></div></td>
+<td>96,447</td>
+<td>16</td>
+<td>12</td>
+<td>1.4M</td>
+<td>60</td>
+</tr><tr>
+<td><div class="b-cell"><img alt="Old El Paso" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af"/><div><div class="nm">Old El Paso</div><div style="font-size:11px;color:var(--muted);">@oldelpaso</div></div></div></td>
+<td>52,450</td>
+<td>9</td>
+<td>9</td>
+<td>306K</td>
+<td>46</td>
+</tr></tbody>
+</table>
+</div>
+<div class="comp-cards stagger">
+<div class="cc">
+<div class="h"><img alt="Knorr" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/a673a5f7-c02c-4259-a8b2-238174e6c0cd"/><div><div class="nm">Knorr</div><div class="hd">@knorr</div></div></div>
+<p>The category leader for earned creator volume. Knorr pulled 26.8M tagged-post views from 31 unique creators in the window   -   second-highest unique-creator count after Goodles, the highest views by a wide margin. Runs a long-term ambassador layer (@brooklynsbites, 200K) on top.</p>
+<div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Long-Term Brand Ambassador</span></div>
+</div><div class="cc">
+<div class="h"><img alt="Goodles" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9"/><div><div class="nm">Goodles</div><div class="hd">@allgoodles</div></div></div>
+<p>The multi-play operator of the category. Goodles is detected running six creator strategies simultaneously, including 31 unique creators tagging (rank 1 of 57), 11 geo-clustered micro-creators, and an ambassador layer anchored by @guacbites (874K followers, 2.8M views). Only one live Meta ad   -   the entire engine runs on creators.</p>
+<div class="strats"><span class="lbl">Strategies in play:</span><span class="pill">Earned Organic Mentions</span><span class="pill">Creator Collective / Volume Model</span><span class="pill">Long-Term Brand Ambassador</span><span class="pill">Geo-Clustered Micro-Creators</span></div>
+</div><div class="cc">
+<div class="h"><img alt="Land O'Lakes Mac &amp; Cheese" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/ad30becb-beca-40f2-a76b-1b5c251e047f"/><div><div class="nm">Land O'Lakes Mac &amp; Cheese</div><div class="hd">@landolakesktchn</div></div></div>
+<p>Sits at the opposite end of the spectrum from Goodles. Land O'Lakes Mac &amp; Cheese commissions 60 live Meta creatives (rank 4 of 57) and pulls 1.4M tagged-post views   -   the heaviest paid-and-creator dual play in the category. Tagged creators are mostly mid-tier (12 unique across 16 posts).</p>
+<div class="strats"><span class="lbl">Strategies in play:</span></div>
+</div><div class="cc">
+<div class="h"><img alt="Old El Paso" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/0482960d-2f74-443e-b4f3-9d540ebd36af"/><div><div class="nm">Old El Paso</div><div class="hd">@oldelpaso</div></div></div>
+<p>The closest direct boxed-meal-kit analog by SKU. Runs 46 live Meta creatives (rank 5 of 57) and 9 tagged posts from 9 unique creators   -   a quieter creator footprint than Land O'Lakes but a similar paid testing cadence.</p>
+<div class="strats"><span class="lbl">Strategies in play:</span></div>
+</div>
+</div>
+<div class="mpo">
+<div class="mpo-head reveal">Multi-play operators · brands running 3+ plays</div>
+<div class="stagger">
+<div class="item">
+<img alt="Goodles" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/03e8e219-b5ff-41b0-88ae-1d4685c573f9"/>
+<div class="body">
+<div class="nm">Goodles</div>
+<div class="sum">Running 6 plays: Creator Collective / Volume Model, Earned Organic Mentions, Geo-Clustered Micro-Creators, Long-Term Brand Ambassador, Press &amp; Brand Trips, UGC for Brand Feed</div>
+</div>
+<div class="badge">6 plays</div>
+</div><div class="item">
+<img alt="Brami" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/553ea665-6015-4236-a9b7-be0a44fab591"/>
+<div class="body">
+<div class="nm">Brami</div>
+<div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Earned Organic Mentions</div>
+</div>
+<div class="badge">3 plays</div>
+</div><div class="item">
+<img alt="Goya" onerror="this.style.display='none'" src="https://first-possum-672.convex.cloud/api/storage/8210a255-864e-483f-a1c3-5451bcdb3e94"/>
+<div class="body">
+<div class="nm">Goya</div>
+<div class="sum">Running 3 plays: Alt-Handle / Brand-Affiliated Creator Channel, Always-On Creator Retainers, Long-Term Brand Ambassador</div>
+</div>
+<div class="badge">3 plays</div>
+</div>
+</div>
+</div>
+<div class="callout reveal">
+<span class="callout-label">The Multi-Play Stack</span>
+<p>Goodles is running an earned-mention engine, an ambassador layer, geo-clusters, a UGC-for-brand-feed cadence, a creator collective at sub-10K micro level, and a press-trip pattern simultaneously. Brami runs an alt-handle resident creator plus a quiet retainer. The strategies in play in this category aren't single-tactic plays   -   the brands winning the creator side are stacking three to six.</p>
+</div>
+</div>
+</section>
+<section id="paid">
+<div class="container">
+<div class="section-label reveal">04 · Creator content in paid</div>
+<h2 class="reveal">The category's paid spend is built on creator content. Yours is built on product photography.</h2>
+<p class="reveal">Across the 62 active ad creatives in the Boxed Meal Kits category at time of analysis, 41.9% are creator-shot (UGC or Lifestyle styles where the camera is on a human, not a pack shot). Hamburger Helper's 16 active creatives in flight contain 2 that fit that definition. The rest are studio-shot food photography promoting the Helper Deluxe launch.</p>
+<div class="stat-grid stagger">
+<div class="stat"><div class="lbl">Active ad creatives in Boxed Meal Kits</div><div class="v" data-count="62" data-format="comma">62</div><div class="sub">across 0 advertisers</div></div>
+<div class="stat"><div class="lbl">Active creatives that are creator-shot</div><div class="v" data-count="42" data-suffix="%">42%</div><div class="sub">UGC or Lifestyle (vs Product-Only / Polished Brand)</div></div>
+<div class="stat dark"><div class="lbl">60+ day survival rate</div><div class="v" data-count="28" data-suffix="%">28%</div><div class="sub">of the top 100 creatives have survived more than 60 days · industry baseline 11%</div></div>
+<div class="stat"><div class="lbl">Hamburger Helper active creator-shot ads</div><div class="v" data-count="2" data-format="comma">2</div><div class="sub">out of 16 unique active · longest runtime 25 days</div></div>
+<div class="stat"><div class="lbl">UGC share of 60+ day winners</div><div class="v" data-count="24" data-suffix="%">24%</div><div class="sub">of the 25 ads surviving 60+ days in the category</div></div>
+<div class="stat dark"><div class="lbl">Brands testing 10+ creator-cycle creatives</div><div class="v" data-count="0" data-format="comma">0</div><div class="sub">with 50%+ cycled in under 30 days · the "creator pipeline" cohort</div></div>
+</div>
+<div class="charts-side-by-side">
+<div class="chart-wrap reveal">
+<h3>Ad longevity distribution</h3>
+<p class="ch-sub">Top 100 category creatives by max days running · still-active vs expired</p>
+<div class="chart-canvas"><canvas id="chart-longevity"></canvas></div>
+</div>
+<div class="chart-wrap reveal">
+<h3>Active creatives by brand · top 5</h3>
+<p class="ch-sub">Of the top 100 creatives in the category map · target highlighted</p>
+<div class="chart-canvas"><canvas id="chart-brand-active"></canvas></div>
+</div>
+</div>
+<p class="reveal">The category's survival curve is unusual. Of the top 100 creatives in the category map, 21 have run more than 60 days   -   roughly 28%, against an industry baseline of about 11%. In that 60-plus-day pool, UGC outweighs every other style: 24% are creator-shot, against the 42% creator-shot share across all active creatives. Creator content survives at higher rates than studio content, in this category, by a large margin.</p>
+<p class="reveal">The brands feeding that pool aren't testing one or two creator videos. They're cycling many. Four niche brands have 10 or more live creatives with the majority cycled in under 30 days   -   Ramen Bae, The Only Bean, Once Upon a Farm, and Land O'Lakes Mac &amp; Cheese all show the high-volume, high-churn pattern of a creator pipeline producing fresh variants every week. The 8 UGC ads surviving 60+ days didn't appear on the first try; they emerged from a testing pool ten times their size.</p>
+<h3 class="reveal" style="margin:32px 0 12px;">The 10 longest-running creator-shot ads in the category</h3>
+<p class="reveal">These are the survivors. Every one is creator-shot (UGC or Lifestyle), every one is still active, every one has been running for 60+ days. Click any tile for the Meta Ad Library snapshot.</p>
+<div class="ad-gallery stagger">
+<a href="https://www.facebook.com/ads/library?id=3793354810945979" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/4d7a54b4-ddbd-4af5-8962-96c096381121"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="Ramen Bae" onerror="this.style.display='none'" src=""/><span class="nm">Ramen Bae</span></div>
+<div class="days">729 days · UGC</div>
+<div class="premise">A product developer announces the launch of two new ramen toppings  -  a kimchi mix and dried enoki mushrooms  -  while demonstrating how </div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=609291041732771" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/5dad923d-4c5b-418e-a568-1c6dba190bc8"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="Ramen Bae" onerror="this.style.display='none'" src=""/><span class="nm">Ramen Bae</span></div>
+<div class="days">459 days · UGC</div>
+<div class="premise">A creator provides three compelling reasons  -  convenience, cost-effectiveness, and nutritional value  -  to use Ramen Bae's dried t</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=1779498512714952" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://www.facebook.com/ads/library?id=1779498512714952"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="b-row"><img alt="Once Upon a Farm" onerror="this.style.display='none'" src=""/><span class="nm">Once Upon a Farm</span></div>
+<div class="days">131 days · Lifestyle</div>
+<div class="premise">A promotional graphic showcasing Once Upon A Farm's product variety  -  pouches, pantry snacks, and oat bars  -  through vibrant life</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=1847545416636667" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://www.facebook.com/ads/library?id=1847545416636667"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="b-row"><img alt="Once Upon a Farm" onerror="this.style.display='none'" src=""/><span class="nm">Once Upon a Farm</span></div>
+<div class="days">131 days · Lifestyle</div>
+<div class="premise">A promotional lifestyle graphic for Once Upon A Farm's Organic Immunity Blend, emphasizing health, fresh ingredients, and chi</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=2290955161315579" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/3e49ef34-0e83-49e0-8dc9-e2f59f8e5d37"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="Tastee Choice" onerror="this.style.display='none'" src=""/><span class="nm">Tastee Choice</span></div>
+<div class="days">116 days · UGC</div>
+<div class="premise">A relatable video showing a woman quickly preparing a frozen chicken carbonara meal after her husband says he will be home in 10 m</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=802257768828060" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/bf9e1980-7e65-4a48-9d72-85d1946bf381"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="Saffron Road" onerror="this.style.display='none'" src=""/><span class="nm">Saffron Road</span></div>
+<div class="days">90 days · UGC</div>
+<div class="premise">A creative food hack demonstrating how to repurpose a frozen Saffron Road Butter Chicken meal into fresh cucumber boats for a low-</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=1276230464413862" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/217535d5-bee2-4661-81b6-90ade47774c5"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="Lovebird Foods" onerror="this.style.display='none'" src=""/><span class="nm">Lovebird Foods</span></div>
+<div class="days">83 days · UGC</div>
+<div class="premise">A creator visits Walmart to celebrate and promote the retail launch of Lovebird, a clean-ingredient, family-owned cereal brand.</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=27576745311927497" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/b3cc2598-488e-409a-adaf-b8198125d77e"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="The Only Bean" onerror="this.style.display='none'" src=""/><span class="nm">The Only Bean</span></div>
+<div class="days">56 days · UGC</div>
+<div class="premise">A creator uses a 'fake apology' hook to announce a massive, limited-time sale on a healthy snack she previously recommen</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=952610527812867" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/f1a35803-0cef-4c59-a4b1-75912dd096dd"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="The Only Bean" onerror="this.style.display='none'" src=""/><span class="nm">The Only Bean</span></div>
+<div class="days">56 days · UGC</div>
+<div class="premise">A health-conscious creator reviews 'The Only Bean' edamame snacks, claiming they helped her achieve a flat stomach and c</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a><a href="https://www.facebook.com/ads/library?id=1301682958493204" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="ad-card">
+<div class="thumb"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/ed64df4f-9557-47e6-9156-bcf36b900bc9"/><div class="fallback" style="display:none;">VIDEO</div></div>
+<div class="body">
+<div class="b-row"><img alt="Annie Chun's Inc." onerror="this.style.display='none'" src=""/><span class="nm">Annie Chun's Inc.</span></div>
+<div class="days">49 days · UGC</div>
+<div class="premise">A mother and daughter showcase the convenience and quality of Annie Chun's ramen bowls as a quick, healthy, and delicious 3-m</div>
+<span class="badge">Creator-shot</span>
+</div>
+</div>
+</a>
+</div>
+<p class="reveal">Hamburger Helper has 2 creator-shot ads in flight out of 16 unique active creatives. All 16 promote the same Helper Deluxe launch (Brew Pub Cheeseburger and Sweet &amp; Savory Teriyaki), with creative_type split 12 image / 4 video and Creative_Style split 10 Product-Only food photography / 4 Polished Brand promo / 2 UGC. The longest runtime in the brand's library is 25 days. Nothing is in the 60+ day pool where the category's survivors live.</p>
+<div class="callout reveal">
+<span class="callout-label">The Commissioning Gap</span>
+<p>Four niche competitors are running 10+ active creatives with the majority cycled in under 30 days   -   they're testing creator variants at category cadence. Hamburger Helper has 2 creator-shot ads in flight (out of 15 live), all under 26 days old. The gap isn't ad budget   -   the brand is rank 9 of 57 on live creatives. The gap is a creator pipeline producing enough fresh creator-led variants to test continuously.</p>
+</div>
+</div>
+</section>
+<section id="feed">
+<div class="container">
+<div class="section-label reveal">05 · Feed content strategy</div>
+<h2 class="reveal">Your best-performing pillar is the one you publish least.</h2>
+<div class="stat-grid stagger">
+<div class="stat"><div class="lbl">Top feed post likes</div><div class="v" data-count="660" data-format="comma">660</div><div class="sub">A Helper Deluxe Breakfast Hashbrowns giveaway carousel · 2026-05-06</div></div>
+<div class="stat"><div class="lbl">Promotional avg likes per post</div><div class="v" data-count="384" data-format="comma">384</div><div class="sub">9.1× the Relatable/Meme average</div></div>
+<div class="stat dark"><div class="lbl">Share of feed that is Promotional</div><div class="v" data-count="23" data-suffix="%">23%</div><div class="sub">3 of 13 posts</div></div>
+</div>
+<p class="reveal">Across the 80-day brand window, Hamburger Helper published 13 own-feed posts on Instagram. The format split skews to carousels (1), with a smaller number of videos and a single photo. Average likes per post sit at 121; median at 50. Underneath those averages, though, the per-pillar numbers tell a much sharper story.</p>
+<p class="reveal">The Promotional posts (3 across the window) average 384 likes. The Relatable / Meme posts (10 across the window) average 42. The gap is 9.1×. The Promotional posts include the Helper Deluxe Breakfast Hashbrowns giveaway (660 likes, 2,760 comments   -   a giveaway mechanic), a Helper Deluxe launch teaser (413 likes), and a Helper Deluxe new-line announcement (81 likes). The Relatable / Meme posts include a Masters Champions Dinner satire (58 likes), a side-by-side "wordy ad vs meme ad" comparison (84 likes), and various Lefty-mascot meme drops in the 3 to 50 like range. The pattern is clear: the audience shows up for product launches and giveaway mechanics, and the brand publishes one of those for every seven memes.</p>
+<div class="charts-side-by-side">
+<div class="chart-wrap reveal">
+<h3>Average likes by content pillar</h3>
+<p class="ch-sub">13 own-feed posts · 80-day brand window</p>
+<div class="chart-canvas"><canvas id="chart-pillar-likes"></canvas></div>
+</div>
+<div class="chart-wrap reveal">
+<h3>Posts by pillar   -   the distribution gap</h3>
+<p class="ch-sub">Production volume per pillar · same 80-day window</p>
+<div class="chart-canvas"><canvas id="chart-pillar-counts"></canvas></div>
+</div>
+</div>
+<h3 class="reveal" style="margin:36px 0 8px;">The five posts your audience picked</h3>
+<p class="reveal">Ranked by likes. The top-ranked card is the canonical example   -   what the audience showed up for. Click any card for the post on Instagram.</p>
+<div class="posts-grid stagger">
+<a href="https://www.instagram.com/p/DYAegH9DoR_/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="post-card is-highlight">
+<div class="thumb"><img alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/4d9da427-0b30-4fa7-acd7-38b910c90ea5"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="rl">01 · Promotional</div>
+<div class="likes">660 likes</div>
+<div class="meta">2760 comments · Carousel</div>
+<div class="desc">A promotional graphic announcing a giveaway for a Hamburger Helper Breakfast Cheesy Hashbrowns product.</div>
+<span class="link">View post →</span>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DWmKOEGjlJJ/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="post-card">
+<div class="thumb"><img alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/ec7f4659-7422-4a1d-a2c1-42ea838264be"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="rl">02 · Promotional</div>
+<div class="likes">413 likes</div>
+<div class="meta">14 comments · Carousel</div>
+<div class="desc">A teaser graphic featuring the Hamburger Helper mascot, 'Lefty,' announcing that he has a secret to share, likely preceding a new product or brand announcement.</div>
+<span class="link">View post →</span>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DX-bRlfjWSg/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="post-card">
+<div class="thumb"><img alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/370f726e-a7e8-42bf-ab84-e5d5426110db"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="rl">03 · Relatable/Meme</div>
+<div class="likes">84 likes</div>
+<div class="meta">7 comments · Carousel</div>
+<div class="desc">A side-by-side comparison meme illustrating the difference between wordy, benefit-driven Millennial marketing copy and concise, slang-heavy Gen Z communication styles using Hamburger Helper as the sub</div>
+<span class="link">View post →</span>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DXt5fUOFjGp/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="post-card">
+<div class="thumb"><img alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/5756f2a6-b2e6-4914-84fb-a561ce65c2c3"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="rl">04 · Promotional</div>
+<div class="likes">81 likes</div>
+<div class="meta">5 comments · Carousel</div>
+<div class="desc">A promotional graphic announcing the launch of a new 'Helper Deluxe' product line, specifically the Brew Pub Cheeseburger flavor, featuring the iconic brand mascot.</div>
+<span class="link">View post →</span>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DVMBUFEDkVk/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="post-card">
+<div class="thumb"><img alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="https://first-possum-672.convex.cloud/api/storage/972cccaa-3597-4a16-9f35-623921cfefc6"/><div class="fallback" style="display:none;">CAROUSEL</div></div>
+<div class="body">
+<div class="rl">05 · Relatable/Meme</div>
+<div class="likes">66 likes</div>
+<div class="meta">5 comments · Carousel</div>
+<div class="desc">A nostalgic childhood photo of a boy at a birthday party, captioned to reveal that he grew up to be a professional chef or food creator.</div>
+<span class="link">View post →</span>
+</div>
+</div>
+</a>
+</div>
+<p class="reveal">Four of the top five posts are Carousels. The single Video in the top five (a Tuna Helper one-pan recipe with Chicken of the Sea, 49 likes) sits at rank 5. Production-wise, every post in the top five is Static Graphic or Polished Brand   -   the lower-production UGC-style videos in the feed underperform on engagement, which is the inverse of what the brand's paid creator content would suggest. The feed is not a UGC channel for this brand; it is a graphic-and-launch channel.</p>
+<p class="reveal">The Helper Deluxe giveaway carousel pulled 11× the median like count of the rest of the feed. That single post is also 2,760 comments   -   the entire comment volume of the window concentrated into one promotional drop. The signal is direct: more promotional carousels, fewer untethered memes, and giveaway mechanics where the budget allows.</p>
+<div class="callout reveal">
+<span class="callout-label">The Biggest Miss</span>
+<p>Hamburger Helper's three Promotional posts average 384 likes. The ten Relatable/Meme posts that make up most of the feed average 42. The pillar producing the engagement is the one the feed barely uses   -   one Promotional drop for every 3.3 memes.</p>
+</div>
+</div>
+</section>
+<section id="shortlist">
+<div class="container">
+<div class="section-label reveal">06 · The shortlist</div>
+<h2 class="reveal">10 creators I'd brief this week if I ran your marketing.</h2>
+<p class="reveal">Pulled from the 114 top creators across Instagram and TikTok in the category map. Selection logic: highest niche-attributable views as primary signal, unique competitor brand overlap as the first tiebreaker, average engagement rate as the second. Every name on this list has zero posting history with Hamburger Helper. The tier mix is three macro creators (100K+ followers), four mid-tier (10K to 100K), three micro (sub-10K with exceptional ER).</p>
+<div class="sl-grid stagger">
+<div class="sl">
+<div class="h">
+<img alt="irisarellano_" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a80c6e7e-e0b2-412d-b5d0-679af7ab3362"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/irisarellano_/" rel="noopener" target="_blank">@irisarellano_</a><span class="plat">Instagram</span></div>
+<div class="name"></div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="69817" data-format="compact">69.8K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="2675935" data-format="compact">2.7M</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="433" data-suffix="">43.34%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="24838519" data-format="compact">24.8M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">24.8MM niche-attributable views across 69,817 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Knorr</div>
+</div><div class="sl">
+<div class="h">
+<img alt="emmanuel.duverneau" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ae67219-580b-44fe-b49a-9a6a14ebd1ac"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/emmanuel.duverneau/" rel="noopener" target="_blank">@emmanuel.duverneau</a><span class="plat">Instagram</span></div>
+<div class="name">Emmanuel Duverneau</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="1508222" data-format="compact">1.5M</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="1175531" data-format="compact">1.2M</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="14" data-suffix="">1.40%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="8776541" data-format="compact">8.8M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">8.8MM niche-attributable views across 1,508,222 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Tillamook</div>
+</div><div class="sl">
+<div class="h">
+<img alt="pinkapronshark" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb54553c-e9d1-435b-b76a-e1ed034ef14d"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/pinkapronshark/" rel="noopener" target="_blank">@pinkapronshark</a><span class="plat">Instagram</span></div>
+<div class="name">Kennedy Sharko 🩷</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="2769" data-format="compact">2.8K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="877045" data-format="compact">877K</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="12376" data-suffix="">1237.61%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="6108367" data-format="compact">6.1M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">6.1MM niche-attributable views across 2,769 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Rao's Homemade</div>
+</div><div class="sl">
+<div class="h">
+<img alt="guacbites" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/84510b80-928d-4704-97b6-378cab249542"/>
+<div class="meta">
+<div class="handle"><a href="https://www.tiktok.com/@guacbites" rel="noopener" target="_blank">@guacbites</a><span class="plat">TikTok</span></div>
+<div class="name">GuacBites</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="873600" data-format="compact">874K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="886780" data-format="compact">887K</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="94" data-suffix="">9.45%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="2800000" data-format="compact">2.8M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">2.8MM niche-attributable views across 873,600 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Goodles</div>
+</div><div class="sl">
+<div class="h">
+<img alt="luxelife9" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/ab837e17-4737-4701-a05d-05d4b762fcec"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/luxelife9/" rel="noopener" target="_blank">@luxelife9</a><span class="plat">Instagram</span></div>
+<div class="name">Marilyne Nix</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="1022080" data-format="compact">1M</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="1792706" data-format="compact">1.8M</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="0" data-suffix="">0.01%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="2111911" data-format="compact">2.1M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">2.1MM niche-attributable views across 1,022,080 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Goya</div>
+</div><div class="sl">
+<div class="h">
+<img alt="bymarianabites" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f3a2cc63-0ae1-4d80-9359-920175a0a302"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/bymarianabites/" rel="noopener" target="_blank">@bymarianabites</a><span class="plat">Instagram</span></div>
+<div class="name">Mari Bites 🌸</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="8674" data-format="compact">8.7K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="543470" data-format="compact">543K</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="4999" data-suffix="">499.97%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="1937384" data-format="compact">1.9M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">1.9MM niche-attributable views across 8,674 followers   -   top-tier reach pool. Already posted about 4 brands in the category.</div>
+<div class="overlap">Already tagged: Barilla, SOMOS, Goya, Land O'Lakes Mac &amp; Cheese</div>
+</div><div class="sl">
+<div class="h">
+<img alt="cookingwithcar" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/38a0e99e-7c36-4de5-833a-e1056f2d1609"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/cookingwithcar/" rel="noopener" target="_blank">@cookingwithcar</a><span class="plat">Instagram</span></div>
+<div class="name">COOKING WITH CAR | HOT &amp; HEALTHY</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="45260" data-format="compact">45.3K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="168403" data-format="compact">168K</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="17" data-suffix="">1.77%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="1734318" data-format="compact">1.7M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">1.7MM niche-attributable views across 45,260 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Brami</div>
+</div><div class="sl">
+<div class="h">
+<img alt="bingewithanbu" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/44ef7bd7-179b-4a71-aadf-c0febe84d794"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/bingewithanbu/" rel="noopener" target="_blank">@bingewithanbu</a><span class="plat">Instagram</span></div>
+<div class="name">✨A N B U ✨</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="74272" data-format="compact">74.3K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="152287" data-format="compact">152K</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="0" data-suffix="">0.07%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="768533" data-format="compact">769K</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">769K niche-attributable views   -   proven the category will watch them. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Tasty Bite</div>
+</div><div class="sl">
+<div class="h">
+<img alt="thejackiezee" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/29ff32c5-7d3f-4484-9ec7-a05eaa5941fc"/>
+<div class="meta">
+<div class="handle"><a href="https://www.instagram.com/thejackiezee/" rel="noopener" target="_blank">@thejackiezee</a><span class="plat">Instagram</span></div>
+<div class="name">J A C K I E</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="12459" data-format="compact">12.5K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="70614" data-format="compact">70.6K</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="376" data-suffix="">37.63%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="603213" data-format="compact">603K</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">Engagement rate of 37.6% on 12,459 followers   -   small audience, real conversation. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Knorr</div>
+</div><div class="sl">
+<div class="h">
+<img alt="wellmadebykiley" class="av" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/64f2db83-d51d-4043-bb1c-8513909bdb3e"/>
+<div class="meta">
+<div class="handle"><a href="https://www.tiktok.com/@wellmadebykiley" rel="noopener" target="_blank">@wellmadebykiley</a><span class="plat">TikTok</span></div>
+<div class="name">Well Made by Kiley</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="s"><div class="v" data-count="481100" data-format="compact">481K</div><div class="lb">Followers</div></div>
+<div class="s"><div class="v" data-count="1177866" data-format="compact">1.2M</div><div class="lb">Avg views</div></div>
+<div class="s"><div class="v" data-count="174" data-suffix="">17.49%</div><div class="lb">Engagement</div></div>
+<div class="s"><div class="v" data-count="1200000" data-format="compact">1.2M</div><div class="lb">Total Creator Views</div></div>
+</div>
+<div class="why">1.2MM niche-attributable views across 481,100 followers   -   top-tier reach pool. Already posted about 1 brand in the category.</div>
+<div class="overlap">Already tagged: Tillamook</div>
+</div>
+</div>
+<h3 class="reveal" style="margin:36px 0 12px;">What's winning in your category this month</h3>
+<p class="reveal">Five of the highest-performing creator posts in the category, mixing Instagram and TikTok. Open any tile for the post.</p>
+<div class="insp-grid stagger">
+<a href="https://www.instagram.com/p/DXF1houDxWz/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="insp">
+<div class="visual"><img alt="" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a80c6e7e-e0b2-412d-b5d0-679af7ab3362"/></div>
+<div class="body">
+<div class="h">@irisarellano_</div>
+<div class="m">24.8M views · Educational</div>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DVeTAGuEuUe/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="insp">
+<div class="visual"><img alt="" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0ae67219-580b-44fe-b49a-9a6a14ebd1ac"/></div>
+<div class="body">
+<div class="h">@emmanuel.duverneau</div>
+<div class="m">8.8M views · Educational</div>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DW0C8qViiAj/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="insp">
+<div class="visual"><img alt="" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/cb54553c-e9d1-435b-b76a-e1ed034ef14d"/></div>
+<div class="body">
+<div class="h">@pinkapronshark</div>
+<div class="m">6.1M views · Inspirational</div>
+</div>
+</div>
+</a><a href="https://www.tiktok.com/@guacbites/video/7611675276967185695" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="insp">
+<div class="visual"><img alt="" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/84510b80-928d-4704-97b6-378cab249542"/></div>
+<div class="body">
+<div class="h">@guacbites</div>
+<div class="m">2.8M views · Relatable/Meme</div>
+</div>
+</div>
+</a><a href="https://www.instagram.com/p/DWeN1uKEbMS/" rel="noopener" style="text-decoration:none;color:inherit;" target="_blank">
+<div class="insp">
+<div class="visual"><img alt="" onerror="this.style.display='none'" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/ab837e17-4737-4701-a05d-05d4b762fcec"/></div>
+<div class="body">
+<div class="h">@luxelife9</div>
+<div class="m">2.1M views · Promotional</div>
+</div>
+</div>
+</a>
+</div>
+<div class="callout reveal">
+<span class="callout-label">The Shortlist Verdict</span>
+<p>Combined: <span data-count="4098253" data-format="compact">4.1M</span> followers across these 10 creators, with <span data-count="50878786" data-format="compact">50.9M</span> Total Creator Views attributed in the category window. 10 of the 10 have already posted about brands in the Boxed Meal Kits category. 0 have not yet been tagged by any brand here.</p>
+</div>
+</div>
+</section>
+<section id="opportunity">
+<div class="container">
+<div class="section-label reveal">07 · The opportunity</div>
+<h2 class="reveal">Six moves that change the game for Hamburger Helper.</h2>
+<p class="reveal">Each opportunity is pulled from the category strategy map   -   a play that's detected on two or more competitors and absent on Hamburger Helper. The strategy_id columns are internal taxonomy; the rendered names are plain English. The closing stat on each card is the category-attributable view count tied to that play, sourced from Table 17 in the audit dataset.</p>
+<div class="opp-grid stagger">
+<div class="opp">
+<div class="eb">Opportunity 01</div>
+<h4>Hero / category-leader play</h4>
+<p>Contract 1-3 high-trust creators as multi-year ambassadors with annual fees, events, and product input.</p><p>In the Boxed Meal Kits map, 5 brands are running this play across 10 tracked posts and 5.7MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand's footprint in the category map.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles, Knorr</p>
+<div class="closer">
+<div class="big">5.7MM</div>
+<div class="lbl">category views attributable to Long-Term Brand Ambassador</div>
+</div>
+<div class="backed">Backed by: Long-Term Brand Ambassador</div>
+</div><div class="opp">
+<div class="eb">Opportunity 02</div>
+<h4>Native brand-feed supply</h4>
+<p>Pay UGC creators to deliver vertical video the brand publishes on its OWN feed   -   not as paid ads, not on the creator's channel.</p><p>In the Boxed Meal Kits map, 8 brands are running this play across 54 tracked posts and 268.9MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand's footprint in the category map.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+<div class="closer">
+<div class="big">268.9MM</div>
+<div class="lbl">category views attributable to UGC for Brand Feed</div>
+</div>
+<div class="backed">Backed by: UGC for Brand Feed</div>
+</div><div class="opp">
+<div class="eb">Opportunity 03</div>
+<h4>Earned organic   -   a strength, not a gap</h4>
+<p>Product, packaging, and experience are so distinctive that creators tag, mention, and post without compensation.</p><p>In the Boxed Meal Kits map, 3 brands are running this play across 69 tracked posts and 8.0MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand's footprint in the category map.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+<div class="closer">
+<div class="big">8.0MM</div>
+<div class="lbl">category views attributable to Earned Organic Mentions</div>
+</div>
+<div class="backed">Backed by: Earned Organic Mentions</div>
+</div><div class="opp">
+<div class="eb">Opportunity 04</div>
+<h4>Volume creator model (Cluely-style)</h4>
+<p>20-100+ small creators each posting multiple short-form videos a day about the brand on their own channels.</p><p>In the Boxed Meal Kits map, 3 brands are running this play across 72 tracked posts and 6.4MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand's footprint in the category map.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+<div class="closer">
+<div class="big">6.4MM</div>
+<div class="lbl">category views attributable to Creator Collective / Volume Model</div>
+</div>
+<div class="backed">Backed by: Creator Collective / Volume Model</div>
+</div><div class="opp">
+<div class="eb">Opportunity 05</div>
+<h4>Press / brand-trip activation</h4>
+<p>Host a tight cluster of creators at a venue or destination   -   typically 8-30 creators inside a 3-7 day window, with content seeded across their channels.</p><p>In the Boxed Meal Kits map, 4 brands are running this play across 38 tracked posts and 1.0MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand's footprint in the category map.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Goodles</p>
+<div class="closer">
+<div class="big">1.0MM</div>
+<div class="lbl">category views attributable to Press &amp; Brand Trips</div>
+</div>
+<div class="backed">Backed by: Press &amp; Brand Trips</div>
+</div><div class="opp">
+<div class="eb">Opportunity 06</div>
+<h4>Always-on Creator Engine</h4>
+<p>Pay a roster of creators a monthly fee to post about the brand on their own audience, every month, for 6-12+ months.</p><p>In the Boxed Meal Kits map, 2 brands are running this play across 44 tracked posts and 2.3MM attributable views.</p><p>Hamburger Helper currently runs none of it   -   the strategy is absent from the brand's footprint in the category map.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:8px;">Running it now: Brami, Goya</p>
+<div class="closer">
+<div class="big">2.3MM</div>
+<div class="lbl">category views attributable to Always-On Creator Retainers</div>
+</div>
+<div class="backed">Backed by: Always-On Creator Retainers</div>
+</div>
+</div>
+</div>
+</section>
+<div class="container">
+<div class="closing reveal">
+<p class="closing-lead">We built this report because Hamburger Helper's creator data sits at an unusual intersection   -   heavy paid investment, almost no organic creator pickup, and a category around it that's increasingly creator-led. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+<h4>Who are we?</h4>
+<p class="sup-intro"><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
+</div>
+<div class="booking-line">Book 30 min to walk through the data together at <a href="https://sup.co/meet" rel="noopener" target="_blank">sup.co/meet</a></div>
 </div>
 <div class="report-footer"><span class="wave">👋</span> Sup · sup.co · Confidential · May 2026</div>
-
 <script>
 const BRAND_PRIMARY = '#C8102E';
 const PALETTE = ['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
