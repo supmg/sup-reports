@@ -66,22 +66,14 @@ section { padding: 96px 0 120px; }
 .brand-emphasis::after { content:""; position: absolute; left: 0; bottom: 2px; width: 0; height: 8px; background: var(--brand-primary); opacity: 0.18; border-radius: 4px; transition: width 700ms cubic-bezier(0.16,1,0.3,1) 400ms; z-index: -1; }
 .brand-emphasis.is-painted::after { width: 100%; }
 .cover-sub { color: var(--secondary); font-size: 17px; max-width: 760px; margin-bottom: 40px; line-height: 1.55; }
-.cover-stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.cover-stats > div { padding: 0 22px; border-right: 1px solid var(--border); }
-.cover-stats > div:last-child { border-right: none; }
-.cover-stats .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; font-variant-numeric: tabular-nums; }
-.cover-stats .cap { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+/* Editorial provenance line replaces the old 5-cell "what we analysed" strip */
+.provenance-line { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; }
+.provenance-line p { font-size: 14px; color: var(--secondary); line-height: 1.55; margin: 0; max-width: 920px; }
+.provenance-line .pv-label { color: var(--muted); font-weight: 500; margin-right: 8px; }
+.provenance-line .num { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
 @media (max-width: 720px) {
-  .cover-stats { grid-template-columns: repeat(2, 1fr); gap: 0; }
-  .cover-stats > div { padding: 18px 16px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .cover-stats > div:nth-child(2n) { border-right: none; }
-  .cover-stats > div:nth-last-child(-n+2) { border-bottom: none; }
-}
-@media (max-width: 480px) {
-  .cover-stats { grid-template-columns: 1fr; padding: 0; margin-bottom: 32px; }
-  .cover-stats > div { padding: 16px 0; border-right: none !important; border-bottom: 1px solid var(--border); }
-  .cover-stats > div:first-child { padding-top: 0; }
-  .cover-stats > div:last-child { border-bottom: none; padding-bottom: 0; }
+  .provenance-line { padding: 18px 0; }
+  .provenance-line p { font-size: 13px; }
 }
 /* Cover hero — tilted-square stack to the right of the headline */
 .cover-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 56px; align-items: center; margin-bottom: 56px; }
@@ -118,35 +110,6 @@ section { padding: 96px 0 120px; }
 }
 
 /* What we analysed */
-.wwa-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 0; }
-.wwa-label { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 16px; }
-.wwa-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
-.wwa-row > div { padding: 0 22px; border-right: 1px solid var(--border); min-width: 0; }
-.wwa-row > div:first-child { padding-left: 0; }
-.wwa-row > div:last-child { border-right: none; padding-right: 0; }
-.wwa-row .v { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.1; }
-.wwa-row .cap { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
-@media (max-width: 900px) {
-  .wwa-row { grid-template-columns: repeat(3, 1fr); gap: 0; }
-  .wwa-row > div { padding: 18px 18px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .wwa-row > div:nth-child(3n) { border-right: none; }
-  .wwa-row > div:nth-child(4) { grid-column: 1 / 3; }
-  .wwa-row > div:nth-child(5) { grid-column: 3 / 4; }
-  .wwa-row > div:nth-last-child(-n+2) { border-bottom: none; }
-}
-@media (max-width: 560px) {
-  .wwa-row { grid-template-columns: repeat(2, 1fr); gap: 0; }
-  .wwa-row > div { padding: 18px 16px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); grid-column: auto; }
-  .wwa-row > div:nth-child(2n) { border-right: none; }
-  .wwa-row > div:nth-child(5) { grid-column: 1 / -1; border-right: none; }
-  .wwa-row > div:nth-last-child(-n+1) { border-bottom: none; }
-}
-@media (max-width: 480px) {
-  .wwa-row { grid-template-columns: 1fr; gap: 0; }
-  .wwa-row > div { padding: 16px 0; border-right: none !important; border-bottom: 1px solid var(--border); grid-column: auto !important; }
-  .wwa-row > div:first-child { padding-top: 0; }
-  .wwa-row > div:last-child { border-bottom: none; padding-bottom: 0; }
-}
 
 /* Section headings */
 .section-label { font-size: 13.5px; color: var(--secondary); font-weight: 500; margin-bottom: 12px; }
@@ -433,55 +396,19 @@ section p { color: var(--secondary); font-size: 16px; line-height: 1.65; margin-
         </a>
       </div>
     </div>
-    <div class="cover-stats reveal">
-      
-    <div>
-      <div class="v" data-count="266" data-format="compact">266</div>
-      <div class="cap">Instagram followers</div>
-    </div>
-    <div>
-      <div class="v" data-count="1" data-format="comma">1</div>
-      <div class="cap">Creator Tagged Posts in window</div>
-    </div>
-    <div>
-      <div class="v" data-count="39" data-format="comma">39</div>
-      <div class="cap">Own-feed posts in window</div>
-    </div>
-    <div>
-      <div class="v" data-count="0" data-format="comma">0</div>
-      <div class="cap">Active Meta ads (20-country sweep)</div>
-    </div>
-    </div>
   </div>
 </section>
 
-<!-- WHAT WE ANALYSED -->
-<div class="wwa-strip">
+<!-- PROVENANCE BYLINE (replaces the old 5-cell "what we analysed" strip) -->
+<div class="provenance-line reveal">
   <div class="container">
-    <div class="wwa-label">What we analysed</div>
-    <div class="wwa-row">
-      
-    <div>
-      <div class="v" data-count="92" data-format="comma">92</div>
-      <div class="cap">brands in the Fashion &amp; Creator Apps category</div>
-    </div>
-    <div>
-      <div class="v" data-count="100" data-format="comma">100</div>
-      <div class="cap">top creators across Instagram and TikTok</div>
-    </div>
-    <div>
-      <div class="v" data-count="76" data-format="comma">76</div>
-      <div class="cap">top niche ad creatives analysed</div>
-    </div>
-    <div>
-      <div class="v">84-day</div>
-      <div class="cap">category window · 2026-02-20 to 2026-05-15</div>
-    </div>
-    <div>
-      <div class="v">84-day</div>
-      <div class="cap">brand window · own feed and Creator Tagged Posts</div>
-    </div>
-    </div>
+    <p>
+      <span class="pv-label">What we analysed:</span>
+      <span class="num">92</span> brands in the Fashion &amp; Creator Apps niche,
+      <span class="num">100</span> top creators across Instagram and TikTok,
+      and <span class="num">76</span> top niche ad creatives, over an
+      <span class="num">84-day</span> category window (2026-02-20 to 2026-05-15) and a matching brand window covering meCore's own feed and Creator Tagged Posts.
+    </p>
   </div>
 </div>
 
