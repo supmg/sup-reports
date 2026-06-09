@@ -47,7 +47,10 @@ h1{font-size:clamp(28px,5vw,46px);font-weight:500;letter-spacing:-.02em;line-hei
 .cr-stat{flex:1;background:var(--surf);border:1px solid var(--bd);border-radius:8px;padding:7px 9px;min-width:0}
 .csl{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;margin-bottom:2px}
 .csv{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
-.cr-post{border-top:1px dashed var(--bd);padding-top:11px;display:flex;flex-direction:column;gap:7px}
+.cr-post{border-top:1px dashed var(--bd);padding-top:11px;display:flex;gap:10px;align-items:flex-start}
+.cr-post-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.pthumb-sm{display:block;width:62px;height:62px;flex:none;border-radius:8px;overflow:hidden;border:1px solid var(--bd);background:var(--surf)}
+.pthumb-sm img{width:100%;height:100%;object-fit:cover}
 .cr-post-metrics{display:flex;gap:16px;font-size:11.5px;color:var(--muted)}
 .cr-post-metrics b{color:var(--text);font-weight:600;font-size:13px;font-variant-numeric:tabular-nums;margin-right:3px}
 .post-metrics{display:flex;gap:22px;margin-bottom:8px}
@@ -58,7 +61,7 @@ h1{font-size:clamp(28px,5vw,46px);font-weight:500;letter-spacing:-.02em;line-hei
 .plink{font-size:11.5px;color:var(--brand);text-decoration:none;font-weight:500;align-self:flex-start}.plink:hover{text-decoration:underline}
 .bf-lbl{font-size:12.5px;font-weight:600;color:var(--sec);margin:4px 0 12px}
 .bfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}
-.bfpost{border:1px solid var(--bd);border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px;transition:box-shadow .2s ease,border-color .2s ease}
+.bfpost{border:1px solid var(--bd);border-radius:12px;padding:14px;background:#fff;display:flex;gap:10px;align-items:flex-start;transition:box-shadow .2s ease,border-color .2s ease}
 .bfpost:hover{box-shadow:0 8px 24px -14px rgba(9,9,11,.22);border-color:#d4d4d8}
 .bf-credit{font-size:10.5px;color:var(--muted);font-style:italic}
 .do{background:#fff;border:1px solid var(--bd);border-left:3px solid var(--brand);border-radius:12px;padding:16px 18px;margin-top:18px}
@@ -86,46 +89,58 @@ h1{font-size:clamp(28px,5vw,46px);font-weight:500;letter-spacing:-.02em;line-hei
   <div class="comp">
   <div class="comp-head"><span class="comp-name">Olly</span><span class="comp-sim">Gummy-vitamin brand — same product format as Rizz</span></div>
   <div class="comp-sum">Across the posts shown: <span class="num" data-count="5400000">5,400,000</span> total views · <span class="num" data-count="32669">32,669</span> total engagement</div>
-  <div class="bf-lbl">Posts on @ollywellness's own feed (creator UGC the brand publishes itself)</div><div class="bfgrid stagger"><div class="bfpost">
-  <div class="cr-post-metrics"><span><b><span class="num" data-count="2200000">2,200,000</span></b> views</span><span><b><span class="num" data-count="12012">12,012</span></b> total eng</span></div>
-  <blockquote class="caption">The power of a girl grip while shopping 💪 #shopping #walmart #wellness #haul #girlgrip</blockquote>
-  <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; Relatability. The text overlay &#x27;Walking around Walmart thinking I don&#x27;t need a basket...&#x27; taps into a near-universal shopping experience that immediately resonates with the viewer.</div>
-  <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
-  <a class="plink" href="https://www.tiktok.com/@ollywellness/video/7641766780318256398" target="_blank" rel="noopener">View post ↗</a>
-</div><div class="bfpost">
-  <div class="cr-post-metrics"><span><b><span class="num" data-count="2100000">2,100,000</span></b> views</span><span><b><span class="num" data-count="19266">19,266</span></b> total eng</span></div>
-  <blockquote class="caption">Shopping for the best night’s sleep 😴 Get yours at @target 🌙 🎶 Sleepy Purr by DJ BAI</blockquote>
-  <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; The &#x27;POV&#x27; text overlay combined with the familiar setting of a Target aisle creates an immediate sense of relatability and curiosity about the specific products chosen.</div>
-  <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
-  <a class="plink" href="https://www.tiktok.com/@ollywellness/video/7616426454825307405" target="_blank" rel="noopener">View post ↗</a>
-</div><div class="bfpost">
-  <div class="cr-post-metrics"><span><b><span class="num" data-count="1100000">1,100,000</span></b> views</span><span><b><span class="num" data-count="1391">1,391</span></b> total eng</span></div>
-  <blockquote class="caption">POV: your OLLY order just got delivered 📦✨ #ASMRunboxing #OLLY</blockquote>
-  <div class="vstyle"><span class="vl">Style</span> UGC; POV ASMR Unboxing; The combination of the crisp sound of a box cutter slicing tape and the text overlay &#x27;ASMR unboxing (OLLY edition!)&#x27; immediately captures the attention of ASMR fans and brand enthusiasts.</div>
-  <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
-  <a class="plink" href="https://www.tiktok.com/@ollywellness/video/7630921548848762142" target="_blank" rel="noopener">View post ↗</a>
+  <div class="bf-lbl">Posts on @ollywellness's own feed (creator UGC the brand publishes itself)</div><div class="bfgrid stagger"><div class="bfpost"><a class="pthumb-sm" href="https://www.tiktok.com/@ollywellness/video/7641766780318256398" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/222d5150-69e1-4e60-8b27-db27220fe0ea" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  <div class="cr-post-b">
+    <div class="cr-post-metrics"><span><b><span class="num" data-count="2200000">2,200,000</span></b> views</span><span><b><span class="num" data-count="12012">12,012</span></b> total eng</span></div>
+    <blockquote class="caption">The power of a girl grip while shopping 💪 #shopping #walmart #wellness #haul #girlgrip</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; Relatability. The text overlay &#x27;Walking around Walmart thinking I don&#x27;t need a basket...&#x27; taps into a near-universal shopping experience that immediately resonates with the viewer.</div>
+    <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
+    <a class="plink" href="https://www.tiktok.com/@ollywellness/video/7641766780318256398" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="bfpost"><a class="pthumb-sm" href="https://www.tiktok.com/@ollywellness/video/7616426454825307405" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/cdbc0597-5364-4a70-b7c3-6ca1cc8b2adf" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  <div class="cr-post-b">
+    <div class="cr-post-metrics"><span><b><span class="num" data-count="2100000">2,100,000</span></b> views</span><span><b><span class="num" data-count="19266">19,266</span></b> total eng</span></div>
+    <blockquote class="caption">Shopping for the best night’s sleep 😴 Get yours at @target 🌙 🎶 Sleepy Purr by DJ BAI</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; The &#x27;POV&#x27; text overlay combined with the familiar setting of a Target aisle creates an immediate sense of relatability and curiosity about the specific products chosen.</div>
+    <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
+    <a class="plink" href="https://www.tiktok.com/@ollywellness/video/7616426454825307405" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="bfpost"><a class="pthumb-sm" href="https://www.tiktok.com/@ollywellness/video/7630921548848762142" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/8f600c7a-352b-4d0b-a508-95acc7abeff3" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  <div class="cr-post-b">
+    <div class="cr-post-metrics"><span><b><span class="num" data-count="1100000">1,100,000</span></b> views</span><span><b><span class="num" data-count="1391">1,391</span></b> total eng</span></div>
+    <blockquote class="caption">POV: your OLLY order just got delivered 📦✨ #ASMRunboxing #OLLY</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV ASMR Unboxing; The combination of the crisp sound of a box cutter slicing tape and the text overlay &#x27;ASMR unboxing (OLLY edition!)&#x27; immediately captures the attention of ASMR fans and brand enthusiasts.</div>
+    <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
+    <a class="plink" href="https://www.tiktok.com/@ollywellness/video/7630921548848762142" target="_blank" rel="noopener">View post ↗</a>
+  </div>
 </div></div>
 </div><div class="comp">
   <div class="comp-head"><span class="comp-name">Lemme</span><span class="comp-sim">Functional wellness gummies — the category&#x27;s creator leader</span></div>
   <div class="comp-sum">Across the posts shown: <span class="num" data-count="755000">755,000</span> total views · <span class="num" data-count="29585">29,585</span> total engagement</div>
-  <div class="bf-lbl">Posts on @lemme's own feed (creator UGC the brand publishes itself)</div><div class="bfgrid stagger"><div class="bfpost">
-  <div class="cr-post-metrics"><span><b><span class="num" data-count="463800">463,800</span></b> views</span><span><b><span class="num" data-count="24169">24,169</span></b> total eng</span></div>
-  <blockquote class="caption">Replying to @RaevenP⁷ she’s the life of the (Pokémon) party 🛒🛍️✨</blockquote>
-  <div class="vstyle"><span class="vl">Style</span> UGC; Behind-the-Scenes Vlog; The sight of a global celebrity in a bright yellow suit holding a megaphone inside a Target store is an immediate pattern interrupt that creates instant curiosity.</div>
-  <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
-  <a class="plink" href="https://www.tiktok.com/@lemme/video/7643029426950769950" target="_blank" rel="noopener">View post ↗</a>
-</div><div class="bfpost">
-  <div class="cr-post-metrics"><span><b><span class="num" data-count="187000">187,000</span></b> views</span><span><b><span class="num" data-count="3583">3,583</span></b> total eng</span></div>
-  <blockquote class="caption">#duet with @El Michelle ☁️🤸✨😭</blockquote>
-  <div class="vstyle"><span class="vl">Style</span> UGC; Split-screen / Duet (UGC Talking Head vs. Brand Content); Irony and Curiosity Gap. The creator immediately states she is &#x27;blocked&#x27; by a brand that just interacted with her, making the viewer want to know the backstory.</div>
-  <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
-  <a class="plink" href="https://www.tiktok.com/@lemme/video/7615057625134173471" target="_blank" rel="noopener">View post ↗</a>
-</div><div class="bfpost">
-  <div class="cr-post-metrics"><span><b><span class="num" data-count="104200">104,200</span></b> views</span><span><b><span class="num" data-count="1833">1,833</span></b> total eng</span></div>
-  <blockquote class="caption">If you feel the temperature rising... that&#x27;s us 😏🔥</blockquote>
-  <div class="vstyle"><span class="vl">Style</span> UGC; Short-form Video (Reels/TikTok); Visual appeal through a fit creator in athletic wear combined with immediate product interaction (eating the gummy) and a high-energy music track.</div>
-  <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
-  <a class="plink" href="https://www.tiktok.com/@lemme/video/7620898483972754702" target="_blank" rel="noopener">View post ↗</a>
+  <div class="bf-lbl">Posts on @lemme's own feed (creator UGC the brand publishes itself)</div><div class="bfgrid stagger"><div class="bfpost"><a class="pthumb-sm" href="https://www.tiktok.com/@lemme/video/7643029426950769950" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/629c4664-0904-4ce5-8ffa-d6d987d9ddf7" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  <div class="cr-post-b">
+    <div class="cr-post-metrics"><span><b><span class="num" data-count="463800">463,800</span></b> views</span><span><b><span class="num" data-count="24169">24,169</span></b> total eng</span></div>
+    <blockquote class="caption">Replying to @RaevenP⁷ she’s the life of the (Pokémon) party 🛒🛍️✨</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Behind-the-Scenes Vlog; The sight of a global celebrity in a bright yellow suit holding a megaphone inside a Target store is an immediate pattern interrupt that creates instant curiosity.</div>
+    <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
+    <a class="plink" href="https://www.tiktok.com/@lemme/video/7643029426950769950" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="bfpost"><a class="pthumb-sm" href="https://www.tiktok.com/@lemme/video/7615057625134173471" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/65a6a44e-cfab-4364-bb9b-c341844d5e0d" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  <div class="cr-post-b">
+    <div class="cr-post-metrics"><span><b><span class="num" data-count="187000">187,000</span></b> views</span><span><b><span class="num" data-count="3583">3,583</span></b> total eng</span></div>
+    <blockquote class="caption">#duet with @El Michelle ☁️🤸✨😭</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Split-screen / Duet (UGC Talking Head vs. Brand Content); Irony and Curiosity Gap. The creator immediately states she is &#x27;blocked&#x27; by a brand that just interacted with her, making the viewer want to know the backstory.</div>
+    <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
+    <a class="plink" href="https://www.tiktok.com/@lemme/video/7615057625134173471" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="bfpost"><a class="pthumb-sm" href="https://www.tiktok.com/@lemme/video/7620898483972754702" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/4562b814-f158-45a8-be80-148d17a5cfea" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  <div class="cr-post-b">
+    <div class="cr-post-metrics"><span><b><span class="num" data-count="104200">104,200</span></b> views</span><span><b><span class="num" data-count="1833">1,833</span></b> total eng</span></div>
+    <blockquote class="caption">If you feel the temperature rising... that&#x27;s us 😏🔥</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Short-form Video (Reels/TikTok); Visual appeal through a fit creator in athletic wear combined with immediate product interaction (eating the gummy) and a high-energy music track.</div>
+    <div class="bf-credit">Brand-published UGC · creator not credited on post</div>
+    <a class="plink" href="https://www.tiktok.com/@lemme/video/7620898483972754702" target="_blank" rel="noopener">View post ↗</a>
+  </div>
 </div></div>
 </div>
   <div class="do"><span class="dl">What Rizz should do</span><p>Commission 3–4 creators a month to shoot short vertical UGC in Rizz's voice (relatable wellness humour), license it, and post it to <b>Rizz's own feed</b> — don't just hope creators post about you. Open on a POV / relatability hook in the first second: Olly's best own-feed posts are 'POV vlog' UGC pulling 2M+ views each.</p></div>
@@ -142,23 +157,26 @@ h1{font-size:clamp(28px,5vw,46px);font-weight:500;letter-spacing:-.02em;line-hei
   <div class="creators stagger"><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DWg6dfuERnj/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/4b2068e1-82de-48b6-9369-6e1a8f0404c1" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">Heidi</div><div class="cr-h">@hideelynn_ig · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="2776">2,776</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="12314">12,314</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="58">58</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="18119">18,119</span></b> post views</span><span><b><span class="num" data-count="138">138</span></b> total eng</span></div>
-    <blockquote class="caption">Has anyone else tried these yet? If so, Let me know your thoughts! Can’t wait to see my 30 day results! 😍🤞🏼💁🏼‍♀️ 
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DWg6dfuERnj/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/383134eb-47d8-4f5c-89c2-cd670c8fcf8c" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="18119">18,119</span></b> post views</span><span><b><span class="num" data-count="138">138</span></b> total eng</span></div>
+      <blockquote class="caption">Has anyone else tried these yet? If so, Let me know your thoughts! Can’t wait to see my 30 day results! 😍🤞🏼💁🏼‍♀️ 
 @follynutrition @follylabs 
 .
 .
 .
 #hairgummies #hairgrowth #healthyhair #womenover40  #over40</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
-    <a class="plink" href="https://www.instagram.com/p/DWg6dfuERnj/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
+      <a class="plink" href="https://www.instagram.com/p/DWg6dfuERnj/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><span class="cr-av"></span><div class="cr-idt"><div class="cr-name">Neyan Babani (NEON) | Travel + KC</div><div class="cr-h">@neyanventures · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="34095">34,095</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="17840">17,840</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="567">567</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="14507">14,507</span></b> post views</span><span><b><span class="num" data-count="449">449</span></b> total eng</span></div>
-    <blockquote class="caption">𝔽𝕠𝕝𝕝𝕪 ℍ𝕒𝕚𝕣 ℍ𝕖𝕒𝕝𝕥𝕙 𝔾𝕦𝕞𝕞𝕚𝕖𝕤
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DYFWOKDRXqr/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/9d2c2526-856e-4b00-9908-4766902c7b54" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="14507">14,507</span></b> post views</span><span><b><span class="num" data-count="449">449</span></b> total eng</span></div>
+      <blockquote class="caption">𝔽𝕠𝕝𝕝𝕪 ℍ𝕒𝕚𝕣 ℍ𝕖𝕒𝕝𝕥𝕙 𝔾𝕦𝕞𝕞𝕚𝕖𝕤
 @follynutrition 
 
 #ad Folly sent me their gummies to try for 4 weeks. 
@@ -166,15 +184,17 @@ h1{font-size:clamp(28px,5vw,46px);font-weight:500;letter-spacing:-.02em;line-hei
  I’ve officially been taking Folly Hair Health Gummies for 30 days and I’m honestly so excited to keep seeing my hair journey unfold 💁🏻‍♀️🍓
 
 Folly sent me their gummies to try for 4 weeks and what makes them different is they’re actually clinically dosed for real results 👏🏼 Unlike ordinary hair gummies, they’re packed with 30+ clinically proven ingredients, third-party tested, and designed to suppor</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
-    <a class="plink" href="https://www.instagram.com/p/DYFWOKDRXqr/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
+      <a class="plink" href="https://www.instagram.com/p/DYFWOKDRXqr/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DW6_D-dEdU1/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/517f6c70-43a3-4885-8c64-087fcdd9c31d" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">Melissa Garcia</div><div class="cr-h">@melissitta · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="30686">30,686</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="6325">6,325</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="219">219</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="12079">12,079</span></b> post views</span><span><b><span class="num" data-count="276">276</span></b> total eng</span></div>
-    <blockquote class="caption">morning reset routine 🍵🌟
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DW6_D-dEdU1/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/a9172aa6-b2de-4038-a039-29125cde8a4d" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="12079">12,079</span></b> post views</span><span><b><span class="num" data-count="276">276</span></b> total eng</span></div>
+      <blockquote class="caption">morning reset routine 🍵🌟
 @follynutrition use code MELISSA-1 for $$ off 
 .
 .
@@ -184,23 +204,26 @@ Deal: New customers get the $1 deal ($54 off your first subscription, limited to
 .
 .
 #morningroutine #wellness #healthylifestyle #folly</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
-    <a class="plink" href="https://www.instagram.com/p/DW6_D-dEdU1/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
+      <a class="plink" href="https://www.instagram.com/p/DW6_D-dEdU1/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DX_3A0wNY4z/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/051876d3-feac-4b9d-9d45-2534c901e685" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">Amanda &amp; Jessie | Motherhood, Pregnancy &amp; Postpartum</div><div class="cr-h">@baby.then.what · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="35153">35,153</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="10350">10,350</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="228">228</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="6947">6,947</span></b> post views</span><span><b><span class="num" data-count="40">40</span></b> total eng</span></div>
-    <blockquote class="caption">No one tells you postpartum hair loss can still be happening at two years. I’m not in the shedding phase anymore -  I’m in the “why is nothing growing back” phase. Wider part. Smaller ponytail.
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DX_3A0wNY4z/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/f9323a0a-8541-4eab-8a7b-0578069d78ee" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="6947">6,947</span></b> post views</span><span><b><span class="num" data-count="40">40</span></b> total eng</span></div>
+      <blockquote class="caption">No one tells you postpartum hair loss can still be happening at two years. I’m not in the shedding phase anymore -  I’m in the “why is nothing growing back” phase. Wider part. Smaller ponytail.
 
 I decided to try something new after coming across this brand @follynutrition 
 
 A few weeks in and there are baby hairs at my hairline. I’m finally seeing something happening after two years of nothing.
 My honest review:
 - It’s way more convenient than any other hair pills I’ve taken and you can just thr</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
-    <a class="plink" href="https://www.instagram.com/p/DX_3A0wNY4z/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator volume/seeding post</div>
+      <a class="plink" href="https://www.instagram.com/p/DX_3A0wNY4z/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div></div>
 </div>
@@ -218,43 +241,50 @@ My honest review:
   <div class="creators stagger"><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/de0c9d7e-b356-4a46-af15-8f9b674ace91" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">edna.gonzalez2</div><div class="cr-h">@edna.gonzalez2 · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="12616">12,616</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="26090">26,090</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="117">117</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="271782">271,782</span></b> post views</span><span><b><span class="num" data-count="1334">1,334</span></b> total eng</span></div>
-    <blockquote class="caption">real moms know... you gotta pick your battles 😭
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/2e46c153-34cd-45a6-878f-b0be2c033d68" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="271782">271,782</span></b> post views</span><span><b><span class="num" data-count="1334">1,334</span></b> total eng</span></div>
+      <blockquote class="caption">real moms know... you gotta pick your battles 😭
 today we switched up the snack bag a little thank you @grunsdaily for sending these over!☺️ #gifted #prpackage #kidsnacks #momreels #olipop</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> UGC; Talking Head / UGC Product Review; Relatability through the shared experience of the &#x27;morning snack routine&#x27; for parents, followed by a curiosity gap regarding the &#x27;something different&#x27; she is introducing.</div>
-    <a class="plink" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> UGC; Talking Head / UGC Product Review; Relatability through the shared experience of the &#x27;morning snack routine&#x27; for parents, followed by a curiosity gap regarding the &#x27;something different&#x27; she is introducing.</div>
+      <a class="plink" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DWPi0kaAhm8/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/19ae7cda-bbbf-43d5-95ba-f95d703434e0" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">bernibjj</div><div class="cr-h">@bernibjj · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="10375">10,375</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="54524">54,524</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="6">6</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="112974">112,974</span></b> post views</span><span><b><span class="num" data-count="534">534</span></b> total eng</span></div>
-    <blockquote class="caption">Wait… my essential daily product is now at COSTCO?! 😱🔥
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DWPi0kaAhm8/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/19445f7e-c667-47c4-9071-4632cfce0dfc" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="112974">112,974</span></b> post views</span><span><b><span class="num" data-count="534">534</span></b> total eng</span></div>
+      <blockquote class="caption">Wait… my essential daily product is now at COSTCO?! 😱🔥
 You already know I don’t play about my health… and now it’s easier than ever
 
 Run to your nearest Costco and grab yours 💪
 @grunsdaily @costco
 
 #costcofind #fitnesslife #grüns #florida</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
-    <a class="plink" href="https://www.instagram.com/p/DWPi0kaAhm8/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
+      <a class="plink" href="https://www.instagram.com/p/DWPi0kaAhm8/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DWcEDISDR8o/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/97cead7a-dd93-41a3-af4c-a68b99359116" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">sap_phiree</div><div class="cr-h">@sap_phiree · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="11104">11,104</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="61420">61,420</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="6520">6,520</span></span></div></div>
   <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="6448">6,448</span></b> post views</span><span><b><span class="num" data-count="176">176</span></b> total eng</span></div>
-    <blockquote class="caption">📦 Somebody say @grunsdaily ‼️ Definitely has become our New favorite #collaboration #kids #health #ugc #parenthood</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
-    <a class="plink" href="https://www.instagram.com/p/DWcEDISDR8o/" target="_blank" rel="noopener">View post ↗</a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="6448">6,448</span></b> post views</span><span><b><span class="num" data-count="176">176</span></b> total eng</span></div>
+      <blockquote class="caption">📦 Somebody say @grunsdaily ‼️ Definitely has become our New favorite #collaboration #kids #health #ugc #parenthood</blockquote>
+      <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
+      <a class="plink" href="https://www.instagram.com/p/DWcEDISDR8o/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DYX3bB-hI9d/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e6cee50a-a7ca-4efe-9a2a-3709f3afb460" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">andreitao</div><div class="cr-h">@andreitao · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="24529">24,529</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="8771">8,771</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="126">126</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="6427">6,427</span></b> post views</span><span><b><span class="num" data-count="67">67</span></b> total eng</span></div>
-    <blockquote class="caption">Ahora entiendo por qué todo el mundo está obsesionado con estas gomitas 😭✨ @grunsdaily 
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DYX3bB-hI9d/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/170b038e-2748-481a-9ca1-97be8e44643f" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="6427">6,427</span></b> post views</span><span><b><span class="num" data-count="67">67</span></b> total eng</span></div>
+      <blockquote class="caption">Ahora entiendo por qué todo el mundo está obsesionado con estas gomitas 😭✨ @grunsdaily 
 Me han encantado para sentirme mejor y cuidarme un poquito más cada día 💚
 
 Link en mi bio 💚
@@ -265,8 +295,9 @@ I’ve been loving them as part of my daily wellness routine 💚
 Link in bio 
 
 #momlife #maternidadreal #partnership #selflove❤️</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
-    <a class="plink" href="https://www.instagram.com/p/DYX3bB-hI9d/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
+      <a class="plink" href="https://www.instagram.com/p/DYX3bB-hI9d/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div></div>
 </div>
@@ -284,33 +315,39 @@ Link in bio
   <div class="creators stagger"><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/81a411e1-ace8-40b3-85df-1e0bf9ee5e14" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">doinglifewithjacie</div><div class="cr-h">@doinglifewithjacie · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="12245">12,245</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="5093">5,093</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="11">11</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="12472">12,472</span></b> post views</span><span><b><span class="num" data-count="16">16</span></b> total eng</span></div>
-    <blockquote class="caption">Mamas it’s the end of the year and I found something to keep us sane!! Say MAMA if you can relate @golinutrition</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
-    <a class="plink" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener">View post ↗</a>
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/cc249399-bf3c-4263-99f5-12b190e62cda" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="12472">12,472</span></b> post views</span><span><b><span class="num" data-count="16">16</span></b> total eng</span></div>
+      <blockquote class="caption">Mamas it’s the end of the year and I found something to keep us sane!! Say MAMA if you can relate @golinutrition</blockquote>
+      <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
+      <a class="plink" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/61b38957-a767-4eb3-8c0d-d94e697b0b4b" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">_ashleyyxnicholee_</div><div class="cr-h">@_ashleyyxnicholee_ · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="7759">7,759</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="37347">37,347</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="673">673</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="8259">8,259</span></b> post views</span><span><b><span class="num" data-count="239">239</span></b> total eng</span></div>
-    <blockquote class="caption">mini restock on some girly essentials from at @burlingtondeals this past week 🫶🏼💖💕🛍️✨ 
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/972bad86-856e-42eb-9ba1-f5fc7c54995b" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="8259">8,259</span></b> post views</span><span><b><span class="num" data-count="239">239</span></b> total eng</span></div>
+      <blockquote class="caption">mini restock on some girly essentials from at @burlingtondeals this past week 🫶🏼💖💕🛍️✨ 
 
 TikTok: AshleyyXNicholee 🎀 | ft. @golinutrition @juicycouture @nivea 
 
 #restock #burlington #juicycouture #burlingtonfinds #fblifestyle #ashleyyxnicholee #baddiesonabudget</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
-    <a class="plink" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener">View post ↗</a>
+      <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
+      <a class="plink" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div><div class="creator">
   <div class="cr-top"><a class="cr-av" href="https://www.instagram.com/p/DW1nwJjuUs_/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/aaf137db-f0ee-4bd7-ac2c-53014b13a66f" alt="" loading="lazy" onerror="this.style.display='none'"></a><div class="cr-idt"><div class="cr-name">styles_bychristina</div><div class="cr-h">@styles_bychristina · Instagram · own feed</div></div></div>
   <div class="cr-stats"><div class="cr-stat"><span class="csl">Followers</span><span class="csv"><span class="num" data-count="1575">1,575</span></span></div><div class="cr-stat"><span class="csl">Avg views</span><span class="csv"><span class="num" data-count="1101">1,101</span></span></div><div class="cr-stat"><span class="csl">Avg eng</span><span class="csv"><span class="num" data-count="9">9</span></span></div></div>
-  <div class="cr-post">
-    <div class="cr-post-metrics"><span><b><span class="num" data-count="1660">1,660</span></b> post views</span><span><b><span class="num" data-count="15">15</span></b> total eng</span></div>
-    <blockquote class="caption">@golinutrition #golisuperbrandday #goligummy #goli</blockquote>
-    <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
-    <a class="plink" href="https://www.instagram.com/p/DW1nwJjuUs_/" target="_blank" rel="noopener">View post ↗</a>
+  <div class="cr-post"><a class="pthumb-sm" href="https://www.instagram.com/p/DW1nwJjuUs_/" target="_blank" rel="noopener"><img src="https://first-possum-672.convex.cloud/api/storage/5f7fb5da-883f-4c99-aa5a-d34874d75c86" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <div class="cr-post-b">
+      <div class="cr-post-metrics"><span><b><span class="num" data-count="1660">1,660</span></b> post views</span><span><b><span class="num" data-count="15">15</span></b> total eng</span></div>
+      <blockquote class="caption">@golinutrition #golisuperbrandday #goligummy #goli</blockquote>
+      <div class="vstyle"><span class="vl">Style</span> video · creator post</div>
+      <a class="plink" href="https://www.instagram.com/p/DW1nwJjuUs_/" target="_blank" rel="noopener">View post ↗</a>
+    </div>
   </div>
 </div></div>
 </div>
