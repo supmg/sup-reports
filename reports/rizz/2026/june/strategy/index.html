@@ -376,8 +376,14 @@ vitamins: @fungiments a delicious gummy vitamin that helps with digestion and ov
 </div><script>
 function fmt(n){n=+n;if(n>=1e6)return (n/1e6).toFixed(n%1e6===0?0:1).replace(/\.0$/,'')+'M';if(n>=1e3)return Math.round(n/100)/10>=100?Math.round(n/1e3)+'K':(n/1e3).toFixed(n%1e3===0?0:1).replace(/\.0$/,'')+'K';return n.toLocaleString()}
 function countUp(el){var t=+el.dataset.count;if(t>=1000){var s=null,d=1100;function tk(ts){if(!s)s=ts;var p=Math.min((ts-s)/d,1);var e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(t*e));if(p<1)requestAnimationFrame(tk);else el.textContent=fmt(t)}requestAnimationFrame(tk)}else{el.textContent=t.toLocaleString()}}
+function show(t){t.classList.add('is-in');t.querySelectorAll('[data-count]').forEach(countUp);t.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.width+'%'})}
+var els=document.querySelectorAll('.reveal,.stagger,.cmp');
 var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(rm){document.querySelectorAll('.reveal,.stagger').forEach(function(e){e.classList.add('is-in')});document.querySelectorAll('[data-count]').forEach(function(e){e.textContent=fmt(+e.dataset.count)});document.querySelectorAll('.bar-fill').forEach(function(e){e.style.width=e.dataset.width+'%'})}
-else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var t=en.target;t.classList.add('is-in');t.querySelectorAll('[data-count]').forEach(countUp);t.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.width+'%'});io.unobserve(t)}})},{threshold:.15});
-document.querySelectorAll('.reveal,.stagger,.cmp').forEach(function(e){io.observe(e)})}
+if(rm){els.forEach(function(e){e.classList.add('is-in')});document.querySelectorAll('[data-count]').forEach(function(e){e.textContent=fmt(+e.dataset.count)});document.querySelectorAll('.bar-fill').forEach(function(e){e.style.width=e.dataset.width+'%'})}
+else if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){show(en.target);io.unobserve(en.target)}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  /* safety net: never leave content hidden — reveal anything still off after 1.8s */
+  setTimeout(function(){els.forEach(function(e){if(!e.classList.contains('is-in'))show(e)})},1800);
+}else{els.forEach(show)}
 </script></body></html>
