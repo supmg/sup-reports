@@ -1,1037 +1,383 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="sup-brand-primary" content="#D5403D">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rizz Superfood Gummies — Campaign Strategy Recommendations</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --brand-primary:#D5403D;
-  --brand-tint:rgba(213,64,61,0.08);
-  --brand-tint-strong:rgba(213,64,61,0.14);
-  --bg:#FFFFFF;
-  --surface:#F4F4F5;
-  --surface-2:#FAFAFA;
-  --text:#09090B;
-  --secondary:#52525B;
-  --muted:#A1A1AA;
-  --border:#E4E4E7;
-  --soft:#EFEFF1;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
-  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
-  font-variant-numeric:tabular-nums;
-}
-a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#D5403D;--text:#09090B;--sec:#52525B;--muted:#A1A1AA;--bd:#E4E4E7;--surf:#FAFAFA}
+body{font-family:Inter,'SF Pro Display','Helvetica Neue',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:32px 24px 90px}
+header.top{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--bd);margin-bottom:30px}
+.mark{font-weight:600;font-size:15px}.mark .wave{margin-right:4px}
+.divider{width:1px;height:20px;background:var(--bd)}
+.blogo{width:24px;height:24px;border-radius:6px;object-fit:contain;background:#fff}
+.bname{font-size:13px;color:var(--sec);font-weight:500}
+h1{font-size:clamp(28px,5vw,46px);font-weight:500;letter-spacing:-.02em;line-height:1.08;margin-bottom:8px}
+.sub{font-size:15px;color:var(--sec);margin-bottom:8px}
+.strat{padding:30px 0;border-top:1px solid var(--bd)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--brand);text-transform:uppercase;margin-bottom:8px}
+.strat h2{font-size:clamp(22px,3.4vw,30px);font-weight:500;letter-spacing:-.02em;margin-bottom:6px}
+.sdef{color:var(--sec);font-size:15px;max-width:760px;margin-bottom:18px}
+.why{background:var(--surf);border:1px solid var(--bd);border-left:3px solid var(--brand);border-radius:12px;padding:16px 18px;margin-bottom:18px}
+.why .wl,.do .dl{display:block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--brand);margin-bottom:6px}
+.why p{font-size:15px;color:var(--text)}.why b{color:var(--brand);font-weight:600}
+.status{margin-top:8px;font-size:12.5px;color:var(--muted)}.status b{color:var(--text)}
+.cmp{margin:0 0 22px}
+.cmp-row{display:grid;grid-template-columns:120px 1fr 150px;align-items:center;gap:12px;margin-bottom:8px}
+.cmp-name{font-size:13px;font-weight:500}
+.cmp-row.target .cmp-name{color:var(--muted)}
+.bar{height:10px;background:var(--surf);border:1px solid var(--bd);border-radius:99px;overflow:hidden}
+.bar-fill{display:block;height:100%;width:0;border-radius:99px;transition:width 900ms cubic-bezier(.16,1,.3,1)}
+.cmp-val{font-size:12px;color:var(--sec);text-align:right;font-variant-numeric:tabular-nums}
+.cmp-cap{font-size:11.5px;color:var(--muted);margin-top:6px}
+.howto-h{font-size:13px;font-weight:600;color:var(--sec);margin:6px 0 14px}
+.comp{border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:16px}
+.comp-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.comp-name{font-size:18px;font-weight:600;color:var(--brand)}
+.comp-sim{font-size:12.5px;color:var(--muted)}
+.comp-sum{font-size:12.5px;color:var(--sec);margin-bottom:14px;font-variant-numeric:tabular-nums}
+.creator{border-top:1px solid var(--bd);padding:14px 0;display:grid;grid-template-columns:200px 1fr;gap:18px}
+.creator:first-child{border-top:none}
+.cr-id{display:flex;gap:10px;align-items:center}
+.pthumb{display:block;width:46px;height:46px;border-radius:10px;overflow:hidden;flex:none;border:1px solid var(--bd)}
+.pthumb img{width:100%;height:100%;object-fit:cover}
+.pthumb.noimg{background:var(--surf)}
+.cr-name{font-size:14px;font-weight:600}.cr-h{font-size:12px;color:var(--muted)}
+.cr-profile{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:8px}
+.cr-profile .m{font-size:12px;color:var(--sec)}.cr-profile .ml{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.post{background:var(--surf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px}
+.post-metrics{display:flex;gap:26px;margin-bottom:8px}
+.pm .pml{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.pm .num,.pm{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.caption{font-size:13px;color:var(--text);font-style:italic;border-left:2px solid var(--bd);padding-left:10px;margin:8px 0}
+.vstyle{font-size:12px;color:var(--sec)}.vstyle .vl{font-weight:600;color:var(--muted);text-transform:uppercase;font-size:10.5px;letter-spacing:.03em;margin-right:4px}
+.plink{display:inline-block;margin-top:8px;font-size:12px;color:var(--brand);text-decoration:none;border-bottom:1px dotted var(--brand)}
+.do{background:#fff;border:1px solid var(--bd);border-left:3px solid var(--brand);border-radius:12px;padding:16px 18px;margin-top:18px}
+.do p{font-size:15px}
+.num{font-variant-numeric:tabular-nums}.na{color:var(--muted);font-style:italic;font-size:12px}
+.close{border-top:1px solid var(--bd);padding-top:26px;margin-top:30px;color:var(--sec);font-size:15px;max-width:820px}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.reveal.is-in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(10px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.stagger.is-in>*{opacity:1;transform:none}
+.stagger.is-in>*:nth-child(2){transition-delay:80ms}.stagger.is-in>*:nth-child(3){transition-delay:160ms}.stagger.is-in>*:nth-child(4){transition-delay:240ms}
+@media(max-width:680px){.creator{grid-template-columns:1fr}.cmp-row{grid-template-columns:90px 1fr 110px}}
+@media(prefers-reduced-motion:reduce){.reveal,.stagger>*{opacity:1!important;transform:none!important}.bar-fill{transition:none}}
+</style></head><body><div class="wrap">
+<header class="top"><span class="mark"><span class="wave">👋</span>Sup</span><span class="divider"></span><img class="blogo" src="https://first-possum-672.convex.cloud/api/storage/a69d8e55-00d0-4610-8da7-713f12e6144e" alt="" onerror="this.style.display='none'"><span class="bname">Rizz Superfood Gummies</span></header>
+<h1>Rizz Superfood Gummies — Campaign Strategy Recommendations</h1>
+<p class="sub">Four creator plays Rizz should run, each proven by the most similar winning brands: UGC for Brand Feed, Long-Term Ambassador, Creator Collective, and Always-On Retainers.</p>
+<section class="strat reveal">
+  <div class="eyebrow">Strategy 01</div>
+  <h2>UGC for Brand Feed</h2>
+  <p class="sdef">Pay creators to shoot video, then run that footage as posts on your own grid — instead of filling the feed in-house.</p>
+  <div class="why"><span class="wl">Why this, for Rizz</span><p>Rizz fills its own grid in-house and tops out around three likes a post. Olly and Lemme pay creators to shoot the video and run it as their own feed: Lemme's four creators below alone pulled <b>5.7M views and 497,871 total engagements</b>. The output instinct is right — the creator input is missing.</p><div class="status">Status on Rizz: <b>absent</b></div></div>
+  <div class="cmp"><div class="cmp-row"><span class="cmp-name">Olly</span><div class="bar"><span class="bar-fill" data-width="10" style="background:#D5403D"></span></div><span class="cmp-val"><span class="num" data-count="51968">51,968</span> total eng</span></div><div class="cmp-row"><span class="cmp-name">Lemme</span><div class="bar"><span class="bar-fill" data-width="100" style="background:#D5403D"></span></div><span class="cmp-val"><span class="num" data-count="497871">497,871</span> total eng</span></div><div class="cmp-row target"><span class="cmp-name">Rizz</span><div class="bar"><span class="bar-fill" data-width="2" style="background:#d4d4d8"></span></div><span class="cmp-val"><span class="num" data-count="0">0</span> total eng</span></div><div class="cmp-cap">Total engagement (likes + comments) across the posts shown · Rizz at zero</div></div>
+  <div class="howto-h">How the closest competitors run it</div>
+  <div class="comp">
+  <div class="comp-head"><span class="comp-name">Olly</span><span class="comp-sim">Gummy-vitamin brand — same product format as Rizz</span></div>
+  <div class="comp-sum">Across the posts shown: <span class="num" data-count="1467106">1,467,106</span> total views · <span class="num" data-count="51968">51,968</span> total engagement</div>
+  <div class="creators stagger"><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DYF9oC3yv-Y/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7b35f381-b05d-4aad-b6ff-0197c1e9e846" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Chrissy Allen</div><div class="cr-h">@csapunch · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="2556593">2,556,593</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="3164237">3,164,237</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="40394">40,394</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="956638">956,638</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="40394">40,394</span></div></div>
+    <blockquote class="caption">Not sure how my gut health made it through those days but I’m good now! @ollywellness Probiotic + Prebiotic delivers a combination of live probiotics and prebiotic to help the gut microbiome thrive!* Give your belly the same love the rest of you gets so that things run smoothly and peacefully on the inside❤️ #OLLYPartner 
 
-/* ---------- sticky nav ---------- */
-.nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);height:56px;
-}
-.nav-inner{max-width:1080px;margin:0 auto;padding:0 28px;height:56px;display:flex;align-items:center;gap:14px}
-.sup-pill{display:inline-flex;align-items:center;gap:6px;background:transparent;border:0;border-radius:0;padding:0;color:var(--text);font-size:14px;font-weight:600}
-.sup-pill .wave{font-size:15px}
-.nav-div{width:1px;height:20px;background:var(--border)}
-.nav-brand{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
-.nav-brand img{width:24px;height:24px;border-radius:6px;object-fit:contain;background:#fff;border:1px solid var(--border)}
-.nav-links{display:none;margin-left:auto;gap:22px;align-items:center}
-.nav-links a{font-size:13px;color:var(--secondary);text-decoration:none}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{margin-left:auto;background:#000;color:#fff;font-size:13px;font-weight:500;padding:8px 16px;border-radius:9999px;text-decoration:none}
-@media(min-width:980px){.nav-links{display:flex}.nav-cta{margin-left:28px}}
-
-/* ---------- header / cover ---------- */
-.cover{padding:72px 0 0}
-.eyebrow-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid var(--border);border-radius:9999px;padding:6px 14px;
-  font-size:11.5px;font-weight:500;color:var(--secondary);letter-spacing:.01em;
-}
-.eyebrow-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--brand-primary)}
-.cover h1{
-  font-size:46px;font-weight:500;letter-spacing:-0.025em;line-height:1.08;
-  margin:26px 0 0;max-width:18ch;
-}
-.cover h1 .em{color:var(--brand-primary)}
-.cover-sub{font-size:17px;color:var(--secondary);max-width:60ch;margin:22px 0 0;line-height:1.55}
-.cover-meta{display:flex;align-items:center;gap:10px;margin-top:30px}
-.cover-meta img{width:30px;height:30px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--border)}
-.cover-meta .bn{font-size:14px;font-weight:600}
-.cover-meta .bh{font-size:13px;color:var(--muted)}
-@media(max-width:640px){.cover h1{font-size:34px}}
-
-/* ---------- provenance band ---------- */
-.provenance-line{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;margin-top:48px}
-.provenance-line p{font-size:14px;color:var(--secondary);line-height:1.55;margin:0;max-width:980px}
-.provenance-line .pv-label{color:var(--muted);font-weight:500;margin-right:8px}
-.provenance-line .num{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
-@media(max-width:720px){.provenance-line{padding:18px 0}.provenance-line p{font-size:13px}}
-
-/* ---------- thesis ---------- */
-.thesis{padding:56px 0 8px}
-.thesis p{font-size:19px;line-height:1.6;color:var(--text);max-width:64ch;margin:0 0 18px;font-weight:400}
-.thesis p.lede{font-size:21px}
-.thesis .sm{font-size:15px;color:var(--secondary);max-width:64ch}
-
-/* ---------- section / strategy block ---------- */
-.strat{padding:64px 0;border-top:1px solid var(--border)}
-.strat:first-of-type{border-top:none}
-.s-eyebrow{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--brand-primary);text-transform:uppercase}
-.s-title{font-size:30px;font-weight:500;letter-spacing:-0.02em;line-height:1.12;margin:12px 0 0;max-width:24ch}
-.s-def{font-size:15.5px;color:var(--secondary);margin:12px 0 0;max-width:62ch}
-.block-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:none;margin:34px 0 12px;letter-spacing:.01em}
-
-/* why band */
-.why{
-  border-left:3px solid var(--brand-primary);
-  background:var(--brand-tint);
-  padding:18px 22px;border-radius:0 12px 12px 0;margin-top:22px;
-}
-.why p{margin:0;font-size:15.5px;line-height:1.6;color:var(--text)}
-.why .ev{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.why .chip{
-  display:inline-flex;flex-direction:column;background:#fff;border:1px solid var(--border);
-  border-radius:10px;padding:9px 13px;min-width:120px;
-}
-.why .chip .v{font-size:20px;font-weight:600;letter-spacing:-0.01em;color:var(--brand-primary);line-height:1.1}
-.why .chip .k{font-size:11.5px;color:var(--muted);margin-top:3px}
-
-.status-tag{
-  display:inline-flex;align-items:center;gap:7px;margin-top:18px;
-  border:1px solid var(--border);border-radius:9999px;padding:5px 12px;
-  font-size:12px;color:var(--secondary);background:#fff;
-}
-.status-tag .d{width:6px;height:6px;border-radius:50%;background:var(--brand-primary)}
-
-/* competitor cards grid */
-.comp-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:14px}
-@media(min-width:860px){.comp-grid.two{grid-template-columns:1fr 1fr}}
-.cc{border:1px solid var(--border);border-radius:18px;padding:22px;background:#fff;display:flex;flex-direction:column}
-.cc.lead{border-color:var(--brand-primary)}
-.cc-head{display:flex;align-items:flex-start;gap:12px}
-.cc-logo{width:40px;height:40px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
-.cc-logo.initials{display:flex;align-items:center;justify-content:center;background:var(--brand-primary);border:none;color:#fff;font-weight:700;font-size:13px;letter-spacing:.02em}
-.cc-name{font-size:17px;font-weight:600;letter-spacing:-0.01em;line-height:1.2}
-.cc-why{font-size:12.5px;color:var(--secondary);margin-top:3px;line-height:1.4}
-.cc-twinflag{display:inline-block;margin-top:8px;font-size:10.5px;font-weight:600;color:#fff;background:var(--brand-primary);padding:3px 9px;border-radius:9999px;letter-spacing:.02em}
-
-.cc-section-label{font-size:11px;font-weight:600;color:var(--muted);margin:20px 0 10px;letter-spacing:.02em}
-
-/* creators */
-.cre{display:flex;flex-direction:column;gap:10px}
-.cre-row{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2)}
-.cre-name{font-size:13.5px;font-weight:600;line-height:1.2}
-.cre-handle{font-size:11.5px;color:var(--muted)}
-.cre-plat{font-size:10px;font-weight:600;color:var(--secondary);border:1px solid var(--border);border-radius:6px;padding:1px 6px;background:#fff;margin-left:6px}
-.cre-stats{display:flex;gap:18px;margin-left:auto;text-align:right;flex-wrap:wrap;justify-content:flex-end}
-.cre-stats > div{min-width:64px}
-.cre-stats .sv{font-size:14px;font-weight:600;letter-spacing:-0.01em;line-height:1.1;color:var(--text)}
-.cre-stats .sv.nc{font-size:11.5px;font-weight:500;color:var(--muted)}
-.cre-stats .sl{font-size:10px;color:var(--muted);margin-top:2px}
-@media(max-width:560px){.cre-row{flex-wrap:wrap}.cre-stats{margin-left:0;width:100%;justify-content:flex-start;gap:14px}}
-
-/* campaign performance strip */
-.perf{display:flex;gap:0;margin-top:6px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}
-.perf > div{flex:1;padding:14px 16px;border-right:1px solid var(--border)}
-.perf > div:last-child{border-right:none}
-.perf .pv{font-size:23px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;color:var(--brand-primary)}
-.perf .pl{font-size:11.5px;color:var(--muted);margin-top:5px}
-.perf .ps{font-size:10.5px;color:var(--muted);margin-top:2px}
-
-/* quotes */
-.quotes{margin-top:6px;display:flex;flex-direction:column;gap:10px}
-.q{
-  font-size:13.5px;line-height:1.55;color:var(--text);
-  border-left:3px solid var(--brand-primary);background:var(--brand-tint);
-  padding:11px 15px;border-radius:0 10px 10px 0;
-}
-.q .qa{display:block;font-size:11px;color:var(--muted);margin-top:6px;font-style:normal}
-
-/* video style */
-.vstyle{font-size:13.5px;line-height:1.55;color:var(--secondary);margin-top:6px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 16px}
-.vstyle b{color:var(--text);font-weight:600}
-
-/* example thumbs */
-.thumbs{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
-.thumb{
-  display:block;width:108px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);
-  text-decoration:none;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease;
-}
-.thumb:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
-.thumb .ti{width:108px;height:135px;overflow:hidden;background:var(--soft)}
-.thumb .ti img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 400ms cubic-bezier(0.16,1,0.3,1)}
-.thumb:hover .ti img{transform:scale(1.04)}
-.thumb .tm{padding:7px 9px;font-size:11px;color:var(--secondary);display:flex;justify-content:space-between;gap:6px}
-.thumb .tm b{color:var(--text);font-weight:600}
-
-/* do-this box */
-.do{margin-top:28px;border:1px solid var(--border);border-radius:16px;background:var(--surface-2);padding:22px}
-.do-h{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
-.do-h .d{width:7px;height:7px;border-radius:50%;background:var(--brand-primary)}
-.do ul{margin:14px 0 0;padding:0;list-style:none}
-.do li{position:relative;padding:0 0 0 22px;margin:0 0 12px;font-size:14.5px;line-height:1.55;color:var(--text)}
-.do li:last-child{margin-bottom:0}
-.do li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:2px;background:var(--brand-primary)}
-.do li b{font-weight:600}
-
-/* chart */
-.chart-wrap{margin-top:30px;border:1px solid var(--border);border-radius:16px;padding:20px 20px 14px;background:#fff}
-.chart-cap{font-size:12.5px;color:var(--muted);margin:0 0 14px}
-.chart-cap b{color:var(--text);font-weight:600}
-.chart-box{position:relative;height:240px}
-
-/* close */
-.close{padding:64px 0 90px;border-top:1px solid var(--border)}
-.close h2{font-size:26px;font-weight:500;letter-spacing:-0.02em;margin:0 0 18px;max-width:24ch}
-.close p{font-size:16px;line-height:1.65;color:var(--secondary);max-width:64ch;margin:0 0 16px}
-.close p b{color:var(--text);font-weight:600}
-.close .sign{display:flex;align-items:center;gap:8px;margin-top:26px;font-size:14px;color:var(--secondary)}
-.close .sign .sup-pill{font-size:14px}
-
-.sx-link{
-  color:inherit;text-decoration:underline;text-decoration-color:var(--brand-primary);
-  text-decoration-style:dotted;text-decoration-thickness:1px;text-underline-offset:3px;
-  transition:color 150ms ease,text-decoration-style 150ms ease;
-}
-.sx-link:hover{color:var(--brand-primary);text-decoration-style:solid}
-
-/* animation primitives */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}
-.reveal.is-in{opacity:1;transform:translateY(0)}
-.stagger > *{opacity:0;transform:translateY(12px);transition:opacity 500ms cubic-bezier(0.16,1,0.3,1),transform 500ms cubic-bezier(0.16,1,0.3,1)}
-.stagger.is-in > *:nth-child(1){transition-delay:0ms;opacity:1;transform:translateY(0)}
-.stagger.is-in > *:nth-child(2){transition-delay:80ms;opacity:1;transform:translateY(0)}
-.stagger.is-in > *:nth-child(3){transition-delay:160ms;opacity:1;transform:translateY(0)}
-.stagger.is-in > *:nth-child(4){transition-delay:240ms;opacity:1;transform:translateY(0)}
-.stagger.is-in > *:nth-child(5){transition-delay:320ms;opacity:1;transform:translateY(0)}
-.stagger.is-in > *:nth-child(6){transition-delay:400ms;opacity:1;transform:translateY(0)}
-.stagger.is-in > *:nth-child(n+7){transition-delay:480ms;opacity:1;transform:translateY(0)}
-.cc{transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms cubic-bezier(0.16,1,0.3,1),border-color 200ms ease}
-.cc:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12),0 2px 6px -2px rgba(9,9,11,0.05);border-color:rgba(213,64,61,0.4)}
-@media(prefers-reduced-motion:reduce){
-  .reveal,.stagger>*{opacity:1;transform:none;transition:none}
-}
-</style>
-</head>
-<body>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <span class="sup-pill"><span class="wave">👋</span> Sup</span>
-    <span class="nav-div"></span>
-    <span class="nav-brand">
-      <img src="https://first-possum-672.convex.cloud/api/storage/a69d8e55-00d0-4610-8da7-713f12e6144e" alt="Rizz Superfood Gummies">
-      Rizz Superfood Gummies
-    </span>
-    <span class="nav-links">
-      <a href="#s1">UGC feed</a>
-      <a href="#s2">Ambassador</a>
-      <a href="#s3">Collective</a>
-      <a href="#s4">Retainers</a>
-    </span>
-    <a class="nav-cta" href="#close">The first move</a>
+*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Talking Head Video; Nostalgia and relatability through the text overlay &#x27;When today me meets 2000s me,&#x27; immediately signaling a comedic comparison of life stages.</div>
+    <a class="plink" href="https://www.instagram.com/p/DYF9oC3yv-Y/" target="_blank" rel="noopener">View post ↗</a>
   </div>
-</nav>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DX-pSeUgrpj/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/308798bd-97df-4791-980b-b7c218b53835" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Ashley • Target Trendsetter</div><div class="cr-h">@targettrendsetter · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="493513">493,513</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="165471">165,471</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="2134">2,134</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="184475">184,475</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="2134">2,134</span></div></div>
+    <blockquote class="caption">#OLLYPartner GET $2 OFF! ✨ Now through 5/17, you can save $2 on OLLY Body Washes. Save on my fav mood-transforming fragrance - CALM - proven to soothe &amp; reduce stress. 💙 Shop all things @ollywellness in stores + online at @Target. 🎯
 
-<header class="cover wrap">
-  <span class="eyebrow-pill reveal"><span class="dot"></span> CAMPAIGN STRATEGY RECOMMENDATIONS</span>
-  <h1 class="reveal">Four creator plays for Rizz Superfood Gummies, <span class="em">each already proven by a brand built like this one</span>.</h1>
-  <p class="cover-sub reveal">Rizz posts roughly seven times a week and earned zero Creator Tagged Posts in the window we analysed. The content engine is running; the distribution engine is not. These are the four plays that put other people's audiences in front of the content Rizz already makes, drawn from the competitors most similar to it that win at each one.</p>
-  <div class="cover-meta reveal">
-    <img src="https://first-possum-672.convex.cloud/api/storage/a69d8e55-00d0-4610-8da7-713f12e6144e" alt="Rizz logo">
-    <div>
-      <div class="bn">Rizz Superfood Gummies</div>
-      <div class="bh">@rizz_nutrition · DTC superfood greens gummies</div>
-    </div>
-  </div>
-</header>
+Shop here 👉🏼 https://liketk.it/6bK2g
 
-<div class="provenance-line">
-  <div class="wrap">
-    <p><span class="pv-label">What we analysed:</span> <span class="num">128</span> brands in the DTC supplements &amp; wellness dataset, the top <span class="num">144</span> creators across Instagram and TikTok, the four campaign plays Rizz is most under-running, and the competitors most similar to Rizz that win at each, over a <span class="num">69</span>-day category window (7 March to 15 May 2026).</p>
+#ad #TargetPartner Target, Target Finds, Target Style, New At Target, Target Beauty, Beauty Finds, Relax, Self Care</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; Relatability and Financial Incentive. The text &#x27;saving money is my favorite hobby&#x27; appeals to the viewer&#x27;s desire for deals while showing a familiar shopping environment.</div>
+    <a class="plink" href="https://www.instagram.com/p/DX-pSeUgrpj/" target="_blank" rel="noopener">View post ↗</a>
   </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DVuCoRWkhIA/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/fa9d8e92-9806-44ec-8d37-e4857a2c41e9" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">HALEY MOORE</div><div class="cr-h">@halesmoore · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="249434">249,434</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="575890">575,890</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="1924">1,924</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="175738">175,738</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="1924">1,924</span></div></div>
+    <blockquote class="caption">How do I get out of this funk?  #ollypartner Getting ready for a little date night! Love when something simple can shift my whole mood. @ollywellness</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog / GRWM; Relatability through the &#x27;running on fumes&#x27; struggle combined with a clear promise of a &#x27;Date Night Reset&#x27; transformation.</div>
+    <a class="plink" href="https://www.instagram.com/p/DVuCoRWkhIA/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DXcBljpDs-t/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0c84620c-6866-4294-843e-4560788463fc" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Keoikantse Mana</div><div class="cr-h">@_kiwi.m_ · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="8651">8,651</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="55134">55,134</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="3764">3,764</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="150255">150,255</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="7516">7,516</span></div></div>
+    <blockquote class="caption">Happy Wednesday 🤍
+—
+Products shown
+@ollywellness women’s multivitamin 
+@healthade glow up kombucha 
+@topicals faded brightening eye masks 
+
+#morningroutine #morningvlog #showerroutine #wellnessjourney</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DXcBljpDs-t/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div></div>
+</div><div class="comp">
+  <div class="comp-head"><span class="comp-name">Lemme</span><span class="comp-sim">Functional wellness gummies — the category&#x27;s creator leader</span></div>
+  <div class="comp-sum">Across the posts shown: <span class="num" data-count="5739774">5,739,774</span> total views · <span class="num" data-count="497871">497,871</span> total engagement</div>
+  <div class="creators stagger"><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.tiktok.com/@nothardtosaysjuanje/video/7619736214685388062" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d2b86e86-ded4-4b73-8309-dac8e57cfe6b" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Sjuanjé</div><div class="cr-h">@nothardtosaysjuanje · TikTok</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="3894">3,894</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="196164">196,164</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="128968">128,968</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="2500000">2,500,000</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="384931">384,931</span></div></div>
+    <blockquote class="caption">I 🤍 @lemme @Kourtney Kardashian Barker  #lemmereview #lemme #vitamins #adhd #fypシ </blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Talking Head Video; Direct call-out to a celebrity (Kourtney Kardashian) combined with high-energy aggression and a &#x27;3 months of consistency&#x27; review promise.</div>
+    <a class="plink" href="https://www.tiktok.com/@nothardtosaysjuanje/video/7619736214685388062" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DYXMD0SIMdn/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/36f85946-6ea3-4c40-a4e6-40fc9f3b6a17" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">starface</div><div class="cr-h">@starface · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="636043">636,043</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="748308">748,308</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="101140">101,140</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="2156140">2,156,140</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="101140">101,140</span></div></div>
+    <blockquote class="caption">ok… where were we 🍿 
+
+Introducing @lemme x @starface Healthy Skin Gummies &amp; Hydro-Stars ✨ Coming 5.17 exclusively to @target 
+
+So tea, so cute.....and with a bare face? Nasty 😉</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> Cinematic; Skit / Commercial; Celebrity pattern interrupt: Kourtney Kardashian appearing with a megaphone and commanding &#x27;Quiet on the set&#x27; immediately grabs attention.</div>
+    <a class="plink" href="https://www.instagram.com/p/DYXMD0SIMdn/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DYBfQmTh64C/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/09ef5187-5bba-4328-bc3b-fc9547906eaa" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">BeautyyBird - Yasmin</div><div class="cr-h">@beautyybird · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="1133530">1,133,530</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="483676">483,676</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="11720">11,720</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="594116">594,116</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="11720">11,720</span></div></div>
+    <blockquote class="caption">still dreaming about that cookie butter latte 🤤☕️🤎 
+
+@fitmeals805 meal preps (code BeautyyBird)
+@lemme supplements 
+@livehealthillie minerals and chill
+@drinkag1 d3 drops
+@1stphorm creatine 
+
+#whatieat #whatieatinaday #mealprep #mealprepideas</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; Visual appeal of a healthy meal combined with the high-intent &#x27;What I eat in a day&#x27; text overlay and a rhythmic Latin soundtrack.</div>
+    <a class="plink" href="https://www.instagram.com/p/DYBfQmTh64C/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DXZk5vnAN45/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/80bc2b0c-4ea0-4dde-a309-3250a2b9e859" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">𝐡𝐨𝐧𝐞𝐲 𝐫𝐨𝐬𝐞 ♡ Lifestyle &amp; Beauty Creator</div><div class="cr-h">@honeyroseloves · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="376369">376,369</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="1993008">1,993,008</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="80">80</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="489518">489,518</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="80">80</span></div></div>
+    <blockquote class="caption">Lemme make a pick n mix stand 💜 
+———
+#lemme #kourtneykardashian #skincare #beauty #beautyhack @lemme</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DXZk5vnAN45/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div></div>
 </div>
+  <div class="do"><span class="dl">What Rizz should do</span><p>Brief 3–4 mid-tier creators a month to shoot short vertical video in Rizz's voice (relatable wellness humour), license it, and post it as your own. Open on a fast visual hook in the first second. Follower count is not the gate — Lemme's @nothardtosaysjuanje has 3.9K followers and pulled 2.5M views.</p></div>
+</section><section class="strat reveal">
+  <div class="eyebrow">Strategy 02</div>
+  <h2>Long-Term Brand Ambassador</h2>
+  <p class="sdef">Keep one or a few creators on a standing relationship so they post about you repeatedly over months, not once.</p>
+  <div class="why"><span class="wl">Why this, for Rizz</span><p>The most heavily run play in the category, and Rizz's own data makes the case: its single best earned mention pulled ~60K views from one committed voice. Orgain runs named ambassadors — <b>@daanawilliamson put 442,733 views and 31,548 total engagements</b> on one ambassador post. Orgain is a looser product match (plant-nutrition shakes), but no gummy brand runs ambassadors here — that is the open lane.</p><div class="status">Status on Rizz: <b>absent</b></div></div>
+  <div class="cmp"><div class="cmp-row"><span class="cmp-name">Orgain</span><div class="bar"><span class="bar-fill" data-width="100" style="background:#D5403D"></span></div><span class="cmp-val"><span class="num" data-count="39180">39,180</span> total eng</span></div><div class="cmp-row target"><span class="cmp-name">Rizz</span><div class="bar"><span class="bar-fill" data-width="2" style="background:#d4d4d8"></span></div><span class="cmp-val"><span class="num" data-count="0">0</span> total eng</span></div><div class="cmp-cap">Total engagement (likes + comments) across the posts shown · Rizz at zero</div></div>
+  <div class="howto-h">How the closest competitors run it</div>
+  <div class="comp">
+  <div class="comp-head"><span class="comp-name">Orgain</span><span class="comp-sim">DTC plant-nutrition — a looser product match (see why)</span></div>
+  <div class="comp-sum">Across the posts shown: <span class="num" data-count="692827">692,827</span> total views · <span class="num" data-count="39180">39,180</span> total engagement</div>
+  <div class="creators stagger"><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DYDDVQ6pXPr/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dbaed588-ada4-4e19-b6fc-678688020d31" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Da&#x27;ana Williamson</div><div class="cr-h">@daanawilliamson · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="639028">639,028</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="826187">826,187</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="31548">31,548</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="442733">442,733</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="31548">31,548</span></div></div>
+    <blockquote class="caption">Giving a few of you an Orgain bundle to try with your family so your park days can look like this too 😉
+Follow  @drinkorgain , like this post, and comment on your family’s favorite snack or routine! #OrgainPartner #DrinkOrgain #Ad
+‌
+*Ends 5/11/26 at 11:59pm PST. 2 winners will be randomly selected &amp; contacted via direct message on Instagram by this official accounts only. This giveaway is in no way sponsored, endorsed or administered by, or associated with Instagram. Open to US 18+ only. Winners</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Cinematic Short-form Vlog; The text overlay &#x27;Editing our park day like a movie trailer&#x27; immediately sets an expectation for a specific creative style, paired with a dramatic &#x27;thud&#x27; sound effect as the door opens.</div>
+    <a class="plink" href="https://www.instagram.com/p/DYDDVQ6pXPr/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DW4YcaNJAGp/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/64b039d2-700f-4968-bf68-fd546a717ccf" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Whitney English | Evidence-Based Nutrition</div><div class="cr-h">@whitneyerd · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="88189">88,189</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="112948">112,948</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="240">240</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="161245">161,245</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="240">240</span></div></div>
+    <blockquote class="caption">Who else is tired of all the junk food handed out at kid’s sports? 🙋‍♀️
 
-<section class="thesis wrap">
-  <p class="lede reveal">Rizz makes modern supplement content. It runs UGC-style video, leans on relatable humour, and even tested early UGC ads. What it does not have is anyone other than Rizz amplifying any of it.</p>
-  <p class="reveal">In the 69-day window, Rizz earned zero Creator Tagged Posts (Instagram and TikTok posts where a creator tags the brand) and zero surviving paid creative, while the brands it most resembles compound hundreds of creator posts and thousands of live ads. The fastest path forward is not more posting. It is putting creators in front of the content Rizz already knows how to make.</p>
-  <p class="sm reveal">Each of the four plays below leads with the recommendation, then the proof from the closest comparator, then exactly what to brief. Every number traces to a real cell in the dataset; where a figure was not captured, it says so.</p>
+As a pediatric dietitian, this is something that really grinds my gears. 
+
+After exercise, kids need the same things adults do - protein, complex carbs + hydration. Not gummy bears and Gatorade 😒
+
+Here are a few of my favorite post-exercise, nourishing, replenishing snacks for kids:
+•orange slices and roasted chickpeas or edamame 🍊 
+•@drinkorgain kid’s plant-based protein shakes
+(a good source of protein, fiber, and micronu</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Talking Head Video with B-roll; The creator uses a &#x27;pet peeve&#x27; hook combined with authority signaling (&#x27;drives me crazy as a parent and a dietitian&#x27;) to create immediate curiosity and trust.</div>
+    <a class="plink" href="https://www.instagram.com/p/DW4YcaNJAGp/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DWja5XFDVD1/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/2869ff3f-318f-4944-b8a5-a50fb3ed5b99" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Cierrah Neal</div><div class="cr-h">@cierrahneal · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="253579">253,579</span></div><div class="m"><span class="ml">Avg profile views</span><span class="na">not captured</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="na">not captured</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="64357">64,357</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="1713">1,713</span></div></div>
+    <blockquote class="caption">Hair cut day for all three of my boys! They have one of these kid @drinkorgain shakes each morning and they absolutely love them! So convenient for busy mornings and I feel good giving them something with no artificial flavors, organic fruits and veggies, and 8g of protein! #drinkorgain #orgainpartner #ad #orgainkidshakes</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DWja5XFDVD1/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DYR5tc6AkDm/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/e82c322e-65a9-4bf1-ab5a-e81cee884fd6" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Caroline G Hamburg</div><div class="cr-h">@careeohhlinee · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="121794">121,794</span></div><div class="m"><span class="ml">Avg profile views</span><span class="na">not captured</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="na">not captured</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="24492">24,492</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="5679">5,679</span></div></div>
+    <blockquote class="caption">Mornings around here move FAST, so if something doesn’t fit seamlessly into my routine… it’s probably not sticking 😅 That’s why I’ve loved adding @drinkorgain newly launched Colostrum into my morning iced coffee. One simple upgrade that blends right into what I’m already doing every day. #OrgainPartner I still start my mornings with my go-to Orgain protein yogurt bowl to get that 30g of protein in, and now adding their Colostrum into my iced coffee has been such an easy addition to support my gu</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DYR5tc6AkDm/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div></div>
+</div>
+  <div class="do"><span class="dl">What Rizz should do</span><p>Convert Rizz's one strong earned voice into a 3–6 month ambassadorship: a set monthly post count, a discount code, and creative freedom. Pick a dietitian or daily-habit wellness creator (Orgain leans on a dietitian, @whitneyerd) whose audience trusts routine advice. One compounding relationship beats one-off seeding.</p></div>
+</section><section class="strat reveal">
+  <div class="eyebrow">Strategy 03</div>
+  <h2>Creator Collective / Volume Model</h2>
+  <p class="sdef">Run many micro-creators at once at low per-post cost — manufacture creator posts by volume rather than betting on a few big names.</p>
+  <div class="why"><span class="wl">Why this, for Rizz</span><p>This is the play Rizz's exact product twin wins. Grüns — greens in a gummy bear, the same product Rizz sells — runs a creator collective spanning <b>12K to 1.7M followers for 929,429 views</b>. For a 412-follower brand with zero creator posts, volume is the cheapest, most scalable way to manufacture proof.</p><div class="status">Status on Rizz: <b>absent</b></div></div>
+  <div class="cmp"><div class="cmp-row"><span class="cmp-name">Grüns</span><div class="bar"><span class="bar-fill" data-width="100" style="background:#D5403D"></span></div><span class="cmp-val"><span class="num" data-count="9963">9,963</span> total eng</span></div><div class="cmp-row target"><span class="cmp-name">Rizz</span><div class="bar"><span class="bar-fill" data-width="2" style="background:#d4d4d8"></span></div><span class="cmp-val"><span class="num" data-count="0">0</span> total eng</span></div><div class="cmp-cap">Total engagement (likes + comments) across the posts shown · Rizz at zero</div></div>
+  <div class="howto-h">How the closest competitors run it</div>
+  <div class="comp">
+  <div class="comp-head"><span class="comp-name">Grüns</span><span class="comp-sim">Rizz&#x27;s exact product twin — greens in a gummy bear</span></div>
+  <div class="comp-sum">Across the posts shown: <span class="num" data-count="929429">929,429</span> total views · <span class="num" data-count="9963">9,963</span> total engagement</div>
+  <div class="creators stagger"><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DVt5jK9kk6b/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a47ea2be-faa2-4e4b-8fb4-c8ccc08a54e3" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">COSTCO DEALS</div><div class="cr-h">@costcodeals · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="1652138">1,652,138</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="284690">284,690</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="306">306</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="288748">288,748</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="306">306</span></div></div>
+    <blockquote class="caption">#GrünsPartner �💚 Our family’s FAVORITE superfood gummy bears, Grüns, are now available at Costco warehouses nationwide!
+
+If you’ve been curious about @grunsdaily, now is the perfect time to grab a 35 ct box of Grüns at a Costco warehouse near you!
+
+✨This isn’t just a multivitamin, a greens gummy, or just a prebiotic. It’s ALL of that (and then some) packed into one convenient snack pack a day — at a fraction of the price!
+
+✅ 6g dietary fiber for gut health
+✅ Vegan (pectin-based, no gelatin)�✅ Nu</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog / UGC Review; The hook uses the authority of a major retailer (Costco) combined with a personal recommendation (&#x27;Our family&#x27;s favorite&#x27;) to immediately establish trust and relevance.</div>
+    <a class="plink" href="https://www.instagram.com/p/DVt5jK9kk6b/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/de0c9d7e-b356-4a46-af15-8f9b674ace91" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Chef edna gonzalez</div><div class="cr-h">@edna.gonzalez2 · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="12616">12,616</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="26089">26,089</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="1334">1,334</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="271782">271,782</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="1334">1,334</span></div></div>
+    <blockquote class="caption">real moms know... you gotta pick your battles 😭
+today we switched up the snack bag a little thank you @grunsdaily for sending these over!☺️ #gifted #prpackage #kidsnacks #momreels #olipop</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; Talking Head Video; The creator uses a relatable parenting routine (morning snacks) and introduces a &#x27;pattern interrupt&#x27; by saying they are doing something &#x27;different&#x27; today.</div>
+    <a class="plink" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DV39AIxjiTl/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c8c3590a-11e4-4e36-b8dd-f6db1a1eddd3" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Lucie Ellis Sunshine Rauschnabel</div><div class="cr-h">@lucierauschnabel · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="348368">348,368</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="183981">183,981</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="7846">7,846</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="237356">237,356</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="7846">7,846</span></div></div>
+    <blockquote class="caption">do you think my German grandma would approve of my outfit? 🥹 
+
+details!!
+@alo yoga pants 
+@grunsdaily nutrient gummies!
+@hatchforsleep alarm clock 
+@dedcool laundry detergent 
+@jcrew barrel jeans and sweater 
+@sezane hat and coat 
+@birdies sneakers
+@brooklinen bed sheets 
+@caraway_home cooking pans 
+@amazonkindle</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; Visual pattern interrupt (leaning out of a high window) combined with a strong identity/location hook (&#x27;Friday in NYC&#x27;, &#x27;early 20s&#x27;).</div>
+    <a class="plink" href="https://www.instagram.com/p/DV39AIxjiTl/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DXmA_s1uygZ/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/73301cb4-84d4-4bf1-bc9a-38eeea62d167" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">The Lay Out</div><div class="cr-h">@thelayoutco · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="37632">37,632</span></div><div class="m"><span class="ml">Avg profile views</span><span class="num" data-count="67555">67,555</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="num" data-count="477">477</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="131543">131,543</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="477">477</span></div></div>
+    <blockquote class="caption">@kyrstin_johnson deserves all the applause for her STUNNING halftime performance at yesterday’s Girls in Sports Day, presented by @grunsdaily 👏🤸‍♀️⭐️⭐️</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> Polished Brand; Performance Video; Pattern Interrupt: Seeing a gymnast in a full leotard ready to perform on a professional soccer field immediately creates a &#x27;what is happening here?&#x27; curiosity gap.</div>
+    <a class="plink" href="https://www.instagram.com/p/DXmA_s1uygZ/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div></div>
+</div>
+  <div class="do"><span class="dl">What Rizz should do</span><p>Stand up a rolling collective of 15–25 micro-creators (10–80K) on a flat gifting + small-fee model, each posting on their own cadence. Chase volume and consistency, not one big name. Mirror Grüns' format: everyday-life clips — grocery hauls, what-I-eat, chef demos — with the gummy folded in naturally.</p></div>
+</section><section class="strat reveal">
+  <div class="eyebrow">Strategy 04</div>
+  <h2>Always-On Creator Retainers</h2>
+  <p class="sdef">Keep a small standing roster of creators on retainer so there is always fresh creator content flowing, instead of campaign bursts.</p>
+  <div class="why"><span class="wl">Why this, for Rizz</span><p>Goli is the only brand in the category running an always-on retainer signal — a clear open lane. Its retained micro-creators (3–12K followers) post on a steady drumbeat. The numbers per post are modest; the value is the always-on flow, not any single hit.</p><div class="status">Status on Rizz: <b>absent</b></div></div>
+  <div class="cmp"><div class="cmp-row"><span class="cmp-name">Goli</span><div class="bar"><span class="bar-fill" data-width="100" style="background:#D5403D"></span></div><span class="cmp-val"><span class="num" data-count="621">621</span> total eng</span></div><div class="cmp-row target"><span class="cmp-name">Rizz</span><div class="bar"><span class="bar-fill" data-width="2" style="background:#d4d4d8"></span></div><span class="cmp-val"><span class="num" data-count="0">0</span> total eng</span></div><div class="cmp-cap">Total engagement (likes + comments) across the posts shown · Rizz at zero</div></div>
+  <div class="howto-h">How the closest competitors run it</div>
+  <div class="comp">
+  <div class="comp-head"><span class="comp-name">Goli</span><span class="comp-sim">Superfood / ACV gummies — the only retainer operator in the niche</span></div>
+  <div class="comp-sum">Across the posts shown: <span class="num" data-count="48491">48,491</span> total views · <span class="num" data-count="621">621</span> total engagement</div>
+  <div class="creators stagger"><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DXcScpNjPp2/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/2ad26eab-b593-4ded-9fed-0afe99ba7ae8" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">harrison_stone</div><div class="cr-h">@harrison_stone · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="6748">6,748</span></div><div class="m"><span class="ml">Avg profile views</span><span class="na">not captured</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="na">not captured</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="22391">22,391</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="37">37</span></div></div>
+    <blockquote class="caption">Fuel your potential with @golinutrition today! 🔥
+•
+•
+•
+#vitamins #health #lifestyle #goli #fitness</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DXcScpNjPp2/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/81a411e1-ace8-40b3-85df-1e0bf9ee5e14" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Jacie</div><div class="cr-h">@doinglifewithjacie · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="12245">12,245</span></div><div class="m"><span class="ml">Avg profile views</span><span class="na">not captured</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="na">not captured</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="12472">12,472</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="16">16</span></div></div>
+    <blockquote class="caption">Mamas it’s the end of the year and I found something to keep us sane!! Say MAMA if you can relate @golinutrition</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/61b38957-a767-4eb3-8c0d-d94e697b0b4b" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">Ashley Nichole</div><div class="cr-h">@_ashleyyxnicholee_ · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="7759">7,759</span></div><div class="m"><span class="ml">Avg profile views</span><span class="na">not captured</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="na">not captured</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="8259">8,259</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="239">239</span></div></div>
+    <blockquote class="caption">mini restock on some girly essentials from at @burlingtondeals this past week 🫶🏼💖💕🛍️✨ 
+
+TikTok: AshleyyXNicholee 🎀 | ft. @golinutrition @juicycouture @nivea 
+
+#restock #burlington #juicycouture #burlingtonfinds #fblifestyle #ashleyyxnicholee #baddiesonabudget</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> video (no Gemini analysis; inferred from post_type + caption)</div>
+    <a class="plink" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div><div class="creator">
+  <div class="cr-id"><a class="pthumb" href="https://www.instagram.com/p/DXz1d7xBf-0/" target="_blank" rel="noopener"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/739d104c-d90c-47d8-9468-6e557c5c9fe9" alt="" loading="lazy" onerror="this.closest('.pthumb').classList.add('noimg')"></a><div><div class="cr-name">emily vu-medelez</div><div class="cr-h">@emmvuu · Instagram</div></div></div>
+  <div class="cr-profile"><div class="m"><span class="ml">Followers</span><span class="num" data-count="3243">3,243</span></div><div class="m"><span class="ml">Avg profile views</span><span class="na">not captured</span></div><div class="m"><span class="ml">Avg profile total eng</span><span class="na">not captured</span></div></div>
+  <div class="post">
+    <div class="post-metrics"><div class="pm"><span class="pml">Post views</span><span class="num" data-count="5369">5,369</span></div><div class="pm"><span class="pml">Total engagement</span><span class="num" data-count="329">329</span></div></div>
+    <blockquote class="caption">What an amazing opportunity it is to honor the memory of a loved one’s faithful service to the U.S. Air Force! 🇺🇸 A quick glimpse into my day working, gyming and eating a good dinner. 🙌🏼 I’ve never been a fan of upper body but now that I occasionally have to pallbear a casket, I have no choice but to love it. 🤣 (i finally had the confidence to record SOME clips of me at the gym LOL.)
+
+vitamins: @fungiments a delicious gummy vitamin that helps with digestion and overall guy health! @golinutrition</blockquote>
+    <div class="vstyle"><span class="vl">Style</span> UGC; POV Vlog; The video opens with a strong pattern interrupt: a woman in a formal US Air Force dress uniform, which immediately grabs attention due to the authority and rarity of the visual.</div>
+    <a class="plink" href="https://www.instagram.com/p/DXz1d7xBf-0/" target="_blank" rel="noopener">View post ↗</a>
+  </div>
+</div></div>
+</div>
+  <div class="do"><span class="dl">What Rizz should do</span><p>Put 3–5 small, on-brand creators on a light monthly retainer for a guaranteed number of posts. At this stage prioritise reliability and fit over reach — a steady trickle of authentic posts builds the creator footprint Rizz currently has none of.</p></div>
 </section>
-
-<!-- ============================== STRATEGY 01 ============================== -->
-<section class="strat wrap" id="s1">
-  <div class="s-eyebrow reveal">Strategy 01</div>
-  <h2 class="s-title reveal"><a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></h2>
-  <p class="s-def reveal">Commission creators to shoot video, then run that video as posts on your own grid instead of filling it in-house.</p>
-
-  <div class="why reveal">
-    <p><b>Why this, for Rizz.</b> This is the highest-reach play in the dataset. Six operators run it, aggregating 21,531,729 views, the largest view pool of any strategy here. It closes Rizz's clearest content gap: Rizz fills its own grid in-house with about 70 posts and zero creator posts, and tops out near 7 likes, yet its video already beats its static posts roughly six times over. Putting commissioned creator video into the feed is the obvious next input for content Rizz already makes.</p>
-    <div class="ev">
-      <div class="chip"><span class="v" data-count="6" data-format="comma">6</span><span class="k">operators detected</span></div>
-      <div class="chip"><span class="v" data-count="21531729" data-format="compact">21.5M</span><span class="k">aggregate views on this play</span></div>
-      <div class="chip"><span class="v" data-count="0" data-format="comma">0</span><span class="k">Rizz Creator Tagged Posts</span></div>
-    </div>
-    <div class="status-tag"><span class="d"></span> Status on Rizz: absent — not detected in the 69-day window.</div>
-  </div>
-
-  <div class="block-label reveal">How the closest competitors run it</div>
-  <div class="comp-grid two stagger">
-
-    <!-- Olly -->
-    <div class="cc lead">
-      <div class="cc-head">
-        <img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/94fb08ec-21bb-4125-88a9-e5dbec65b82f" alt="Olly logo">
-        <div>
-          <div class="cc-name">Olly</div>
-          <div class="cc-why">Direct gummy / vitamin DTC twin (bio: "Vitamins, supplements &amp; body care"). Ranks #2 on this play with 5,982,100 aggregate views across 4 posts.</div>
-          <span class="cc-twinflag">Gummy / vitamin twin</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">Chrissy Allen <span class="cre-plat">IG</span></div><div class="cre-handle">@csapunch</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="2556593" data-format="compact">2.6M</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="4.83" data-format="decimal" data-suffix="%">4.83%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="3164237" data-format="compact">3.2M</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">HALEY MOORE <span class="cre-plat">IG</span></div><div class="cre-handle">@halesmoore</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="249434" data-format="compact">249K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="19.81" data-format="decimal" data-suffix="%">19.81%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="575890" data-format="compact">576K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Ashley · Target Trendsetter <span class="cre-plat">IG</span></div><div class="cre-handle">@targettrendsetter</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="493513" data-format="compact">494K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="1.61" data-format="decimal" data-suffix="%">1.61%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="165471" data-format="compact">165K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Keoikantse Mana <span class="cre-plat">IG</span></div><div class="cre-handle">@_kiwi.m_</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="8651" data-format="comma">8,651</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="39.49" data-format="decimal" data-suffix="%">39.49%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="55134" data-format="compact">55K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Campaign performance (Olly · this play)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="2.73" data-format="decimal" data-suffix="%">2.73%</div><div class="pl">avg engagement</div><div class="ps">across 56 tagged posts</div></div>
-        <div><div class="pv" data-count="35610" data-format="compact">36K</div><div class="pl">avg views</div><div class="ps">per tagged post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"Not sure how my gut health made it through those days but I'm good now! @ollywellness Probiotic + Prebiotic delivers a combination of live probiotics and prebiotic to help the gut microbiome thrive! Give your belly the same love the rest of you gets so that things run smoothly and peacefully on the inside ❤️ #OLLYPartner"<span class="qa">@csapunch</span></div>
-        <div class="q">"How do I get out of this funk? #ollypartner Getting ready for a little date night! Love when something simple can shift my whole mood. @ollywellness"<span class="qa">@halesmoore</span></div>
-        <div class="q">"Fiber is for hotties!! And @ollywellness is the hottest of them all #OLLYPartner"<span class="qa">tagged creator</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">Short vertical <b>talking-head / POV-vlog / GRWM</b> clips that open on a relatable life-stage or mood hook ("When today me meets 2000s me" nostalgia, a "running on fumes" date-night reset), then fold the Olly gummy or body-wash into a self-care routine. <b>UGC</b> creative style in 8 of 9 Gemini-matched posts; the ninth is a product-only "$2 OFF" promo graphic.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.instagram.com/p/DYF9oC3yv-Y/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7b35f381-b05d-4aad-b6ff-0197c1e9e846" alt="Olly example post" loading="lazy"></span><span class="tm"><b>957K</b> views<span>1.58%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DX-pSeUgrpj/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/308798bd-97df-4791-980b-b7c218b53835" alt="Olly example post" loading="lazy"></span><span class="tm"><b>184K</b> views<span>0.43%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DVuCoRWkhIA/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/fa9d8e92-9806-44ec-8d37-e4857a2c41e9" alt="Olly example post" loading="lazy"></span><span class="tm"><b>176K</b> views<span>0.77%</span></span></a>
-      </div>
-    </div>
-
-    <!-- Lemme -->
-    <div class="cc">
-      <div class="cc-head">
-        <img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/97ee2b59-2aba-46fa-b4f7-4d0fb603f926" alt="Lemme logo">
-        <div>
-          <div class="cc-name">Lemme</div>
-          <div class="cc-why">Category leader on creator volume (225 Creator Tagged Posts) and the largest gummy operator in the dataset; the model Rizz is scaling toward.</div>
-          <span class="cc-twinflag">Gummy supplement leader</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">BeautyyBird · Yasmin <span class="cre-plat">IG</span></div><div class="cre-handle">@beautyybird</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="1133530" data-format="compact">1.1M</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="1.61" data-format="decimal" data-suffix="%">1.61%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="483676" data-format="compact">484K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">starface <span class="cre-plat">IG</span></div><div class="cre-handle">@starface</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="636043" data-format="compact">636K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="1.97" data-format="decimal" data-suffix="%">1.97%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="748308" data-format="compact">748K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">honey rose · Lifestyle &amp; Beauty <span class="cre-plat">IG</span></div><div class="cre-handle">@honeyroseloves</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="376369" data-format="compact">376K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="7.55" data-format="decimal" data-suffix="%">7.55%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="1993008" data-format="compact">2M</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Sjuanjé <span class="cre-plat">TT</span></div><div class="cre-handle">@nothardtosaysjuanje</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="3894" data-format="comma">3,894</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="769.48" data-format="decimal" data-suffix="%">769.48%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="196164" data-format="compact">196K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Campaign performance (Lemme · this play)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="108.81" data-format="decimal" data-suffix="%">108.81%</div><div class="pl">avg engagement</div><div class="ps">across 186 tagged posts</div></div>
-        <div><div class="pv" data-count="63515" data-format="compact">64K</div><div class="pl">avg views</div><div class="ps">per tagged post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"I 🤍 @lemme @Kourtney Kardashian Barker #lemmereview #lemme #vitamins #adhd #fypシ"<span class="qa">tagged creator</span></div>
-        <div class="q">"ok… where were we 🍿 Introducing @lemme x @starface Healthy Skin Gummies &amp; Hydro-Stars ✨ Coming 5.17 exclusively to @target. So tea, so cute… and with a bare face? Nasty 😉"<span class="qa">@starface</span></div>
-        <div class="q">"Lemme make a pick n mix stand 💜 #lemme #kourtneykardashian #skincare #beauty #beautyhack @lemme"<span class="qa">tagged creator</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">Mostly single-creator <b>UGC vertical video</b> — talking-head and POV / GRWM "what I eat / day in the life" vlogs that fold the Lemme gummy into a daily routine, opening on a celebrity call-out (Kourtney Kardashian) or a curiosity / transformation text overlay ("summer skin loading", a DIY branded gummy dispenser). Pillars run <b>relatable / meme, promotional, entertaining</b>. 37 of the 186 matched posts carry full Gemini analysis.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.tiktok.com/@nothardtosaysjuanje/video/7619736214685388062" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d2b86e86-ded4-4b73-8309-dac8e57cfe6b" alt="Lemme example post" loading="lazy"></span><span class="tm"><b>2.5M</b> views<span>TT</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DYXMD0SIMdn/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/36f85946-6ea3-4c40-a4e6-40fc9f3b6a17" alt="Lemme example post" loading="lazy"></span><span class="tm"><b>2.2M</b> views<span>15.9%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DYBfQmTh64C/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/09ef5187-5bba-4328-bc3b-fc9547906eaa" alt="Lemme example post" loading="lazy"></span><span class="tm"><b>594K</b> views<span>1.03%</span></span></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="chart-wrap reveal">
-    <p class="chart-cap"><b>Average views per tagged post on this play.</b> Olly and Lemme vs Rizz (zero, no creator posts in the window).</p>
-    <div class="chart-box"><canvas id="chart1"></canvas></div>
-  </div>
-
-  <div class="do reveal">
-    <div class="do-h"><span class="d"></span> What Rizz should do</div>
-    <ul>
-      <li><b>Shoot:</b> vertical talking-head / GRWM clips, 15–30 seconds, creator-filmed on a phone. No polished brand edit — the format that wins here is the one Rizz already makes in-house, just shot by someone else.</li>
-      <li><b>Open on:</b> a relatable mood or life-stage hook in the first two seconds ("running on fumes", "when today me meets 2000s me"), then fold the gummy into the routine. Mirror Olly's self-care framing, not a product pitch.</li>
-      <li><b>Copy angle:</b> first-person and casual, gut-health or energy benefit stated plainly, partnership tag and #ad disclosed — exactly the register of the Olly captions above.</li>
-      <li><b>Brief:</b> a mix of mid-tier lifestyle creators (250K–1M, like @halesmoore) for reach plus high-engagement micro creators (@_kiwi.m_ at 39.49% profile engagement) for proof, then re-post their clips to Rizz's own grid.</li>
-      <li><b>Cadence:</b> seed 4–6 commissioned clips a month into the feed; treat creator video as a recurring content input, not a one-off.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================== STRATEGY 02 ============================== -->
-<section class="strat wrap" id="s2">
-  <div class="s-eyebrow reveal">Strategy 02</div>
-  <h2 class="s-title reveal"><a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></h2>
-  <p class="s-def reveal">Keep one or a few creators on a standing relationship so they post about you repeatedly over months, not once.</p>
-
-  <div class="why reveal">
-    <p><b>Why this, for Rizz.</b> This is one of the most heavily run plays in the dataset: 11 operators, 4,530,974 aggregate views, the second-highest match count here. Seven competitors run it, and the two multi-play leaders, Waterboy and Orgain, both lead with it. Rizz's own data makes the case: its single strongest earned mention pulled 59,759 views from one committed creator. Converting that kind of one-off into a standing relationship is how a single voice turns into compounding reach.</p>
-    <div class="ev">
-      <div class="chip"><span class="v" data-count="11" data-format="comma">11</span><span class="k">operators detected</span></div>
-      <div class="chip"><span class="v" data-count="4530974" data-format="compact">4.5M</span><span class="k">aggregate views on this play</span></div>
-      <div class="chip"><span class="v" data-count="59759" data-format="compact">60K</span><span class="k">Rizz's best earned mention</span></div>
-    </div>
-    <div class="status-tag"><span class="d"></span> Status on Rizz: absent — named as opportunity #1 in the brand's findings.</div>
-  </div>
-
-  <div class="block-label reveal">How the closest competitors run it</div>
-  <div class="comp-grid two stagger">
-
-    <!-- Orgain -->
-    <div class="cc lead">
-      <div class="cc-head">
-        <img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/f906b42c-386b-4e2a-a54e-48c6e435192d" alt="Orgain logo">
-        <div>
-          <div class="cc-name">Orgain</div>
-          <div class="cc-why">Plant-based nutrition DTC (bio: "Real Nutrition for Real Life — Organic &amp; plant-based"). A confirmed multi-play operator running a durable ambassador layer.</div>
-          <span class="cc-twinflag">Clean-nutrition comparator</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">Cierrah Neal <span class="cre-plat">IG</span></div><div class="cre-handle">@cierrahneal · named ambassador</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="253579" data-format="compact">254K</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Da'ana Williamson <span class="cre-plat">IG</span></div><div class="cre-handle">@daanawilliamson</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="639028" data-format="compact">639K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="14.11" data-format="decimal" data-suffix="%">14.11%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="826187" data-format="compact">826K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Whitney English · Dietitian <span class="cre-plat">IG</span></div><div class="cre-handle">@whitneyerd</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="88189" data-format="compact">88K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="4.84" data-format="decimal" data-suffix="%">4.84%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="112948" data-format="compact">113K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Caroline G Hamburg <span class="cre-plat">IG</span></div><div class="cre-handle">@careeohhlinee</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="121794" data-format="compact">122K</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Campaign performance (Orgain · named ambassador)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="0.6" data-format="decimal" data-suffix="%">0.6%</div><div class="pl">avg engagement</div><div class="ps">2 repeat ambassador posts</div></div>
-        <div><div class="pv" data-count="47509" data-format="compact">48K</div><div class="pl">avg views</div><div class="ps">per ambassador post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"Hair cut day for all three of my boys! They have one of these kid @drinkorgain shakes each morning and they absolutely love them! So convenient for busy mornings and I feel good giving them something with no artificial flavors, organic fruits and veggies, and 8g of protein! #drinkorgain #orgainpartner #ad #orgainkidshakes"<span class="qa">@cierrahneal</span></div>
-        <div class="q">"Officially a soccer mom! These @drinkorgain shakes have been an easy grab on the way out the door — 8g of protein plus 22 vitamins &amp; minerals, and the boys LOVE the taste. #drinkorgain #orgainpartner #ad"<span class="qa">@cierrahneal</span></div>
-        <div class="q">"As a pediatric dietitian, this is something that really grinds my gears. After exercise, kids need the same things adults do — protein, complex carbs + hydration. Not gummy bears and Gatorade 😒 … @drinkorgain kid's plant-based protein shakes"<span class="qa">@whitneyerd</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">The named ambassador's posts are recurring <b>"busy-mom morning routine"</b> single-image / carousel placements with repeat #orgainpartner tags and functional callouts (8g protein, organic, no artificial flavors). Among the Gemini-analysed matches, the format is <b>UGC talking-head with b-roll</b> opened by an authority / pet-peeve hook ("this grinds my gears, as a pediatric dietitian"), positioning Orgain as the trusted everyday family staple.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.instagram.com/p/DWja5XFDVD1/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/2869ff3f-318f-4944-b8a5-a50fb3ed5b99" alt="Orgain example post" loading="lazy"></span><span class="tm"><b>64K</b> views<span>0.68%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DW4YcaNJAGp/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/64b039d2-700f-4968-bf68-fd546a717ccf" alt="Orgain example post" loading="lazy"></span><span class="tm"><b>161K</b> views<span>0.27%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DXsFb4bEeJX/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/2869ff3f-318f-4944-b8a5-a50fb3ed5b99" alt="Orgain example post" loading="lazy"></span><span class="tm"><b>31K</b> views<span>0.52%</span></span></a>
-      </div>
-    </div>
-
-    <!-- Jocko Greens -->
-    <div class="cc">
-      <div class="cc-head">
-        <img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/3d22f7d2-2331-41ab-8dd5-7ac1565e83f5" alt="Jocko Greens logo">
-        <div>
-          <div class="cc-name">Jocko Greens</div>
-          <div class="cc-why">Greens-product comparator running the ambassador play at rank #3 with 640,611 views across 3 posts — direct greens-category proof.</div>
-          <span class="cc-twinflag">Greens-category comparator</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">Dr. Michael Milobsky <span class="cre-plat">IG</span></div><div class="cre-handle">@drmichaelmilobsky</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="561390" data-format="compact">561K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="0.21" data-format="decimal" data-suffix="%">0.21%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="204171" data-format="compact">204K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Emily Loogman · BSN, MBA <span class="cre-plat">IG</span></div><div class="cre-handle">@emilyloogman</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="335064" data-format="compact">335K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="1.78" data-format="decimal" data-suffix="%">1.78%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="168595" data-format="compact">169K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Winter &amp; Sky Duboc <span class="cre-plat">IG</span></div><div class="cre-handle">@dubocsisters</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="120800" data-format="compact">121K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="7.01" data-format="decimal" data-suffix="%">7.01%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="214158" data-format="compact">214K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Alec Rodriguez <span class="cre-plat">IG</span></div><div class="cre-handle">@hangryfireman</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="19570" data-format="compact">20K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="29.19" data-format="decimal" data-suffix="%">29.19%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="138854" data-format="compact">139K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Campaign performance (Jocko Greens · this play)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="5.08" data-format="decimal" data-suffix="%">5.08%</div><div class="pl">avg engagement</div><div class="ps">across 33 tagged posts</div></div>
-        <div><div class="pv" data-count="78611" data-format="compact">79K</div><div class="pl">avg views</div><div class="ps">per tagged post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"Winter and Sky show up and put in the work 💪🏽 Squats getting stronger, jump rope getting smoother… Just building habits, one session at a time. Fueled by @jockofuel Warrior Kid ⚔️ #fitness #crossfit #crossfitkids"<span class="qa">@dubocsisters</span></div>
-        <div class="q">"Processed foods, refined carbs and sugars are not great at helping with sustained focus and energy. @jockofuel Warrior kids protein shake is 12g of clean protein, no added sugar, tastes great and easy to drink on the go (also kosher!)"<span class="qa">@drmichaelmilobsky</span></div>
-        <div class="q">"2 INGREDIENT PROTEIN CREPES 💪🏼🤯 … one of my favorite ways to get in extra protein in a delicious way! Check out @jockofuel and use code 'ALEC' for 15% off at checkout 😎"<span class="qa">@hangryfireman</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">High-energy <b>UGC fitness / lifestyle reels</b>. The hero post is a CrossFit montage opening on a visual pattern-interrupt (toddlers in sunglasses squatting a barbell); companion ambassador posts use <b>educational talking-head + product-overlay</b> formats (a pediatrician opening on a fear-of-failure overlay) to embed the product in the creator's own routine. Pillars: <b>inspirational, educational</b>.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.instagram.com/p/DXXqMbZDgtP/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/6e7cf95d-5e60-4793-a7a4-f15c8dd1a11a" alt="Jocko Greens example post" loading="lazy"></span><span class="tm"><b>642K</b> views<span>88.82%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DXP0IHTp50P/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/39b426f0-431e-4281-a456-e37e1e5c94fb" alt="Jocko Greens example post" loading="lazy"></span><span class="tm"><b>597K</b> views<span>24.53%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DYPJvNkuBT9/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f5aa81d0-a95d-469d-a9d2-389104c16d76" alt="Jocko Greens example post" loading="lazy"></span><span class="tm"><b>136K</b> views<span>0.34%</span></span></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="chart-wrap reveal">
-    <p class="chart-cap"><b>Average views per tagged post on this play.</b> Orgain and Jocko Greens vs Rizz (zero).</p>
-    <div class="chart-box"><canvas id="chart2"></canvas></div>
-  </div>
-
-  <div class="do reveal">
-    <div class="do-h"><span class="d"></span> What Rizz should do</div>
-    <ul>
-      <li><b>Sign:</b> one or two creators to a 3–6 month standing relationship, not a single post. Orgain rides the same named voice (@cierrahneal) across repeat #orgainpartner posts; that repetition is the play.</li>
-      <li><b>Profile to brief:</b> a credibility-carrying mid-tier creator — a dietitian or trainer (like @whitneyerd or @hangryfireman) — whose audience already trusts their nutrition advice, so Rizz inherits that trust over time.</li>
-      <li><b>Open on:</b> an authority or "pet-peeve" hook ("as a dietitian, this grinds my gears") or a routine-habit frame, then place the gummy as the easy everyday step. Plain functional callouts, not hype.</li>
-      <li><b>Copy angle:</b> recurring "this is part of my routine" framing with a discount code (Jocko's "code ALEC for 15% off") to make the relationship trackable and renewable.</li>
-      <li><b>Cadence:</b> 2–4 posts per ambassador per month so the same face shows up repeatedly — the compounding effect, not reach from any single drop, is the point.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================== STRATEGY 03 ============================== -->
-<section class="strat wrap" id="s3">
-  <div class="s-eyebrow reveal">Strategy 03</div>
-  <h2 class="s-title reveal"><a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a></h2>
-  <p class="s-def reveal">Run many micro-creators at once at low per-post cost, manufacturing creator posts by volume rather than betting on a few big names.</p>
-
-  <div class="why reveal">
-    <p><b>Why this, for Rizz.</b> This is the play Rizz's exact product twin wins. Four operators run it for 132,188 aggregate views, led by Grüns — greens in a gummy bear, the same product Rizz sells. The findings flag it as an open lane: no brand in this dataset concentrates creators into retainers, so the category runs on broad volume. For a 412-follower start-up, a volume model of many micro-creators is the most scalable, lowest-cost-per-post way to manufacture the Creator Tagged Posts Rizz has zero of.</p>
-    <div class="ev">
-      <div class="chip"><span class="v" data-count="4" data-format="comma">4</span><span class="k">operators detected</span></div>
-      <div class="chip"><span class="v" data-count="132188" data-format="compact">132K</span><span class="k">aggregate views on this play</span></div>
-      <div class="chip"><span class="v" data-count="0" data-format="comma">0</span><span class="k">Rizz Creator Tagged Posts</span></div>
-    </div>
-    <div class="status-tag"><span class="d"></span> Status on Rizz: absent — not detected in the 69-day window.</div>
-  </div>
-
-  <div class="block-label reveal">How the closest competitors run it</div>
-  <div class="comp-grid two stagger">
-
-    <!-- Grüns -->
-    <div class="cc lead">
-      <div class="cc-head">
-        <img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/3d22f7d2-2331-41ab-8dd5-7ac1565e83f5" alt="Grüns logo">
-        <div>
-          <div class="cc-name">Grüns</div>
-          <div class="cc-why">Rizz's literal product twin (bio: "The greens you were always supposed to eat. Now in a pack of gummy bears"). Ranks #1 on this play: 23 posts, 15 unique tagged creators, 17% campaign average engagement across micro-creators.</div>
-          <span class="cc-twinflag">Literal product twin</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">COSTCO DEALS <span class="cre-plat">IG</span></div><div class="cre-handle">@costcodeals</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="1652138" data-format="compact">1.7M</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="0.12" data-format="decimal" data-suffix="%">0.12%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="284690" data-format="compact">285K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Lucie Ellis Rauschnabel <span class="cre-plat">IG</span></div><div class="cre-handle">@lucierauschnabel</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="348368" data-format="compact">348K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="5.55" data-format="decimal" data-suffix="%">5.55%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="183981" data-format="compact">184K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">The Lay Out <span class="cre-plat">IG</span></div><div class="cre-handle">@thelayoutco</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="37632" data-format="compact">38K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="0.34" data-format="decimal" data-suffix="%">0.34%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="67555" data-format="compact">68K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Chef Edna Gonzalez <span class="cre-plat">IG</span></div><div class="cre-handle">@edna.gonzalez2</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="12616" data-format="compact">13K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="0.98" data-format="decimal" data-suffix="%">0.98%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="26089" data-format="compact">26K</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Campaign performance (Grüns · this play)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="3.45" data-format="decimal" data-suffix="%">3.45%</div><div class="pl">avg engagement</div><div class="ps">across 109 tagged posts</div></div>
-        <div><div class="pv" data-count="20574" data-format="compact">21K</div><div class="pl">avg views</div><div class="ps">per tagged post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"#GrünsPartner 💚 Our family's FAVORITE superfood gummy bears, Grüns, are now available at Costco warehouses nationwide! …This isn't just a multivitamin, a greens gummy, or just a prebiotic. It's ALL of that (and then some) packed into one convenient snack pack a day — at a fraction of the price! ✅ 6g dietary fiber ✅ Vegan (pectin-based, no gelatin)"<span class="qa">@costcodeals</span></div>
-        <div class="q">"real moms know… you gotta pick your battles 😭 today we switched up the snack bag a little — thank you @grunsdaily for sending these over! ☺️ #gifted #prpackage #kidsnacks #momreels"<span class="qa">tagged creator</span></div>
-        <div class="q">"do you think my German grandma would approve of my outfit? 🥹 details!! …@grunsdaily nutrient gummies!"<span class="qa">@lucierauschnabel</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">Predominantly creator-shot <b>UGC</b> (9 of 16 Gemini-analysed posts) — mostly <b>POV "day in my life" vlogs</b> and talking-head / product-review reels, with a sizeable "new at Costco" static-graphic contingent. Opens on a relatable routine or retailer-authority hook ("our family's favorite, now at Costco", a mom's morning-snack swap), where Grüns is folded into the creator's own lifestyle rather than presented as a polished ad.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.instagram.com/p/DVt5jK9kk6b/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a47ea2be-faa2-4e4b-8fb4-c8ccc08a54e3" alt="Grüns example post" loading="lazy"></span><span class="tm"><b>289K</b> views<span>0.02%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DXhtPAGgdjA/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/de0c9d7e-b356-4a46-af15-8f9b674ace91" alt="Grüns example post" loading="lazy"></span><span class="tm"><b>272K</b> views<span>10.57%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DV39AIxjiTl/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/c8c3590a-11e4-4e36-b8dd-f6db1a1eddd3" alt="Grüns example post" loading="lazy"></span><span class="tm"><b>237K</b> views<span>2.25%</span></span></a>
-      </div>
-    </div>
-
-    <!-- Primal Queen -->
-    <div class="cc">
-      <div class="cc-head">
-        <span class="cc-logo initials" aria-label="Primal Queen">PQ</span>
-        <div>
-          <div class="cc-name">Primal Queen</div>
-          <div class="cc-why">DTC supplement brand (bio: "Nourish Your Body Like a Queen") running the same broad-volume motion at rank #2 — 21 posts, second-closest supplement comparator on this play.</div>
-          <span class="cc-twinflag">Supplement comparator</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">Molly <span class="cre-plat">IG</span></div><div class="cre-handle">@mollylately</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="105547" data-format="compact">106K</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Adriana · Storyteller <span class="cre-plat">IG</span></div><div class="cre-handle">@adrianawithanuh</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="19029" data-format="compact">19K</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">isabelle paige <span class="cre-plat">IG</span></div><div class="cre-handle">@isabelle.p.t</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="7997" data-format="comma">7,997</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Soma · UGC &amp; Storytelling <span class="cre-plat">IG</span></div><div class="cre-handle">@thecraftedstudio_soma</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="4710" data-format="comma">4,710</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-      <p style="font-size:11.5px;color:var(--muted);margin:8px 2px 0">Primal Queen's micro-creators sit outside the top-100 profile tables, so account-level engagement and views are not captured.</p>
-
-      <div class="cc-section-label">Campaign performance (Primal Queen · this play)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="2.4" data-format="decimal" data-suffix="%">2.4%</div><div class="pl">avg engagement</div><div class="ps">across 31 tagged posts</div></div>
-        <div><div class="pv" data-count="1734" data-format="comma">1,734</div><div class="pl">avg views</div><div class="ps">per tagged post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"…I'm all about focusing on healing the body at the root source when possible. I can honestly say @primalqueenera has helped both Adelaide and I with lessening our symptoms from our cycles. I like this supplement because it's more than just beef liver — it has a bunch of different organs in it. You can click my link in bio to get a discount."<span class="qa">tagged creator</span></div>
-        <div class="q">"SAVE 25% off your first Primal Queen order using link below (also in Bio) ✨ Step into your power with @primalqueenera 👑 …once a Queen, forever a Queen. AD #PrimalQueen #QueenEnergy #BeefOrganSupplements"<span class="qa">@thecraftedstudio_soma</span></div>
-        <div class="q">"I wish I had taken before pics, because I had no idea my skin would improve so much!! Thanks @primalqueenera!! …for 25% your first order to try it with me!! 😊"<span class="qa">@isabelle.p.t</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">All 31 matched posts are video. The polished hero is a <b>UGC-style brand montage</b> opening on a visual pattern-interrupt (a woman in a floor-length red tulle gown by a London telephone booth, text "You don't become a queen"), selling beef-organ supplements as the way to reclaim "inner queen" energy. The broader set skews <b>first-person "I tried / it helped me" testimonial reels</b> with affiliate-discount CTAs. Pillar: <b>inspirational / empowerment</b>.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.instagram.com/p/DXrFcuzCFJK/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/8faef487-9513-4e8a-a32c-546d4ac63dd8" alt="Primal Queen example post" loading="lazy"></span><span class="tm"><b>5,874</b> views<span>14.61%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DXWmLAEAIyo/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/b40ab8ff-00b3-4721-89e3-1de454670106" alt="Primal Queen example post" loading="lazy"></span><span class="tm"><b>9,203</b> views<span>0.17%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DXcRVxFiV30/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/dce9b7b8-40ee-476d-a527-830afa171da6" alt="Primal Queen example post" loading="lazy"></span><span class="tm"><b>4,756</b> views<span>2.19%</span></span></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="chart-wrap reveal">
-    <p class="chart-cap"><b>Average views per tagged post on this play.</b> Grüns and Primal Queen vs Rizz (zero).</p>
-    <div class="chart-box"><canvas id="chart3"></canvas></div>
-  </div>
-
-  <div class="do reveal">
-    <div class="do-h"><span class="d"></span> What Rizz should do</div>
-    <ul>
-      <li><b>Recruit at volume:</b> brief 10–20 micro-creators (5K–40K, like @edna.gonzalez2 or @thelayoutco) at once rather than chasing one big name. Grüns built rank #1 on this play with 15 unique creators, not a single hero.</li>
-      <li><b>Shoot:</b> creator-filmed POV "day in my life" vlogs that fold the gummy bear into a morning routine or kid-snack swap. This is the exact format Rizz's literal twin Grüns uses to win.</li>
-      <li><b>Open on:</b> a relatable routine hook ("real moms know, you gotta pick your battles") or, where there's retail, a "now available at [retailer]" authority hook. Keep it inside the creator's life, not a studio.</li>
-      <li><b>Copy angle:</b> the all-in-one greens-gummy pitch Grüns runs verbatim — multivitamin + greens + prebiotic in one snack pack — plus a gifting tag (#gifted) for seeded posts and a discount link for affiliate ones.</li>
-      <li><b>Cadence:</b> a steady drip of many low-cost posts across the cohort; volume is the mechanism, so prioritise breadth of creators over polish on any single post.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================== STRATEGY 04 ============================== -->
-<section class="strat wrap" id="s4">
-  <div class="s-eyebrow reveal">Strategy 04</div>
-  <h2 class="s-title reveal"><a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></h2>
-  <p class="s-def reveal">Keep a small standing bench of creators on retainer so there is always fresh creator content flowing, instead of campaign-by-campaign one-offs.</p>
-
-  <div class="why reveal">
-    <p><b>Why this, for Rizz.</b> This is the top-ranked strategy in the dataset and Rizz's own #1 opportunity: stand up an always-on creator bench. Goli runs it at rank #1 with 11 Creator Tagged Posts and 45,074 aggregate views. The findings note that no brand in this dataset concentrates creators into retainers, so a focused bench is an open lane. It is the play that turns Rizz's high-output content engine into compounding earned reach rather than one-off posts.</p>
-    <div class="ev">
-      <div class="chip"><span class="v" data-count="2" data-format="comma">2</span><span class="k">operators detected</span></div>
-      <div class="chip"><span class="v" data-count="45074" data-format="compact">45K</span><span class="k">aggregate views on this play</span></div>
-      <div class="chip"><span class="v" data-count="0" data-format="comma">0</span><span class="k">Rizz Creator Tagged Posts</span></div>
-    </div>
-    <div class="status-tag"><span class="d"></span> Status on Rizz: absent — explicitly named as opportunity #1 in the brand's findings.</div>
-  </div>
-
-  <div class="block-label reveal">How the closest competitor runs it</div>
-  <div class="comp-grid stagger">
-
-    <!-- Goli -->
-    <div class="cc lead">
-      <div class="cc-head">
-        <img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/8735788d-a96b-4fb0-a67a-6195f878b88e" alt="Goli logo">
-        <div>
-          <div class="cc-name">Goli</div>
-          <div class="cc-why">Gummy-format supplement twin (ACV gummies; bio: "Health Simple — Vegan, Gluten-Free, Non-GMO") and the #1-ranked operator on this play: 11 posts, 45,074 views, with a retained, repeat-creator bench Rizz can model directly.</div>
-          <span class="cc-twinflag">Gummy supplement twin</span>
-        </div>
-      </div>
-
-      <div class="cc-section-label">Creators used</div>
-      <div class="cre">
-        <div class="cre-row">
-          <div><div class="cre-name">Nzinga Young <span class="cre-plat">TT</span></div><div class="cre-handle">@veganzinga</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="135300" data-format="compact">135K</div><div class="sl">followers</div></div>
-            <div><div class="sv" data-count="0.57" data-format="decimal" data-suffix="%">0.57%</div><div class="sl">profile eng</div></div>
-            <div><div class="sv" data-count="7717" data-format="comma">7,717</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Jacie <span class="cre-plat">IG</span></div><div class="cre-handle">@doinglifewithjacie</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="12245" data-format="compact">12K</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Ashley Nichole <span class="cre-plat">IG</span></div><div class="cre-handle">@_ashleyyxnicholee_</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="7759" data-format="comma">7,759</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-        <div class="cre-row">
-          <div><div class="cre-name">Christina <span class="cre-plat">IG</span></div><div class="cre-handle">@styles_bychristina</div></div>
-          <div class="cre-stats">
-            <div><div class="sv" data-count="1575" data-format="comma">1,575</div><div class="sl">followers</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile eng</div></div>
-            <div><div class="sv nc">not captured</div><div class="sl">profile views</div></div>
-          </div>
-        </div>
-      </div>
-      <p style="font-size:11.5px;color:var(--muted);margin:8px 2px 0">Three of Goli's four bench creators sit outside the top-100 profile tables, so their account-level engagement and views are not captured.</p>
-
-      <div class="cc-section-label">Campaign performance (Goli · this play)</div>
-      <div class="perf">
-        <div><div class="pv" data-count="1.77" data-format="decimal" data-suffix="%">1.77%</div><div class="pl">avg engagement</div><div class="ps">across 23 tagged posts</div></div>
-        <div><div class="pv" data-count="3980" data-format="comma">3,980</div><div class="pl">avg views</div><div class="ps">per tagged post</div></div>
-      </div>
-
-      <div class="cc-section-label">The copy (verbatim)</div>
-      <div class="quotes">
-        <div class="q">"Fuel your potential with @golinutrition today! 🔥 #vitamins #health #lifestyle #goli #fitness"<span class="qa">tagged creator</span></div>
-        <div class="q">"Mamas it's the end of the year and I found something to keep us sane!! Say MAMA if you can relate @golinutrition"<span class="qa">tagged creator</span></div>
-        <div class="q">"RUN don't walk! @golinutrition #ashwagandhabenefits #goli #wellness"<span class="qa">tagged creator</span></div>
-      </div>
-
-      <div class="cc-section-label">The video style</div>
-      <div class="vstyle">Predominantly raw <b>UGC</b>: handheld POV vlogs and talking-head clips where a creator works the brand into an everyday routine (an Air-Force-uniform pattern-interrupt day-in-the-life that cuts to gym / skincare / dinner; a vegan creator's daily-supplement routine opening on "I'm getting old"), plus single-image lifestyle graphics. Hooks open on a strong visual or identity-label pattern-interrupt, not a product shot. Pillars: <b>relatable / meme, educational, inspirational</b>.</div>
-
-      <div class="cc-section-label">Evidence</div>
-      <div class="thumbs">
-        <a class="thumb" href="https://www.instagram.com/p/DXcScpNjPp2/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/2ad26eab-b593-4ded-9fed-0afe99ba7ae8" alt="Goli example post" loading="lazy"></span><span class="tm"><b>22K</b> views<span>0.55%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DYGUMGlxOFa/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/81a411e1-ace8-40b3-85df-1e0bf9ee5e14" alt="Goli example post" loading="lazy"></span><span class="tm"><b>12K</b> views<span>0.13%</span></span></a>
-        <a class="thumb" href="https://www.instagram.com/p/DVzmYD5Ec8f/" target="_blank" rel="noopener"><span class="ti"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/61b38957-a767-4eb3-8c0d-d94e697b0b4b" alt="Goli example post" loading="lazy"></span><span class="tm"><b>8,259</b> views<span>3.08%</span></span></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="chart-wrap reveal">
-    <p class="chart-cap"><b>Average views per tagged post on this play.</b> Goli vs Rizz (zero).</p>
-    <div class="chart-box"><canvas id="chart4"></canvas></div>
-  </div>
-
-  <div class="do reveal">
-    <div class="do-h"><span class="d"></span> What Rizz should do</div>
-    <ul>
-      <li><b>Stand up a small bench:</b> retain 3–5 creators who post on a standing schedule, so there is always fresh Rizz content in market. Goli's edge here is repetition from the same faces, not breadth.</li>
-      <li><b>Profile to brief:</b> mid-and-micro creators with a clear identity hook (a vegan creator like @veganzinga, a relatable-mum voice), whose niche makes the gummy a natural fit.</li>
-      <li><b>Shoot:</b> raw, handheld POV day-in-the-life and talking-head clips that open on a visual or identity pattern-interrupt before the product appears — never lead on the gummy.</li>
-      <li><b>Copy angle:</b> short, punchy, energy-forward lines ("RUN don't walk", "Fuel your potential") with consistent #goli-style brand tags so the bench reads as one ongoing voice.</li>
-      <li><b>Cadence:</b> a guaranteed monthly minimum per retained creator. The point of a retainer is a steady baseline of creator posts, which is exactly the zero Rizz is starting from.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================== CLOSE ============================== -->
-<section class="close wrap" id="close">
-  <h2 class="reveal">One throughline, one first move.</h2>
-  <p class="reveal">All four plays point the same direction: Rizz already makes the content the category rewards, and the brands most like it — Grüns the literal twin, Goli and Olly the gummy twins, Jocko Greens the greens twin — win by putting that content in other people's hands. The gap is not creative. It is distribution. Rizz earned <b>zero Creator Tagged Posts</b> in the window while these comparators compound thousands of creator posts and millions of views on plays Rizz runs on none of.</p>
-  <p class="reveal">The fastest first move is the <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>: a batch of 10–20 micro-creators shooting the day-in-my-life gummy content Grüns has already proven at rank #1. It is the lowest cost per post, the most forgiving of a small follower base, and the quickest way to turn a zero into a steady stream of creator posts — which the always-on bench and the ambassador layer then compound.</p>
-  <div class="sign reveal">
-    Sup can source and commission the creators for every play above.
-    <span class="sup-pill"><span class="wave">👋</span> Sup</span>
-  </div>
-</section>
-
-<script>
-const BRAND='#D5403D';
-function fmtCompact(n){
-  if(n>=1000000)return (n/1000000).toFixed(n>=10000000?0:1).replace(/\.0$/,'')+'M';
-  if(n>=1000)return (n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,'')+'K';
-  return Math.round(n).toString();
-}
-function formatNumber(v,fmt,raw){
-  if(fmt==='comma')return Math.round(v).toLocaleString();
-  if(fmt==='compact')return fmtCompact(v);
-  if(fmt==='decimal'){
-    // keep up to 2 decimals, mirroring the raw target's precision
-    const dec=(String(raw).split('.')[1]||'').length;
-    return v.toFixed(Math.min(2,dec));
-  }
-  return Math.round(v).toString();
-}
-function scrambleCount(el){
-  const target=parseFloat(el.dataset.count);
-  const fmt=el.dataset.format;
-  const suffix=el.dataset.suffix||'';
-  const duration=1400, scramblePhase=0.65, start=performance.now();
-  function tick(now){
-    const t=Math.min(1,(now-start)/duration);
-    let v;
-    if(t<scramblePhase){
-      const intensity=1-(t/scramblePhase);
-      const baseline=target*(t/scramblePhase);
-      const jitter=target*0.5*intensity*(Math.random()-0.3);
-      v=Math.max(0,baseline+jitter);
-    }else{
-      const settleT=(t-scramblePhase)/(1-scramblePhase);
-      const eased=1-Math.pow(1-settleT,3);
-      const lastScrambled=target*scramblePhase;
-      v=lastScrambled+(target-lastScrambled)*eased;
-    }
-    el.textContent=formatNumber(v,fmt,target)+suffix;
-    if(t<1)requestAnimationFrame(tick);
-    else el.textContent=formatNumber(target,fmt,target)+suffix;
-  }
-  requestAnimationFrame(tick);
-}
-
-const charts=[];
-function makeBarChart(id,labels,data,colors){
-  const ctx=document.getElementById(id);
-  if(!ctx)return;
-  return new Chart(ctx,{
-    type:'bar',
-    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:8,maxBarThickness:64}]},
-    options:{
-      indexAxis:'x',
-      responsive:true,maintainAspectRatio:false,
-      animation:{duration:1200,easing:'easeOutCubic',delay:(c)=>(c.dataIndex??0)*90},
-      animations:{y:{from:(c)=>c.chart.scales.y.getBasePixel()}},
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:(c)=>fmtCompact(c.parsed.y)+' avg views'}}},
-      scales:{
-        y:{beginAtZero:true,grid:{color:'#EFEFF1',drawBorder:false},ticks:{color:'#A1A1AA',font:{family:'Inter',size:11},callback:(v)=>fmtCompact(v)}},
-        x:{grid:{display:false,drawBorder:false},ticks:{color:'#52525B',font:{family:'Inter',size:12,weight:'500'}}}
-      }
-    }
-  });
-}
-
-function buildCharts(){
-  if(typeof Chart==='undefined')return;
-  Chart.defaults.font.family='Inter';
-  // S1 UGC for Brand Feed: Olly 35610, Lemme 63515, Rizz 0
-  makeBarChart('chart1',['Lemme','Olly','Rizz'],[63515,35610,0],[BRAND,'#D5403D99','#D1D5DB']);
-  // S2 Long-Term Ambassador: Jocko 78611, Orgain 47509, Rizz 0
-  makeBarChart('chart2',['Jocko Greens','Orgain','Rizz'],[78611,47509,0],[BRAND,'#D5403D99','#D1D5DB']);
-  // S3 Creator Collective: Grüns 20574, Primal Queen 1734, Rizz 0
-  makeBarChart('chart3',['Grüns','Primal Queen','Rizz'],[20574,1734,0],[BRAND,'#D5403D99','#D1D5DB']);
-  // S4 Always-On Retainers: Goli 3980, Rizz 0
-  makeBarChart('chart4',['Goli','Rizz'],[3980,0],[BRAND,'#D1D5DB']);
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){
-    document.querySelectorAll('.reveal,.stagger').forEach(el=>el.classList.add('is-in'));
-    document.querySelectorAll('[data-count]').forEach(el=>{
-      const n=parseFloat(el.dataset.count);const fmt=el.dataset.format;const suffix=el.dataset.suffix||'';
-      el.textContent=formatNumber(n,fmt,n)+suffix;
-    });
-    buildCharts();
-    return;
-  }
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-in');
-        if(entry.target.hasAttribute('data-count'))scrambleCount(entry.target);
-        io.unobserve(entry.target);
-      }
-    });
-  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal,.stagger,[data-count]').forEach(el=>io.observe(el));
-  buildCharts();
-});
-</script>
-</body>
-</html>
+<div class="close reveal">The throughline is simple: every play above is already won by a brand built like Rizz, and Rizz runs none of them. Start with the Creator Collective — it is the cheapest, fastest way to manufacture the creator posts Rizz has zero of, and it is the exact play its product twin Grüns uses. Sup can source, brief, and run the creators end-to-end.</div>
+</div><script>
+function fmt(n){n=+n;if(n>=1e6)return (n/1e6).toFixed(n%1e6===0?0:1).replace(/\.0$/,'')+'M';if(n>=1e3)return Math.round(n/100)/10>=100?Math.round(n/1e3)+'K':(n/1e3).toFixed(n%1e3===0?0:1).replace(/\.0$/,'')+'K';return n.toLocaleString()}
+function countUp(el){var t=+el.dataset.count;if(t>=1000){var s=null,d=1100;function tk(ts){if(!s)s=ts;var p=Math.min((ts-s)/d,1);var e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(t*e));if(p<1)requestAnimationFrame(tk);else el.textContent=fmt(t)}requestAnimationFrame(tk)}else{el.textContent=t.toLocaleString()}}
+var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(rm){document.querySelectorAll('.reveal,.stagger').forEach(function(e){e.classList.add('is-in')});document.querySelectorAll('[data-count]').forEach(function(e){e.textContent=fmt(+e.dataset.count)});document.querySelectorAll('.bar-fill').forEach(function(e){e.style.width=e.dataset.width+'%'})}
+else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var t=en.target;t.classList.add('is-in');t.querySelectorAll('[data-count]').forEach(countUp);t.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.width+'%'});io.unobserve(t)}})},{threshold:.15});
+document.querySelectorAll('.reveal,.stagger,.cmp').forEach(function(e){io.observe(e)})}
+</script></body></html>
