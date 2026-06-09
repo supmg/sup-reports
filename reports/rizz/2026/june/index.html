@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="sup-brand-primary" content="#D5403D">
+<title>Rizz Superfood Gummies · Influencer Marketing Intelligence Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#F4F4F5; --soft:#ECECEE; --text:#09090B; --secondary:#52525B;
+  --muted:#71717A; --hint:#A1A1AA; --border:#E4E4E7;
+  --brand-primary:#D5403D; --brand-accent-dark:#8E1B17; --brand-tint:rgba(213,64,61,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--secondary);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px}
+.container{max-width:1180px;margin:0 auto;padding:0 32px}
+@media(max-width:900px){.container{padding:0 24px}}
+@media(max-width:560px){.container{padding:0 20px}}
+a{color:inherit}
+img{opacity:0;transition:opacity 300ms ease}
+img.loaded{opacity:1}
+section{padding:96px 0 120px;border-bottom:1px solid var(--border)}
+@media(max-width:900px){section{padding:72px 0 80px}}
+@media(max-width:560px){section{padding:56px 0 64px}}
+h1,h2,h3{color:var(--text);font-weight:500;letter-spacing:-0.02em}
+.section-label{font-size:13px;font-weight:500;color:var(--secondary);margin-bottom:18px}
+.section h2{font-size:clamp(22px,4vw,38px);line-height:1.15;position:relative;padding-bottom:14px;max-width:880px}
+.section h2::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brand-primary);border-radius:2px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 200ms}
+.section.is-in h2::after{width:48px}
+p{font-size:16px;color:var(--secondary);line-height:1.6;margin-bottom:16px}
+@media(max-width:560px){p{font-size:15px}}
+.lead-narrow{max-width:760px}
+
+/* scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--brand-primary);z-index:200;transition:width 100ms linear}
+
+/* nav */
+.nav{position:sticky;top:0;height:56px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;display:flex;align-items:center}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-left{display:flex;align-items:center;gap:12px}
+.sup-pill{display:inline-flex;align-items:center;gap:6px;background:transparent;border:0;border-radius:0;padding:0;color:var(--text);font-size:14px;font-weight:600}
+.nav-divider{width:1px;height:22px;background:var(--border)}
+.nav-logo{height:22px;width:auto;opacity:1}
+.nav-mid{display:flex;align-items:center;gap:22px}
+.nav-mid a{font-size:13px;color:var(--secondary);text-decoration:none;position:relative;padding-bottom:2px;white-space:nowrap}
+.nav-mid a.is-active{color:var(--brand-primary)}
+.nav-mid a.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--brand-primary);border-radius:2px}
+.nav-cta a{display:inline-block;background:#000;color:#fff;border-radius:9999px;padding:8px 16px;font-size:13px;font-weight:500;text-decoration:none;transition:transform 180ms cubic-bezier(0.16,1,0.3,1),filter 180ms ease;white-space:nowrap}
+.nav-cta a:hover{transform:scale(1.02);filter:brightness(1.15)}
+@media(max-width:900px){.nav-mid{display:none}}
+@media(max-width:560px){.nav-logo{display:none}.nav-divider{display:none}}
+
+/* cover */
+.cover{padding:72px 0 56px;border-bottom:0}
+.pill-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#fff;border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--secondary);margin-bottom:28px}
+.green-dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;display:inline-block}
+.cover-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:56px;align-items:center;margin-bottom:56px}
+.cover h1{font-size:clamp(32px,5vw,60px);font-weight:500;letter-spacing:-0.02em;line-height:1.08}
+.cover h1 .s{display:block}
+.brand-emphasis{position:relative;color:var(--brand-primary)}
+.brand-emphasis::after{content:"";position:absolute;left:0;bottom:0;width:0;height:6px;background:var(--brand-primary);opacity:0.18;border-radius:4px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 400ms;z-index:-1}
+.brand-emphasis.is-painted::after{width:100%}
+.cover-sub{font-size:17px;color:var(--muted);margin-top:22px;max-width:560px}
+.cover-thumbs{position:relative;width:100%;height:360px}
+.thumb-tilt{position:absolute;width:168px;height:168px;border-radius:22px;overflow:hidden;background:var(--surface);border:5px solid #fff;box-shadow:0 18px 42px -12px rgba(9,9,11,0.22),0 6px 14px -4px rgba(9,9,11,0.08);transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 320ms ease;cursor:pointer}
+.thumb-tilt img{width:100%;height:100%;object-fit:cover;transition:transform 400ms ease;opacity:1}
+.thumb-tilt .stamp{position:absolute;left:10px;bottom:10px;padding:4px 10px;background:rgba(9,9,11,0.7);color:#fff;font-size:10.5px;font-weight:500;border-radius:9999px;backdrop-filter:blur(8px)}
+.thumb-1{top:22px;left:8px;transform:rotate(-9deg);z-index:1}
+.thumb-2{top:92px;left:138px;transform:rotate(6deg);z-index:3}
+.thumb-3{top:168px;left:8px;transform:rotate(-3deg);z-index:2}
+.thumb-tilt:hover{transform:rotate(0deg) scale(1.06);z-index:4;box-shadow:0 22px 50px -14px rgba(9,9,11,0.28),0 8px 18px -4px rgba(9,9,11,0.1)}
+.thumb-tilt:hover img{transform:scale(1.04)}
+@media(max-width:1080px){.cover-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px}.thumb-tilt{width:144px;height:144px}.thumb-2{left:118px}.thumb-3{top:148px}.cover-thumbs{height:320px}}
+@media(max-width:900px){.cover-grid{grid-template-columns:1fr;gap:36px;margin-bottom:40px}.cover-thumbs{height:280px;max-width:380px;margin:0 auto}.thumb-tilt{width:150px;height:150px}.thumb-1{top:0;left:4%}.thumb-2{top:56px;left:36%}.thumb-3{top:112px;left:4%}}
+@media(max-width:480px){.cover-thumbs{height:260px;max-width:320px}.thumb-tilt{width:128px;height:128px;border-width:4px;border-radius:18px}.thumb-1{left:0;top:0}.thumb-2{left:42%;top:48px}.thumb-3{left:0;top:112px}}
+
+/* provenance */
+.provenance-line{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0}
+.provenance-line p{font-size:14px;color:var(--secondary);line-height:1.55;margin:0;max-width:980px}
+.provenance-line .pv-label{color:var(--muted);font-weight:500;margin-right:8px}
+.provenance-line .num{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+@media(max-width:720px){.provenance-line{padding:18px 0}.provenance-line p{font-size:13px}}
+
+/* section 01 inline stats */
+.section-stats{display:grid;grid-template-columns:repeat(6,1fr);padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:8px 0 40px}
+.section-stats>div{padding:0 22px;border-right:1px solid var(--border)}
+.section-stats>div:last-child{border-right:none}
+.section-stats .v{font-size:28px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;color:var(--text);font-variant-numeric:tabular-nums}
+.section-stats .ctx{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.section-stats .lbl{font-size:12px;color:var(--muted);margin-top:8px;font-weight:500}
+@media(max-width:900px){.section-stats{grid-template-columns:repeat(3,1fr);gap:0}.section-stats>div{padding:18px 18px;border-bottom:1px solid var(--border)}.section-stats>div:nth-child(3n){border-right:none}.section-stats>div:nth-last-child(-n+3){border-bottom:none}}
+@media(max-width:560px){.section-stats{grid-template-columns:repeat(2,1fr)}.section-stats>div{padding:16px}.section-stats>div:nth-child(2n){border-right:none}.section-stats>div:nth-child(3n){border-right:1px solid var(--border)}.section-stats>div:nth-last-child(-n+2){border-bottom:none}.section-stats .v{font-size:24px}}
+@media(max-width:480px){.section-stats{grid-template-columns:1fr}.section-stats>div{padding:16px 0!important;border-right:none!important;border-bottom:1px solid var(--border)}.section-stats>div:first-child{padding-top:0!important}.section-stats>div:last-child{border-bottom:none;padding-bottom:0!important}}
+
+/* player cards */
+.players{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:8px 0 32px}
+.player-card{border:1px solid var(--border);border-radius:24px;padding:20px 18px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.player-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.player-card.target{border:1.5px solid var(--brand-primary);background:linear-gradient(180deg,var(--brand-tint) 0%,#ffffff 60%)}
+.pc-eyebrow{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:9999px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--text);margin-bottom:12px}
+.pc-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-primary)}
+.pc-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid var(--border);padding:3px;opacity:1}
+.pc-logo-fallback{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px}
+.pc-name{font-size:14.5px;font-weight:600;line-height:1.15;color:var(--text);margin-top:10px;word-break:break-word}
+.pc-handle{font-size:11px;color:var(--muted);margin-bottom:14px}
+.pc-name.brandcolor{color:var(--brand-primary)}
+.stat-row{margin-bottom:12px}
+.stat-row .srlbl{font-size:12px;font-weight:500;color:var(--muted)}
+.stat-row .srval{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:3px}
+.stat-row .num{font-size:17px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;color:var(--text)}
+.rank-pill{display:inline-block;font-size:9.5px;font-weight:500;color:var(--text);border:1px solid var(--border);background:#fff;border-radius:9999px;padding:3px 8px;font-variant-numeric:tabular-nums;transform:scale(0);transition:transform 400ms cubic-bezier(0.34,1.56,0.64,1)}
+.rank-pill.is-in{transform:scale(1)}
+.rank-pill.top1{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.bar{height:5px;background:var(--soft);border-radius:4px;margin-top:7px;overflow:hidden}
+.bar>span{display:block;height:100%;width:0;border-radius:4px;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+.player-card .stat-row:nth-child(1) .bar>span{transition-delay:200ms}
+.player-card .stat-row:nth-child(2) .bar>span{transition-delay:280ms}
+.player-card .stat-row:nth-child(3) .bar>span{transition-delay:360ms}
+.player-card .stat-row:nth-child(4) .bar>span{transition-delay:440ms}
+.caption{font-size:12.5px;color:var(--muted);margin-top:4px}
+@media(max-width:900px){.players{grid-template-columns:repeat(2,1fr)}.player-card.target{grid-column:1/-1}}
+@media(max-width:560px){.players{grid-template-columns:1fr}}
+
+/* callout */
+.callout{position:relative;background:var(--surface);border-radius:16px;padding:22px 24px 22px 28px;border:1px solid var(--border);margin:28px 0 0}
+.callout::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;background:var(--brand-primary);border-radius:4px}
+.callout-label{display:block;font-size:13px;font-weight:500;color:var(--brand-primary);margin-bottom:10px}
+.callout p{font-size:15.5px;color:var(--text);margin:0;line-height:1.55}
+
+/* generic stat grid */
+.stat-grid{display:grid;gap:16px;margin:28px 0}
+.sg-3{grid-template-columns:repeat(3,1fr)}
+.sg-6{grid-template-columns:repeat(3,1fr)}
+@media(max-width:780px){.sg-3{grid-template-columns:1fr}.sg-6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.sg-6{grid-template-columns:1fr}}
+.stat{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.stat:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.stat.dark{background:var(--text);border-color:var(--text)}
+.stat.dark .slabel,.stat.dark .ssub{color:#A1A1AA}
+.stat.dark .sval{color:#fff}
+.slabel{font-size:12px;font-weight:500;color:var(--muted)}
+.sval{font-size:27px;font-weight:600;letter-spacing:-0.02em;color:var(--text);font-variant-numeric:tabular-nums;margin:8px 0 6px}
+.ssub{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+/* theme bars */
+.theme-row{margin:14px 0}
+.theme-head{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+.theme-head .tname{color:var(--text);font-weight:500}
+.theme-head .tcount{color:var(--muted);font-variant-numeric:tabular-nums}
+.theme-track{height:10px;background:var(--soft);border-radius:6px;overflow:hidden}
+.theme-bar-fill{height:100%;width:0;background:var(--brand-primary);border-radius:6px;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+
+/* chart */
+.chart-wrap{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;margin:24px 0}
+.chart-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:14px}
+.chart-canvas{position:relative;height:340px}
+.charts-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.charts-2{grid-template-columns:1fr}.chart-canvas{height:300px}}
+@media(max-width:560px){.chart-canvas{height:260px}}
+
+/* competitor table */
+.tbl-wrap{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border)}
+th{font-size:12px;font-weight:500;color:var(--muted)}
+td{color:var(--secondary);font-variant-numeric:tabular-nums}
+tr.target-row{background:rgba(213,64,61,0.06)}
+.tbl-brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:500}
+.tbl-logo{width:22px;height:22px;border-radius:6px;object-fit:contain;background:#fff;border:1px solid var(--border);opacity:1}
+@media(max-width:760px){.col-hide{display:none}}
+
+/* competitor cards */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:780px){.comp-grid{grid-template-columns:1fr}}
+.cc{border:1px solid var(--border);border-radius:14px;padding:22px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.cc:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.cc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.cc-logo{width:36px;height:36px;border-radius:9px;object-fit:contain;background:#fff;border:1px solid var(--border);padding:2px;opacity:1}
+.cc-name{font-size:16px;font-weight:600;color:var(--text)}
+.cc p{font-size:14px;margin-bottom:12px}
+.strats{font-size:12.5px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--border);padding-top:12px}
+.strats .lbl{display:inline-flex;align-items:center;gap:6px;color:var(--secondary)}
+.strats .lbl::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-primary);display:inline-block}
+.strats .empty{font-style:italic;color:var(--muted);font-size:12px}
+
+/* multi-play operators */
+.mpo{margin:32px 0 0}
+.mpo-head{font-size:14px;color:var(--secondary);font-weight:500;margin-bottom:14px}
+.mpo .item{display:flex;align-items:flex-start;gap:14px;border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.mpo .item:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.mpo .item img{width:32px;height:32px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--border);padding:2px;opacity:1;flex-shrink:0}
+.mpo .item .mname{font-size:15px;font-weight:600;color:var(--text)}
+.mpo .item .mline{font-size:13.5px;color:var(--secondary);margin-top:4px}
+
+/* sx-link */
+.sx-link{color:inherit;text-decoration:underline;text-decoration-color:var(--brand-primary);text-decoration-style:dotted;text-decoration-thickness:1px;text-underline-offset:3px;transition:color 150ms ease,text-decoration-style 150ms ease}
+.sx-link:hover{color:var(--brand-primary);text-decoration-style:solid}
+
+/* ads gallery */
+.ad-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:16px;overflow-x:auto;padding-bottom:12px;margin:24px 0;scroll-snap-type:x mandatory}
+.ad-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;scroll-snap-align:start;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.ad-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.ad-card .thumb{height:180px;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.ad-card .thumb img{width:100%;height:100%;object-fit:cover}
+.ad-card .body{padding:14px}
+.ad-badge{display:inline-block;font-size:10px;font-weight:500;color:var(--brand-primary);background:var(--brand-tint);border-radius:9999px;padding:3px 8px;margin-bottom:8px}
+.ad-card .abr{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.ad-card .abr img{width:18px;height:18px;border-radius:5px;object-fit:contain;opacity:1}
+.ad-card .adays{font-size:12px;color:var(--muted)}
+.ad-card .ahook{font-size:12.5px;color:var(--secondary);margin-top:8px;line-height:1.4}
+.ad-card a{font-size:12px;color:var(--brand-primary);text-decoration:none;display:inline-block;margin-top:10px}
+
+/* post grid */
+.post-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:20px 0}
+@media(max-width:980px){.post-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.post-grid{grid-template-columns:1fr}}
+.post-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.post-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.post-card.is-highlight{border-color:var(--brand-primary)}
+.post-card .thumb{height:150px;overflow:hidden;background:var(--surface)}
+.post-card .thumb img{width:100%;height:100%;object-fit:cover}
+.post-card .pbody{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.post-rank{font-size:11px;font-weight:500;color:var(--muted)}
+.post-likes{font-size:22px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.post-meta{font-size:12px;color:var(--muted)}
+.post-desc{font-size:12.5px;color:var(--secondary);line-height:1.45}
+.post-card a{font-size:12px;color:var(--brand-primary);text-decoration:none;margin-top:auto}
+
+/* shortlist */
+.sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:780px){.sl-grid{grid-template-columns:1fr}}
+.sl{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.sl:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.sl-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sl-av{width:46px;height:46px;border-radius:50%;object-fit:cover;background:var(--surface);opacity:1;flex-shrink:0}
+.sl-hname{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
+.sl-real{font-size:12.5px;color:var(--muted)}
+.sl-badge{font-size:10px;font-weight:500;color:var(--brand-primary);background:var(--brand-tint);border-radius:9999px;padding:3px 8px;margin-left:auto}
+.sl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+@media(max-width:780px){.sl-stats{grid-template-columns:repeat(2,1fr)}}
+.sl-stats .k{font-size:11px;color:var(--muted)}
+.sl-stats .vv{font-size:15px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;margin-top:2px}
+.sl .why{font-size:13px;color:var(--secondary);line-height:1.5}
+.sl .why a{color:var(--brand-primary);text-decoration:none}
+.sl-over{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* inspiration gallery */
+.insp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
+@media(max-width:980px){.insp-grid{grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}}
+.insp{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;scroll-snap-align:start;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.insp:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.insp .ihead{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.insp .ihead img{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:1}
+.insp .ih{font-size:12px;font-weight:600;color:var(--text);word-break:break-word}
+.insp .iv{font-size:18px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.insp .im{font-size:11px;color:var(--muted)}
+.insp a{font-size:11px;color:var(--brand-primary);text-decoration:none;display:block;margin-top:8px}
+
+/* opportunities */
+.opp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:880px){.opp-grid{grid-template-columns:1fr}}
+.opp{border:1px solid var(--border);border-radius:14px;padding:26px;background:#fff;display:flex;flex-direction:column;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.opp:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(213,64,61,0.4)}
+.opp .oeyebrow{font-size:12px;font-weight:600;color:var(--brand-primary);letter-spacing:0.02em;margin-bottom:10px}
+.opp h3{font-size:18px;font-weight:600;margin-bottom:10px}
+.opp p{font-size:14px;margin-bottom:10px}
+.opp .ostat{font-size:30px;font-weight:600;color:var(--brand-primary);letter-spacing:-0.02em;font-variant-numeric:tabular-nums;margin-top:auto}
+.opp .ostatlbl{font-size:12px;color:var(--muted);margin-top:4px}
+.opp .obacked{font-size:11px;color:var(--muted);margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+
+/* closing */
+.closing{background:var(--surface);border:1px solid var(--border);border-radius:24px;max-width:720px;margin:48px auto 12px;padding:48px 40px;text-align:left}
+.closing-lead{font-size:18px;color:var(--text);line-height:1.55;margin-bottom:28px}
+.closing h4{font-size:16px;font-weight:600;color:var(--text);margin:0 0 12px}
+.closing-sup{font-size:15px;color:var(--muted);line-height:1.65;margin:0}
+.booking{font-size:15px;color:var(--secondary);font-weight:500;text-align:center;max-width:720px;margin:0 auto 64px;padding:0 20px}
+.booking a{color:var(--secondary);text-decoration:underline}
+@media(max-width:720px){.closing{max-width:calc(100% - 40px);padding:32px 24px}}
+.footer{text-align:center;padding:40px 0 60px;font-size:13px;color:var(--muted);border-top:1px solid var(--border)}
+
+/* wave */
+@keyframes wave-wiggle{0%{transform:rotate(0)}15%{transform:rotate(-20deg)}30%{transform:rotate(20deg)}45%{transform:rotate(-10deg)}60%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0)}}
+.wave{display:inline-block;transform-origin:70% 70%}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}
+.reveal.is-in{opacity:1;transform:translateY(0)}
+.stagger>*{opacity:0;transform:translateY(12px);transition:opacity 500ms cubic-bezier(0.16,1,0.3,1),transform 500ms cubic-bezier(0.16,1,0.3,1)}
+.stagger.is-in>*:nth-child(1){transition-delay:0ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(2){transition-delay:80ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(3){transition-delay:160ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(4){transition-delay:240ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(5){transition-delay:320ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(6){transition-delay:400ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(n+7){transition-delay:480ms;opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <span class="sup-pill"><span class="wave">👋</span> Sup</span>
+      <span class="nav-divider"></span>
+      <img class="nav-logo" src="https://first-possum-672.convex.cloud/api/storage/a69d8e55-00d0-4610-8da7-713f12e6144e" alt="Rizz Superfood Gummies">
+    </div>
+    <div class="nav-mid">
+      <a href="#benchmark">Benchmark</a>
+      <a href="#influencer">Influencer</a>
+      <a href="#competitors">Competitors</a>
+      <a href="#paid">Paid</a>
+      <a href="#feed">Feed</a>
+      <a href="#shortlist">Shortlist</a>
+      <a href="#opportunity">Opportunity</a>
+    </div>
+    <div class="nav-cta"><a href="#opportunity">View opportunity</a></div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="container">
+    <span class="pill-eyebrow reveal"><span class="green-dot"></span> Influencer marketing intelligence report</span>
+    <div class="cover-grid">
+      <div class="reveal">
+        <h1>
+          <span class="s">Rizz Superfood Gummies and the DTC supplements &amp; wellness category.</span>
+          <span class="s">Where they sit, <span class="brand-emphasis">and the creator landscape around them</span>.</span>
+        </h1>
+        <p class="cover-sub">A look at how a high-output gummy brand stands against the category on paid, organic, own content, and the creators driving the conversation.</p>
+      </div>
+      <div class="cover-thumbs reveal">
+        <a class="thumb-tilt thumb-1" href="https://www.instagram.com/p/DVtXVkkjnbC/" target="_blank" rel="noopener">
+          <img src="https://first-possum-672.convex.cloud/api/storage/80085f4e-9f7e-4cc6-8f1c-e94e98ae2102" alt="Top Rizz post">
+          <span class="stamp">129 likes</span>
+        </a>
+        <a class="thumb-tilt thumb-2" href="https://www.tiktok.com/@rizz.gummies/video/7625365090430176525" target="_blank" rel="noopener">
+          <img src="https://first-possum-672.convex.cloud/api/storage/2d95926a-5ea6-4735-bf2d-1390f7f9f45e" alt="Rizz TikTok post">
+          <span class="stamp">88 likes</span>
+        </a>
+        <a class="thumb-tilt thumb-3" href="https://www.tiktok.com/@rizz.gummies/video/7616397264071789855" target="_blank" rel="noopener">
+          <img src="https://first-possum-672.convex.cloud/api/storage/8b424d9e-30be-436b-a89a-097afbfb07cf" alt="Rizz TikTok post">
+          <span class="stamp">74 likes</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROVENANCE -->
+<div class="provenance-line">
+  <div class="container">
+    <p><span class="pv-label">What we analysed:</span> <span class="num">128</span> brands in the DTC supplements &amp; wellness niche, <span class="num">144</span> top creators across Instagram and TikTok, and <span class="num">100</span> top niche ad creatives, over a <span class="num">69-day</span> category window (7 March 2026 to 15 May 2026) and a matching brand window covering Rizz's own feed and Creator Tagged Posts.</p>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<section id="benchmark" class="section">
+  <div class="container">
+    <div class="section-label reveal">01 · Market benchmark</div>
+    <h2 class="reveal">A large social peer set, and Rizz sitting near the bottom of it on creator reach.</h2>
+
+    <div class="section-stats reveal">
+      <div><div class="v" data-count="412" data-format="comma">412</div><div class="ctx">rank 120 of 128 (top 94%)</div><div class="lbl">Instagram followers</div></div>
+      <div><div class="v" data-count="0">0</div><div class="ctx">rank 99 of 128 (top 78%)</div><div class="lbl">Creator Tagged Posts (69d)</div></div>
+      <div><div class="v" data-count="0">0</div><div class="ctx">rank 103 of 128 (top 81%)</div><div class="lbl">Total Creator Views (69d)</div></div>
+      <div><div class="v" data-count="0">0</div><div class="ctx">vs category leader Goli at 229 live creatives</div><div class="lbl">Active Meta ads</div></div>
+      <div><div class="v" data-count="70">70</div><div class="ctx">7.2 per week across IG and TikTok</div><div class="lbl">Own-feed posts (69d)</div></div>
+      <div><div class="v">10 days</div><div class="ctx">vs category top of 968 days (Organic India)</div><div class="lbl">Longest ad runtime</div></div>
+    </div>
+
+    <div class="players stagger reveal">
+      <!-- target -->
+      <div class="player-card target">
+        <span class="pc-eyebrow"><span class="dot"></span> Target brand</span><br>
+        <img class="pc-logo" src="https://first-possum-672.convex.cloud/api/storage/a69d8e55-00d0-4610-8da7-713f12e6144e" alt="Rizz" onerror="this.style.display='none'">
+        <div class="pc-name brandcolor">Rizz Superfood Gummies</div>
+        <div class="pc-handle">@rizz_nutrition</div>
+        <div class="stat-row"><div class="srlbl">Instagram followers</div><div class="srval"><span class="num" data-count="412" data-format="comma">412</span><span class="rank-pill">#120 of 128</span></div><div class="bar"><span data-width="0.1" style="background:var(--brand-primary)"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="0">0</span><span class="rank-pill">#99 of 128</span></div><div class="bar"><span data-width="0" style="background:var(--brand-primary)"></span></div></div>
+        <div class="stat-row"><div class="srlbl">TikTok followers</div><div class="srval"><span class="num" data-count="80">80</span><span class="rank-pill">#73 of 128</span></div><div class="bar"><span data-width="0.1" style="background:var(--brand-primary)"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="0">0</span><span class="rank-pill">#103 of 128</span></div><div class="bar"><span data-width="0" style="background:var(--brand-primary)"></span></div></div>
+      </div>
+      <!-- Lemme -->
+      <div class="player-card">
+        <img class="pc-logo" src="https://first-possum-672.convex.cloud/api/storage/97ee2b59-2aba-46fa-b4f7-4d0fb603f926" alt="Lemme" onerror="this.style.display='none'">
+        <div class="pc-name">Lemme</div><div class="pc-handle">@lemme</div>
+        <div class="stat-row"><div class="srlbl">Instagram followers</div><div class="srval"><span class="num" data-count="723319" data-format="compact">723K</span><span class="rank-pill top1">#5 of 128</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="225">225</span><span class="rank-pill">#2 of 128</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+        <div class="stat-row"><div class="srlbl">TikTok followers</div><div class="srval"><span class="num" data-count="802500" data-format="compact">802K</span><span class="rank-pill">#3 of 128</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="8110521" data-format="compact">8.1M</span><span class="rank-pill">#2 of 128</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+      </div>
+      <!-- Olly -->
+      <div class="player-card">
+        <img class="pc-logo" src="https://first-possum-672.convex.cloud/api/storage/94fb08ec-21bb-4125-88a9-e5dbec65b82f" alt="Olly" onerror="this.style.display='none'">
+        <div class="pc-name">Olly</div><div class="pc-handle">@ollywellness</div>
+        <div class="stat-row"><div class="srlbl">Instagram followers</div><div class="srval"><span class="num" data-count="263831" data-format="compact">264K</span><span class="rank-pill">#22 of 128</span></div><div class="bar"><span data-width="36.5" style="background:#1D9E75"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="63">63</span><span class="rank-pill">#11 of 128</span></div><div class="bar"><span data-width="28" style="background:#1D9E75"></span></div></div>
+        <div class="stat-row"><div class="srlbl">TikTok followers</div><div class="srval"><span class="num" data-count="167500" data-format="compact">168K</span><span class="rank-pill">#11 of 128</span></div><div class="bar"><span data-width="20.9" style="background:#1D9E75"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="1867241" data-format="compact">1.9M</span><span class="rank-pill">#12 of 128</span></div><div class="bar"><span data-width="23" style="background:#1D9E75"></span></div></div>
+      </div>
+      <!-- Goli -->
+      <div class="player-card">
+        <img class="pc-logo" src="https://first-possum-672.convex.cloud/api/storage/8735788d-a96b-4fb0-a67a-6195f878b88e" alt="Goli" onerror="this.style.display='none'">
+        <div class="pc-name">Goli</div><div class="pc-handle">@GoliNutrition</div>
+        <div class="stat-row"><div class="srlbl">Instagram followers</div><div class="srval"><span class="num" data-count="553027" data-format="compact">553K</span><span class="rank-pill">#9 of 128</span></div><div class="bar"><span data-width="76.5" style="background:#D85A30"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="27">27</span><span class="rank-pill">#25 of 128</span></div><div class="bar"><span data-width="12" style="background:#D85A30"></span></div></div>
+        <div class="stat-row"><div class="srlbl">TikTok followers</div><div class="srval"><span class="num" data-count="541300" data-format="compact">541K</span><span class="rank-pill">#4 of 128</span></div><div class="bar"><span data-width="67.4" style="background:#D85A30"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="83570" data-format="compact">84K</span><span class="rank-pill">#49 of 128</span></div><div class="bar"><span data-width="1" style="background:#D85A30"></span></div></div>
+      </div>
+      <!-- Waterboy -->
+      <div class="player-card">
+        <img class="pc-logo" src="https://first-possum-672.convex.cloud/api/storage/bdf189d2-e5af-4542-bb53-ed97540ee345" alt="Waterboy" onerror="this.style.display='none'">
+        <div class="pc-name">Waterboy</div><div class="pc-handle">@waterboycan</div>
+        <div class="stat-row"><div class="srlbl">Instagram followers</div><div class="srval"><span class="num" data-count="137913" data-format="compact">138K</span><span class="rank-pill">#44 of 128</span></div><div class="bar"><span data-width="19.1" style="background:#378ADD"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="64">64</span><span class="rank-pill">#9 of 128</span></div><div class="bar"><span data-width="28.4" style="background:#378ADD"></span></div></div>
+        <div class="stat-row"><div class="srlbl">TikTok followers</div><div class="srval"><span class="num" data-count="326000" data-format="compact">326K</span><span class="rank-pill">#6 of 128</span></div><div class="bar"><span data-width="40.6" style="background:#378ADD"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="3474069" data-format="compact">3.5M</span><span class="rank-pill">#5 of 128</span></div><div class="bar"><span data-width="42.8" style="background:#378ADD"></span></div></div>
+      </div>
+    </div>
+    <div class="caption reveal">The DTC supplements &amp; wellness cohort, brand by brand · 69-day niche window. Locations swapped for TikTok followers because all five are DTC with zero retail.</div>
+
+    <p class="lead-narrow reveal">Rizz sits in the bottom slice of the niche on every creator metric: rank 120 of 128 by Instagram followers, and rank 99 and 103 of 128 by Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) and Total Creator Views. The four brands beside it, Lemme, Olly, Goli and Waterboy, each carry six-figure followings and dozens to hundreds of creator posts. The social footprint and the creator conversation are not close to lined up yet.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">Where Rizz sits</span>
+      <p>The gap is not that Rizz is quiet, it posts about 7 times a week, but that none of that output is being carried by anyone other than Rizz itself, which is exactly what the next section looks at.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02 INFLUENCER INTELLIGENCE -->
+<section id="influencer" class="section">
+  <div class="container">
+    <div class="section-label reveal">02 · Influencer intelligence</div>
+    <h2 class="reveal">The output of a creator brand, with none of the creators yet.</h2>
+
+    <div class="stat-grid sg-3 stagger reveal">
+      <div class="stat"><div class="slabel">Creator Tagged Posts (69d)</div><div class="sval" data-count="0">0</div><div class="ssub">zero creators tagged Rizz inside the window</div></div>
+      <div class="stat"><div class="slabel">Unpaid earned mentions, all-time</div><div class="sval" data-count="7">7</div><div class="ssub">all landed before the window, the newest on 3 March</div></div>
+      <div class="stat dark"><div class="slabel">Best past mention</div><div class="sval" data-count="59759" data-format="compact">60K</div><div class="ssub">views on one October 2025 creator testimonial</div></div>
+    </div>
+
+    <p class="reveal lead-narrow">We kept looking for the creator conversation around Rizz and could not find one inside the 69-day window. There were no Creator Tagged Posts on Instagram or TikTok in that period. What does exist is just outside it: six unpaid Instagram posts and one TikTok between late October 2025 and 3 March 2026, including a one-gummy-a-day testimonial from @alexxmara that pulled 59.7K views. The earned-mention engine has clearly fired before; it has simply gone quiet.</p>
+
+    <p class="reveal lead-narrow">That makes the read on paid versus organic unusual. With zero paid creator posts and zero organic ones in the window, this is a <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned-mention engine</a> sitting idle rather than a programme being run badly. The surprising part is that the content itself looks like creator content. Reading through the brand's own 70 posts, more than eight in ten are filmed as single-person, phone-first UGC, the exact format the category pays creators to produce.</p>
+
+    <div class="chart-title reveal" style="margin-top:8px">What Rizz talks about, on its own feed (69-day brand window)</div>
+    <div class="reveal">
+      <div class="theme-row"><div class="theme-head"><span class="tname">Relatable wellness humour &amp; memes</span><span class="tcount">29 posts · 41%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="100"></div></div></div>
+      <div class="theme-row"><div class="theme-head"><span class="tname">Direct product promotion</span><span class="tcount">17 posts · 24%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="59"></div></div></div>
+      <div class="theme-row"><div class="theme-head"><span class="tname">Aspirational glow-up &amp; habit-stacking</span><span class="tcount">7 posts · 10%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="24"></div></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">The audience the content reaches for is consistent: health-conscious Gen Z and Millennial women chasing convenient wellness (about 55% of the personas the posts target), then busy Type-A professionals worried about digestion and energy, then internet-culture natives who reward self-deprecating humour. It is a coherent voice. What it lacks is anyone outside the brand carrying it.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Dormant Engine</span>
+      <p>Rizz already produces creator-style content and has earned real mentions before, the 59.7K-view testimonial being the clearest, yet across the 69-day window not a single creator tagged the brand. The voice exists; the distribution does not.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03 COMPETITOR DEEP-DIVE -->
+<section id="competitors" class="section">
+  <div class="container">
+    <div class="section-label reveal">03 · Competitor deep-dive</div>
+    <h2 class="reveal">Across the 69-day niche window, the category leaders are stacking creator plays while Rizz runs none.</h2>
+
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Brand</th><th>IG followers</th><th>Creator Tagged Posts</th><th class="col-hide">Unique creators</th><th class="col-hide">Total Creator Views</th><th>Strategies detected</th></tr></thead>
+        <tbody>
+          <tr class="target-row"><td><div class="tbl-brand"><img class="tbl-logo" src="https://first-possum-672.convex.cloud/api/storage/a69d8e55-00d0-4610-8da7-713f12e6144e" alt="" onerror="this.style.display='none'">Rizz Superfood Gummies</div></td><td>412</td><td>0</td><td class="col-hide">0</td><td class="col-hide">0</td><td>0</td></tr>
+          <tr><td><div class="tbl-brand"><img class="tbl-logo" src="https://first-possum-672.convex.cloud/api/storage/97ee2b59-2aba-46fa-b4f7-4d0fb603f926" alt="" onerror="this.style.display='none'">Lemme</div></td><td>723K</td><td>225</td><td class="col-hide">200</td><td class="col-hide">8.1M</td><td>1</td></tr>
+          <tr><td><div class="tbl-brand"><img class="tbl-logo" src="https://first-possum-672.convex.cloud/api/storage/94fb08ec-21bb-4125-88a9-e5dbec65b82f" alt="" onerror="this.style.display='none'">Olly</div></td><td>264K</td><td>63</td><td class="col-hide">62</td><td class="col-hide">1.9M</td><td>2</td></tr>
+          <tr><td><div class="tbl-brand"><img class="tbl-logo" src="https://first-possum-672.convex.cloud/api/storage/8735788d-a96b-4fb0-a67a-6195f878b88e" alt="" onerror="this.style.display='none'">Goli</div></td><td>553K</td><td>27</td><td class="col-hide">18</td><td class="col-hide">84K</td><td>2</td></tr>
+          <tr><td><div class="tbl-brand"><img class="tbl-logo" src="https://first-possum-672.convex.cloud/api/storage/bdf189d2-e5af-4542-bb53-ed97540ee345" alt="" onerror="this.style.display='none'">Waterboy</div></td><td>138K</td><td>64</td><td class="col-hide">52</td><td class="col-hide">3.5M</td><td>3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="comp-grid stagger reveal">
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/97ee2b59-2aba-46fa-b4f7-4d0fb603f926" alt="" onerror="this.style.display='none'"><span class="cc-name">Lemme</span></div>
+        <p>The category's creator giant. Lemme pulled 225 Creator Tagged Posts and 8.1M Total Creator Views in the window, more than any brand in the niche, by feeding its grid with a steady supply of creator video.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/94fb08ec-21bb-4125-88a9-e5dbec65b82f" alt="" onerror="this.style.display='none'"><span class="cc-name">Olly</span></div>
+        <p>The closest format twin to Rizz, a gummy-vitamin brand, running two plays at once: creator video for its feed plus a press and brand-trips motion that added 14 Creator Tagged Posts and 1.1M views.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/8735788d-a96b-4fb0-a67a-6195f878b88e" alt="" onerror="this.style.display='none'"><span class="cc-name">Goli</span></div>
+        <p>The paid powerhouse with the creator pipeline to match. Goli runs an always-on retainer signal alongside a brand-affiliated creator channel, keeping named voices producing on a repeatable rhythm.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s04" target="_blank" rel="noopener">Alt-Handle / Brand-Affiliated Creator Channel</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://first-possum-672.convex.cloud/api/storage/bdf189d2-e5af-4542-bb53-ed97540ee345" alt="" onerror="this.style.display='none'"><span class="cc-name">Waterboy</span></div>
+        <p>The widest stack in this set. Waterboy layers a long-term ambassador programme (17 Creator Tagged Posts, 2.1M views) on top of creator feed video and brand trips, three plays running together.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a></div>
+      </div>
+    </div>
+
+    <div class="mpo reveal">
+      <div class="mpo-head">Multi-play operators · brands running 3+ plays</div>
+      <div class="item">
+        <img src="https://first-possum-672.convex.cloud/api/storage/bdf189d2-e5af-4542-bb53-ed97540ee345" alt="" onerror="this.style.display='none'">
+        <div><div class="mname">Waterboy</div><div class="mline">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a>.</div></div>
+      </div>
+      <div class="item">
+        <img src="https://first-possum-672.convex.cloud/api/storage/f906b42c-386b-4e2a-a54e-48c6e435192d" alt="" onerror="this.style.display='none'">
+        <div><div class="mname">Orgain</div><div class="mline">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">Creator Collective / Volume Model</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s17" target="_blank" rel="noopener">Press &amp; Brand Trips</a>.</div></div>
+      </div>
+    </div>
+
+    <div class="chart-wrap reveal">
+      <div class="chart-title">Total Creator Views in the window, by brand</div>
+      <div class="chart-canvas"><canvas id="compChart"></canvas></div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Category Playbook</span>
+      <p>Eight of the eleven creator strategies tracked in this niche are running on at least one competitor, and Waterboy and Orgain each stack three at once; Rizz is detected on none of them, which is the whole opportunity later in this report.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04 CREATOR CONTENT IN PAID -->
+<section id="paid" class="section">
+  <div class="container">
+    <div class="section-label reveal">04 · Creator content in paid</div>
+    <h2 class="reveal">The category's paid spend runs on creator content. Rizz's does not yet.</h2>
+
+    <div class="stat-grid sg-6 stagger reveal">
+      <div class="stat"><div class="slabel">Active ad creatives in niche</div><div class="sval" data-count="4699" data-format="comma">4,699</div><div class="ssub">across 77 advertisers</div></div>
+      <div class="stat"><div class="slabel">Creator-shot share of survivors</div><div class="sval" data-count="46" data-suffix="%">46%</div><div class="ssub">of the longest-running creatives are creator-led</div></div>
+      <div class="stat"><div class="slabel">60+ day survival rate</div><div class="sval" data-count="11" data-suffix="%">11%</div><div class="ssub">matches the wider industry benchmark</div></div>
+      <div class="stat"><div class="slabel">UGC share of 60+ day winners</div><div class="sval" data-count="42" data-suffix="%">42%</div><div class="ssub">UGC over-indexes among ads that last</div></div>
+      <div class="stat dark"><div class="slabel">Rizz active creator-shot ads</div><div class="sval" data-count="0">0</div><div class="ssub">12 tested, none currently live</div></div>
+      <div class="stat"><div class="slabel">Advertisers testing at cadence</div><div class="sval" data-count="42">42</div><div class="ssub">running 10+ live, mostly under 30 days old</div></div>
+    </div>
+
+    <div class="charts-2">
+      <div class="chart-wrap reveal"><div class="chart-title">Where creatives live and die, by days running</div><div class="chart-canvas"><canvas id="longevityChart"></canvas></div></div>
+      <div class="chart-wrap reveal"><div class="chart-title">What survives past 60 days, by style</div><div class="chart-canvas"><canvas id="winnersChart"></canvas></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Start with scale. Across the niche there are 4,699 active ad creatives from 77 advertisers, and only about 11% of all creatives survive past 60 days, in line with the wider industry. The interesting question is what makes that 11%. Among the longest-running creatives, creator-shot UGC is the single most common style at 42%, over-indexing against its 38% share of the full set, and video over-indexes too. The ads that last in this category are filmed by people, not studios.</p>
+
+    <p class="reveal lead-narrow">The same pattern shows up in specific clusters. Four unrelated brands, <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a> being the common thread, run single-creator testimonial ads that open on a curiosity gap or a price-error hook, each surviving past 60 days. Organic India has one such UGC creative running for 968 days. Theweem keeps three past 430 days. This is durable, compounding creative, not a one-off.</p>
+
+    <div class="ad-grid stagger reveal">
+      <div class="ad-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/378a1518-7ac5-4500-b741-0bbf395ef57e" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr"><img src="https://first-possum-672.convex.cloud/api/storage/868c8e05-21a9-44d8-ab37-1f31866aa8fd" alt="" onerror="this.style.display='none'">Organic India USA</div><div class="adays">968 days running · UGC video</div><div class="ahook">Creator explains ashwagandha as an adaptogen over harvest footage.</div><a href="https://www.facebook.com/ads/library?id=323908246854571" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/5e8cd49f-b2ea-4074-8872-a98599d6f1a5" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr"><img src="https://first-possum-672.convex.cloud/api/storage/868c8e05-21a9-44d8-ab37-1f31866aa8fd" alt="" onerror="this.style.display='none'">Organic India USA</div><div class="adays">881 days running · UGC video</div><div class="ahook">Contrarian "stop going to the beach" hook over a beach scene.</div><a href="https://www.facebook.com/ads/library?id=682877500683952" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/13fc8022-5195-4894-baf7-70afa48fe0e0" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr"><img src="https://first-possum-672.convex.cloud/api/storage/868c8e05-21a9-44d8-ab37-1f31866aa8fd" alt="" onerror="this.style.display='none'">Organic India USA</div><div class="adays">877 days running · UGC video</div><div class="ahook">Aesthetic mocktail tutorial built around the product.</div><a href="https://www.facebook.com/ads/library?id=1427748328123400" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/1e6f5def-313c-46c8-a7a6-691f11097f1f" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr"><img src="https://first-possum-672.convex.cloud/api/storage/ffbf951a-906a-4df4-96c1-4cc68e704604" alt="" onerror="this.style.display='none'">Theweem</div><div class="adays">433 days running · UGC video</div><div class="ahook">Price-anchoring: a $20 gummy that beat $100 alternatives.</div><a href="https://www.facebook.com/ads/library?id=1432840131029156" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/ed1feaf1-8a53-46cd-8399-cae7a819effe" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr"><img src="https://first-possum-672.convex.cloud/api/storage/dc35aeea-5969-49c5-a513-2bd6b545d0f6" alt="" onerror="this.style.display='none'">Cymbiotika</div><div class="adays">315 days running · UGC video</div><div class="ahook">Wellness creator makes a "beauty creamer" with the product.</div><a href="https://www.facebook.com/ads/library?id=1040722224938010" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4c80e1a5-55b3-42c0-9f51-32505131bd46" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr"><img src="https://first-possum-672.convex.cloud/api/storage/8735788d-a96b-4fb0-a67a-6195f878b88e" alt="" onerror="this.style.display='none'">Goli</div><div class="adays">267 days running · UGC video</div><div class="ahook">"Price-error" curiosity hook on a probiotic gummy three-pack.</div><a href="https://www.facebook.com/ads/library?id=1780895335862519" target="_blank" rel="noopener">View ad ↗</a></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Who is commissioning at volume? Forty-two advertisers run 10 or more live creatives with most refreshed inside the last 30 days, JSHealth at 356 active, Gruns at 334, Goli at 229, several at a 100% fresh-creative pace. They are testing at a cadence only a creator pipeline can feed.</p>
+
+    <p class="reveal lead-narrow">Where does Rizz sit? It has tested 12 ad creatives, and the instinct is right, eight of the twelve were creator-shot UGC. But every one expired inside 10 days and none is live now. The idea is correct; the volume and the persistence are not there yet.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Commissioning Gap</span>
+      <p>42 advertisers in the category are each running 10+ live creatives with the majority refreshed in the last 30 days. Rizz has tested 12 and currently runs none. The gap is not budget; it is a creator pipeline producing enough variants to test at category cadence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05 FEED CONTENT STRATEGY -->
+<section id="feed" class="section">
+  <div class="container">
+    <div class="section-label reveal">05 · Feed content strategy</div>
+    <h2 class="reveal">Your videos earn 6 times the likes of your static posts. Three in ten posts are still static.</h2>
+
+    <div class="stat-grid sg-3 stagger reveal">
+      <div class="stat"><div class="slabel">Top own-feed post</div><div class="sval" data-count="129">129</div><div class="ssub">likes on a what-I-eat-in-a-day vlog</div></div>
+      <div class="stat"><div class="slabel">Video vs static likes</div><div class="sval" data-count="6" data-suffix="×">6×</div><div class="ssub">18 avg likes on video vs 3 on static</div></div>
+      <div class="stat dark"><div class="slabel">Feed that is static</div><div class="sval" data-count="30" data-suffix="%">30%</div><div class="ssub">21 of 70 posts are carousel or photo</div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Across the 69-day brand window Rizz published 70 posts, split 49 videos, 8 carousels and 13 photos or photo slideshows, at about 7 a week. The average post draws 14 likes and the typical post just 3, numbers that read as a small account still finding reach. Underneath those averages, though, there is a clear signal about what the audience actually rewards.</p>
+
+    <p class="reveal lead-narrow">By content pillar, the brand's relatable wellness humour is both the most published (29 posts) and a strong performer at 21 average likes. Its aspirational glow-up content does slightly better per post at 25 likes across 7 posts. The drag is direct product promotion: 17 posts, nearly a quarter of the feed, averaging just 6 likes. The lowest-performing material is also among the most published, and the format split tells the same story even more sharply.</p>
+
+    <div class="charts-2">
+      <div class="chart-wrap reveal"><div class="chart-title">Average likes by content pillar</div><div class="chart-canvas"><canvas id="pillarLikes"></canvas></div></div>
+      <div class="chart-wrap reveal"><div class="chart-title">Posts by pillar, the distribution gap</div><div class="chart-canvas"><canvas id="pillarCount"></canvas></div></div>
+    </div>
+
+    <h3 class="reveal" style="margin:32px 0 4px;font-size:20px">The five posts your audience picked</h3>
+    <p class="reveal" style="font-size:14px;max-width:680px">Read these as a creative brief. They are the posts Rizz's own audience rewarded most, and every one is video.</p>
+    <div class="post-grid stagger reveal">
+      <div class="post-card is-highlight"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/80085f4e-9f7e-4cc6-8f1c-e94e98ae2102" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">01 · Relatable/Meme</div><div class="post-likes" data-count="129">129</div><div class="post-meta">7 comments · Video</div><div class="post-desc">A high-energy what-I-eat-in-a-day vlog balancing healthy meals with the chaos of being a mother and CEO, Rizz folded into the routine.</div><a href="https://www.instagram.com/p/DVtXVkkjnbC/" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/2d95926a-5ea6-4735-bf2d-1390f7f9f45e" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">02 · Inspirational</div><div class="post-likes" data-count="88">88</div><div class="post-meta">0 comments · Video</div><div class="post-desc">A wellness lifestyle clip listing positive daily habits and goals to inspire a glow-up, using Rizz as the easy nutrition step.</div><a href="https://www.tiktok.com/@rizz.gummies/video/7625365090430176525" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/8b424d9e-30be-436b-a89a-097afbfb07cf" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">03 · Relatable/Meme</div><div class="post-likes" data-count="74">74</div><div class="post-meta">0 comments · Video</div><div class="post-desc">A simple before-and-after transition showing the mood and energy shift from a morning snack and functional drink, anchored on Rizz.</div><a href="https://www.tiktok.com/@rizz.gummies/video/7616397264071789855" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/3ccd3eea-a34b-4e6c-afeb-3cdb7a45329d" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">04 · Inspirational</div><div class="post-likes" data-count="59">59</div><div class="post-meta">0 comments · Video</div><div class="post-desc">A rhythmic affirmation clip where the creator applies lip gloss in time to an upbeat gratitude song, Rizz as the wellness prop.</div><a href="https://www.tiktok.com/@rizz.gummies/video/7617945748616858911" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/91fd69ab-f384-4ea0-9960-873b8a62c8dd" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">05 · Relatable/Meme</div><div class="post-likes" data-count="58">58</div><div class="post-meta">0 comments · Video</div><div class="post-desc">A two-character comedy skit reminding the viewer about a low-sugar, healthy gummy snack the creator keeps reaching for.</div><a href="https://www.tiktok.com/@rizz.gummies/video/7631295130045041950" target="_blank" rel="noopener">View post ↗</a></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">All five of the top posts are video, and across the whole window video averages 18 likes against 3 for carousels and photo slideshows. The pattern is the familiar one for early brands: the lighter, more personal, phone-first formats outrun the polished static ones. The top post at 129 likes is roughly 9 times the typical post in the dominant humour pillar.</p>
+
+    <p class="reveal lead-narrow">The instruction the data is giving the content team is simple: make more video, make less static, and move promotion out of straight product posts and into the relatable and aspirational formats that already work.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Biggest Miss</span>
+      <p>Your videos average 18 likes; your static posts, the carousels and photo slideshows, average 3, roughly 6 times fewer. Yet 30% of what you post is still static. Shift that mix toward video and the same effort buys far more reach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06 SHORTLIST -->
+<section id="shortlist" class="section">
+  <div class="container">
+    <div class="section-label reveal">06 · The shortlist</div>
+    <h2 class="reveal">144 creators are active in your category right now. Zero have posted about you.</h2>
+    <p class="reveal lead-narrow">These nine are drawn from the 144 top creators in the DTC supplements &amp; wellness niche over the 69-day window, ranked by Total Creator Views, filtered to a spread of reach tiers and platforms, and every one has already posted about a direct competitor. None has posted about Rizz, so the relationship would start fresh.</p>
+
+    <div class="sl-grid stagger reveal">
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/78490129-0acd-4004-ae3c-f33e84db605c" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/mrsharrington913/" target="_blank" rel="noopener">@mrsharrington913</a><div class="sl-real">Michele</div></div><span class="sl-badge">IG · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="25811" data-format="compact">26K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="825541" data-format="compact">826K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="4.99" data-suffix="%">4.99%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="7912041" data-format="compact">7.9M</div></div></div><div class="why">Highest niche-attributable reach on the list at 7.9M Creator Tagged Post views, and already posting about <span>Cymbiotika</span>. <a href="https://www.instagram.com/p/DXLFKD0Cq8V/" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d2b86e86-ded4-4b73-8309-dac8e57cfe6b" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.tiktok.com/@nothardtosaysjuanje" target="_blank" rel="noopener">@nothardtosaysjuanje</a><div class="sl-real">Sjuanjé</div></div><span class="sl-badge">TT · micro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="3894" data-format="compact">3.9K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="196164" data-format="compact">196K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="15" data-suffix="%">15%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="2513043" data-format="compact">2.5M</div></div></div><div class="why">Nano following but 2.5M niche views and three posts about <span>Lemme</span>, a strong repeat-poster signal. <a href="https://www.tiktok.com/@nothardtosaysjuanje/video/7619736214685388062" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/94dd76fb-6492-4909-877a-4dde111be6c1" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.tiktok.com/@thegruenersisters" target="_blank" rel="noopener">@thegruenersisters</a><div class="sl-real">Jennifer and Laura</div></div><span class="sl-badge">TT · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="10900" data-format="compact">11K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="1033494" data-format="compact">1M</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="15" data-suffix="%">15%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="3100000" data-format="compact">3.1M</div></div></div><div class="why">A sister duo averaging over 1M views per post and already tagging <span>The Honey Pot Company</span>. <a href="https://www.tiktok.com/@thegruenersisters/video/7634253437814803743" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7890de99-918e-4ab1-a5f7-9a817e3fcae1" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/jheniifit/" target="_blank" rel="noopener">@jheniifit</a><div class="sl-real">Jhenii</div></div><span class="sl-badge">IG · micro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="4204" data-format="compact">4.2K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="160559" data-format="compact">161K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="0.99" data-suffix="%">0.99%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="1678366" data-format="compact">1.7M</div></div></div><div class="why">A fitness micro-creator punching far above her follower count at 1.7M niche views, already in the supplements category. <a href="https://www.instagram.com/p/DVrdLohAbr2/" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/36f85946-6ea3-4c40-a4e6-40fc9f3b6a17" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/starface/" target="_blank" rel="noopener">@starface</a><div class="sl-real">Starface</div></div><span class="sl-badge">IG · macro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="636043" data-format="compact">636K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="748308" data-format="compact">748K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="1.97" data-suffix="%">1.97%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="2156140" data-format="compact">2.2M</div></div></div><div class="why">A macro brand-account with reach to spare and 2.2M niche views, already overlapping with <span>Lemme</span>. <a href="https://www.instagram.com/p/DYXMD0SIMdn/" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/6752b3b9-6b1b-489b-9954-444f1b457df7" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/rahi_chadda/" target="_blank" rel="noopener">@rahi_chadda</a><div class="sl-real">Rahi</div></div><span class="sl-badge">IG · macro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="1803627" data-format="compact">1.8M</div></div><div><div class="k">Avg views</div><div class="vv" data-count="600792" data-format="compact">601K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="2.03" data-suffix="%">2.03%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="1374502" data-format="compact">1.4M</div></div></div><div class="why">The largest following on the list at 1.8M, with 1.4M niche views and overlap with <span>Poosh</span>. <a href="https://www.instagram.com/p/DXGzVE3k3hI/" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/70c12d58-4996-497f-b39b-2ed53dc950d9" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/packslight/" target="_blank" rel="noopener">@packslight</a><div class="sl-real">Gabby Beckford</div></div><span class="sl-badge">IG · macro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="167791" data-format="compact">168K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="177564" data-format="compact">178K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="0.68" data-suffix="%">0.68%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="1505693" data-format="compact">1.5M</div></div></div><div class="why">A travel-and-lifestyle macro creator with 1.5M niche views, already posting about <span>Culturelle</span>. <a href="https://www.instagram.com/p/DX9cAz5RWhY/" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/780b585c-27f0-461f-9a12-7acbdd2cb639" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/sydneymarshal/" target="_blank" rel="noopener">@sydneymarshal</a><div class="sl-real">Sydney Marshall</div></div><span class="sl-badge">IG · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="58225" data-format="compact">58K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="160147" data-format="compact">160K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="1.22" data-suffix="%">1.22%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="780402" data-format="compact">780K</div></div></div><div class="why">A mid-tier lifestyle creator with steady reach and overlap with <span>Cymbiotika</span>. <a href="https://www.instagram.com/p/DW9XOhRAZ7X/" target="_blank" rel="noopener">Example ↗</a></div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/6388aee6-cf04-400e-b6bd-cd7d1b7c4d41" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/hailey_obrien__/" target="_blank" rel="noopener">@hailey_obrien__</a><div class="sl-real">Hailey OBrien</div></div><span class="sl-badge">IG · micro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="6609" data-format="compact">6.6K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="68116" data-format="compact">68K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="15" data-suffix="%">15%</div></div><div><div class="k">Niche views</div><div class="vv" data-count="435436" data-format="compact">435K</div></div></div><div class="why">A high-engagement micro-creator with 435K niche views, already tagging <span>Zarbee's</span>. <a href="https://www.instagram.com/p/DWzppwKAaj-/" target="_blank" rel="noopener">Example ↗</a></div></div>
+    </div>
+
+    <h3 class="reveal" style="margin:32px 0 4px;font-size:20px">What's winning in your niche this month</h3>
+    <div class="insp-grid stagger reveal">
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/78490129-0acd-4004-ae3c-f33e84db605c" alt="" onerror="this.style.display='none'"><span class="ih">@mrsharrington913</span></div><div class="iv" data-count="7912041" data-format="compact">7.9M</div><div class="im">IG · Relatable/Meme</div><a href="https://www.instagram.com/p/DXLFKD0Cq8V/" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/94dd76fb-6492-4909-877a-4dde111be6c1" alt="" onerror="this.style.display='none'"><span class="ih">@thegruenersisters</span></div><div class="iv" data-count="3100000" data-format="compact">3.1M</div><div class="im">TikTok · Relatable/Meme</div><a href="https://www.tiktok.com/@thegruenersisters/video/7634253437817" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d2b86e86-ded4-4b73-8309-dac8e57cfe6b" alt="" onerror="this.style.display='none'"><span class="ih">@nothardtosaysjuanje</span></div><div class="iv" data-count="2500000" data-format="compact">2.5M</div><div class="im">TikTok · User-Generated</div><a href="https://www.tiktok.com/@nothardtosaysjuanje/video/7619736214" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/36f85946-6ea3-4c40-a4e6-40fc9f3b6a17" alt="" onerror="this.style.display='none'"><span class="ih">@starface</span></div><div class="iv" data-count="2156140" data-format="compact">2.2M</div><div class="im">IG · Promotional</div><a href="https://www.instagram.com/p/DYXMD0SIMdn/" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7890de99-918e-4ab1-a5f7-9a817e3fcae1" alt="" onerror="this.style.display='none'"><span class="ih">@jheniifit</span></div><div class="iv" data-count="1678366" data-format="compact">1.7M</div><div class="im">IG · Inspirational</div><a href="https://www.instagram.com/p/DVrdLohAbr2/" target="_blank" rel="noopener">View ↗</a></div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Names To Call</span>
+      <p>Combined, these nine reach 2.7M followers and pulled 21.5M Creator Tagged Post views in the niche over the window. All nine have already posted about a direct competitor, and none has ever posted about Rizz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07 OPPORTUNITY -->
+<section id="opportunity" class="section">
+  <div class="container">
+    <div class="section-label reveal">07 · The opportunity</div>
+    <h2 class="reveal">Six moves that change the game for Rizz.</h2>
+    <div class="opp-grid stagger reveal">
+      <div class="opp"><div class="oeyebrow">Opportunity 01</div><h3>Stand up an always-on creator bench</h3><p>Rizz earned zero Creator Tagged Posts in the 69-day window while Lemme compounded over 200 on Instagram alone. No niche brand concentrates creators into retainers, so a focused bench is an open lane.</p><div class="ostat" data-count="0">0</div><div class="ostatlbl">Creator Tagged Posts in window</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-On Creator Retainers</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 02</div><h3>Commission UGC built for paid, then let it run</h3><p>42 advertisers run 10+ live creatives refreshed at category cadence; Rizz's 12 tests all died inside 10 days. UGC over-indexes among ads that survive 60+ days, the single most durable style in the category.</p><div class="ostat">10 days</div><div class="ostatlbl">Rizz's longest ad runtime</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for Paid Ads</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 03</div><h3>Turn the feed into a creator feed</h3><p>Six niche brands feed their own grid with commissioned UGC; Rizz fills it in-house and tops out near 7 likes a post. Video already outperforms Rizz's static posts about 6 times, so creator video is the obvious next input.</p><div class="ostat" data-count="70">70</div><div class="ostatlbl">in-house posts, near-zero creator posts</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for Brand Feed</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 04</div><h3>Launch an affiliate or commission layer</h3><p>Five niche brands run affiliate or commission programmes to scale creator volume without per-post fees. Rizz sells on its own site and on Amazon, both of which natively support trackable affiliate links.</p><div class="ostat" data-count="5">5</div><div class="ostatlbl">competitors running affiliate programmes</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s09" target="_blank" rel="noopener">Affiliate / Commission Programmes</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 05</div><h3>Build a long-term ambassador layer</h3><p>Seven niche brands run long-term ambassadors, and the multi-play operators Waterboy and Orgain both lead with it. Rizz's one strong earned mention at 59.7K views proves a single committed creator can move real reach.</p><div class="ostat" data-count="7">7</div><div class="ostatlbl">competitors running ambassadors</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-Term Brand Ambassador</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 06</div><h3>Seed product to drive earned mentions</h3><p>Rizz has earned mentions before, six unpaid Instagram posts just outside this window, so seeding clearly converts. Earned Organic Mentions is a detected play for three niche brands; a structured gifting motion would restart Rizz's dormant engine.</p><div class="ostat" data-count="6">6</div><div class="ostatlbl">past earned mentions before the window</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-Value Gifting &amp; Seeding</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing reveal">
+  <p class="closing-lead">We built this report because Rizz's creator data is genuinely interesting, a brand already producing creator-style content with almost no creators attached, and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+  <h4>Who are we?</h4>
+  <p class="closing-sup"><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
+</div>
+<div class="booking">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank" rel="noopener">sup.co/meet</a></div>
+
+<div class="footer"><span class="wave">👋</span> Sup · sup.co · Confidential · June 2026</div>
+
+<script>
+const BRAND_PRIMARY='#D5403D';
+const PALETTE=['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function formatCompact(n){if(n>=1000000)return (n/1000000).toFixed(n>=10000000?0:1).replace(/\.0$/,'')+'M';if(n>=1000)return (n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,'')+'K';return n.toString();}
+function fmtNum(v,fmt){if(fmt==='comma')return Math.round(v).toLocaleString();if(fmt==='compact')return formatCompact(Math.round(v));if(Number.isInteger(v))return v.toString();return v.toFixed(2);}
+function scrambleCount(el){
+  const target=parseFloat(el.dataset.count);const fmt=el.dataset.format;const suffix=el.dataset.suffix||'';
+  const duration=1400;const sp=0.65;const start=performance.now();
+  function tick(now){const t=Math.min(1,(now-start)/duration);let v;
+    if(t<sp){const intensity=1-(t/sp);const baseline=target*(t/sp);const jitter=target*0.5*intensity*(Math.random()-0.3);v=Math.max(0,baseline+jitter);}
+    else{const st=(t-sp)/(1-sp);const eased=1-Math.pow(1-st,3);const last=target*sp;v=last+(target-last)*eased;}
+    el.textContent=fmtNum(v,fmt)+suffix;
+    if(t<1)requestAnimationFrame(tick);else el.textContent=fmtNum(target,fmt)+suffix;}
+  requestAnimationFrame(tick);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('img').forEach(img=>{if(img.complete&&img.naturalHeight!==0)img.classList.add('loaded');else{img.addEventListener('load',()=>img.classList.add('loaded'));img.addEventListener('error',()=>{img.style.opacity=1;});}});
+
+  if(reduceMotion){
+    document.querySelectorAll('.reveal,.stagger').forEach(el=>el.classList.add('is-in'));
+    document.querySelectorAll('[data-count]').forEach(el=>{el.textContent=fmtNum(parseFloat(el.dataset.count),el.dataset.format)+(el.dataset.suffix||'');});
+    document.querySelectorAll('.theme-bar-fill,.bar>span').forEach(el=>{const w=el.dataset.width;if(w)el.style.width=w+'%';});
+    document.querySelectorAll('.rank-pill').forEach(el=>el.classList.add('is-in'));
+    document.querySelectorAll('.brand-emphasis').forEach(el=>el.classList.add('is-painted'));
+    drawCharts();return;
+  }
+
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el=entry.target;el.classList.add('is-in');
+        if(el.hasAttribute('data-count'))scrambleCount(el);
+        if(el.matches('.theme-bar-fill,.bar>span')){const w=el.dataset.width;if(w)el.style.width=w+'%';}
+        if(el.classList.contains('players')){setTimeout(()=>{el.querySelectorAll('.rank-pill').forEach((p,i)=>setTimeout(()=>p.classList.add('is-in'),i*40));},1500);}
+        io.unobserve(el);
+      }
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal,.stagger,[data-count],.theme-bar-fill,.bar>span,.players').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('.brand-emphasis').forEach(el=>setTimeout(()=>el.classList.add('is-painted'),800));
+  drawCharts();
+});
+
+// scroll progress
+window.addEventListener('scroll',()=>{const h=document.documentElement;const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('scroll-progress').style.width=pct+'%';},{passive:true});
+
+// nav active
+const navIO=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){const id=entry.target.id;document.querySelectorAll('.nav-mid a').forEach(a=>a.classList.remove('is-active'));const link=document.querySelector('.nav-mid a[href="#'+id+'"]');if(link)link.classList.add('is-active');}});},{rootMargin:'-40% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>navIO.observe(s));
+
+// wave
+setInterval(()=>{document.querySelectorAll('.wave').forEach(el=>{el.style.animation='none';el.offsetHeight;el.style.animation='wave-wiggle 1.2s ease-in-out';});},10000);
+document.querySelectorAll('.wave').forEach(el=>{el.style.animation='wave-wiggle 1.2s ease-in-out';});
+
+function baseOpts(extra){return Object.assign({responsive:true,maintainAspectRatio:false,animation:reduceMotion?{duration:0}:{duration:1200,easing:'easeOutCubic',delay:(ctx)=>(ctx.dataIndex??0)*70},plugins:{legend:{display:false}}},extra||{});}
+let charted=false;
+function drawCharts(){
+  if(charted)return;charted=true;
+  Chart.defaults.font.family="Inter, sans-serif";Chart.defaults.color="#71717A";
+
+  new Chart(document.getElementById('compChart'),{type:'bar',
+    data:{labels:['Rizz','Lemme','Olly','Goli','Waterboy'],datasets:[{data:[0,8.11,1.87,0.084,3.47],backgroundColor:[BRAND_PRIMARY,PALETTE[0],PALETTE[1],PALETTE[2],PALETTE[3]],borderRadius:6}]},
+    options:baseOpts({scales:{y:{title:{display:true,text:'Total Creator Views (millions)'},grid:{color:'#F4F4F5'}},x:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:(c)=>c.parsed.y+'M views'}}}})});
+
+  new Chart(document.getElementById('longevityChart'),{type:'bar',
+    data:{labels:['0-29','30-59','60-89','90-179','180+'],datasets:[
+      {label:'Still active',data:[3542,571,225,266,95],backgroundColor:BRAND_PRIMARY,borderRadius:4,stack:'s'},
+      {label:'Expired',data:[4679,810,252,296,68],backgroundColor:'#E4E4E7',borderRadius:4,stack:'s'}]},
+    options:baseOpts({scales:{x:{stacked:true,grid:{display:false},title:{display:true,text:'Days running'}},y:{stacked:true,grid:{color:'#F4F4F5'}}},plugins:{legend:{display:true,position:'bottom'}}})});
+
+  new Chart(document.getElementById('winnersChart'),{type:'bar',
+    data:{labels:['UGC','Video','Product-Only','Static graphic'],datasets:[
+      {label:'Share of 60+ day winners',data:[42,60,15,23],backgroundColor:BRAND_PRIMARY,borderRadius:4},
+      {label:'Share of all creatives',data:[38,56,11,27],backgroundColor:'#E4E4E7',borderRadius:4}]},
+    options:baseOpts({scales:{y:{grid:{color:'#F4F4F5'},title:{display:true,text:'% of creatives'}},x:{grid:{display:false}}},plugins:{legend:{display:true,position:'bottom'}}})});
+
+  new Chart(document.getElementById('pillarLikes'),{type:'bar',
+    data:{labels:['Inspirational','Relatable/Meme','Seasonal','Promotional','Photo lifestyle'],datasets:[{data:[25,21,8,6,3],backgroundColor:[BRAND_PRIMARY,'#E4E4E7','#E4E4E7','#E4E4E7','#E4E4E7'],borderRadius:4}]},
+    options:baseOpts({indexAxis:'y',scales:{x:{grid:{color:'#F4F4F5'},title:{display:true,text:'Avg likes per post'}},y:{grid:{display:false}}}})});
+
+  new Chart(document.getElementById('pillarCount'),{type:'bar',
+    data:{labels:['Relatable/Meme','Promotional','Inspirational','Seasonal','Photo lifestyle'],datasets:[{data:[29,17,7,2,2],backgroundColor:['#E4E4E7','#D5403D','#E4E4E7','#E4E4E7','#E4E4E7'],borderRadius:4}]},
+    options:baseOpts({indexAxis:'y',scales:{x:{grid:{color:'#F4F4F5'},title:{display:true,text:'Posts published'}},y:{grid:{display:false}}}})});
+}
+</script>
+</body>
+</html>
