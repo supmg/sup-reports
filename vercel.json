@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/:slug/:year(\\d{4})/:month/:file", "destination": "/reports/:slug/:year/:month/:file" },
+    { "source": "/:slug/:year(\\d{4})/:month", "destination": "/reports/:slug/:year/:month" }
+  ],
   "headers": [
     {
       "source": "/reports/:slug/(.*)",
