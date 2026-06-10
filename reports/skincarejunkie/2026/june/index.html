@@ -1,0 +1,537 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="sup-brand-primary" content="#7a2640">
+<title>Skincare Junkie · Signal Report · Indie DTC Skincare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#fff;--surface:#F4F4F5;--text:#09090B;--secondary:#52525B;--muted:#71717A;--hint:#A1A1AA;--border:#E4E4E7;--brand-primary:#7a2640;--brand-tint:rgba(122,38,64,0.08);}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1180px;margin:0 auto;padding:0 32px}
+@media(max-width:900px){.container{padding:0 24px}}
+@media(max-width:560px){.container{padding:0 20px}}
+section{padding:96px 0 120px}
+@media(max-width:900px){section{padding:72px 0 80px}}
+@media(max-width:560px){section{padding:56px 0 64px}}
+img{opacity:0;transition:opacity 300ms ease}img.loaded{opacity:1}
+a{color:inherit}
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--brand-primary);z-index:200;transition:width 100ms linear}
+/* nav */
+.nav{position:sticky;top:0;height:56px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100}
+.nav-in{max-width:1180px;margin:0 auto;padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-left{display:flex;align-items:center;gap:12px}
+.sup-pill{display:inline-flex;align-items:center;gap:6px;background:transparent;border:0;border-radius:0;padding:0;color:var(--text);font-size:14px;font-weight:600}
+.nav-div{width:1px;height:20px;background:var(--border)}
+.nav-brand{display:flex;align-items:center;gap:8px}
+.nav-brand img{height:22px;width:auto;opacity:1}
+.nav-brand span{font-size:13px;font-weight:600}
+.nav-mid{display:flex;gap:22px}
+.nav-mid a{font-size:13px;color:var(--secondary);text-decoration:none;position:relative;padding-bottom:2px}
+.nav-mid a.is-active{color:var(--brand-primary)}
+.nav-mid a.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--brand-primary);border-radius:2px}
+.nav-cta a{background:#000;color:#fff;border-radius:9999px;padding:8px 16px;font-size:13px;font-weight:500;text-decoration:none;transition:transform 180ms,filter 180ms}
+.nav-cta a:hover{transform:scale(1.02);filter:brightness(1.15)}
+@media(max-width:900px){.nav-mid{display:none}}
+@media(max-width:560px){.nav-brand span{display:none}}
+/* cover */
+.cover{padding:72px 0 0}
+.cover-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:56px;align-items:center;margin-bottom:56px}
+.pill-green{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--secondary);border:1px solid var(--border);border-radius:9999px;padding:6px 14px;background:#fff}
+.pill-green::before{content:"";width:7px;height:7px;border-radius:50%;background:#1D9E75;display:inline-block}
+.cover h1{font-size:clamp(32px,5vw,60px);font-weight:500;letter-spacing:-0.02em;line-height:1.1;margin:24px 0 0}
+.cover h1 .s{display:block}
+.cover h1 .s2{color:var(--text)}
+.brand-emphasis{position:relative;color:var(--brand-primary)}
+.brand-emphasis::after{content:"";position:absolute;left:0;bottom:0;width:0;height:6px;background:var(--brand-primary);opacity:0.18;border-radius:4px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 400ms;z-index:-1}
+.brand-emphasis.is-painted::after{width:100%}
+.cover-sub{font-size:17px;color:var(--muted);margin-top:24px;max-width:520px;line-height:1.55}
+.cover-thumbs{position:relative;width:100%;height:360px}
+.thumb-tilt{position:absolute;width:168px;height:168px;border-radius:22px;overflow:hidden;background:var(--surface);border:5px solid #fff;box-shadow:0 18px 42px -12px rgba(9,9,11,0.22),0 6px 14px -4px rgba(9,9,11,0.08);transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 320ms ease;cursor:pointer;text-decoration:none}
+.thumb-tilt img{width:100%;height:100%;object-fit:cover;transition:transform 400ms ease;opacity:1}
+.thumb-tilt .stamp{position:absolute;left:10px;bottom:10px;padding:4px 10px;background:rgba(9,9,11,0.7);color:#fff;font-size:10.5px;font-weight:500;border-radius:9999px;backdrop-filter:blur(8px)}
+.thumb-1{top:22px;left:8px;transform:rotate(-9deg);z-index:1}
+.thumb-2{top:92px;left:138px;transform:rotate(6deg);z-index:3}
+.thumb-3{top:168px;left:8px;transform:rotate(-3deg);z-index:2}
+.thumb-tilt:hover{transform:rotate(0deg) scale(1.06);z-index:4}
+.thumb-tilt:hover img{transform:scale(1.04)}
+@media(max-width:1080px){.cover-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px}.thumb-tilt{width:144px;height:144px}.thumb-2{left:118px}.thumb-3{top:148px}.cover-thumbs{height:320px}}
+@media(max-width:900px){.cover-grid{grid-template-columns:1fr;gap:36px}.cover-thumbs{height:280px;max-width:380px;margin:0 auto}.thumb-tilt{width:150px;height:150px}.thumb-1{top:0;left:4%}.thumb-2{top:56px;left:36%}.thumb-3{top:112px;left:4%}}
+@media(max-width:480px){.cover-thumbs{height:260px;max-width:320px}.thumb-tilt{width:128px;height:128px;border-width:4px;border-radius:18px}.thumb-1{left:0;top:0}.thumb-2{left:42%;top:48px}.thumb-3{left:0;top:112px}}
+/* provenance */
+.provenance-line{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0}
+.provenance-line p{font-size:14px;color:var(--secondary);line-height:1.55;margin:0;max-width:920px}
+.provenance-line .pv-label{color:var(--muted);font-weight:500;margin-right:8px}
+.provenance-line .num{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+@media(max-width:720px){.provenance-line{padding:18px 0}.provenance-line p{font-size:13px}}
+/* sections */
+.section h2{font-size:clamp(22px,4vw,38px);font-weight:500;letter-spacing:-0.02em;line-height:1.15;position:relative;padding-bottom:14px;margin-bottom:8px}
+.section h2::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brand-primary);border-radius:2px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 200ms}
+.section.is-in h2::after{width:48px}
+.eyebrow{font-size:13px;font-weight:500;color:var(--secondary);margin-bottom:14px}
+.lead{font-size:16px;color:var(--secondary);max-width:760px;margin:18px 0;line-height:1.65}
+.lead.tight{margin:12px 0}
+p.body{font-size:16px;color:var(--secondary);max-width:760px;margin:14px 0;line-height:1.65}
+/* inline stats */
+.section-stats{display:grid;grid-template-columns:repeat(6,1fr);padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:28px 0}
+.section-stats>div{padding:0 22px;border-right:1px solid var(--border)}
+.section-stats>div:last-child{border-right:none}
+.section-stats .v{font-size:28px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;color:var(--text);font-variant-numeric:tabular-nums}
+.section-stats .ctx{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.section-stats .lbl{font-size:12px;color:var(--muted);margin-top:8px;font-weight:500}
+@media(max-width:900px){.section-stats{grid-template-columns:repeat(3,1fr);gap:0}.section-stats>div{padding:18px 18px;border-bottom:1px solid var(--border)}.section-stats>div:nth-child(3n){border-right:none}.section-stats>div:nth-last-child(-n+3){border-bottom:none}}
+@media(max-width:560px){.section-stats{grid-template-columns:repeat(2,1fr)}.section-stats .v{font-size:24px}.section-stats>div:nth-child(2n){border-right:none}.section-stats>div:nth-child(3n){border-right:1px solid var(--border)}.section-stats>div:nth-last-child(-n+2){border-bottom:none}}
+/* player cards */
+.players{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:32px}
+.player-card{border:1px solid var(--border);border-radius:24px;padding:18px;background:#fff;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.player-card.target{border:1.5px solid var(--brand-primary);background:linear-gradient(180deg,var(--brand-tint) 0%,#fff 60%)}
+.player-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.tbrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:9999px;padding:4px 10px;background:#fff;margin-bottom:12px}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--brand-primary)}
+.pc-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.pc-logo{width:36px;height:36px;border-radius:10px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;overflow:hidden;flex:0 0 36px}
+.pc-logo img{width:100%;height:100%;object-fit:contain;opacity:1}
+.pc-name{font-size:14.5px;font-weight:600;line-height:1.15;word-break:break-word}
+.pc-handle{font-size:11px;color:var(--muted)}
+.stat-row{margin-bottom:10px}
+.sr-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.sr-label{font-size:12px;font-weight:500;color:var(--muted)}
+.sr-val{font-size:16px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.rank-pill{font-size:9.5px;font-weight:500;color:var(--text);border:1px solid var(--border);background:#fff;border-radius:9999px;padding:3px 8px;font-variant-numeric:tabular-nums;display:inline-block;transition:transform 400ms cubic-bezier(0.34,1.56,0.64,1)}
+.rank-pill.top1{background:var(--brand-primary);color:#fff;border:0}
+.bar{height:5px;background:var(--surface);border-radius:4px;margin-top:6px;overflow:hidden}
+.bar-fill{display:block;height:100%;width:0;border-radius:4px;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+.player-card .stat-row:nth-child(2) .bar-fill{transition-delay:200ms}
+.player-card .stat-row:nth-child(3) .bar-fill{transition-delay:280ms}
+.player-card .stat-row:nth-child(4) .bar-fill{transition-delay:360ms}
+.cap{font-size:12.5px;color:var(--muted);margin-top:18px;max-width:760px}
+@media(max-width:900px){.players{grid-template-columns:repeat(2,1fr)}.player-card.target{grid-column:1/-1}}
+@media(max-width:560px){.players{grid-template-columns:1fr}}
+/* themes */
+.theme-row{margin:14px 0;max-width:620px}
+.theme-top{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+.theme-n{color:var(--muted);font-size:12px}
+.theme-bar{height:8px;background:var(--surface);border-radius:6px;overflow:hidden}
+.theme-bar-fill{display:block;height:100%;width:0;background:var(--brand-primary);border-radius:6px;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+/* callout */
+.callout{position:relative;background:var(--surface);border-radius:16px;padding:22px 24px 22px 28px;border:1px solid var(--border);margin:28px 0 0;max-width:820px}
+.callout::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;background:var(--brand-primary);border-radius:4px}
+.callout-label{display:block;font-size:13px;font-weight:500;color:var(--brand-primary);margin-bottom:10px}
+.callout p{font-size:15.5px;color:var(--text);margin:0;line-height:1.55}
+/* table */
+.tbl-wrap{overflow-x:auto;margin-top:28px}
+table.comp{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+table.comp th{text-align:left;font-size:12px;font-weight:500;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border)}
+table.comp td{padding:12px 14px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+table.comp tr.tgt-row{background:rgba(122,38,64,0.06)}
+.tbl-logo{width:20px;height:20px;border-radius:4px;object-fit:contain;vertical-align:middle;margin-right:8px;opacity:1}
+.tbl-name{font-weight:500}
+/* competitor cards */
+.comp-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
+.cc{border:1px solid var(--border);border-radius:16px;padding:22px;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.cc:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.cc-head{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.cc-logo{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;flex:0 0 38px}
+.cc-logo img{width:100%;height:100%;object-fit:contain;opacity:1}.cc-init{font-weight:700;font-size:13px}
+.cc-name{font-size:15px;font-weight:600}.cc-sub{font-size:12px;color:var(--muted)}
+.cc p{font-size:14px;color:var(--secondary);line-height:1.55;margin:0 0 14px}
+.strats{font-size:12.5px;color:var(--secondary);border-top:1px solid var(--border);padding-top:12px}
+.strats .lbl{color:var(--muted);margin-right:6px}
+.cc .strats .empty{font-style:italic;color:var(--muted);font-size:12px}
+.sx-link{color:inherit;text-decoration:underline;text-decoration-color:var(--brand-primary);text-decoration-style:dotted;text-decoration-thickness:1px;text-underline-offset:3px;transition:color 150ms ease}
+.sx-link:hover{color:var(--brand-primary);text-decoration-style:solid}
+@media(max-width:780px){.comp-cards{grid-template-columns:1fr}}
+/* multi-play */
+.mpo{margin-top:32px}
+.mpo-h{font-size:14px;color:var(--secondary);font-weight:500;margin-bottom:14px}
+.mpo .item{display:flex;gap:12px;align-items:center;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.mpo .item:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.mpo-logo{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);overflow:hidden;flex:0 0 32px}
+.mpo-logo img{width:100%;height:100%;object-fit:contain;opacity:1}
+.mpo .item strong{font-size:14px}.mpo-line{font-size:13px;color:var(--secondary);margin-top:2px}
+/* stat cards grid */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.stat{border:1px solid var(--border);border-radius:14px;padding:22px;background:#fff;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.stat:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.stat.dark{background:#09090B;color:#fff;border-color:#09090B}
+.stat .s-lbl{font-size:12px;color:var(--muted);font-weight:500}
+.stat.dark .s-lbl{color:#A1A1AA}
+.stat .s-val{font-size:26px;font-weight:600;letter-spacing:-0.02em;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.stat .s-sub{font-size:12.5px;color:var(--muted)}
+.stat.dark .s-sub{color:#A1A1AA}
+@media(max-width:780px){.stat-grid{grid-template-columns:1fr}}
+/* charts */
+.chart-wrap{border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:24px;background:#fff}
+.chart-title{font-size:14px;font-weight:500;margin-bottom:14px}
+.chart-canvas{position:relative;height:340px}
+.charts-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.charts-2{grid-template-columns:1fr}.chart-canvas{height:280px}}
+/* ad gallery */
+.ad-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,1fr);gap:16px;overflow-x:auto;padding-bottom:8px;margin-top:28px;scroll-snap-type:x mandatory}
+.ad-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;text-decoration:none;scroll-snap-align:start;transition:transform 200ms,box-shadow 200ms,border-color 200ms;display:block}
+.ad-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.ad-card .thumb{height:160px;background:var(--surface);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ad-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 400ms;opacity:1}
+.ad-card:hover .thumb img{transform:scale(1.03)}
+.ad-card .badge{font-size:12px;color:var(--muted);font-weight:500}
+.ad-meta{padding:14px}
+.ad-brand{font-size:13.5px;font-weight:600}.ad-days{font-size:12px;color:var(--muted);margin:4px 0 8px}
+.ad-flag{display:inline-block;font-size:10px;font-weight:500;border-radius:9999px;padding:3px 8px}
+.ad-flag.cs{background:rgba(122,38,64,0.1);color:var(--brand-primary)}
+.ad-flag.bp{background:var(--surface);color:var(--muted)}
+/* vel table */
+.vel{margin-top:24px}
+table.vel-t{width:100%;border-collapse:collapse;font-size:13.5px}
+table.vel-t th{text-align:left;font-size:12px;color:var(--muted);font-weight:500;padding:8px 12px;border-bottom:1px solid var(--border)}
+table.vel-t td{padding:10px 12px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+/* post grid */
+.post-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px}
+.post-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform 200ms,box-shadow 200ms,border-color 200ms;display:flex;flex-direction:column}
+.post-card.is-highlight{border-color:var(--brand-primary)}
+.post-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.post-card .thumb{height:130px;background:var(--surface);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.post-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 400ms;opacity:1}
+.post-card:hover .thumb img{transform:scale(1.03)}
+.post-card .badge{font-size:12px;color:var(--muted);font-weight:600}
+.pc-body{padding:14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pc-rank{font-size:11px;color:var(--muted);font-weight:500}
+.pc-likes{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.pc-sub{font-size:11.5px;color:var(--muted)}
+.pc-desc{font-size:12.5px;color:var(--secondary);line-height:1.5;margin-top:4px;flex:1}
+.pc-link{font-size:12px;color:var(--brand-primary);margin-top:8px;font-weight:500}
+@media(max-width:980px){.post-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.post-grid{grid-template-columns:1fr}}
+/* opportunities */
+.opp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
+.opp{border:1px solid var(--border);border-radius:16px;padding:26px;transition:transform 200ms,box-shadow 200ms,border-color 200ms;display:flex;flex-direction:column}
+.opp:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.opp-eyebrow{font-size:12px;font-weight:600;color:var(--brand-primary);margin-bottom:10px}
+.opp-title{font-size:18px;font-weight:600;line-height:1.25;margin-bottom:10px}
+.opp p{font-size:14px;color:var(--secondary);line-height:1.6;margin:0 0 16px;flex:1}
+.opp-stat{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}
+.opp-big{font-size:28px;font-weight:600;color:var(--brand-primary);letter-spacing:-0.02em}
+.opp-lbl{font-size:12px;color:var(--muted)}
+.opp-foot{font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px}
+@media(max-width:880px){.opp-grid{grid-template-columns:1fr}}
+/* shortlist */
+.sl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.short-card{border:1px solid var(--border);border-radius:16px;padding:20px;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.short-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(122,38,64,0.4)}
+.sl-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sl-av{width:44px;height:44px;border-radius:50%;background:var(--surface);overflow:hidden;flex:0 0 44px}
+.sl-av img{width:100%;height:100%;object-fit:cover;opacity:1}
+.sl-handle{font-size:14px;font-weight:600;text-decoration:none;word-break:break-word}
+.sl-name{font-size:12px;color:var(--muted)}
+.sl-badge{margin-left:auto;font-size:10px;font-weight:500;border:1px solid var(--border);background:rgba(122,38,64,0.06);color:var(--brand-primary);border-radius:9999px;padding:3px 9px}
+.sl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.sl-stats div{display:flex;flex-direction:column}
+.sl-stats b{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.sl-stats span{font-size:10.5px;color:var(--muted)}
+.why{font-size:13px;color:var(--secondary);line-height:1.55}
+@media(max-width:780px){.sl-grid{grid-template-columns:1fr}.sl-stats{grid-template-columns:repeat(2,1fr)}}
+/* inspiration */
+.insp-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(180px,1fr);gap:14px;overflow-x:auto;margin-top:20px;padding-bottom:8px;scroll-snap-type:x mandatory}
+.insp{border:1px solid var(--border);border-radius:14px;padding:18px;text-decoration:none;scroll-snap-align:start;transition:transform 200ms,box-shadow 200ms,border-color 200ms}
+.insp:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12)}
+.insp-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.insp-av{width:32px;height:32px;border-radius:50%;background:var(--surface);overflow:hidden;flex:0 0 32px}
+.insp-av img{width:100%;height:100%;object-fit:cover;opacity:1}
+.insp-handle{font-size:12.5px;font-weight:600;word-break:break-word}
+.insp-pill{font-size:9.5px;color:var(--muted)}
+.insp-stat{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.insp-pillar{font-size:11.5px;color:var(--muted);margin-top:4px}
+.sub-h{font-size:18px;font-weight:500;margin:40px 0 8px}
+/* closing */
+.closing{background:var(--surface);border:1px solid var(--border);border-radius:24px;max-width:720px;margin:48px auto 0;padding:48px 40px}
+.closing-lead{font-size:18px;color:var(--text);line-height:1.55;margin-bottom:28px}
+.closing h3{font-size:16px;font-weight:600;margin:0 0 12px}
+.closing p{font-size:15px;color:var(--muted);line-height:1.65}
+.booking{font-size:15px;color:var(--secondary);font-weight:500;text-align:center;max-width:720px;margin:28px auto 64px}
+.booking a{color:var(--secondary)}
+.footer{text-align:center;font-size:12.5px;color:var(--muted);padding:0 0 60px}
+/* reveal */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}
+.reveal.is-in{opacity:1;transform:translateY(0)}
+.stagger>*{opacity:0;transform:translateY(12px);transition:opacity 500ms cubic-bezier(0.16,1,0.3,1),transform 500ms cubic-bezier(0.16,1,0.3,1)}
+.stagger.is-in>*:nth-child(1){transition-delay:0ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(2){transition-delay:80ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(3){transition-delay:160ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(4){transition-delay:240ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(5){transition-delay:320ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(6){transition-delay:400ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(n+7){transition-delay:480ms;opacity:1;transform:translateY(0)}
+@keyframes wave-wiggle{0%{transform:rotate(0)}15%{transform:rotate(-20deg)}30%{transform:rotate(20deg)}45%{transform:rotate(-10deg)}60%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0)}}
+.wave{display:inline-block;transform-origin:70% 70%}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="scroll-progress" id="scroll-progress"></div>
+<nav class="nav"><div class="nav-in">
+  <div class="nav-left"><span class="sup-pill"><span class="wave">👋</span> Sup</span><span class="nav-div"></span>
+  <span class="nav-brand"><img src="https://skincarejunkie.com/cdn/shop/files/Untitled-2_cd787bd1-fe89-4db4-99cd-8dd85cc7a5fb.png?v=1751232228&width=500" alt="Skincare Junkie" onerror="this.style.display='none'"><span>Skincare Junkie</span></span></div>
+  <div class="nav-mid"><a href="#benchmark">Benchmark</a><a href="#influencer">Influencer</a><a href="#competitors">Competitors</a><a href="#paid">Paid</a><a href="#feed">Feed</a><a href="#shortlist">Shortlist</a><a href="#opportunity">Opportunity</a></div>
+  <div class="nav-cta"><a href="#opportunity">View opportunity</a></div>
+</div></nav>
+
+<header class="cover container">
+  <div class="cover-grid">
+    <div>
+      <span class="pill-green">Influencer marketing intelligence report</span>
+      <h1 class="reveal"><span class="s s1">Skincare Junkie and the indie DTC skincare category.</span><span class="s s2">Where it sits, <span class="brand-emphasis">what the creator landscape is doing</span>.</span></h1>
+      <p class="cover-sub reveal">An end-to-end read on Skincare Junkie across paid, own content, and the creator conversation, set against 188 brands in the same category over a 70-day window.</p>
+    </div>
+    <div class="cover-thumbs reveal"><a class="thumb-tilt thumb-1" href="https://www.tiktok.com/@skincarejunkieofficial/video/7628357433907318029" target="_blank" rel="noopener">
+      <img src="https://first-possum-672.convex.cloud/api/storage/0f5c7b5c-3c4e-45d6-895d-ba721517f73b" alt="Top feed post" loading="lazy" onerror="this.style.display='none'">
+      <span class="stamp">309 likes</span></a><a class="thumb-tilt thumb-2" href="https://www.tiktok.com/@skincarejunkieofficial/video/7626082279227510030" target="_blank" rel="noopener">
+      <img src="https://first-possum-672.convex.cloud/api/storage/a5dba0a9-02f7-4aa0-8b0d-75a6c73ec429" alt="Top feed post" loading="lazy" onerror="this.style.display='none'">
+      <span class="stamp">217 likes</span></a><a class="thumb-tilt thumb-3" href="https://www.tiktok.com/@skincarejunkieofficial/video/7627144681549204750" target="_blank" rel="noopener">
+      <img src="https://first-possum-672.convex.cloud/api/storage/57447acf-c472-4a7b-a30e-ebfaa9a98377" alt="Top feed post" loading="lazy" onerror="this.style.display='none'">
+      <span class="stamp">190 likes</span></a></div>
+  </div>
+</header>
+<div class="provenance-line"><div class="container"><p><span class="pv-label">What we analysed:</span>What we analysed: <span class="num"><span data-count="188" data-format="comma" data-suffix="">188</span></span> brands in the Indie DTC Skincare niche, <span class="num"><span data-count="200" data-format="comma" data-suffix="">200</span></span> top creators across Instagram and TikTok, and <span class="num"><span data-count="3993" data-format="compact" data-suffix="">4K</span></span> live ad creatives, over a <span class="num"><span data-count="70" data-format="comma" data-suffix="">70</span></span>-day category window (2026-03-07 to 2026-05-16) and a matching brand window covering Skincare Junkie's own feed and Creator Tagged Posts.</p></div></div>
+
+<section id="benchmark" class="section"><div class="container">
+  <div class="eyebrow reveal">01 · Market benchmark</div>
+  <h2 class="reveal">Strong shelf, near-silent creator presence.</h2>
+  <div class="section-stats stagger"><div><div class="v"><span data-count="28000" data-format="compact" data-suffix="">28K</span></div><div class="ctx">rank 146 of 188 (top 78%)</div><div class="lbl">Instagram followers</div></div><div><div class="v"><span data-count="0" data-format="comma" data-suffix="">0</span></div><div class="ctx">vs category leader Rhode at 3,214</div><div class="lbl">Creator Tagged Posts (70d)</div></div><div><div class="v"><span data-count="0" data-format="comma" data-suffix="">0</span></div><div class="ctx">vs EADEM at 419 creators</div><div class="lbl">Unique tagging creators (70d)</div></div><div><div class="v"><span data-count="0" data-format="comma" data-suffix="">0</span></div><div class="ctx">vs category leader Byoma at 26M</div><div class="lbl">Total Creator Views (70d)</div></div><div><div class="v"><span data-count="989" data-format="comma" data-suffix="">989</span></div><div class="ctx">vs challenger Byoma at 1.4M</div><div class="lbl">TikTok followers</div></div><div><div class="v"><span data-count="2" data-format="comma" data-suffix="">2</span></div><div class="ctx">both brand-produced, none creator-shot</div><div class="lbl">Active Meta ads</div></div></div>
+  <div class="players stagger"><div class="player-card target"><div class="tbrow"><span class="tdot"></span>Target brand</div><div class="pc-head"><div class="pc-logo"><img src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/405898551_655599043396031_1380482599605979155_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=106&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=MSpcJcKZGyUQ7kNvwFrD6-u&amp;_nc_oc=Adp3ifi23C0oXFblSQRGbZhABOkzkxa8rGSx8ErJL_dKAJQjPVJGDJ7OAHMbrZHV7Io&amp;_nc_zt=24&amp;_nc_ht=scontent-sea1-1.xx&amp;_nc_gid=Qjr1Ovfx3sYG4-CBK1YLFQ&amp;_nc_ss=70289&amp;oh=00_Af-kr0NN_xITFytpSg2DEf7jqK2Spb_41CzvY_462j-nKg&amp;oe=6A289B3D" alt="Skincare Junkie" onerror="this.parentNode.innerHTML='SK'"></div><div><div class="pc-name">Skincare Junkie</div><div class="pc-handle">@skincarejunkieofficial</div></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Followers</span><span class="sr-val"><span data-count="28000" data-format="compact" data-suffix="">28K</span><span class="rank-pill">#146 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="4" style="background:#7a2640"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Creator Tagged Posts</span><span class="sr-val"><span data-count="0" data-format="comma" data-suffix="">0</span><span class="rank-pill">#188 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="0" style="background:#7a2640"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">TikTok followers</span><span class="sr-val"><span data-count="989" data-format="comma" data-suffix="">989</span><span class="rank-pill">#106 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="0" style="background:#7a2640"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Total Creator Views</span><span class="sr-val"><span data-count="0" data-format="comma" data-suffix="">0</span><span class="rank-pill">#188 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="0" style="background:#7a2640"></span></div></div></div><div class="player-card"><div class="pc-head"><div class="pc-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/272038960_259730309617869_2806913767183863469_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=P45COob0cpQQ7kNvwHoNJFk&amp;_nc_oc=Adr1XiUN253BAG6ntLjMu1k-bMVWFFQXu1Shmd8MdnFWa1J8fnejbs7fEqmUBFQDlSk&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=ek8TXzASJVIfQKtkrVp79g&amp;_nc_ss=70289&amp;oh=00_Af_Z9UMFGAmA9AcluHDNI7ipcylX5A-FsNTE1JIe5Y5-Tg&amp;oe=6A28BDF6" alt="Byoma" onerror="this.parentNode.innerHTML='BY'"></div><div><div class="pc-name">Byoma</div><div class="pc-handle">@byoma</div></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Followers</span><span class="sr-val"><span data-count="688000" data-format="compact" data-suffix="">688K</span><span class="rank-pill">#29 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="100" style="background:#534AB7"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Creator Tagged Posts</span><span class="sr-val"><span data-count="323" data-format="comma" data-suffix="">323</span><span class="rank-pill">#16 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="50" style="background:#534AB7"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">TikTok followers</span><span class="sr-val"><span data-count="1400000" data-format="compact" data-suffix="">1.4M</span><span class="rank-pill">#6 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="100" style="background:#534AB7"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Total Creator Views</span><span class="sr-val"><span data-count="26000000" data-format="compact" data-suffix="">26M</span><span class="rank-pill">#8 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="100" style="background:#534AB7"></span></div></div></div><div class="player-card"><div class="pc-head"><div class="pc-logo"><img src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/340513448_1370382096864043_2985480216285828330_n.png?stp=dst-png_s200x200&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=g7_bIFo_DFIQ7kNvwGr2WuJ&amp;_nc_oc=AdqJzoYcAf-ko1ZyMUnOBLwaZziCo0KOgdcZJm_f-clw3VfTu_CXiT0d6yK6I-R1mIY&amp;_nc_zt=24&amp;_nc_ht=scontent-sea1-1.xx&amp;_nc_gid=pTFuB8Ku-zs33rrAglZaCg&amp;_nc_ss=70289&amp;oh=00_Af8whG6wrKO7mwujlj4jS8ZUxmoRZ4bZ3RQl3RjTtO-HAw&amp;oe=6A28AA78" alt="Naturium" onerror="this.parentNode.innerHTML='NA'"></div><div><div class="pc-name">Naturium</div><div class="pc-handle">@naturium</div></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Followers</span><span class="sr-val"><span data-count="478000" data-format="compact" data-suffix="">478K</span><span class="rank-pill">#45 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="69" style="background:#1D9E75"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Creator Tagged Posts</span><span class="sr-val"><span data-count="369" data-format="comma" data-suffix="">369</span><span class="rank-pill">#14 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="58" style="background:#1D9E75"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">TikTok followers</span><span class="sr-val"><span data-count="161000" data-format="compact" data-suffix="">161K</span><span class="rank-pill">#38 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="11" style="background:#1D9E75"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Total Creator Views</span><span class="sr-val"><span data-count="5400000" data-format="compact" data-suffix="">5.4M</span><span class="rank-pill">#27 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="20" style="background:#1D9E75"></span></div></div></div><div class="player-card"><div class="pc-head"><div class="pc-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/310059999_467171672141538_250462813571739486_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=GJdtlds_XIoQ7kNvwEzlfGB&amp;_nc_oc=AdpAawQ0wbiMZNJOdHxPWUI94M4dHRGmiyUeQZUf3QHV6wWlRjgjzEEbG-W7JEyQKlM&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=5aaLZV190Ndn1idnRvJcpw&amp;_nc_ss=70289&amp;oh=00_Af-u75D-uYIYFhRJgrSUULNpnU_Fm4maR3wTmb3NJxktRA&amp;oe=6A28C2D3" alt="EADEM" onerror="this.parentNode.innerHTML='EA'"></div><div><div class="pc-name">EADEM</div><div class="pc-handle">@eadem.co</div></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Followers</span><span class="sr-val"><span data-count="311000" data-format="compact" data-suffix="">311K</span><span class="rank-pill">#63 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="45" style="background:#D85A30"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Creator Tagged Posts</span><span class="sr-val"><span data-count="533" data-format="comma" data-suffix="">533</span><span class="rank-pill">#8 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="84" style="background:#D85A30"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">TikTok followers</span><span class="sr-val"><span data-count="118000" data-format="compact" data-suffix="">118K</span><span class="rank-pill">#43 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="8" style="background:#D85A30"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Total Creator Views</span><span class="sr-val"><span data-count="11700000" data-format="compact" data-suffix="">11.7M</span><span class="rank-pill">#18 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="45" style="background:#D85A30"></span></div></div></div><div class="player-card"><div class="pc-head"><div class="pc-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/347881535_957875235663213_852598068562925257_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=sdlR3qd5n9YQ7kNvwE0o-Q_&amp;_nc_oc=AdpNkUiSsmfEWUpvzrFpi_hpJQHwfl03qRMoha4_NV57hqOg_BRQA6QDc-2G1ZabvAQ&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=fLtcNgD-nHBYVGMYL_ckRw&amp;_nc_ss=70289&amp;oh=00_Af-hse2gyXacQNG0xn7yRGCl9p94OCVvSHF74VMNE51_KQ&amp;oe=6A28B0C9" alt="Tower 28" onerror="this.parentNode.innerHTML='TO'"></div><div><div class="pc-name">Tower 28</div><div class="pc-handle">@tower28beauty</div></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Followers</span><span class="sr-val"><span data-count="0" data-format="comma" data-suffix="">0</span><span class="rank-pill">#188 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="0" style="background:#378ADD"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Creator Tagged Posts</span><span class="sr-val"><span data-count="634" data-format="comma" data-suffix="">634</span><span class="rank-pill">#6 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="100" style="background:#378ADD"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">TikTok followers</span><span class="sr-val"><span data-count="379000" data-format="compact" data-suffix="">379K</span><span class="rank-pill">#20 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="27" style="background:#378ADD"></span></div></div><div class="stat-row"><div class="sr-top"><span class="sr-label">Total Creator Views</span><span class="sr-val"><span data-count="20000000" data-format="compact" data-suffix="">20M</span><span class="rank-pill">#12 of 188</span></span></div>
+        <div class="bar"><span class="bar-fill" data-width="76" style="background:#378ADD"></span></div></div></div></div>
+  <div class="cap reveal">The indie skincare cohort, brand by brand · 70-day niche window. Locations swapped for TikTok followers (every brand is DTC, zero storefronts).</div>
+  <p class="body reveal">Skincare Junkie sits at rank 146 of 188 on Instagram followers and at the foot of the category on Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the 70-day window), unique creators, and Total Creator Views. Its four challenger-tier competitors each drew between 323 and 634 Creator Tagged Posts in the same window.</p>
+  <div class="callout reveal"><span class="callout-label">The Benchmark Verdict</span><p>The brand has a real product story and a dermatologist founder, but on every creator-reach metric it is starting from zero while the category around it is already in motion. That is the gap the rest of this report sizes.</p></div>
+</div></section>
+
+<section id="influencer" class="section"><div class="container">
+  <div class="eyebrow reveal">02 · Influencer intelligence</div>
+  <h2 class="reveal">Zero creators tagged the brand in 70 days. The category runs on the opposite.</h2>
+  <p class="lead reveal">Across the 70-day brand window, no creator posted a Creator Tagged Post mentioning Skincare Junkie, on either platform. We kept looking for a quiet earned signal under the surface and could not find one. In a category where <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned organic mentions</a> are the default growth engine, that absence is the single loudest finding in the data.</p>
+  <p class="body reveal">The brand's own feed is healthy and consistent, around six posts a week, but it is talking to itself. Its busiest theme is educational / ingredient content; its highest-engaging is founder / derm authority. The themes below are the brand's own publishing mix, not a creator conversation, because there is no creator conversation yet to chart.</p>
+  <div class="themes reveal"><div class="theme-row"><div class="theme-top"><span>Educational / Ingredient</span><span class="theme-n">25 posts · 43.9%</span></div>
+    <div class="theme-bar"><span class="theme-bar-fill" data-width="100"></span></div></div><div class="theme-row"><div class="theme-top"><span>Promotional / Offer</span><span class="theme-n">19 posts · 33.3%</span></div>
+    <div class="theme-bar"><span class="theme-bar-fill" data-width="76"></span></div></div><div class="theme-row"><div class="theme-top"><span>Founder / Derm Authority</span><span class="theme-n">8 posts · 14.0%</span></div>
+    <div class="theme-bar"><span class="theme-bar-fill" data-width="32"></span></div></div><div class="theme-row"><div class="theme-top"><span>Product Showcase</span><span class="theme-n">3 posts · 5.3%</span></div>
+    <div class="theme-bar"><span class="theme-bar-fill" data-width="12"></span></div></div></div>
+  <p class="body reveal">Calibration on earned mentions is sparse: zero unique creators against a category where Tower 28 alone pulled 514. The competitors are not buying reach the brand cannot afford, they are running <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">high-value micro-creator gifting &amp; seeding</a> at a scale that costs more in coordination than in cash. That is the entry point, not a budget wall.</p>
+  <div class="callout reveal"><span class="callout-label">What Competitors Pay For</span><p>Zero earned mentions, zero paid creator content. That is the exact position competitors run gifting programmes and <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned organic mentions</a> engines trying to reach, and Skincare Junkie is starting with a clean slate and a credibility asset most of them do not have.</p></div>
+</div></section>
+
+<section id="competitors" class="section"><div class="container">
+  <div class="eyebrow reveal">03 · Competitor deep-dive</div>
+  <h2 class="reveal">Four challengers, hundreds of creators each, and a category that gifts at scale.</h2>
+  <p class="lead reveal">Over the 70-day category window, the four brands Skincare Junkie most resembles in size and positioning each built a wide creator base. None concentrates those creators into a retainer, the average sits near one post per creator, so the category's strength is breadth of <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned organic mentions</a>, not depth.</p>
+  <div class="tbl-wrap reveal"><table class="comp"><thead><tr><th>Brand</th><th>Creator Tagged Posts</th><th>Unique creators</th><th>Total Creator Views</th><th>Active Meta ads</th></tr></thead><tbody><tr class="tgt-row"><td><img src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/405898551_655599043396031_1380482599605979155_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=106&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=MSpcJcKZGyUQ7kNvwFrD6-u&amp;_nc_oc=Adp3ifi23C0oXFblSQRGbZhABOkzkxa8rGSx8ErJL_dKAJQjPVJGDJ7OAHMbrZHV7Io&amp;_nc_zt=24&amp;_nc_ht=scontent-sea1-1.xx&amp;_nc_gid=Qjr1Ovfx3sYG4-CBK1YLFQ&amp;_nc_ss=70289&amp;oh=00_Af-kr0NN_xITFytpSg2DEf7jqK2Spb_41CzvY_462j-nKg&amp;oe=6A289B3D" class="tbl-logo" onerror="this.style.display='none'"><span class="tbl-name" style=color:#7a2640>Skincare Junkie</span></td><td><span data-count="0" data-format="comma" data-suffix="">0</span></td><td><span data-count="0" data-format="comma" data-suffix="">0</span></td><td><span data-count="0" data-format="compact" data-suffix="">0</span></td><td><span data-count="2" data-format="comma" data-suffix="">2</span></td></tr><tr><td><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/272038960_259730309617869_2806913767183863469_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=P45COob0cpQQ7kNvwHoNJFk&amp;_nc_oc=Adr1XiUN253BAG6ntLjMu1k-bMVWFFQXu1Shmd8MdnFWa1J8fnejbs7fEqmUBFQDlSk&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=ek8TXzASJVIfQKtkrVp79g&amp;_nc_ss=70289&amp;oh=00_Af_Z9UMFGAmA9AcluHDNI7ipcylX5A-FsNTE1JIe5Y5-Tg&amp;oe=6A28BDF6" class="tbl-logo" onerror="this.style.display='none'"><span class="tbl-name">Byoma</span></td><td><span data-count="323" data-format="comma" data-suffix="">323</span></td><td><span data-count="259" data-format="comma" data-suffix="">259</span></td><td><span data-count="25999187" data-format="compact" data-suffix="">26M</span></td><td><span data-count="0" data-format="comma" data-suffix="">0</span></td></tr><tr><td><img src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/340513448_1370382096864043_2985480216285828330_n.png?stp=dst-png_s200x200&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=g7_bIFo_DFIQ7kNvwGr2WuJ&amp;_nc_oc=AdqJzoYcAf-ko1ZyMUnOBLwaZziCo0KOgdcZJm_f-clw3VfTu_CXiT0d6yK6I-R1mIY&amp;_nc_zt=24&amp;_nc_ht=scontent-sea1-1.xx&amp;_nc_gid=pTFuB8Ku-zs33rrAglZaCg&amp;_nc_ss=70289&amp;oh=00_Af8whG6wrKO7mwujlj4jS8ZUxmoRZ4bZ3RQl3RjTtO-HAw&amp;oe=6A28AA78" class="tbl-logo" onerror="this.style.display='none'"><span class="tbl-name">Naturium</span></td><td><span data-count="369" data-format="comma" data-suffix="">369</span></td><td><span data-count="296" data-format="comma" data-suffix="">296</span></td><td><span data-count="5372908" data-format="compact" data-suffix="">5.4M</span></td><td><span data-count="1" data-format="comma" data-suffix="">1</span></td></tr><tr><td><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/310059999_467171672141538_250462813571739486_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=GJdtlds_XIoQ7kNvwEzlfGB&amp;_nc_oc=AdpAawQ0wbiMZNJOdHxPWUI94M4dHRGmiyUeQZUf3QHV6wWlRjgjzEEbG-W7JEyQKlM&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=5aaLZV190Ndn1idnRvJcpw&amp;_nc_ss=70289&amp;oh=00_Af-u75D-uYIYFhRJgrSUULNpnU_Fm4maR3wTmb3NJxktRA&amp;oe=6A28C2D3" class="tbl-logo" onerror="this.style.display='none'"><span class="tbl-name">EADEM</span></td><td><span data-count="533" data-format="comma" data-suffix="">533</span></td><td><span data-count="419" data-format="comma" data-suffix="">419</span></td><td><span data-count="11728464" data-format="compact" data-suffix="">11.7M</span></td><td><span data-count="2" data-format="comma" data-suffix="">2</span></td></tr><tr><td><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/347881535_957875235663213_852598068562925257_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=sdlR3qd5n9YQ7kNvwE0o-Q_&amp;_nc_oc=AdpNkUiSsmfEWUpvzrFpi_hpJQHwfl03qRMoha4_NV57hqOg_BRQA6QDc-2G1ZabvAQ&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=fLtcNgD-nHBYVGMYL_ckRw&amp;_nc_ss=70289&amp;oh=00_Af-hse2gyXacQNG0xn7yRGCl9p94OCVvSHF74VMNE51_KQ&amp;oe=6A28B0C9" class="tbl-logo" onerror="this.style.display='none'"><span class="tbl-name">Tower 28</span></td><td><span data-count="634" data-format="comma" data-suffix="">634</span></td><td><span data-count="514" data-format="comma" data-suffix="">514</span></td><td><span data-count="19963480" data-format="compact" data-suffix="">20M</span></td><td><span data-count="0" data-format="comma" data-suffix="">0</span></td></tr></tbody></table></div>
+  <div class="comp-cards stagger"><div class="cc"><div class="cc-head"><div class="cc-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/347881535_957875235663213_852598068562925257_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=sdlR3qd5n9YQ7kNvwE0o-Q_&amp;_nc_oc=AdpNkUiSsmfEWUpvzrFpi_hpJQHwfl03qRMoha4_NV57hqOg_BRQA6QDc-2G1ZabvAQ&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=fLtcNgD-nHBYVGMYL_ckRw&amp;_nc_ss=70289&amp;oh=00_Af-hse2gyXacQNG0xn7yRGCl9p94OCVvSHF74VMNE51_KQ&amp;oe=6A28B0C9" onerror="this.style.display='none'"></div><div><div class="cc-name">Tower 28</div><div class="cc-sub">634 Creator Tagged Posts · 20M Total Creator Views</div></div></div>
+    <p>634 Creator Tagged Posts from 514 unique creators (rank 6 of 188), the category&#x27;s deepest earned-mention engine.</p><div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a></div></div><div class="cc"><div class="cc-head"><div class="cc-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/310059999_467171672141538_250462813571739486_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=GJdtlds_XIoQ7kNvwEzlfGB&amp;_nc_oc=AdpAawQ0wbiMZNJOdHxPWUI94M4dHRGmiyUeQZUf3QHV6wWlRjgjzEEbG-W7JEyQKlM&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=5aaLZV190Ndn1idnRvJcpw&amp;_nc_ss=70289&amp;oh=00_Af-u75D-uYIYFhRJgrSUULNpnU_Fm4maR3wTmb3NJxktRA&amp;oe=6A28C2D3" onerror="this.style.display='none'"></div><div><div class="cc-name">EADEM</div><div class="cc-sub">533 Creator Tagged Posts · 11.7M Total Creator Views</div></div></div>
+    <p>533 Creator Tagged Posts from 419 unique creators (rank 8 of 188).</p><div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a></div></div><div class="cc"><div class="cc-head"><div class="cc-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/272038960_259730309617869_2806913767183863469_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=P45COob0cpQQ7kNvwHoNJFk&amp;_nc_oc=Adr1XiUN253BAG6ntLjMu1k-bMVWFFQXu1Shmd8MdnFWa1J8fnejbs7fEqmUBFQDlSk&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=ek8TXzASJVIfQKtkrVp79g&amp;_nc_ss=70289&amp;oh=00_Af_Z9UMFGAmA9AcluHDNI7ipcylX5A-FsNTE1JIe5Y5-Tg&amp;oe=6A28BDF6" onerror="this.style.display='none'"></div><div><div class="cc-name">Byoma</div><div class="cc-sub">323 Creator Tagged Posts · 26M Total Creator Views</div></div></div>
+    <p>323 Creator Tagged Posts from 259 unique creators; 26M category-attributable views (rank 8 of 188).</p><div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-term brand ambassador programmes</a></div></div><div class="cc"><div class="cc-head"><div class="cc-logo"><img src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/340513448_1370382096864043_2985480216285828330_n.png?stp=dst-png_s200x200&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=g7_bIFo_DFIQ7kNvwGr2WuJ&amp;_nc_oc=AdqJzoYcAf-ko1ZyMUnOBLwaZziCo0KOgdcZJm_f-clw3VfTu_CXiT0d6yK6I-R1mIY&amp;_nc_zt=24&amp;_nc_ht=scontent-sea1-1.xx&amp;_nc_gid=pTFuB8Ku-zs33rrAglZaCg&amp;_nc_ss=70289&amp;oh=00_Af8whG6wrKO7mwujlj4jS8ZUxmoRZ4bZ3RQl3RjTtO-HAw&amp;oe=6A28AA78" onerror="this.style.display='none'"></div><div><div class="cc-name">Naturium</div><div class="cc-sub">369 Creator Tagged Posts · 5.4M Total Creator Views</div></div></div>
+    <p>369 Creator Tagged Posts from 296 unique creators (rank 14 of 188).</p><div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a></div></div></div>
+  <div class="mpo reveal"><div class="mpo-h">Multi-play operators · brands running 3+ plays</div><div class="item"><div class="mpo-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/272038960_259730309617869_2806913767183863469_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=P45COob0cpQQ7kNvwHoNJFk&amp;_nc_oc=Adr1XiUN253BAG6ntLjMu1k-bMVWFFQXu1Shmd8MdnFWa1J8fnejbs7fEqmUBFQDlSk&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=ek8TXzASJVIfQKtkrVp79g&amp;_nc_ss=70289&amp;oh=00_Af_Z9UMFGAmA9AcluHDNI7ipcylX5A-FsNTE1JIe5Y5-Tg&amp;oe=6A28BDF6" onerror="this.style.display='none'"></div><div><strong>Byoma</strong><div class="mpo-line">Running 4 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s08" target="_blank" rel="noopener">TikTok Shop affiliate programmes</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-term brand ambassador programmes</a></div></div></div><div class="item"><div class="mpo-logo"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/310059999_467171672141538_250462813571739486_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=GJdtlds_XIoQ7kNvwEzlfGB&amp;_nc_oc=AdpAawQ0wbiMZNJOdHxPWUI94M4dHRGmiyUeQZUf3QHV6wWlRjgjzEEbG-W7JEyQKlM&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=5aaLZV190Ndn1idnRvJcpw&amp;_nc_ss=70289&amp;oh=00_Af-u75D-uYIYFhRJgrSUULNpnU_Fm4maR3wTmb3NJxktRA&amp;oe=6A28C2D3" onerror="this.style.display='none'"></div><div><strong>EADEM</strong><div class="mpo-line">Running 4 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s06" target="_blank" rel="noopener">Spark ads / whitelisting</a></div></div></div><div class="item"><div class="mpo-logo"><img src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/340513448_1370382096864043_2985480216285828330_n.png?stp=dst-png_s200x200&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=g7_bIFo_DFIQ7kNvwGr2WuJ&amp;_nc_oc=AdqJzoYcAf-ko1ZyMUnOBLwaZziCo0KOgdcZJm_f-clw3VfTu_CXiT0d6yK6I-R1mIY&amp;_nc_zt=24&amp;_nc_ht=scontent-sea1-1.xx&amp;_nc_gid=pTFuB8Ku-zs33rrAglZaCg&amp;_nc_ss=70289&amp;oh=00_Af8whG6wrKO7mwujlj4jS8ZUxmoRZ4bZ3RQl3RjTtO-HAw&amp;oe=6A28AA78" onerror="this.style.display='none'"></div><div><strong>Naturium</strong><div class="mpo-line">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">High-value micro-creator gifting &amp; seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for organic social content</a></div></div></div></div>
+  <div class="callout reveal"><span class="callout-label">The Category Playbook</span><p>EADEM and Byoma each run four plays at once, stacking <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">high-value micro-creator gifting &amp; seeding</a> on top of an <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned organic mentions</a> engine and paid creator content. The category's most visible challengers are not winning on one tactic, they are running a stack.</p></div>
+</div></section>
+
+<section id="paid" class="section"><div class="container">
+  <div class="eyebrow reveal">04 · Creator content in paid</div>
+  <h2 class="reveal">The category's paid spend runs on creator content. Skincare Junkie's does not yet.</h2>
+  <div class="stat-grid stagger"><div class="stat"><div class="s-lbl">Live ad creatives in the category</div><div class="s-val"><span data-count="3993" data-format="compact" data-suffix="">4K</span></div><div class="s-sub">across 124 advertisers</div></div><div class="stat"><div class="s-lbl">Creator-shot share of live creatives</div><div class="s-val"><span data-count="31.0" data-format="raw" data-suffix="%">31.0%</span></div><div class="s-sub">the rest are brand-produced</div></div><div class="stat dark"><div class="s-lbl">Skincare Junkie's creator-shot ads</div><div class="s-val"><span data-count="0" data-format="comma" data-suffix="">0</span></div><div class="s-sub">of 4 ad creatives on record</div></div><div class="stat"><div class="s-lbl">Longest-running brand ad</div><div class="s-val"><span data-count="22" data-format="comma" data-suffix="">22</span> days</div><div class="s-sub">vs the category's 823-day leader</div></div><div class="stat"><div class="s-lbl">Top advertiser's live creatives</div><div class="s-val"><span data-count="407" data-format="comma" data-suffix="">407</span></div><div class="s-sub">@drmtlgy, testing at volume</div></div><div class="stat"><div class="s-lbl">60+ day creatives still live</div><div class="s-val"><span data-count="531" data-format="comma" data-suffix="">531</span></div><div class="s-sub">the durable-creative pool</div></div></div>
+  <p class="lead reveal">Across the category, advertisers keep <span data-count="3993" data-format="compact" data-suffix="">4K</span> ad creatives live at the time of analysis, and roughly a third are creator-shot. The most active testers run creator-fed pipelines at a cadence brand-produced studios cannot match: @drmtlgy alone keeps <span data-count="407" data-format="comma" data-suffix="">407</span> creatives live, most refreshed inside 30 days.</p>
+  <p class="body reveal">Durable creative skews toward authority and middle-funnel storytelling: the single longest-running creative in the category is a 823-day clinical product carousel from Revision Skincare. The pattern that survives is not novelty, it is a steady supply of variants that lets the winners surface.</p>
+  <div class="chart-wrap reveal"><div class="chart-title">Live creatives by how long they have run</div><div class="chart-canvas"><canvas id="chLongev"></canvas></div></div>
+  <div class="vel reveal"><table class="vel-t"><thead><tr><th>Advertiser</th><th>Live creatives</th><th>Fresh under 30 days</th><th>Typical runtime</th></tr></thead><tbody><tr><td>drmtlgy</td><td><span data-count="407" data-format="comma" data-suffix="">407</span></td><td>89.9%</td><td><span data-count="1" data-format="comma" data-suffix="">1</span>d</td></tr><tr><td>paulaschoice.inc</td><td><span data-count="262" data-format="comma" data-suffix="">262</span></td><td>51.5%</td><td><span data-count="29" data-format="comma" data-suffix="">29</span>d</td></tr><tr><td>skin1004global</td><td><span data-count="164" data-format="comma" data-suffix="">164</span></td><td>99.4%</td><td><span data-count="8" data-format="comma" data-suffix="">8</span>d</td></tr><tr><td>getoakcha</td><td><span data-count="164" data-format="comma" data-suffix="">164</span></td><td>0.0%</td><td><span data-count="40" data-format="comma" data-suffix="">40</span>d</td></tr><tr><td>tatchabeauty</td><td><span data-count="163" data-format="comma" data-suffix="">163</span></td><td>62.6%</td><td><span data-count="18" data-format="comma" data-suffix="">18</span>d</td></tr><tr><td>saltandstone64</td><td><span data-count="136" data-format="comma" data-suffix="">136</span></td><td>44.1%</td><td><span data-count="37" data-format="comma" data-suffix="">37</span>d</td></tr></tbody></table></div>
+  <h3 class="sub-h reveal">The creatives keeping competitors live</h3>
+  <div class="ad-grid stagger"><a class="ad-card" href="https://www.facebook.com/ads/library?id=3799205360315305" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/356635848_661571919345885_7859105632518881008_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=ZTY9fwpYqdIQ7kNvwE8nDi2&amp;_nc_oc=Adr0uBhL_XH1RKMQZx0R57qDgiuE7NqehNQ1jNfQz63eKIjvf8PbDl1cv1lsoCodNjQ&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=Rx7M4PKoFZxgNCPfgWdmAQ&amp;_nc_ss=70289&amp;oh=00_Af8B9pUgXqUF6yYlR_5Dfy4Hzqtxr2SGNH-j8sSoijipBw&amp;oe=6A289EA0" alt="logo" onerror="this.style.display='none'"></div>
+    <div class="ad-meta"><div class="ad-brand">Revision Skincare</div><div class="ad-days"><span data-count="823" data-format="comma" data-suffix="">823</span> days live · carousel</div>
+    <div class="ad-flag bp">BRAND-PRODUCED</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=909196097776630" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/457848544_1623298028604609_9037156787363988249_n.jpg?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=pbv2FgpnBEwQ7kNvwFNpu0G&amp;_nc_oc=Adqc-Xl-PXQuPUqCHNDxW-7QXJt-W4PIVTK8iq3ruO0va_ntGxT6G74Xx4hXSWP3xhY&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Y9QsbmlnNIGnECzyuu0bOg&amp;_nc_ss=7e289&amp;oh=00_Af9WHxShkFIzurrHfQyT8KYj_O0R35uX4-lB0zDRmf3Q2w&amp;oe=6A28C965" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Royal Fern Skincare</div><div class="ad-days"><span data-count="598" data-format="comma" data-suffix="">598</span> days live · video</div>
+    <div class="ad-flag bp">BRAND-PRODUCED</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=9605426612822722" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-phl2-1.xx.fbcdn.net/v/t39.35426-6/473669643_461675983659799_1698893503130842485_n.jpg?_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=6ku7PjNQAOwQ7kNvwFMvx2_&amp;_nc_oc=AdqVJldfXsaNsfjaTKaYMlu07bLb7vKjHsCJbpmy_Zlv__yoreEs5CpRtVEt9xWwJVM&amp;_nc_zt=14&amp;_nc_ht=scontent-phl2-1.xx&amp;_nc_gid=ztzeGJzzTO74s77BYtUGRg&amp;_nc_ss=7e289&amp;oh=00_Af_GQV-yWtJpYAJ0bHsn0-QhzIGsUqQxpVr-kfts_sPf0A&amp;oe=6A28CAAD" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Doctor Rogers</div><div class="ad-days"><span data-count="504" data-format="comma" data-suffix="">504</span> days live · video</div>
+    <div class="ad-flag cs">CREATOR-SHOT</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1272661930516369" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-phl2-1.xx.fbcdn.net/v/t39.35426-6/473450616_2853392834830261_8779244768754659519_n.jpg?_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=kZYwTGaeW9IQ7kNvwE0tyGl&amp;_nc_oc=AdrEDzdBVTZ_LcRHVnbkAeod6Y019zNjMSBlaO3RSOP08AlkCC01fBZ9eLAVURBSRBk&amp;_nc_zt=14&amp;_nc_ht=scontent-phl2-1.xx&amp;_nc_gid=ztzeGJzzTO74s77BYtUGRg&amp;_nc_ss=7e289&amp;oh=00_Af8dixiheVJnK5KrrATRD2ryF9Tuopm42-Pl7UlpZtbt6w&amp;oe=6A28A6FC" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Doctor Rogers</div><div class="ad-days"><span data-count="504" data-format="comma" data-suffix="">504</span> days live · video</div>
+    <div class="ad-flag cs">CREATOR-SHOT</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1121901109207302" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-sjc6-1.xx.fbcdn.net/v/t39.35426-6/475250669_2410896622582497_3920639954044045533_n.jpg?_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=8EhGSQ--pOEQ7kNvwG8Zlqw&amp;_nc_oc=AdpHNAfNhkSsW7gU1ZLHvdeoSe_19XPwklmgxlJnBHho_1vZT7WLpapO2IloWtKjrUI&amp;_nc_zt=14&amp;_nc_ht=scontent-sjc6-1.xx&amp;_nc_gid=DC2HkxRgRvmhafRrTwZcSQ&amp;_nc_ss=7e289&amp;oh=00_Af-DIv-uQFZgadkY_CUFlCucHj1LPBCRm4bJ4Rb2cIa3oA&amp;oe=6A28B7B9" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Meet Blume</div><div class="ad-days"><span data-count="493" data-format="comma" data-suffix="">493</span> days live · video</div>
+    <div class="ad-flag cs">CREATOR-SHOT</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1535300383801213" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-sjc6-1.xx.fbcdn.net/v/t39.35426-6/473627772_593402743632680_7117778572304278777_n.jpg?_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=s_emwOhwYWgQ7kNvwG4Dwdm&amp;_nc_oc=Adqx7vakaRW0lc5FGmKEFfo5vMydimTlEHghWeJn7CRGkdZCeILlLNUc2_mEFEs7jJs&amp;_nc_zt=14&amp;_nc_ht=scontent-sjc6-1.xx&amp;_nc_gid=DC2HkxRgRvmhafRrTwZcSQ&amp;_nc_ss=7e289&amp;oh=00_Af8y3Zo5h3Yc53mFMNK7TG2y-6IKnS76rkfwV7pF2igt6A&amp;oe=6A28CB5F" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Meet Blume</div><div class="ad-days"><span data-count="489" data-format="comma" data-suffix="">489</span> days live · video</div>
+    <div class="ad-flag cs">CREATOR-SHOT</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1080091383801926" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-sjc3-1.xx.fbcdn.net/v/t39.35426-6/476131326_969976218529517_294659631652780115_n.jpg?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=LzTfqNRM1zoQ7kNvwGzj0Te&amp;_nc_oc=AdpvONVUw5mBj0ybAdWcJk0IwqsX3qYTLZP9iAjpOJbaf4uCMo7srTDVUFcok0BM4r4&amp;_nc_zt=14&amp;_nc_ht=scontent-sjc3-1.xx&amp;_nc_gid=Vp4RCQV_dgxga1VZ3HVUAA&amp;_nc_ss=7e289&amp;oh=00_Af-STg4m1W7dNw1ek5nt0dDxyepP3Woq6KPhKjEAWUHTag&amp;oe=6A28A34E" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Meet Blume</div><div class="ad-days"><span data-count="484" data-format="comma" data-suffix="">484</span> days live · video</div>
+    <div class="ad-flag cs">CREATOR-SHOT</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=2816965451981156" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/356635848_661571919345885_7859105632518881008_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=ZTY9fwpYqdIQ7kNvwE8nDi2&amp;_nc_oc=Adr0uBhL_XH1RKMQZx0R57qDgiuE7NqehNQ1jNfQz63eKIjvf8PbDl1cv1lsoCodNjQ&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=Rx7M4PKoFZxgNCPfgWdmAQ&amp;_nc_ss=70289&amp;oh=00_Af8B9pUgXqUF6yYlR_5Dfy4Hzqtxr2SGNH-j8sSoijipBw&amp;oe=6A289EA0" alt="logo" onerror="this.style.display='none'"></div>
+    <div class="ad-meta"><div class="ad-brand">Revision Skincare</div><div class="ad-days"><span data-count="441" data-format="comma" data-suffix="">441</span> days live · carousel</div>
+    <div class="ad-flag bp">BRAND-PRODUCED</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1023162326668193" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-phl2-1.xx.fbcdn.net/v/t39.35426-6/497583496_1227299409027426_4991897651258826615_n.jpg?_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=c53f8f&amp;_nc_ohc=ckoQsQtcj48Q7kNvwFEQ-hE&amp;_nc_oc=AdrtBn8jZ_31c0Qj416ZLaX8txEYuClHbWeFp5tkwSZZSsPGvnp1oHSFD2tz9JJiYZ4&amp;_nc_zt=14&amp;_nc_ht=scontent-phl2-1.xx&amp;_nc_gid=ztzeGJzzTO74s77BYtUGRg&amp;_nc_ss=7e289&amp;oh=00_Af-D4-AD0LuQRqGPWMtHPhIBztEJUjPzrodQetTUjIVhbQ&amp;oe=6A28A353" alt="ad" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+    <div class="ad-meta"><div class="ad-brand">Doctor Rogers</div><div class="ad-days"><span data-count="386" data-format="comma" data-suffix="">386</span> days live · video</div>
+    <div class="ad-flag cs">CREATOR-SHOT</div></div></a><a class="ad-card" href="https://www.facebook.com/ads/library?id=1092650916258232" target="_blank" rel="noopener"><div class="thumb"><img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/434100507_807807224725278_80587797125969737_n.jpg?stp=dst-jpg_s200x200_tt6&amp;_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=418b77&amp;_nc_ohc=_KgPD3D0Bm4Q7kNvwFl2D2I&amp;_nc_oc=AdrY2nHiAfvo0V8UYohvHoNMzyMunfb83yR_VD-b2tdyET3B8EKQwgrmrrsytUKggBA&amp;_nc_zt=24&amp;_nc_ht=scontent-sea5-1.xx&amp;_nc_gid=JHXlLx7P73qQPQ9GSjcLtA&amp;_nc_ss=70289&amp;oh=00_Af9bkzoxLOKALHuymCJxMpsTohpQb74aoyYqUXx-iDdLOA&amp;oe=6A28D0B3" alt="logo" onerror="this.style.display='none'"></div>
+    <div class="ad-meta"><div class="ad-brand">Obagi Medical</div><div class="ad-days"><span data-count="370" data-format="comma" data-suffix="">370</span> days live · carousel</div>
+    <div class="ad-flag bp">BRAND-PRODUCED</div></div></a></div>
+  <p class="body reveal">Skincare Junkie has four ad creatives on record, one still live, and the longest ran 22 days. Every one is brand-produced product or lifestyle content, all built on the Skincare Junkie Megadose Moisturizer and the Discoloration Fade Wand. None is creator-shot.</p>
+  <div class="callout reveal"><span class="callout-label">The Commissioning Gap</span><p>Across the category, 124 advertisers keep 3,993 creatives live and roughly a third are creator-shot UGC. Skincare Junkie commissions zero creator content for paid, one live ad, brand-produced. The gap isn&#x27;t budget; it&#x27;s a creator pipeline producing enough variants to test at category cadence.</p></div>
+</div></section>
+
+<section id="feed" class="section"><div class="container">
+  <div class="eyebrow reveal">05 · Feed content strategy</div>
+  <h2 class="reveal">The brand's most engaging content is the kind it publishes least.</h2>
+  <div class="stat-grid stagger"><div class="stat"><div class="s-lbl">Top feed post</div><div class="s-val"><span data-count="309" data-format="comma" data-suffix="">309</span> likes</div><div class="s-sub">targeted skincare &gt; everything 🫧 the Discoloration Fade Wand</div></div><div class="stat"><div class="s-lbl">Founder / Derm Authority wins per post</div><div class="s-val"><span data-count="66" data-format="comma" data-suffix="">66</span> likes</div><div class="s-sub">2.7× the Educational / Ingredient average</div></div><div class="stat dark"><div class="s-lbl">Founder / Derm Authority share of feed</div><div class="s-val"><span data-count="14" data-format="raw" data-suffix="%">14%</span></div><div class="s-sub">8 of 57 posts</div></div></div>
+  <p class="lead reveal">Over the 70-day brand window, Skincare Junkie published <span data-count="57" data-format="comma" data-suffix="">57</span> own-feed posts across Instagram and TikTok, around six a week. The split is 10 carousels, 41 videos, 6 photo slideshows. Average likes per post land at <span data-count="39" data-format="comma" data-suffix="">39</span> and the typical post at <span data-count="25" data-format="comma" data-suffix="">25</span>, modest numbers that hide a more useful signal underneath.</p>
+  <p class="body reveal">Sorted by theme, Founder / Derm Authority content averages <span data-count="66" data-format="comma" data-suffix="">66</span> likes a post, 2.7× the <span data-count="24" data-format="comma" data-suffix="">24</span> that Educational / Ingredient content earns, even though Educational / Ingredient is the most-published theme at 25 posts. Founder / Derm Authority runs just 8. The brand's clearest engagement driver, the dermatologist founder in frame, is the one it leans on least.</p>
+  <div class="charts-2 reveal"><div class="chart-wrap"><div class="chart-title">Average likes by content theme</div><div class="chart-canvas"><canvas id="chPillarAvg"></canvas></div></div>
+  <div class="chart-wrap"><div class="chart-title">Posts by theme, the distribution gap</div><div class="chart-canvas"><canvas id="chPillarCnt"></canvas></div></div></div>
+  <h3 class="sub-h reveal">The five posts the audience picked</h3>
+  <p class="body tight reveal">Read this grid as a creative brief: these are the posts the audience rewarded, and what they have in common is the brief for the next quarter.</p>
+  <div class="post-grid stagger"><a class="post-card is-highlight" href="https://www.tiktok.com/@skincarejunkieofficial/video/7628357433907318029" target="_blank" rel="noopener"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/0f5c7b5c-3c4e-45d6-895d-ba721517f73b" alt="post" onerror="this.parentNode.innerHTML='<span class=badge>VID</span>'"></div>
+    <div class="pc-body"><div class="pc-rank">01 · Founder / Derm Authority</div>
+    <div class="pc-likes"><span data-count="309" data-format="comma" data-suffix="">309</span></div><div class="pc-sub"><span data-count="3" data-format="comma" data-suffix="">3</span> comments · Video</div>
+    <div class="pc-desc">targeted skincare &gt; everything 🫧 the Discoloration Fade Wand is built to hit dark spots, melasma + uneven tone at the source ✨ created by our founder …</div><span class="pc-link">View post ↗</span></div></a><a class="post-card" href="https://www.tiktok.com/@skincarejunkieofficial/video/7626082279227510030" target="_blank" rel="noopener"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/a5dba0a9-02f7-4aa0-8b0d-75a6c73ec429" alt="post" onerror="this.parentNode.innerHTML='<span class=badge>VID</span>'"></div>
+    <div class="pc-body"><div class="pc-rank">02 · Promotional / Offer</div>
+    <div class="pc-likes"><span data-count="217" data-format="comma" data-suffix="">217</span></div><div class="pc-sub"><span data-count="2" data-format="comma" data-suffix="">2</span> comments · Video</div>
+    <div class="pc-desc">follow Loli on a day in the life with her trusted megadose moisturizer 🫶 shop now on TikTok shop to get that glow! #dayinmylife #skincare #fyp #skinca…</div><span class="pc-link">View post ↗</span></div></a><a class="post-card" href="https://www.tiktok.com/@skincarejunkieofficial/video/7627144681549204750" target="_blank" rel="noopener"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/57447acf-c472-4a7b-a30e-ebfaa9a98377" alt="post" onerror="this.parentNode.innerHTML='<span class=badge>VID</span>'"></div>
+    <div class="pc-body"><div class="pc-rank">03 · Educational / Ingredient</div>
+    <div class="pc-likes"><span data-count="190" data-format="comma" data-suffix="">190</span></div><div class="pc-sub"><span data-count="4" data-format="comma" data-suffix="">4</span> comments · Video</div>
+    <div class="pc-desc">A small step that makes a difference 🌟 Loved by @Glenda | Digital Vlog and many more, this mist is super gentle and nice when your skin needs a quick …</div><span class="pc-link">View post ↗</span></div></a><a class="post-card" href="https://www.tiktok.com/@skincarejunkieofficial/video/7624606324176850190" target="_blank" rel="noopener"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/df8f4165-e45c-4b62-9683-79f42ca822ea" alt="post" onerror="this.parentNode.innerHTML='<span class=badge>VID</span>'"></div>
+    <div class="pc-body"><div class="pc-rank">04 · Promotional / Offer</div>
+    <div class="pc-likes"><span data-count="124" data-format="comma" data-suffix="">124</span></div><div class="pc-sub"><span data-count="0" data-format="comma" data-suffix="">0</span> comments · Video</div>
+    <div class="pc-desc">antioxidants, hyaluronic acid AND vitamin c - immediate yes 🙌 check out our megadose moisturizer on TikTok shop now! your skin will thank you 💕 which …</div><span class="pc-link">View post ↗</span></div></a><a class="post-card" href="https://www.tiktok.com/@skincarejunkieofficial/video/7618645526044527886" target="_blank" rel="noopener"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/b392efe8-24fc-4f3d-a195-818d6d5f41ee" alt="post" onerror="this.parentNode.innerHTML='<span class=badge>VID</span>'"></div>
+    <div class="pc-body"><div class="pc-rank">05 · Product Launch</div>
+    <div class="pc-likes"><span data-count="84" data-format="comma" data-suffix="">84</span></div><div class="pc-sub"><span data-count="6" data-format="comma" data-suffix="">6</span> comments · Video</div>
+    <div class="pc-desc">our Pore Therapy Daily Toner Pads = your new ride or die 🔥 and they’re available right now in our TikTok Shop 😇 save this for your next skincare reset…</div><span class="pc-link">View post ↗</span></div></a></div>
+  <p class="body reveal">Video carries the top of the feed and earns the most engagement of any format, yet a third of output is carousel and photo. The pattern is familiar: lower-production, founder-on-camera video outperforms polished product layouts, and the brand has the asset to make far more of it.</p>
+  <div class="callout reveal"><span class="callout-label">The Biggest Miss</span><p>Over the 70-day brand window, Founder / Derm Authority content averages 66 likes a post, 2.7× the 24 of Educational / Ingredient, the brand&#x27;s most-published theme. The highest-intent content is also the rarest. The fastest content win is to put the founder in frame more often and let the busiest theme make room for it.</p></div>
+</div></section>
+
+<section id="shortlist" class="section"><div class="container">
+  <div class="eyebrow reveal">06 · The shortlist</div>
+  <h2 class="reveal">8 creators already active in the category. Zero have posted about you.</h2>
+  <p class="lead reveal">These 8 creators rank among the highest in the category by Total Creator Views over the window, chosen across Instagram and TikTok and balanced across reach tiers. None has posted about Skincare Junkie yet, so every one is a clean first hire.</p>
+  <div class="sl-grid stagger"><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/80bc2b0c-4ea0-4dde-a309-3250a2b9e859" alt="honeyroseloves" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.instagram.com/honeyroseloves/" target="_blank" rel="noopener">@honeyroseloves</a><div class="sl-name">𝐡𝐨𝐧𝐞𝐲 𝐫𝐨𝐬𝐞 ♡ Lifestyle &amp; Beauty Creator</div></div>
+    <span class="sl-badge">IG</span></div>
+    <div class="sl-stats"><div><b><span data-count="376369" data-format="compact" data-suffix="">376K</span></b><span>Followers</span></div><div><b><span data-count="1993008" data-format="compact" data-suffix="">2M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="7.55" data-format="raw" data-suffix="%">7.55%</span></b><span>Engagement</span></div><div><b><span data-count="6" data-format="comma" data-suffix="">6</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Macro-tier IG creator with 16,677,345 category-attributable views across 6 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/62267ed4-b50f-4c1d-ad34-e7ddf5686a63" alt="patriizzle" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.instagram.com/patriizzle/" target="_blank" rel="noopener">@patriizzle</a><div class="sl-name">PATRICIA MONROY</div></div>
+    <span class="sl-badge">IG</span></div>
+    <div class="sl-stats"><div><b><span data-count="116695" data-format="compact" data-suffix="">117K</span></b><span>Followers</span></div><div><b><span data-count="1482954" data-format="compact" data-suffix="">1.5M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="0.59" data-format="raw" data-suffix="%">0.59%</span></b><span>Engagement</span></div><div><b><span data-count="3" data-format="comma" data-suffix="">3</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Macro-tier IG creator with 14,810,011 category-attributable views across 3 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7b152545-166e-4b38-87df-b249d8d22230" alt="wiinnyypooh" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.instagram.com/wiinnyypooh/" target="_blank" rel="noopener">@wiinnyypooh</a><div class="sl-name">Winny</div></div>
+    <span class="sl-badge">IG</span></div>
+    <div class="sl-stats"><div><b><span data-count="218172" data-format="compact" data-suffix="">218K</span></b><span>Followers</span></div><div><b><span data-count="1009483" data-format="compact" data-suffix="">1M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="12.54" data-format="raw" data-suffix="%">12.54%</span></b><span>Engagement</span></div><div><b><span data-count="4" data-format="comma" data-suffix="">4</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Macro-tier IG creator with 12,302,536 category-attributable views across 4 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7b425996-edf3-4bef-88a3-5cfd044d89e8" alt="carolyn.chang" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.instagram.com/carolyn.chang/" target="_blank" rel="noopener">@carolyn.chang</a><div class="sl-name"></div></div>
+    <span class="sl-badge">IG</span></div>
+    <div class="sl-stats"><div><b><span data-count="39324" data-format="compact" data-suffix="">39K</span></b><span>Followers</span></div><div><b><span data-count="2512403" data-format="compact" data-suffix="">2.5M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="7.57" data-format="raw" data-suffix="%">7.57%</span></b><span>Engagement</span></div><div><b><span data-count="3" data-format="comma" data-suffix="">3</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Mid-tier IG creator with 25,863,167 category-attributable views across 3 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/aeb472bf-9950-4c4c-b962-6d0611c7d5d7" alt="tristingracerowell" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.instagram.com/tristingracerowell/" target="_blank" rel="noopener">@tristingracerowell</a><div class="sl-name">Tristin-Grace Rowell</div></div>
+    <span class="sl-badge">IG</span></div>
+    <div class="sl-stats"><div><b><span data-count="55206" data-format="compact" data-suffix="">55K</span></b><span>Followers</span></div><div><b><span data-count="1995072" data-format="compact" data-suffix="">2M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="1.39" data-format="raw" data-suffix="%">1.39%</span></b><span>Engagement</span></div><div><b><span data-count="6" data-format="comma" data-suffix="">6</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Mid-tier IG creator with 21,655,239 category-attributable views across 6 Creator Tagged Posts in the window. Has posted about Byoma.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/a208362c-474f-4c9c-a54a-621d6c009989" alt="jayashree_malla" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.instagram.com/jayashree_malla/" target="_blank" rel="noopener">@jayashree_malla</a><div class="sl-name">Jayashree Juli</div></div>
+    <span class="sl-badge">IG</span></div>
+    <div class="sl-stats"><div><b><span data-count="11339" data-format="compact" data-suffix="">11K</span></b><span>Followers</span></div><div><b><span data-count="1025396" data-format="compact" data-suffix="">1M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="1.53" data-format="raw" data-suffix="%">1.53%</span></b><span>Engagement</span></div><div><b><span data-count="2" data-format="comma" data-suffix="">2</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Mid-tier IG creator with 8,483,051 category-attributable views across 2 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/78332a26-a19a-4c64-b76c-30286abf1542" alt="james.bok" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.tiktok.com/@james.bok" target="_blank" rel="noopener">@james.bok</a><div class="sl-name">James Bok</div></div>
+    <span class="sl-badge">TT</span></div>
+    <div class="sl-stats"><div><b><span data-count="586700" data-format="compact" data-suffix="">587K</span></b><span>Followers</span></div><div><b><span data-count="489803" data-format="compact" data-suffix="">490K</span></b><span>Avg views</span></div>
+    <div><b><span data-count="0.94" data-format="raw" data-suffix="%">0.94%</span></b><span>Engagement</span></div><div><b><span data-count="2" data-format="comma" data-suffix="">2</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Macro-tier TT creator with 4,130,700 category-attributable views across 2 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div><div class="short-card"><div class="sl-head"><div class="sl-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f37487bc-a71c-4e0c-996e-260267cf9b6e" alt="lenkalul" onerror="this.style.display='none';this.parentNode.classList.add('noav')"></div>
+    <div><a class="sl-handle" href="https://www.tiktok.com/@lenkalul" target="_blank" rel="noopener">@lenkalul</a><div class="sl-name">lenkalul</div></div>
+    <span class="sl-badge">TT</span></div>
+    <div class="sl-stats"><div><b><span data-count="4000000" data-format="compact" data-suffix="">4M</span></b><span>Followers</span></div><div><b><span data-count="3646533" data-format="compact" data-suffix="">3.6M</span></b><span>Avg views</span></div>
+    <div><b><span data-count="4.14" data-format="raw" data-suffix="%">4.14%</span></b><span>Engagement</span></div><div><b><span data-count="3" data-format="comma" data-suffix="">3</span></b><span>Creator Tagged Posts</span></div></div>
+    <div class="why">Macro-tier TT creator with 3,922,400 category-attributable views across 3 Creator Tagged Posts in the window. No prior posts about brands in this set, a clean first hire.</div></div></div>
+  <h3 class="sub-h reveal">What's winning in your category this month</h3>
+  <div class="insp-grid stagger"><a class="insp" href="https://www.instagram.com/p/DWH6taTDuZA/" target="_blank" rel="noopener"><div class="insp-head"><div class="insp-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/7b425996-edf3-4bef-88a3-5cfd044d89e8" onerror="this.style.display='none'"></div><div><div class="insp-handle">@carolyn.chang</div><div class="insp-pill">IG</div></div></div>
+    <div class="insp-stat"><span data-count="25756108" data-format="compact" data-suffix="">25.8M</span> views</div><div class="insp-pillar">Creator review</div></a><a class="insp" href="https://www.instagram.com/p/DXRjQFxjH0c/" target="_blank" rel="noopener"><div class="insp-head"><div class="insp-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/90e42440-a95c-40c6-9b30-1398dad2fbf5" onerror="this.style.display='none'"></div><div><div class="insp-handle">@skincare_with_alysha</div><div class="insp-pill">IG</div></div></div>
+    <div class="insp-stat"><span data-count="23792993" data-format="compact" data-suffix="">23.8M</span> views</div><div class="insp-pillar">Creator review</div></a><a class="insp" href="https://www.instagram.com/p/DXriZYLCNbq/" target="_blank" rel="noopener"><div class="insp-head"><div class="insp-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/40764b5a-90a2-48cc-9585-919d95def4af" onerror="this.style.display='none'"></div><div><div class="insp-handle">@createsbyhifza</div><div class="insp-pill">IG</div></div></div>
+    <div class="insp-stat"><span data-count="20167874" data-format="compact" data-suffix="">20.2M</span> views</div><div class="insp-pillar">Creator review</div></a><a class="insp" href="https://www.instagram.com/p/DW7DkTugQjS/" target="_blank" rel="noopener"><div class="insp-head"><div class="insp-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/aeb472bf-9950-4c4c-b962-6d0611c7d5d7" onerror="this.style.display='none'"></div><div><div class="insp-handle">@tristingracerowell</div><div class="insp-pill">IG</div></div></div>
+    <div class="insp-stat"><span data-count="18235987" data-format="compact" data-suffix="">18.2M</span> views</div><div class="insp-pillar">Creator review</div></a><a class="insp" href="https://www.instagram.com/p/DXBReSfAfuF/" target="_blank" rel="noopener"><div class="insp-head"><div class="insp-av"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/62267ed4-b50f-4c1d-ad34-e7ddf5686a63" onerror="this.style.display='none'"></div><div><div class="insp-handle">@patriizzle</div><div class="insp-pill">IG</div></div></div>
+    <div class="insp-stat"><span data-count="14717730" data-format="compact" data-suffix="">14.7M</span> views</div><div class="insp-pillar">Creator review</div></a></div>
+  <div class="callout reveal"><span class="callout-label">The Shortlist Verdict</span><p>Combined, these 8 creators reach <span data-count="5403805" data-format="compact" data-suffix="">5.4M</span> followers and drove <span data-count="107844449" data-format="compact" data-suffix="">107.8M</span> Total Creator Views in the category. 1 have already posted about your direct competitors, and 7 have no prior tie to any brand in this set.</p></div>
+</div></section>
+
+<section id="opportunity" class="section"><div class="container">
+  <div class="eyebrow reveal">07 · The opportunity</div>
+  <h2 class="reveal">Six moves that change the game for Skincare Junkie.</h2>
+  <p class="lead reveal">Each move is a creator play the category already runs and Skincare Junkie does not, ordered by how much leverage it adds from a standing start.</p>
+  <div class="opp-grid stagger"><div class="opp"><div class="opp-eyebrow">Opportunity 01</div>
+    <div class="opp-title">Light the earned-mention engine from zero</div><p>Skincare Junkie recorded zero Creator Tagged Posts in the 70-day window while Tower 28, EADEM, Naturium and Byoma each drew 320-630. The category runs on broad creator seeding, not concentrated retainers, the entry point is volume of micro-creator gifting, not big-ticket deals.</p>
+    <div class="opp-stat"><span class="opp-big">0 → 634</span><span class="opp-lbl">Creator Tagged Posts vs category leader</span></div>
+    <div class="opp-foot">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">Earned-mention cultivation</a></div></div><div class="opp"><div class="opp-eyebrow">Opportunity 02</div>
+    <div class="opp-title">Commission creator-shot UGC for paid</div><p>Roughly a third of the category&#x27;s live ad creatives are creator-shot UGC; Skincare Junkie&#x27;s are 100% brand-produced. EADEM alone keeps 65 creatives running past 30 days, a creator pipeline the brand currently has no equivalent of.</p>
+    <div class="opp-stat"><span class="opp-big">0 creator-shot</span><span class="opp-lbl">of the brand&#x27;s ad creatives</span></div>
+    <div class="opp-foot">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a></div></div><div class="opp"><div class="opp-eyebrow">Opportunity 03</div>
+    <div class="opp-title">Build a TikTok creator squad</div><p>At 989 TikTok followers the brand is effectively absent on the platform where Byoma turned 28 paid creators into 137K followers and Target sell-through. A nano-and-micro TikTok squad is the fastest route into category-relevant creator views.</p>
+    <div class="opp-stat"><span class="opp-big">989</span><span class="opp-lbl">TikTok followers today</span></div>
+    <div class="opp-foot">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s08" target="_blank" rel="noopener">TikTok Shop affiliate programmes</a></div></div><div class="opp"><div class="opp-eyebrow">Opportunity 04</div>
+    <div class="opp-title">Stand up an ambassador layer on the derm-founder</div><p>Dr. Blair Murphy-Rose is a board-certified dermatologist founder, a credibility asset competitors don&#x27;t have, and ideal anchor for a long-term ambassador roster. Byoma runs multi-creator ambassador activations; Skincare Junkie runs none.</p>
+    <div class="opp-stat"><span class="opp-big">1 → 8</span><span class="opp-lbl">ambassadors on a derm-led roster</span></div>
+    <div class="opp-foot">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">Long-term brand ambassador programmes</a></div></div><div class="opp"><div class="opp-eyebrow">Opportunity 05</div>
+    <div class="opp-title">Be first to a retainer bench in a gifting-only category</div><p>No brand in this dataset concentrates creators into an always-on retainer (every competitor sits near one post per creator). Converting a handful of the best seeded creators into a paid bench would compound earned mentions competitors only rent.</p>
+    <div class="opp-stat"><span class="opp-big">0</span><span class="opp-lbl">brands in the category run retainers</span></div>
+    <div class="opp-foot">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">Always-on creator retainers</a></div></div><div class="opp"><div class="opp-eyebrow">Opportunity 06</div>
+    <div class="opp-title">Diversify the feed with creator content</div><p>The own feed is entirely brand-produced; video already earns the most engagement, yet creator-style UGC is absent from organic. Competitors fold creator content into their own grids; the target does not.</p>
+    <div class="opp-stat"><span class="opp-big">24</span><span class="opp-lbl">avg likes on the brand&#x27;s busiest theme</span></div>
+    <div class="opp-foot">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s02" target="_blank" rel="noopener">UGC for organic social content</a></div></div></div>
+</div></section>
+
+<div class="container">
+  <div class="closing reveal">
+    <p class="closing-lead">We built this report because Skincare Junkie's position is genuinely interesting: a dermatologist-founded brand with real products and almost no creator footprint, sitting inside a category that runs on creators. If any of this is useful or you would like the full creator list behind the numbers, happy to send it over.</p>
+    <h3>Who are we?</h3>
+    <p><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
+  </div>
+  <div class="booking">Book 30 min to walk through the data together at <a href="https://sup.co/meet">sup.co/meet</a></div>
+  <div class="footer"><span class="wave">👋</span> Sup · sup.co · Confidential · June 2026</div>
+</div>
+
+<script>
+const BRAND_PRIMARY='#7a2640';
+const PALETTE=['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
+const CD={"ctp_brands": ["Skincare Junkie", "Byoma", "Naturium", "EADEM", "Tower 28"], "ctp_vals": [0, 323, 369, 533, 634], "tcv_vals": [0, 25999187, 5372908, 11728464, 19963480], "longev": [{"bucket": "0-29", "still_active": 2765, "expired": 7285}, {"bucket": "30-59", "still_active": 697, "expired": 1538}, {"bucket": "60-89", "still_active": 293, "expired": 580}, {"bucket": "90-179", "still_active": 202, "expired": 397}, {"bucket": "180+", "still_active": 36, "expired": 98}], "pillar_names": ["Educational / Ingredient", "Promotional / Offer", "Founder / Derm Authority", "Product Showcase", "Product Launch"], "pillar_avg": [24, 51, 66, 7, 61], "pillar_cnt": [25, 19, 8, 3, 2], "fmt_names": ["Carousel / Album", "Video", "Photo Slideshow"], "fmt_avg": [20, 49, 7]};
+const BEST_IDX=2;
+function formatCompact(n){if(n>=1000000)return (n/1000000).toFixed(n>=10000000?0:1).replace(/\.0$/,'')+'M';if(n>=1000)return (n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,'')+'K';return n.toString();}
+function scrambleCount(el){const target=parseFloat(el.dataset.count);const fmt=el.dataset.format;const suffix=el.dataset.suffix||'';const duration=1400;const sp=0.65;const start=performance.now();const isFloat=fmt==='raw'&&!Number.isInteger(target);function fmtN(v){if(fmt==='comma')return Math.round(v).toLocaleString();if(fmt==='compact')return formatCompact(Math.round(v));if(isFloat)return v.toFixed(1);return Math.round(v).toString();}function tick(now){const t=Math.min(1,(now-start)/duration);let v;if(t<sp){const it=1-(t/sp);const base=target*(t/sp);v=Math.max(0,base+target*0.5*it*(Math.random()-0.3));}else{const st=(t-sp)/(1-sp);const e=1-Math.pow(1-st,3);const ls=target*sp;v=ls+(target-ls)*e;}el.textContent=fmtN(v)+suffix;if(t<1)requestAnimationFrame(tick);else el.textContent=fmtN(target)+suffix;}requestAnimationFrame(tick);}
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('img').forEach(img=>{if(img.complete&&img.naturalHeight!==0)img.classList.add('loaded');else{img.addEventListener('load',()=>img.classList.add('loaded'));img.addEventListener('error',()=>{img.style.opacity=1;});}});
+  if(reduce){document.querySelectorAll('.reveal,.stagger').forEach(el=>el.classList.add('is-in'));document.querySelectorAll('[data-count]').forEach(el=>{const n=parseFloat(el.dataset.count);const f=el.dataset.format;const s=el.dataset.suffix||'';el.textContent=(f==='comma'?Math.round(n).toLocaleString():f==='compact'?formatCompact(n):(f==='raw'&&!Number.isInteger(n)?n.toFixed(1):n))+s;});document.querySelectorAll('.bar-fill,.theme-bar-fill').forEach(b=>{const w=b.dataset.width;if(w)b.style.width=w+'%';});document.querySelectorAll('.brand-emphasis').forEach(e=>e.classList.add('is-painted'));drawCharts();return;}
+  const io=new IntersectionObserver((es)=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('is-in');if(en.target.hasAttribute('data-count'))scrambleCount(en.target);if(en.target.matches('.bar-fill,.theme-bar-fill')){const w=en.target.dataset.width;if(w)en.target.style.width=w+'%';}io.unobserve(en.target);}});},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal,.stagger,[data-count],.bar-fill,.theme-bar-fill').forEach(el=>io.observe(el));
+  document.querySelectorAll('.brand-emphasis').forEach(el=>setTimeout(()=>el.classList.add('is-painted'),800));
+  setTimeout(drawCharts,300);
+});
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('scroll-progress').style.width=p+'%';},{passive:true});
+const navIO=new IntersectionObserver((es)=>{es.forEach(en=>{if(en.isIntersecting){const id=en.target.id;document.querySelectorAll('.nav-mid a').forEach(a=>a.classList.remove('is-active'));const l=document.querySelector('.nav-mid a[href="#'+id+'"]');if(l)l.classList.add('is-active');}});},{rootMargin:'-40% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>navIO.observe(s));
+setInterval(()=>{document.querySelectorAll('.wave').forEach(el=>{el.style.animation='none';el.offsetHeight;el.style.animation='wave-wiggle 1.2s ease-in-out';});},10000);
+const baseAnim={duration:1200,easing:'easeOutCubic',delay:(c)=>(c.dataIndex??0)*70};
+const gridX={grid:{display:false},ticks:{color:'#71717A',font:{size:11}}};
+const gridY={grid:{color:'#F4F4F5'},ticks:{color:'#71717A',font:{size:11}},border:{display:false}};
+let drawn=false;
+function drawCharts(){ if(drawn)return; drawn=true; Chart.defaults.font.family="Inter";
+  new Chart(document.getElementById('chLongev'),{type:'bar',data:{labels:CD.longev.map(b=>b.bucket+'d'),datasets:[{label:'Live',data:CD.longev.map(b=>b.still_active),backgroundColor:BRAND_PRIMARY,borderRadius:4},{label:'Expired',data:CD.longev.map(b=>b.expired),backgroundColor:'#E4E4E7',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,animation:baseAnim,plugins:{legend:{position:'bottom',labels:{color:'#52525B',font:{size:11},boxWidth:12}}},scales:{x:{...gridX,stacked:false},y:{...gridY}}}});
+  new Chart(document.getElementById('chPillarAvg'),{type:'bar',data:{labels:CD.pillar_names,datasets:[{data:CD.pillar_avg,backgroundColor:CD.pillar_names.map((_,i)=>i===BEST_IDX?BRAND_PRIMARY:'#A1A1AA'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:1200,easing:'easeOutCubic',delay:(c)=>(c.dataIndex??0)*70},plugins:{legend:{display:false}},scales:{x:{...gridY},y:{...gridX}}}});
+  new Chart(document.getElementById('chPillarCnt'),{type:'bar',data:{labels:CD.pillar_names,datasets:[{data:CD.pillar_cnt,backgroundColor:CD.pillar_names.map((_,i)=>i===BEST_IDX?BRAND_PRIMARY:'#A1A1AA'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:1200,easing:'easeOutCubic',delay:(c)=>(c.dataIndex??0)*70},plugins:{legend:{display:false}},scales:{x:{...gridY},y:{...gridX}}}});
+}
+</script>
+</body></html>
