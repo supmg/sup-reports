@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="sup-brand-primary" content="#6E120C">
+<title>PRÉS · Influencer Marketing Intelligence Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#F4F4F5; --soft:#ECECEE; --text:#09090B; --secondary:#52525B;
+  --muted:#71717A; --hint:#A1A1AA; --border:#E4E4E7;
+  --brand-primary:#6E120C; --brand-accent-dark:#3D0903; --brand-tint:rgba(110,18,12,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--secondary);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px}
+.container{max-width:1180px;margin:0 auto;padding:0 32px}
+@media(max-width:900px){.container{padding:0 24px}}
+@media(max-width:560px){.container{padding:0 20px}}
+a{color:inherit}
+img{opacity:0;transition:opacity 300ms ease}
+img.loaded{opacity:1}
+section{padding:96px 0 120px;border-bottom:1px solid var(--border)}
+@media(max-width:900px){section{padding:72px 0 80px}}
+@media(max-width:560px){section{padding:56px 0 64px}}
+h1,h2,h3{color:var(--text);font-weight:500;letter-spacing:-0.02em}
+.section-label{font-size:13px;font-weight:500;color:var(--secondary);margin-bottom:18px}
+.section h2{font-size:clamp(22px,4vw,38px);line-height:1.15;position:relative;padding-bottom:14px;max-width:880px}
+.section h2::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brand-primary);border-radius:2px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 200ms}
+.section.is-in h2::after{width:48px}
+p{font-size:16px;color:var(--secondary);line-height:1.6;margin-bottom:16px}
+@media(max-width:560px){p{font-size:15px}}
+.lead-narrow{max-width:760px}
+
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--brand-primary);z-index:200;transition:width 100ms linear}
+
+.nav{position:sticky;top:0;height:56px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;display:flex;align-items:center}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-left{display:flex;align-items:center;gap:12px}
+.sup-pill{display:inline-flex;align-items:center;gap:6px;background:transparent;border:0;border-radius:0;padding:0;color:var(--text);font-size:14px;font-weight:600}
+.nav-divider{width:1px;height:22px;background:var(--border)}
+.nav-logo{height:20px;width:auto;opacity:1}
+.nav-name{font-size:14px;font-weight:600;color:var(--text)}
+.nav-mid{display:flex;align-items:center;gap:22px}
+.nav-mid a{font-size:13px;color:var(--secondary);text-decoration:none;position:relative;padding-bottom:2px;white-space:nowrap}
+.nav-mid a.is-active{color:var(--brand-primary)}
+.nav-mid a.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--brand-primary);border-radius:2px}
+.nav-cta a{display:inline-block;background:#000;color:#fff;border-radius:9999px;padding:8px 16px;font-size:13px;font-weight:500;text-decoration:none;transition:transform 180ms cubic-bezier(0.16,1,0.3,1),filter 180ms ease;white-space:nowrap}
+.nav-cta a:hover{transform:scale(1.02);filter:brightness(1.15)}
+@media(max-width:900px){.nav-mid{display:none}}
+@media(max-width:560px){.nav-name{display:none}}
+
+.cover{padding:72px 0 56px;border-bottom:0}
+.pill-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#fff;border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--secondary);margin-bottom:28px}
+.green-dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;display:inline-block}
+.cover-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:56px;align-items:center;margin-bottom:56px}
+.cover h1{font-size:clamp(32px,5vw,60px);font-weight:500;letter-spacing:-0.02em;line-height:1.08}
+.cover h1 .s{display:block}
+.brand-emphasis{position:relative;color:var(--brand-primary)}
+.brand-emphasis::after{content:"";position:absolute;left:0;bottom:0;width:0;height:6px;background:var(--brand-primary);opacity:0.18;border-radius:4px;transition:width 700ms cubic-bezier(0.16,1,0.3,1) 400ms;z-index:-1}
+.brand-emphasis.is-painted::after{width:100%}
+.cover-sub{font-size:17px;color:var(--muted);margin-top:22px;max-width:560px}
+.cover-thumbs{position:relative;width:100%;height:360px}
+.thumb-tilt{position:absolute;width:168px;height:168px;border-radius:22px;overflow:hidden;background:var(--surface);border:5px solid #fff;box-shadow:0 18px 42px -12px rgba(9,9,11,0.22),0 6px 14px -4px rgba(9,9,11,0.08);transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 320ms ease;cursor:pointer}
+.thumb-tilt img{width:100%;height:100%;object-fit:cover;transition:transform 400ms ease;opacity:1}
+.thumb-tilt .stamp{position:absolute;left:10px;bottom:10px;padding:4px 10px;background:rgba(9,9,11,0.7);color:#fff;font-size:10.5px;font-weight:500;border-radius:9999px;backdrop-filter:blur(8px)}
+.thumb-1{top:22px;left:8px;transform:rotate(-9deg);z-index:1}
+.thumb-2{top:92px;left:138px;transform:rotate(6deg);z-index:3}
+.thumb-3{top:168px;left:8px;transform:rotate(-3deg);z-index:2}
+.thumb-tilt:hover{transform:rotate(0deg) scale(1.06);z-index:4;box-shadow:0 22px 50px -14px rgba(9,9,11,0.28),0 8px 18px -4px rgba(9,9,11,0.1)}
+.thumb-tilt:hover img{transform:scale(1.04)}
+@media(max-width:1080px){.cover-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px}.thumb-tilt{width:144px;height:144px}.thumb-2{left:118px}.thumb-3{top:148px}.cover-thumbs{height:320px}}
+@media(max-width:900px){.cover-grid{grid-template-columns:1fr;gap:36px;margin-bottom:40px}.cover-thumbs{height:280px;max-width:380px;margin:0 auto}.thumb-tilt{width:150px;height:150px}.thumb-1{top:0;left:4%}.thumb-2{top:56px;left:36%}.thumb-3{top:112px;left:4%}}
+@media(max-width:480px){.cover-thumbs{height:260px;max-width:320px}.thumb-tilt{width:128px;height:128px;border-width:4px;border-radius:18px}.thumb-1{left:0;top:0}.thumb-2{left:42%;top:48px}.thumb-3{left:0;top:112px}}
+
+.provenance-line{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0}
+.provenance-line p{font-size:14px;color:var(--secondary);line-height:1.55;margin:0;max-width:980px}
+.provenance-line .pv-label{color:var(--muted);font-weight:500;margin-right:8px}
+.provenance-line .num{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+@media(max-width:720px){.provenance-line{padding:18px 0}.provenance-line p{font-size:13px}}
+
+.section-stats{display:grid;grid-template-columns:repeat(6,1fr);padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:8px 0 40px}
+.section-stats>div{padding:0 22px;border-right:1px solid var(--border)}
+.section-stats>div:last-child{border-right:none}
+.section-stats .v{font-size:28px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;color:var(--text);font-variant-numeric:tabular-nums}
+.section-stats .ctx{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.section-stats .lbl{font-size:12px;color:var(--muted);margin-top:8px;font-weight:500}
+@media(max-width:900px){.section-stats{grid-template-columns:repeat(3,1fr);gap:0}.section-stats>div{padding:18px 18px;border-bottom:1px solid var(--border)}.section-stats>div:nth-child(3n){border-right:none}.section-stats>div:nth-last-child(-n+3){border-bottom:none}}
+@media(max-width:560px){.section-stats{grid-template-columns:repeat(2,1fr)}.section-stats>div{padding:16px}.section-stats>div:nth-child(2n){border-right:none}.section-stats>div:nth-child(3n){border-right:1px solid var(--border)}.section-stats>div:nth-last-child(-n+2){border-bottom:none}.section-stats .v{font-size:24px}}
+@media(max-width:480px){.section-stats{grid-template-columns:1fr}.section-stats>div{padding:16px 0!important;border-right:none!important;border-bottom:1px solid var(--border)}.section-stats>div:first-child{padding-top:0!important}.section-stats>div:last-child{border-bottom:none;padding-bottom:0!important}}
+
+.players{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:8px 0 32px}
+.player-card{border:1px solid var(--border);border-radius:24px;padding:20px 18px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.player-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.player-card.target{border:1.5px solid var(--brand-primary);background:linear-gradient(180deg,var(--brand-tint) 0%,#ffffff 60%)}
+.pc-eyebrow{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:9999px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--text);margin-bottom:12px}
+.pc-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-primary)}
+.pc-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid var(--border);padding:3px;opacity:1}
+.pc-logo-fallback{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px}
+.pc-name{font-size:14.5px;font-weight:600;line-height:1.15;color:var(--text);margin-top:10px;word-break:break-word}
+.pc-handle{font-size:11px;color:var(--muted);margin-bottom:14px}
+.pc-name.brandcolor{color:var(--brand-primary)}
+.stat-row{margin-bottom:12px}
+.stat-row .srlbl{font-size:12px;font-weight:500;color:var(--muted)}
+.stat-row .srval{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:3px}
+.stat-row .num{font-size:17px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;color:var(--text)}
+.rank-pill{display:inline-block;font-size:9.5px;font-weight:500;color:var(--text);border:1px solid var(--border);background:#fff;border-radius:9999px;padding:3px 8px;font-variant-numeric:tabular-nums;transform:scale(0);transition:transform 400ms cubic-bezier(0.34,1.56,0.64,1)}
+.rank-pill.is-in{transform:scale(1)}
+.rank-pill.top1{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.bar{height:5px;background:var(--soft);border-radius:4px;margin-top:7px;overflow:hidden}
+.bar>span{display:block;height:100%;width:0;border-radius:4px;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+.player-card .stat-row:nth-child(1) .bar>span{transition-delay:200ms}
+.player-card .stat-row:nth-child(2) .bar>span{transition-delay:280ms}
+.player-card .stat-row:nth-child(3) .bar>span{transition-delay:360ms}
+.player-card .stat-row:nth-child(4) .bar>span{transition-delay:440ms}
+.caption{font-size:12.5px;color:var(--muted);margin-top:4px}
+@media(max-width:900px){.players{grid-template-columns:repeat(2,1fr)}.player-card.target{grid-column:1/-1}}
+@media(max-width:560px){.players{grid-template-columns:1fr}}
+
+.callout{position:relative;background:var(--surface);border-radius:16px;padding:22px 24px 22px 28px;border:1px solid var(--border);margin:28px 0 0}
+.callout::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;background:var(--brand-primary);border-radius:4px}
+.callout-label{display:block;font-size:13px;font-weight:500;color:var(--brand-primary);margin-bottom:10px}
+.callout p{font-size:15.5px;color:var(--text);margin:0;line-height:1.55}
+
+.stat-grid{display:grid;gap:16px;margin:28px 0}
+.sg-3{grid-template-columns:repeat(3,1fr)}
+.sg-6{grid-template-columns:repeat(3,1fr)}
+@media(max-width:780px){.sg-3{grid-template-columns:1fr}.sg-6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.sg-6{grid-template-columns:1fr}}
+.stat{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.stat:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.stat.dark{background:var(--text);border-color:var(--text)}
+.stat.dark .slabel,.stat.dark .ssub{color:#A1A1AA}
+.stat.dark .sval{color:#fff}
+.slabel{font-size:12px;font-weight:500;color:var(--muted)}
+.sval{font-size:27px;font-weight:600;letter-spacing:-0.02em;color:var(--text);font-variant-numeric:tabular-nums;margin:8px 0 6px}
+.ssub{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+.theme-row{margin:14px 0}
+.theme-head{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+.theme-head .tname{color:var(--text);font-weight:500}
+.theme-head .tcount{color:var(--muted);font-variant-numeric:tabular-nums}
+.theme-track{height:10px;background:var(--soft);border-radius:6px;overflow:hidden}
+.theme-bar-fill{height:100%;width:0;background:var(--brand-primary);border-radius:6px;transition:width 900ms cubic-bezier(0.16,1,0.3,1)}
+
+.chart-wrap{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;margin:24px 0}
+.chart-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:14px}
+.chart-canvas{position:relative;height:340px}
+.charts-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.charts-2{grid-template-columns:1fr}.chart-canvas{height:300px}}
+@media(max-width:560px){.chart-canvas{height:260px}}
+
+.tbl-wrap{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border)}
+th{font-size:12px;font-weight:500;color:var(--muted)}
+td{color:var(--secondary);font-variant-numeric:tabular-nums}
+tr.target-row{background:rgba(110,18,12,0.06)}
+.tbl-brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:500}
+.tbl-logo{width:22px;height:22px;border-radius:6px;object-fit:contain;background:#fff;border:1px solid var(--border);opacity:1}
+@media(max-width:760px){.col-hide{display:none}}
+
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:780px){.comp-grid{grid-template-columns:1fr}}
+.cc{border:1px solid var(--border);border-radius:14px;padding:22px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.cc:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.cc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.cc-logo{width:36px;height:36px;border-radius:9px;object-fit:contain;background:#fff;border:1px solid var(--border);padding:2px;opacity:1}
+.cc-name{font-size:16px;font-weight:600;color:var(--text)}
+.cc-name.brandcolor{color:var(--brand-primary)}
+.cc p{font-size:14px;margin-bottom:12px}
+.strats{font-size:12.5px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--border);padding-top:12px}
+.strats .lbl{display:inline-flex;align-items:center;gap:6px;color:var(--secondary)}
+.strats .lbl::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-primary);display:inline-block}
+.strats .empty{font-style:italic;color:var(--muted);font-size:12px}
+
+.mpo{margin:32px 0 0}
+.mpo-head{font-size:14px;color:var(--secondary);font-weight:500;margin-bottom:14px}
+.mpo .item{display:flex;align-items:flex-start;gap:14px;border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.mpo .item:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.mpo .item img{width:32px;height:32px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--border);padding:2px;opacity:1;flex-shrink:0}
+.mpo .item .mname{font-size:15px;font-weight:600;color:var(--text)}
+.mpo .item .mline{font-size:13.5px;color:var(--secondary);margin-top:4px}
+
+.sx-link{color:inherit;text-decoration:underline;text-decoration-color:var(--brand-primary);text-decoration-style:dotted;text-decoration-thickness:1px;text-underline-offset:3px;transition:color 150ms ease,text-decoration-style 150ms ease}
+.sx-link:hover{color:var(--brand-primary);text-decoration-style:solid}
+
+.ad-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:16px;overflow-x:auto;padding-bottom:12px;margin:24px 0;scroll-snap-type:x mandatory}
+.ad-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;scroll-snap-align:start;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.ad-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.ad-card .thumb{height:180px;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.ad-card .thumb img{width:100%;height:100%;object-fit:cover}
+.ad-card .body{padding:14px}
+.ad-badge{display:inline-block;font-size:10px;font-weight:500;color:var(--brand-primary);background:var(--brand-tint);border-radius:9999px;padding:3px 8px;margin-bottom:8px}
+.ad-badge.brandmade{color:var(--secondary);background:var(--soft)}
+.ad-card .abr{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.ad-card .abr img{width:18px;height:18px;border-radius:5px;object-fit:contain;opacity:1}
+.ad-card .adays{font-size:12px;color:var(--muted)}
+.ad-card .ahook{font-size:12.5px;color:var(--secondary);margin-top:8px;line-height:1.4}
+.ad-card a{font-size:12px;color:var(--brand-primary);text-decoration:none;display:inline-block;margin-top:10px}
+
+.post-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:20px 0}
+@media(max-width:980px){.post-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.post-grid{grid-template-columns:1fr}}
+.post-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.post-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.post-card.is-highlight{border-color:var(--brand-primary)}
+.post-card .thumb{height:150px;overflow:hidden;background:var(--surface)}
+.post-card .thumb img{width:100%;height:100%;object-fit:cover}
+.post-card .pbody{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.post-rank{font-size:11px;font-weight:500;color:var(--muted)}
+.post-likes{font-size:22px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.post-meta{font-size:12px;color:var(--muted)}
+.post-desc{font-size:12.5px;color:var(--secondary);line-height:1.45}
+.post-card a{font-size:12px;color:var(--brand-primary);text-decoration:none;margin-top:auto}
+
+.sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:780px){.sl-grid{grid-template-columns:1fr}}
+.sl{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.sl:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.sl-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sl-av{width:46px;height:46px;border-radius:50%;object-fit:cover;background:var(--surface);opacity:1;flex-shrink:0}
+.sl-hname{font-size:15px;font-weight:600;color:var(--text);text-decoration:none;word-break:break-word}
+.sl-real{font-size:12.5px;color:var(--muted)}
+.sl-badge{font-size:10px;font-weight:500;color:var(--brand-primary);background:var(--brand-tint);border-radius:9999px;padding:3px 8px;margin-left:auto;white-space:nowrap}
+.sl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+@media(max-width:780px){.sl-stats{grid-template-columns:repeat(2,1fr)}}
+.sl-stats .k{font-size:11px;color:var(--muted)}
+.sl-stats .vv{font-size:15px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;margin-top:2px}
+.sl .why{font-size:13px;color:var(--secondary);line-height:1.5}
+.sl .why a{color:var(--brand-primary);text-decoration:none}
+
+.insp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
+@media(max-width:980px){.insp-grid{grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}}
+.insp{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;scroll-snap-align:start;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.insp:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.insp .ihead{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.insp .ihead img{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:1}
+.insp .ih{font-size:12px;font-weight:600;color:var(--text);word-break:break-word}
+.insp .iv{font-size:18px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.insp .im{font-size:11px;color:var(--muted)}
+.insp a{font-size:11px;color:var(--brand-primary);text-decoration:none;display:block;margin-top:8px}
+
+.opp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:880px){.opp-grid{grid-template-columns:1fr}}
+.opp{border:1px solid var(--border);border-radius:14px;padding:26px;background:#fff;display:flex;flex-direction:column;transition:transform 200ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease,border-color 200ms ease}
+.opp:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,9,11,0.12);border-color:rgba(110,18,12,0.4)}
+.opp .oeyebrow{font-size:12px;font-weight:600;color:var(--brand-primary);margin-bottom:10px}
+.opp h3{font-size:18px;font-weight:600;margin-bottom:10px}
+.opp p{font-size:14px;margin-bottom:10px}
+.opp .ostat{font-size:30px;font-weight:600;color:var(--brand-primary);letter-spacing:-0.02em;font-variant-numeric:tabular-nums;margin-top:auto}
+.opp .ostatlbl{font-size:12px;color:var(--muted);margin-top:4px}
+.opp .obacked{font-size:11px;color:var(--muted);margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+
+.closing{background:var(--surface);border:1px solid var(--border);border-radius:24px;max-width:720px;margin:48px auto 12px;padding:48px 40px;text-align:left}
+.closing-lead{font-size:18px;color:var(--text);line-height:1.55;margin-bottom:28px}
+.closing h4{font-size:16px;font-weight:600;color:var(--text);margin:0 0 12px}
+.closing-sup{font-size:15px;color:var(--muted);line-height:1.65;margin:0}
+.booking{font-size:15px;color:var(--secondary);font-weight:500;text-align:center;max-width:720px;margin:0 auto 64px;padding:0 20px}
+.booking a{color:var(--secondary);text-decoration:underline}
+@media(max-width:720px){.closing{max-width:calc(100% - 40px);padding:32px 24px}}
+.footer{text-align:center;padding:40px 0 60px;font-size:13px;color:var(--muted);border-top:1px solid var(--border)}
+
+@keyframes wave-wiggle{0%{transform:rotate(0)}15%{transform:rotate(-20deg)}30%{transform:rotate(20deg)}45%{transform:rotate(-10deg)}60%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0)}}
+.wave{display:inline-block;transform-origin:70% 70%}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}
+.reveal.is-in{opacity:1;transform:translateY(0)}
+.stagger>*{opacity:0;transform:translateY(12px);transition:opacity 500ms cubic-bezier(0.16,1,0.3,1),transform 500ms cubic-bezier(0.16,1,0.3,1)}
+.stagger.is-in>*:nth-child(1){transition-delay:0ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(2){transition-delay:80ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(3){transition-delay:160ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(4){transition-delay:240ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(5){transition-delay:320ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(6){transition-delay:400ms;opacity:1;transform:translateY(0)}
+.stagger.is-in>*:nth-child(n+7){transition-delay:480ms;opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <span class="sup-pill"><span class="wave">👋</span> Sup</span>
+      <span class="nav-divider"></span>
+      <img class="nav-logo" src="https://drinkpres.com/cdn/shop/files/presdark.svg" alt="PRÉS" onerror="this.style.display='none'">
+      <span class="nav-name">PRÉS</span>
+    </div>
+    <div class="nav-mid">
+      <a href="#benchmark">Benchmark</a>
+      <a href="#influencer">Influencer</a>
+      <a href="#competitors">Competitors</a>
+      <a href="#paid">Paid</a>
+      <a href="#feed">Feed</a>
+      <a href="#shortlist">Shortlist</a>
+      <a href="#opportunity">Opportunity</a>
+    </div>
+    <div class="nav-cta"><a href="#opportunity">View opportunity</a></div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="container">
+    <span class="pill-eyebrow reveal"><span class="green-dot"></span> Influencer marketing intelligence report</span>
+    <div class="cover-grid">
+      <div class="reveal">
+        <h1>
+          <span class="s">PRÉS and the protein coffee category.</span>
+          <span class="s">Where it sits, <span class="brand-emphasis">and the creator landscape around it</span>.</span>
+        </h1>
+        <p class="cover-sub">A look at how a cold-brew protein coffee brand stands against the category on paid, organic, own content, and the creators driving the conversation.</p>
+      </div>
+      <div class="cover-thumbs reveal">
+        <a class="thumb-tilt thumb-1" href="https://www.instagram.com/p/DZ-Uoynjlqq/" target="_blank" rel="noopener">
+          <img src="https://first-possum-672.convex.cloud/api/storage/4e4c8f10-54bd-4827-ac13-aa347e147a6d" alt="Top PRÉS post">
+          <span class="stamp">149 likes</span>
+        </a>
+        <a class="thumb-tilt thumb-2" href="https://www.tiktok.com/@drinkpres/video/7636460604206648606" target="_blank" rel="noopener">
+          <img src="https://first-possum-672.convex.cloud/api/storage/b2998626-8f65-4adf-8cbc-047b7f9de969" alt="PRÉS TikTok post">
+          <span class="stamp">53 likes</span>
+        </a>
+        <a class="thumb-tilt thumb-3" href="https://www.instagram.com/p/DUE0tfiD31y/" target="_blank" rel="noopener">
+          <img src="https://first-possum-672.convex.cloud/api/storage/862005e5-8371-4f50-b44a-23ea617c128d" alt="PRÉS product post">
+          <span class="stamp">51 likes</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROVENANCE -->
+<div class="provenance-line">
+  <div class="container">
+    <p><span class="pv-label">What we analysed:</span> <span class="num">97</span> brands in the Protein Coffee &amp; Shake niche, <span class="num">200</span> top creators across Instagram and TikTok, and <span class="num">100</span> top niche ad creatives, over a <span class="num">181-day</span> category window (29 December 2025 to 28 June 2026) and a matching brand window covering PRÉS's own feed and Creator Tagged Posts.</p>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<section id="benchmark" class="section">
+  <div class="container">
+    <div class="section-label reveal">01 · Market benchmark</div>
+    <h2 class="reveal">Near the bottom on followers and paid, but mid-pack on the creator conversation.</h2>
+
+    <div class="section-stats reveal">
+      <div><div class="v" data-count="3179" data-format="compact">3.2K</div><div class="ctx">rank 88 of 97 (top 91%)</div><div class="lbl">Instagram followers</div></div>
+      <div><div class="v" data-count="18">18</div><div class="ctx">rank 41 of 97 (top 43%)</div><div class="lbl">Creator Tagged Posts (181d)</div></div>
+      <div><div class="v" data-count="0">0</div><div class="ctx">vs category leader Javvy at 511</div><div class="lbl">Active Meta ads</div></div>
+      <div><div class="v" data-count="20795" data-format="compact">21K</div><div class="ctx">rank 57 of 97 (top 59%)</div><div class="lbl">Total Creator Views (181d)</div></div>
+      <div><div class="v" data-count="21">21</div><div class="ctx">across five metro creator pods</div><div class="lbl">Tagging creators</div></div>
+      <div><div class="v">~0.5/wk</div><div class="ctx">14 own posts in six months</div><div class="lbl">Own-feed cadence</div></div>
+    </div>
+
+    <div class="players stagger reveal">
+      <div class="player-card target">
+        <span class="pc-eyebrow"><span class="dot"></span> Target brand</span><br>
+        <img class="pc-logo" src="https://first-possum-672.convex.cloud/api/storage/4e4c8f10-54bd-4827-ac13-aa347e147a6d" alt="PRÉS" onerror="this.style.display='none'">
+        <div class="pc-name brandcolor">PRÉS</div>
+        <div class="pc-handle">@drinkpres</div>
+        <div class="stat-row"><div class="srlbl">Followers</div><div class="srval"><span class="num" data-count="3179" data-format="compact">3.2K</span><span class="rank-pill">#88 of 97</span></div><div class="bar"><span data-width="1.3" style="background:var(--brand-primary)"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="18">18</span><span class="rank-pill">#41 of 97</span></div><div class="bar"><span data-width="36" style="background:var(--brand-primary)"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Active Meta ads</div><div class="srval"><span class="num" data-count="0">0</span><span class="rank-pill">#91 of 97</span></div><div class="bar"><span data-width="0" style="background:var(--brand-primary)"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="20795" data-format="compact">21K</span><span class="rank-pill">#57 of 97</span></div><div class="bar"><span data-width="7.9" style="background:var(--brand-primary)"></span></div></div>
+      </div>
+      <div class="player-card">
+        <img class="pc-logo" src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/720509402_1536193161884713_7710260640663714885_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=EX2hFsO49asQ7kNvwGnNGft&_nc_oc=AdqMmTP0bQOYgVhbCd5qAQ6MW2tUDd3o4vG9j_dDppc4zBz7WhOqMG1VxQNrl8EmBYQ&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=5Wms8SmEmiqjTOkidWhGrQ&_nc_ss=70180&oh=00_Af_1CvwUGW1OZ6XrXcyq_IsqmPcpQ3GDyxnxqKksduanSw&oe=6A4840F9" alt="Javvy" onerror="this.style.display='none'">
+        <div class="pc-name">Javvy</div><div class="pc-handle">@javvycoffee</div>
+        <div class="stat-row"><div class="srlbl">Followers</div><div class="srval"><span class="num" data-count="237191" data-format="compact">237K</span><span class="rank-pill">#31 of 97</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="50">50</span><span class="rank-pill">#16 of 97</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Active Meta ads</div><div class="srval"><span class="num" data-count="511">511</span><span class="rank-pill top1">#1 of 97</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="261672" data-format="compact">262K</span><span class="rank-pill">#39 of 97</span></div><div class="bar"><span data-width="100" style="background:#534AB7"></span></div></div>
+      </div>
+      <div class="player-card">
+        <div class="pc-logo-fallback" style="background:#1D9E75">SU</div>
+        <div class="pc-name">Super Coffee</div><div class="pc-handle">@drinksupercoffee</div>
+        <div class="stat-row"><div class="srlbl">Followers</div><div class="srval"><span class="num" data-count="108926" data-format="compact">109K</span><span class="rank-pill">#46 of 97</span></div><div class="bar"><span data-width="45.9" style="background:#1D9E75"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="1">1</span><span class="rank-pill">#74 of 97</span></div><div class="bar"><span data-width="2" style="background:#1D9E75"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Active Meta ads</div><div class="srval"><span class="num" data-count="0">0</span><span class="rank-pill">#71 of 97</span></div><div class="bar"><span data-width="0" style="background:#1D9E75"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="0">0</span><span class="rank-pill">#78 of 97</span></div><div class="bar"><span data-width="0" style="background:#1D9E75"></span></div></div>
+      </div>
+      <div class="player-card">
+        <img class="pc-logo" src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-1/299286602_6162562793758090_1201195666133540492_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=418b77&_nc_ohc=9be_6rTjTR0Q7kNvwFL2Hl5&_nc_oc=AdpczKE-D3IzBGhH4rVX4k3Rrf2zUcWeT5CbyUsbSAUap8sYh5rp0n0cdhF5fobGSk0&_nc_zt=24&_nc_ht=scontent-sea1-1.xx&_nc_gid=I1KOQd0ruXi3liTcU9GICQ&_nc_ss=70180&oh=00_Af9F2NFs-X2aFGYyKLa9s4vrtrXNSCvIDYTHC_j-J-NA_A&oe=6A4876FF" alt="Chike" onerror="this.style.display='none'">
+        <div class="pc-name">Chike</div><div class="pc-handle">@ilikechike</div>
+        <div class="stat-row"><div class="srlbl">Followers</div><div class="srval"><span class="num" data-count="53581" data-format="compact">54K</span><span class="rank-pill">#67 of 97</span></div><div class="bar"><span data-width="22.6" style="background:#D85A30"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="11">11</span><span class="rank-pill">#53 of 97</span></div><div class="bar"><span data-width="22" style="background:#D85A30"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Active Meta ads</div><div class="srval"><span class="num" data-count="20">20</span><span class="rank-pill">#30 of 97</span></div><div class="bar"><span data-width="3.9" style="background:#D85A30"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="69369" data-format="compact">69K</span><span class="rank-pill">#48 of 97</span></div><div class="bar"><span data-width="26.5" style="background:#D85A30"></span></div></div>
+      </div>
+      <div class="player-card">
+        <img class="pc-logo" src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/680718169_122262661736248466_414778351226511690_n.jpg?stp=dst-jpg_p200x200_tt6&_nc_cat=103&ccb=1-7&_nc_sid=418b77&_nc_ohc=Me1zreIH1HwQ7kNvwF8S1J1&_nc_oc=AdpxIy8XKd8_ZHegRLUjy9Z9IfTJ22WlfX5Mfh6Y0fmcaOxYLefkSqD9J-KePygDaqI&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=xCatszYN7zispPDUjxHNuA&_nc_ss=70180&oh=00_Af_c9gOOuOG-U8B_fsSD8Jgfqgs6S41Le15J_K8rX-WxCA&oe=6A4840DA" alt="Throne Sport Coffee" onerror="this.style.display='none'">
+        <div class="pc-name">Throne Sport Coffee</div><div class="pc-handle">@sportcoffee</div>
+        <div class="stat-row"><div class="srlbl">Followers</div><div class="srval"><span class="num" data-count="27289" data-format="compact">27K</span><span class="rank-pill">#75 of 97</span></div><div class="bar"><span data-width="11.5" style="background:#378ADD"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Creator Tagged Posts</div><div class="srval"><span class="num" data-count="3">3</span><span class="rank-pill">#70 of 97</span></div><div class="bar"><span data-width="6" style="background:#378ADD"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Active Meta ads</div><div class="srval"><span class="num" data-count="5">5</span><span class="rank-pill">#46 of 97</span></div><div class="bar"><span data-width="1" style="background:#378ADD"></span></div></div>
+        <div class="stat-row"><div class="srlbl">Total Creator Views</div><div class="srval"><span class="num" data-count="5404" data-format="compact">5K</span><span class="rank-pill">#67 of 97</span></div><div class="bar"><span data-width="2.1" style="background:#378ADD"></span></div></div>
+      </div>
+    </div>
+    <div class="caption reveal">PRÉS against four Protein Coffee and Proffee competitors · 181-day niche window. Locations swapped for Active Meta ads because all five are location-free DTC, and paid creative is where the category gap shows.</div>
+
+    <p class="lead-narrow reveal">PRÉS is one of the smallest brands in the niche by audience, rank 88 of 97 on Instagram followers, yet it sits mid-pack on the creator conversation: rank 41 of 97 by Creator Tagged Posts (Instagram and TikTok posts where a creator tagged the brand inside the window) and rank 57 by Total Creator Views. For a 3,200-follower brand to pull more creator posts than two-thirds of a category that includes Super Coffee and Throne Sport Coffee is the genuinely interesting part. The thing it does not have is any paid presence at all.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">Where PRÉS Sits</span>
+      <p>The follower count says small brand; the creator footprint says something else, and the zero in the Active Meta ads column is the cleanest gap in the row, which is exactly what the rest of this report works through.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02 INFLUENCER INTELLIGENCE -->
+<section id="influencer" class="section">
+  <div class="container">
+    <div class="section-label reveal">02 · Influencer intelligence</div>
+    <h2 class="reveal">A real creator engine, gifted into life across five cities and a Sprouts shelf.</h2>
+
+    <div class="stat-grid sg-3 stagger reveal">
+      <div class="stat"><div class="slabel">Creator Tagged Posts (181d)</div><div class="sval" data-count="22">22</div><div class="ssub">18 on Instagram, 4 on TikTok</div></div>
+      <div class="stat"><div class="slabel">Unique creators tagging PRÉS</div><div class="sval" data-count="21">21</div><div class="ssub">a strong earned signal at this size</div></div>
+      <div class="stat dark"><div class="slabel">Best micro-creator engagement</div><div class="sval" data-count="17.36" data-suffix="%">17.36%</div><div class="ssub">on a Sprouts taste-test by @mishuleopardi</div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Read across the brand window and one motion does all the work. Twenty-one creators tagged PRÉS, and fifteen of the twenty-two posts carry a #partnership disclosure sourced through the Hummingbirds local-creator network, clustered into five metro pods, Atlanta, Houston, Kansas City, Oklahoma City and Orlando, each tied to a nearby Sprouts. This is a deliberate <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting and seeding</a> programme stacked on top of <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clustered micro-creator activations</a>, and for a brand this size it is sharp work.</p>
+
+    <p class="reveal lead-narrow">Because the calibration here is strong, twenty-one unique creators tagging in the window, the right way to read the paid versus organic split is amplification, not absence. PRÉS is already generating the exact creator-style content the rest of the category pays to manufacture, and seven of the posts carry no partnership tag at all, genuine earned mentions around the Sprouts launch. The interesting question this raises is why none of that content is being pushed any further than a single organic view.</p>
+
+    <div class="chart-title reveal" style="margin-top:8px">What creators talk about when they post PRÉS (181-day brand window)</div>
+    <div class="reveal">
+      <div class="theme-row"><div class="theme-head"><span class="tname">Busy-morning routine &amp; grab-and-go convenience</span><span class="tcount">9 posts · 41%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="100"></div></div></div>
+      <div class="theme-row"><div class="theme-head"><span class="tname">Sprouts retail discovery via local creator pods</span><span class="tcount">6 posts · 27%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="67"></div></div></div>
+      <div class="theme-row"><div class="theme-head"><span class="tname">Gifting suites &amp; community wellness events</span><span class="tcount">3 posts · 14%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="33"></div></div></div>
+      <div class="theme-row"><div class="theme-head"><span class="tname">Flavour &amp; ingredient reviews (20g protein, 1g sugar)</span><span class="tcount">3 posts · 14%</span></div><div class="theme-track"><div class="theme-bar-fill" data-width="33"></div></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">The audience the content reaches for is consistent: health-conscious busy professionals and parents chasing convenient protein (about 40% of the personas the posts target), then millennial women in boutique fitness and wellness, then the calmer "that girl" morning-routine crowd. The best engagement comes from the smallest accounts, @mishuleopardi at 17.4% on a Sprouts review and @novbarnett at 4.8% on a quiet cold-brew reel, which is the signal worth amplifying.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Earned Engine</span>
+      <p>Twenty-one creators tagged PRÉS in the window and most of them did it through one gifted pod motion tied to Sprouts, the position competitors run paid budgets trying to reach. The engine works; it just stops at the edge of each creator's own feed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03 COMPETITOR DEEP-DIVE -->
+<section id="competitors" class="section">
+  <div class="container">
+    <div class="section-label reveal">03 · Competitor deep-dive</div>
+    <h2 class="reveal">Across the 181-day niche window, the category's biggest names are stacking creator plays while PRÉS runs a tight two.</h2>
+
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Brand</th><th>IG followers</th><th>Creator Tagged Posts</th><th class="col-hide">Unique creators</th><th class="col-hide">Total Creator Views</th><th>Active Meta ads</th></tr></thead>
+        <tbody>
+          <tr class="target-row"><td><div class="tbl-brand"><img class="tbl-logo" src="https://first-possum-672.convex.cloud/api/storage/4e4c8f10-54bd-4827-ac13-aa347e147a6d" alt="" onerror="this.style.display='none'">PRÉS</div></td><td>3.2K</td><td>18</td><td class="col-hide">17</td><td class="col-hide">21K</td><td>0</td></tr>
+          <tr><td><div class="tbl-brand">Javvy</div></td><td>237K</td><td>50</td><td class="col-hide">44</td><td class="col-hide">262K</td><td>511</td></tr>
+          <tr><td><div class="tbl-brand">Super Coffee</div></td><td>109K</td><td>1</td><td class="col-hide">1</td><td class="col-hide">0</td><td>0</td></tr>
+          <tr><td><div class="tbl-brand">Chike</div></td><td>54K</td><td>11</td><td class="col-hide">9</td><td class="col-hide">69K</td><td>20</td></tr>
+          <tr><td><div class="tbl-brand">Throne Sport Coffee</div></td><td>27K</td><td>3</td><td class="col-hide">3</td><td class="col-hide">5K</td><td>5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="reveal lead-narrow">Inside the Protein Coffee and Proffee sub-set, Javvy is the brand PRÉS is genuinely racing. It carries 237K followers, 50 Creator Tagged Posts, and the most active Meta ad library of any brand in the dataset. The other proffee names are quieter, Super Coffee has gone almost silent on creators despite its following, so the sharpest plays in this category come from the wider niche, where the volume operators live.</p>
+
+    <div class="comp-grid stagger reveal">
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/720509402_1536193161884713_7710260640663714885_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=EX2hFsO49asQ7kNvwGnNGft&_nc_oc=AdqMmTP0bQOYgVhbCd5qAQ6MW2tUDd3o4vG9j_dDppc4zBz7WhOqMG1VxQNrl8EmBYQ&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=5Wms8SmEmiqjTOkidWhGrQ&_nc_ss=70180&oh=00_Af_1CvwUGW1OZ6XrXcyq_IsqmPcpQ3GDyxnxqKksduanSw&oe=6A4840F9" alt="" onerror="this.style.display='none'"><span class="cc-name brandcolor">Javvy</span></div>
+        <p>The head-to-head, and a paid machine. Javvy runs 511 live ad creatives, the most of any brand here, whitelists creator handles into partnership ads, and still pulls 50 Creator Tagged Posts from 44 creators. It became a household coffee name on the back of creator volume.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s06" target="_blank" rel="noopener">spark ads / whitelisting</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting &amp; seeding</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/641337519_1253699880284552_8365379811543204592_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=1i_UfNIEhqEQ7kNvwGxbRgb&_nc_oc=AdrN6WJtJesr76bgmTfPpEwKQr1NQ_j2ydb8VtNEQ3h-W-4-hPMtRVvij9VgLXbshX0&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=VjJbO361SGVNgSuBhQu_Sw&_nc_ss=70289&oh=00_Af8xRUWdfT5MfI2bH9KC2B3YdwLJZ5USusPuyz4pSV1dUg&oe=6A27FC57" alt="" onerror="this.style.display='none'"><span class="cc-name">Alani Nu</span></div>
+        <p>The category's creator giant. Alani Nu pulled 500 Creator Tagged Posts from 330 creators, and crucially it concentrates: creators like heathergets_healthy posted 17 times, blairelatham7 14 times, a de-facto retainer core inside a huge volume play.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">always-on creator retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">long-term brand ambassadors</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting &amp; seeding</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/497554717_1425038936294841_9222810077707452267_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=Ni3c8m5uXZUQ7kNvwEm77w0&_nc_oc=Adq1lce3qaQ5czPiIyImHGJk7eXStUlXTmN-swSx0UPTKMZIZA4hbxjyijuzHNLC08E&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=tU5kztY3ESUIYo-8Lm-PwQ&_nc_ss=70289&oh=00_Af_osQGvXQBlFmIYYQRhLBp027YbrXBAPujav-AbAzoZPQ&oe=6A27F0CF" alt="" onerror="this.style.display='none'"><span class="cc-name">RYZE Superfoods</span></div>
+        <p>The paid-creative benchmark in functional coffee. RYZE runs 483 live ad creatives with 144 of them past 90 days, including 320-day cinematic mushroom-mascot films, and feeds the top of that funnel with 65 gifted creators.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s06" target="_blank" rel="noopener">spark ads / whitelisting</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting &amp; seeding</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><img class="cc-logo" src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/703635889_1013841577656823_1382585223377199314_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=xARh5AZ8KO0Q7kNvwEFS7Z-&_nc_oc=Adp-HypoRhstkqdSqRshy7itcM0d3KLQdGNPI4tXRL3G8k6byzf6-iHAVRC5_x04dHc&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=kvJTUyQ6gIuKoqS5S5SeUg&_nc_ss=70289&oh=00_Af9zrVgqZw5ALxJVW2TfWhFRyoo40ne-PR43ViiRcLYE0Q&oe=6A27D52F" alt="" onerror="this.style.display='none'"><span class="cc-name">TRIP</span></div>
+        <p>The broadest creator base in the dataset. TRIP works with 84 unique creators across 91 Creator Tagged Posts and backs it with 289 live ad creatives, a wide-net <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a> rather than a concentrated bench.</p>
+        <div class="strats"><span class="lbl">Strategies in play:</span> <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting &amp; seeding</a></div>
+      </div>
+    </div>
+
+    <div class="mpo reveal">
+      <div class="mpo-head">Multi-play operators · brands running 3+ plays</div>
+      <div class="item">
+        <img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/641337519_1253699880284552_8365379811543204592_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=1i_UfNIEhqEQ7kNvwGxbRgb&_nc_oc=AdrN6WJtJesr76bgmTfPpEwKQr1NQ_j2ydb8VtNEQ3h-W-4-hPMtRVvij9VgLXbshX0&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=VjJbO361SGVNgSuBhQu_Sw&_nc_ss=70289&oh=00_Af8xRUWdfT5MfI2bH9KC2B3YdwLJZ5USusPuyz4pSV1dUg&oe=6A27FC57" alt="" onerror="this.style.display='none'">
+        <div><div class="mname">Alani Nu</div><div class="mline">Running 4 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">always-on creator retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">long-term brand ambassadors</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting &amp; seeding</a>.</div></div>
+      </div>
+      <div class="item">
+        <img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/720509402_1536193161884713_7710260640663714885_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=EX2hFsO49asQ7kNvwGnNGft&_nc_oc=AdqMmTP0bQOYgVhbCd5qAQ6MW2tUDd3o4vG9j_dDppc4zBz7WhOqMG1VxQNrl8EmBYQ&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=5Wms8SmEmiqjTOkidWhGrQ&_nc_ss=70180&oh=00_Af_1CvwUGW1OZ6XrXcyq_IsqmPcpQ3GDyxnxqKksduanSw&oe=6A4840F9" alt="" onerror="this.style.display='none'">
+        <div><div class="mname">Javvy</div><div class="mline">Running 4 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s06" target="_blank" rel="noopener">spark ads / whitelisting</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s07" target="_blank" rel="noopener">gifting &amp; seeding</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s22" target="_blank" rel="noopener">earned organic mentions</a>.</div></div>
+      </div>
+      <div class="item">
+        <img src="https://scontent-sea5-1.xx.fbcdn.net/v/t39.30808-1/459656067_934578222045324_3980448889403618150_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=1&ccb=1-7&_nc_sid=418b77&_nc_ohc=DLhsGBbzq98Q7kNvwFA85xQ&_nc_oc=AdqootV-oN63w3Nzg6bwyueuy9Ii-giVUkyszJIN1UHWDCPGxOrsWxxi3mn7h_Lj6Wg&_nc_zt=24&_nc_ht=scontent-sea5-1.xx&_nc_gid=14pgVyChE95EOgoIr4aagQ&_nc_ss=70289&oh=00_Af99XPVDE__i4NknxjZ3EznH0EL77PMlUKp1TnH6JoT4Nw&oe=6A27D1A2" alt="" onerror="this.style.display='none'">
+        <div><div class="mname">MyProtein</div><div class="mline">Running 3 plays: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">always-on creator retainers</a>, <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a>.</div></div>
+      </div>
+    </div>
+
+    <div class="chart-wrap reveal">
+      <div class="chart-title">Total Creator Views in the window, the Proffee head-to-head</div>
+      <div class="chart-canvas"><canvas id="compChart"></canvas></div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Category Playbook</span>
+      <p>The biggest names in this niche each stack three or four creator plays at once, with Alani Nu running a retainer core inside a 330-creator collective; PRÉS is genuinely strong on two of those plays already, which is why the opportunity later is about adding, not starting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04 CREATOR CONTENT IN PAID -->
+<section id="paid" class="section">
+  <div class="container">
+    <div class="section-label reveal">04 · Creator content in paid</div>
+    <h2 class="reveal">The category's paid spend runs on creator content. PRÉS's column is empty.</h2>
+
+    <div class="stat-grid sg-6 stagger reveal">
+      <div class="stat"><div class="slabel">Active ad creatives in niche</div><div class="sval" data-count="3798" data-format="comma">3,798</div><div class="ssub">across 51 advertisers</div></div>
+      <div class="stat"><div class="slabel">Creator-shot share of top creatives</div><div class="sval" data-count="36" data-suffix="%">36%</div><div class="ssub">of the top 100 creatives are creator-led UGC</div></div>
+      <div class="stat"><div class="slabel">60+ day survival rate</div><div class="sval" data-count="11" data-suffix="%">11%</div><div class="ssub">matches the wider industry benchmark</div></div>
+      <div class="stat"><div class="slabel">UGC share of 60+ day winners</div><div class="sval" data-count="41" data-suffix="%">41%</div><div class="ssub">UGC over-indexes among ads that last</div></div>
+      <div class="stat dark"><div class="slabel">PRÉS active creator-shot ads</div><div class="sval" data-count="0">0</div><div class="ssub">no Meta ads running at all</div></div>
+      <div class="stat"><div class="slabel">Advertisers testing at cadence</div><div class="sval" data-count="10">10+</div><div class="ssub">running 10+ live, mostly under 30 days old</div></div>
+    </div>
+
+    <div class="charts-2">
+      <div class="chart-wrap reveal"><div class="chart-title">Where creatives live and die, by days running</div><div class="chart-canvas"><canvas id="longevityChart"></canvas></div></div>
+      <div class="chart-wrap reveal"><div class="chart-title">What survives past 60 days, by style</div><div class="chart-canvas"><canvas id="winnersChart"></canvas></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Start with scale. Across this niche there are 3,798 active ad creatives from 51 advertisers, and only about 11% of all creatives survive past 60 days, in line with the wider industry. The question is what makes that 11%. Among the longest-running creatives, creator-shot UGC is the single most over-indexed style, 41% of the 60-plus-day winners against 36% of the full top set. The ads that last in this category are filmed by people, not studios.</p>
+
+    <p class="reveal lead-narrow">The durability is real. Bulk keeps a lifestyle creative running 622 days and Humantra a product carousel for 616, but the creator-shot survivors are the instructive ones: MaxiNutrition has a single UGC <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a> testimonial live for 500 days, Humantra a 367-day UGC piece, and RYZE three cinematic mascot films past 320 days each. This is compounding creative, not a one-off.</p>
+
+    <div class="ad-grid stagger reveal">
+      <div class="ad-card"><div class="thumb"><img src="https://scontent-sjc6-1.xx.fbcdn.net/v/t39.35426-6/410397978_376670908106117_8944552696220133263_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=kr_Gw9O25GUQ7kNvwF2eBuj&_nc_oc=AdrNfJaGDGnhCG1stM3iYXNQtJ25Rw9Llqwj6y261SBnoMxQNd5U5jGTgn7yNKgvkjQ&_nc_zt=14&_nc_ht=scontent-sjc6-1.xx&_nc_gid=fCL-7LoTwp0vGWbtNP85tA&_nc_ss=7f289&oh=00_Af9EE79MEXxhWei1dZCIFHxgf4e6TIoPtDSZG7TrXZTixw&oe=6A4874BF" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr">MaxiNutrition</div><div class="adays">500 days running · UGC video</div><div class="ahook">A listicle "3 reasons" hook paired with a 30-year-legacy claim.</div><a href="https://www.facebook.com/ads/library?id=1329701524831972" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/495575476_1732358234326666_9081781600597611963_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=93SmxqKwotoQ7kNvwF_nEz_&_nc_oc=AdpwpZvGo1JwxVcuCmAN3sWQC8IFTKA5ZU2kUFTN96kRmuEbUqVGp-1NQsVUOnctT-0&_nc_zt=14&_nc_ht=scontent-bos5-1.xx&_nc_gid=Tl4NIt-sWDRoAhl3sNkzWQ&_nc_ss=7f289&oh=00_Af8Z0mF30ZldOQXTt2ulGAz6nibhzFy-bo-mkSud2UKfWw&oe=6A4868F8" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr">Humantra</div><div class="adays">367 days running · UGC video</div><div class="ahook">A shocking flight-dehydration statistic frames the product as essential.</div><a href="https://www.facebook.com/ads/library?id=1981581639340575" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/531418045_1069600188658583_7650853466197079504_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=raRoXpDA_RQQ7kNvwGqkvLz&_nc_oc=Adq6NbuFugdkuZJaf4vKCtzMROoLs3JHJ3miL4QQY19XNM9fCDslCqlNueORhSpfzyw&_nc_zt=14&_nc_ht=scontent-bos5-1.xx&_nc_gid=jFYx66lmnnQZsaZe4L6lMA&_nc_ss=7f289&oh=00_Af_y7Tx3lnJ27BiAVJduU1CDhA6YWlvCBwWYmIp20JkUmA&oe=6A4859E9" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge brandmade">Brand-produced</span><div class="abr">RYZE Superfoods</div><div class="adays">325 days running · cinematic video</div><div class="ahook">A whimsical animated mushroom turns a sluggish morning joyful.</div><a href="https://www.facebook.com/ads/library?id=774861464990229" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/531792845_1784436589092723_3318138356121708213_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=CLw6E94mpuAQ7kNvwE2Dz2N&_nc_oc=AdruSd69WfqiIaJ3qZDkf-mo5EeeB3IKgyFA68QP8549PWaTH6qJ5U3qqXMTTp4HE4c&_nc_zt=14&_nc_ht=scontent-bos5-1.xx&_nc_gid=RLeSAl-ckM8pZAQud7u8jQ&_nc_ss=7f289&oh=00_Af9_eBb0zT8s9emFrfsxAYBnn2EkU1GxDaSf1kDdAYHCyA&oe=6A4842C2" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge brandmade">Brand-produced</span><div class="abr">RYZE Superfoods</div><div class="adays">325 days running · cinematic video</div><div class="ahook">A tiny CGI mushroom character walks a curb as a pattern interrupt.</div><a href="https://www.facebook.com/ads/library?id=2911656922352100" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://scontent-sjc6-1.xx.fbcdn.net/v/t39.35426-6/549452229_772529082208420_6332942070730485869_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=4k4qBPy3ZRAQ7kNvwGFFnN1&_nc_oc=Ado5E4xAQmyggI5xwUUPTPPkSUJug7q9WcH_hd30duAR9CTa2I9UTvjW5IQVxQ09yC0&_nc_zt=14&_nc_ht=scontent-sjc6-1.xx&_nc_gid=fCL-7LoTwp0vGWbtNP85tA&_nc_ss=7f289&oh=00_Af8ldWTZttGi4GDMZWG--eEYtGWlijk_ed5RfKCAy7lhlw&oe=6A48584B" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge">Creator-shot</span><div class="abr">MaxiNutrition</div><div class="adays">285 days running · UGC video</div><div class="ahook">Direct address and an immediate product reveal in a gym setting.</div><a href="https://www.facebook.com/ads/library?id=1536398168047535" target="_blank" rel="noopener">View ad ↗</a></div></div>
+      <div class="ad-card"><div class="thumb"><img src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.35426-6/530007502_3543324482477378_6508346856908687644_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=M7v4Ya71AycQ7kNvwFvNJ22&_nc_oc=AdqyFZN_1AIyLqXseH_-lfZevqjYUZtAA6Eo9dpV1kjJFXPE-RyfdxHPrGpf8ashjyk&_nc_zt=14&_nc_ht=scontent-bos5-1.xx&_nc_gid=mv6yXxjbfDVbVi2xxg9POw&_nc_ss=7f289&oh=00_Af87ucavkVcVHsNsG744rHgcV9O78-SMucOpg6q1yBuT0w&oe=6A4866DB" alt="" onerror="this.parentElement.style.display='none'"></div><div class="body"><span class="ad-badge brandmade">Brand-produced</span><div class="abr">RYZE Superfoods</div><div class="adays">323 days running · cinematic video</div><div class="ahook">A mushroom mascot guides a woman from mundane to energetic.</div><a href="https://www.facebook.com/ads/library?id=1291347225819840" target="_blank" rel="noopener">View ad ↗</a></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Who commissions at volume? The advertisers running the category are doing it at a cadence only a creator pipeline can feed: Humantra at 426 active creatives with three-quarters refreshed inside 30 days, Javvy at 365, TRIP at 273, Legion at 232, several at a near-total fresh-creative pace. This is testing, not posting.</p>
+
+    <p class="reveal lead-narrow">Where does PRÉS sit? It commissions zero creator content for paid and runs no Meta ads in the US at all, while already producing exactly the creator-style content the category licenses into spend through its gifting pods. The raw material exists; none of it is being put behind a dollar.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Commissioning Gap</span>
+      <p>At least ten brands in this category are running 10+ live ad creatives with more than half refreshed in the last 30 days, Humantra at 426 (74% fresh), Javvy at 365 (56%), TRIP at 273 (70%). PRÉS commissions zero creator content for paid. The gap isn't budget; it's a creator pipeline producing enough variants to test at category cadence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05 FEED CONTENT STRATEGY -->
+<section id="feed" class="section">
+  <div class="container">
+    <div class="section-label reveal">05 · Feed content strategy</div>
+    <h2 class="reveal">Your carousels earn nearly three times your videos, and you post one of anything a fortnight.</h2>
+
+    <div class="stat-grid sg-3 stagger reveal">
+      <div class="stat"><div class="slabel">Top own-feed post</div><div class="sval" data-count="149">149</div><div class="ssub">likes on a fit-physique product carousel</div></div>
+      <div class="stat"><div class="slabel">Carousel vs video likes</div><div class="sval" data-count="2.7" data-suffix="×">2.7×</div><div class="ssub">69 avg likes on carousel vs 26 on video</div></div>
+      <div class="stat dark"><div class="slabel">Feed that is straight promotion</div><div class="sval" data-count="50" data-suffix="%">50%</div><div class="ssub">7 of 14 own posts are Promotional</div></div>
+    </div>
+
+    <p class="reveal lead-narrow">Across the 181-day brand window PRÉS published just 14 posts on its own channels, 9 on Instagram and 5 on TikTok, about one every fortnight. The average own post draws 36 likes and the typical one 28, numbers that read as an early account still finding reach, and the low cadence is the first thing the data flags. The brand's creators are out-posting and out-performing the brand's own feed several times over.</p>
+
+    <p class="reveal lead-narrow">By format the signal is sharp. The brand's three carousels average 69 likes, its two photos 32, and its nine videos just 26, so the most-published format on the feed is also the weakest, while the format that works best is barely used. By pillar the feed leans hard on Promotional, 7 of 14 posts, and those promotional posts do hold up at 46 average likes, but the lighter Relatable and Meme content (35 likes) and the calmer Inspirational routine posts (20 likes) round out a feed that is doing too little, too rarely.</p>
+
+    <div class="charts-2">
+      <div class="chart-wrap reveal"><div class="chart-title">Average likes by format</div><div class="chart-canvas"><canvas id="pillarLikes"></canvas></div></div>
+      <div class="chart-wrap reveal"><div class="chart-title">Posts by format, the distribution gap</div><div class="chart-canvas"><canvas id="pillarCount"></canvas></div></div>
+    </div>
+
+    <h3 class="reveal" style="margin:32px 0 4px;font-size:20px">The five posts your audience picked</h3>
+    <p class="reveal" style="font-size:14px;max-width:680px">Read these as a creative brief. They are the own-feed posts PRÉS's audience rewarded most across the window.</p>
+    <div class="post-grid stagger reveal">
+      <div class="post-card is-highlight"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/4e4c8f10-54bd-4827-ac13-aa347e147a6d" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">01 · Promotional</div><div class="post-likes" data-count="149">149</div><div class="post-meta">23 comments · Carousel</div><div class="post-desc">A lifestyle carousel pairing the cold-brew protein coffee with a fit, athletic physique to sell the 20g-protein benefit, the brand's single best own post.</div><a href="https://www.instagram.com/p/DZ-Uoynjlqq/" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/b2998626-8f65-4adf-8cbc-047b7f9de969" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">02 · Relatable/Meme</div><div class="post-likes" data-count="53">53</div><div class="post-meta">0 comments · Video</div><div class="post-desc">A humorous "top 5 horror movies" framing of everyday struggles, used to make a protein coffee feel relatable rather than promotional.</div><a href="https://www.tiktok.com/@drinkpres/video/7636460604206648606" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/862005e5-8371-4f50-b44a-23ea617c128d" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">03 · Promotional</div><div class="post-likes" data-count="51">51</div><div class="post-meta">3 comments · Photo</div><div class="post-desc">A clean minimalist shot of all four PRÉS flavours in a cardboard carrier, the kind of pack shot that anchors a feed but earns little.</div><a href="https://www.instagram.com/p/DUE0tfiD31y/" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/f800b542-13e1-4dd1-ad29-21f70dcdf054" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">04 · Relatable/Meme</div><div class="post-likes" data-count="51">51</div><div class="post-meta">1 comment · Video</div><div class="post-desc">A quick mood-transition skit showing PRÉS turning a somber morning into a happy one, light creator-style content on the brand's own channel.</div><a href="https://www.tiktok.com/@drinkpres/video/7641300917639220494" target="_blank" rel="noopener">View post ↗</a></div></div>
+      <div class="post-card"><div class="thumb"><img src="https://first-possum-672.convex.cloud/api/storage/51b07693-4938-417d-98e2-2f0ce86513cf" alt="" onerror="this.parentElement.style.display='none'"></div><div class="pbody"><div class="post-rank">05 · Inspirational</div><div class="post-likes" data-count="43">43</div><div class="post-meta">0 comments · Video</div><div class="post-desc">An aesthetic morning-routine reel featuring PRÉS alongside journaling and treats, leaning into the calm "that girl" wellness look.</div><a href="https://www.tiktok.com/@drinkpres/video/7638676880912125214" target="_blank" rel="noopener">View post ↗</a></div></div>
+    </div>
+
+    <p class="reveal lead-narrow">The lead post is a carousel, and that is the pattern across the window: carousels and the lighter, phone-first formats outrun straight video on this feed, and lower-production content tends to win. The top post at 149 likes is more than four times the typical own post, a reminder of how much headroom sits unused at this posting volume.</p>
+
+    <p class="reveal lead-narrow">The instruction the data gives the content team is simple: post far more often, lean into carousels and relatable creator-style video, and let the gifted pod creators carry the volume the brand's own feed cannot.</p>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Biggest Miss</span>
+      <p>Across the 6-month brand window PRÉS published just 14 own posts, about one every fortnight, and carousels earned 2.7 times the likes of videos (69 vs 26) while video made up nine of the fourteen. The feed is both starved and skewed to its weakest format, while creator-tagged content carries the brand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06 SHORTLIST -->
+<section id="shortlist" class="section">
+  <div class="container">
+    <div class="section-label reveal">06 · The shortlist</div>
+    <h2 class="reveal">Eight creators I'd contact this week if I ran your marketing.</h2>
+    <p class="reveal lead-narrow">These eight are drawn from the 200 top creators in the Protein Coffee &amp; Shake niche over the 181-day window, ranked by Total Creator Views, filtered to a spread of reach tiers and platforms with the feed weighted to Instagram, and every one has already posted about a direct competitor. None has posted about PRÉS, so the relationship would start fresh. The micro tier in the top-views pool is thin, so the list leans toward proven mid creators.</p>
+
+    <div class="sl-grid stagger reveal">
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/9050c00f-073d-4101-a16d-4cc0f6db2aff" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/mychoyceofcoffee/" target="_blank" rel="noopener">@mychoyceofcoffee</a><div class="sl-real">Choyce, Coffee &amp; Lifestyle</div></div><span class="sl-badge">IG · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="78083" data-format="compact">78K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="546584" data-format="compact">547K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="1.01" data-suffix="%">1.01%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="12">12</div></div></div><div class="why">A dedicated coffee-and-lifestyle creator with 12 niche posts, the most on-brief voice in the pool for a cold-brew proffee launch, already posting about <span>Fairlife</span>.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/tiktok/creators/laniekristin.jpg" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.tiktok.com/@laniekristin" target="_blank" rel="noopener">@laniekristin</a><div class="sl-real">lanie kristin</div></div><span class="sl-badge">TT · macro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="274800" data-format="compact">275K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="161661" data-format="compact">162K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="14.55" data-suffix="%">14.55%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="6">6</div></div></div><div class="why">A TikTok fitness creator at roughly 14.5% engagement and a repeat <span>Alani Nu</span> partner, a strong proffee fit on the platform PRÉS most needs to build.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/f58cfe97-889b-43d5-87af-709efc220347" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/galvezphysique/" target="_blank" rel="noopener">@galvezphysique</a><div class="sl-real">Carlos Galvez</div></div><span class="sl-badge">IG · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="31766" data-format="compact">32K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="43744" data-format="compact">44K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="11.89" data-suffix="%">11.89%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="10">10</div></div></div><div class="why">A fitness creator at roughly 12% engagement across 10 protein-brand posts, already a regular for <span>David Protein</span>.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/d5e1fdc4-f752-4c2d-a222-b4c29cdf09fe" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/becs_fitbites/" target="_blank" rel="noopener">@becs_fitbites</a><div class="sl-real">Rebecca Charles</div></div><span class="sl-badge">IG · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="12260" data-format="compact">12K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="17611" data-format="compact">18K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="8.21" data-suffix="%">8.21%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="9">9</div></div></div><div class="why">A recipe-and-wellness micro at 8%+ engagement with nine niche posts and a proven <span>MyProtein</span> collaboration.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/tiktok/creators/whitneyysimmons.jpg" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.tiktok.com/@whitneyysimmons" target="_blank" rel="noopener">@whitneyysimmons</a><div class="sl-real">Whitney Simmons</div></div><span class="sl-badge">TT · macro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="3100000" data-format="compact">3.1M</div></div><div><div class="k">Avg views</div><div class="vv" data-count="2977777" data-format="compact">3M</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="12.06" data-suffix="%">12.06%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="2">2</div></div></div><div class="why">A marquee fitness creator at 3.1M followers with <span>Alani Nu</span> ties, the aspirational ceiling for a PRÉS TikTok push.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/6dee918a-e759-4340-a8fc-c1c35f38c379" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/rxmiee/" target="_blank" rel="noopener">@rxmiee</a><div class="sl-real">Rahma Kahsu</div></div><span class="sl-badge">IG · mid</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="90849" data-format="compact">91K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="30687" data-format="compact">31K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="0.91" data-suffix="%">0.91%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="3">3</div></div></div><div class="why">A mid-tier wellness creator with <span>Humantra</span> history and over a million niche views in the window.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/3ae0a0de-c1a0-44e5-a392-fef80470413a" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.tiktok.com/@marcosworldnyc" target="_blank" rel="noopener">@marcosworldnyc</a><div class="sl-real">Marco Lombardi</div></div><span class="sl-badge">TT · macro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="267000" data-format="compact">267K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="175742" data-format="compact">176K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="2.39" data-suffix="%">2.39%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="2">2</div></div></div><div class="why">An NYC food creator with <span>Quest Nutrition</span> history and strong reach for flavour-led taste-test content.</div></div>
+
+      <div class="sl"><div class="sl-head"><img class="sl-av" src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0a88cf2f-b2d2-45ef-8f3e-ab6151f2d5fd" alt="" onerror="this.style.display='none'"><div><a class="sl-hname" href="https://www.instagram.com/jonny.melkus/" target="_blank" rel="noopener">@jonny.melkus</a><div class="sl-real">Jonny</div></div><span class="sl-badge">IG · micro</span></div><div class="sl-stats"><div><div class="k">Followers</div><div class="vv" data-count="9167" data-format="compact">9.2K</div></div><div><div class="k">Avg views</div><div class="vv" data-count="25773" data-format="compact">26K</div></div><div><div class="k">Eng. rate</div><div class="vv" data-count="6.02" data-suffix="%">6.02%</div></div><div><div class="k">Niche posts</div><div class="vv" data-count="1">1</div></div></div><div class="why">A sub-10k nano with viral-level engagement, 35% on a 1.9M-view post, and a <span>Protein Works</span> tie, a high-upside bet.</div></div>
+    </div>
+
+    <h3 class="reveal" style="margin:32px 0 4px;font-size:20px">What's winning in your niche this month</h3>
+    <div class="insp-grid stagger reveal">
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/tiktok/creators/whitneyysimmons.jpg" alt="" onerror="this.style.display='none'"><span class="ih">@whitneyysimmons</span></div><div class="iv" data-count="3100000" data-format="compact">3.1M</div><div class="im">TikTok · Relatable/Meme</div><a href="https://www.tiktok.com/@whitneyysimmons/video/7639497332714753294" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/da3ee3fb-8f80-4490-8dae-8e166ad06603" alt="" onerror="this.style.display='none'"><span class="ih">@thedonutdaddy</span></div><div class="iv" data-count="2400000" data-format="compact">2.4M</div><div class="im">TikTok · Inspirational</div><a href="https://www.tiktok.com/@thedonutdaddy/video/7643827034501762325" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/474fef58-3b3f-4f06-815c-aa4038d8a2b0" alt="" onerror="this.style.display='none'"><span class="ih">@llibbygardner</span></div><div class="iv" data-count="2247238" data-format="compact">2.2M</div><div class="im">IG · Relatable/UGC</div><a href="https://www.instagram.com/p/DU3b4RuEZen/" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/tiktok/creators/ilonamaher.jpg" alt="" onerror="this.style.display='none'"><span class="ih">@ilonamaher</span></div><div class="iv" data-count="2800000" data-format="compact">2.8M</div><div class="im">TikTok · Promotional</div><a href="https://www.tiktok.com/@ilonamaher/video/7641744912576204045" target="_blank" rel="noopener">View ↗</a></div>
+      <div class="insp"><div class="ihead"><img src="https://cxmnfzelypxpfxasrfub.supabase.co/storage/v1/object/public/thumbnails/0a88cf2f-b2d2-45ef-8f3e-ab6151f2d5fd" alt="" onerror="this.style.display='none'"><span class="ih">@jonny.melkus</span></div><div class="iv" data-count="1915650" data-format="compact">1.9M</div><div class="im">IG · Relatable/Meme</div><a href="https://www.instagram.com/p/DXbZDZVCOLC/" target="_blank" rel="noopener">View ↗</a></div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-label">The Names To Call</span>
+      <p>Combined, these eight reach 3.9M followers and pulled 15.3M Creator Tagged Post views in the niche over the window. All eight have already posted about a direct competitor, and none has ever posted about PRÉS.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07 OPPORTUNITY -->
+<section id="opportunity" class="section">
+  <div class="container">
+    <div class="section-label reveal">07 · The opportunity</div>
+    <h2 class="reveal">Six moves that change the game for PRÉS.</h2>
+    <div class="opp-grid stagger reveal">
+      <div class="opp"><div class="oeyebrow">Opportunity 01</div><h3>License your creator content into paid</h3><p>The category runs 3,798 active ad creatives across 51 advertisers; PRÉS runs zero. Creator-shot UGC over-indexes among the ads that survive past 60 days, and PRÉS already produces it organically through its gifting pods, just never behind a dollar.</p><div class="ostat" data-count="3798" data-format="comma">3,798</div><div class="ostatlbl">active category creatives vs 0 for PRÉS</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s01" target="_blank" rel="noopener">UGC for paid ads</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 02</div><h3>Whitelist your gifted creators into Partnership Ads</h3><p>PRÉS's 21 gifted creators make strong native content that dies after one organic view. Javvy built a household name by whitelisting creator handles into paid Partnership Ads. Putting spend behind content the brand already commissions compounds a working motion.</p><div class="ostat" data-count="511">511</div><div class="ostatlbl">live partnership-style ads at Javvy</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s06" target="_blank" rel="noopener">spark ads / whitelisting</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 03</div><h3>Concentrate the best pod creators into a retainer bench</h3><p>PRÉS spreads across 21 creators at roughly one post each; the category's leaders concentrate. David Protein runs one creator to 20 posts, Orgain and Alani Nu to 17 and 18 each. Signing the top five Hummingbirds performers compounds an engine that already works.</p><div class="ostat" data-count="20">20</div><div class="ostatlbl">posts from a single retained creator (David Protein)</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s03" target="_blank" rel="noopener">always-on creator retainers</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 04</div><h3>Build a TikTok creator squad</h3><p>PRÉS has just four Creator Tagged Posts and five own posts on TikTok across six months. Javvy became a household coffee brand on TikTok, and Alani Nu and MyProtein field dozens of creators there. A standing squad is where proffee discovery now happens.</p><div class="ostat" data-count="13">13</div><div class="ostatlbl">Javvy TikTok Creator Tagged Posts vs 4 for PRÉS</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s05" target="_blank" rel="noopener">creator collective</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 05</div><h3>Scale the geo-cluster playbook as Sprouts widens</h3><p>PRÉS already runs five metro creator pods, Atlanta, Houston, Kansas City, Oklahoma City and Orlando, each tied to a local Sprouts. The model is proven: gifted micros drive in-store discovery at the exact doors carrying the product. Add pods market by market as retail expands.</p><div class="ostat" data-count="5">5</div><div class="ostatlbl">metro creator pods already live</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s18" target="_blank" rel="noopener">geo-clustered micro-creator activations</a></div></div>
+      <div class="opp"><div class="oeyebrow">Opportunity 06</div><h3>Turn one-off gifting into an ambassador layer</h3><p>PRÉS gifts creators once and has no standing ambassador roster. Alani Nu and 1st Phorm convert loyal creators into long-term ambassadors who post for months. A small always-on tier gives the brand a reliable monthly content base between launches.</p><div class="ostat" data-count="330">330</div><div class="ostatlbl">unique creators in Alani Nu's standing roster</div><div class="obacked">Backed by: <a class="sx-link" href="https://signals.sup.co/strategies#s10" target="_blank" rel="noopener">long-term brand ambassadors</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing reveal">
+  <p class="closing-lead">We built this report because PRÉS's creator data is genuinely interesting, a tiny brand already running a sharp gifted-creator motion across five metros with almost no paid behind it, and we wanted to share what we found. If any of this is useful or you'd like the full creator list behind the numbers, happy to send it over.</p>
+  <h4>Who are we?</h4>
+  <p class="closing-sup"><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
+</div>
+<div class="booking">Book 30 min to walk through the data together at <a href="https://sup.co/meet" target="_blank" rel="noopener">sup.co/meet</a></div>
+
+<div class="footer"><span class="wave">👋</span> Sup · sup.co · Confidential · June 2026</div>
+
+<script>
+const BRAND_PRIMARY='#6E120C';
+const PALETTE=['#534AB7','#1D9E75','#D85A30','#378ADD','#71717A'];
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function formatCompact(n){if(n>=1000000)return (n/1000000).toFixed(n>=10000000?0:1).replace(/\.0$/,'')+'M';if(n>=1000)return (n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,'')+'K';return n.toString();}
+function fmtNum(v,fmt){if(fmt==='comma')return Math.round(v).toLocaleString();if(fmt==='compact')return formatCompact(Math.round(v));if(Number.isInteger(v))return v.toString();return v.toFixed(2);}
+function scrambleCount(el){
+  const target=parseFloat(el.dataset.count);const fmt=el.dataset.format;const suffix=el.dataset.suffix||'';
+  const duration=1400;const sp=0.65;const start=performance.now();
+  function tick(now){const t=Math.min(1,(now-start)/duration);let v;
+    if(t<sp){const intensity=1-(t/sp);const baseline=target*(t/sp);const jitter=target*0.5*intensity*(Math.random()-0.3);v=Math.max(0,baseline+jitter);}
+    else{const st=(t-sp)/(1-sp);const eased=1-Math.pow(1-st,3);const last=target*sp;v=last+(target-last)*eased;}
+    el.textContent=fmtNum(v,fmt)+suffix;
+    if(t<1)requestAnimationFrame(tick);else el.textContent=fmtNum(target,fmt)+suffix;}
+  requestAnimationFrame(tick);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('img').forEach(img=>{if(img.complete&&img.naturalHeight!==0)img.classList.add('loaded');else{img.addEventListener('load',()=>img.classList.add('loaded'));img.addEventListener('error',()=>{img.style.opacity=1;});}});
+
+  if(reduceMotion){
+    document.querySelectorAll('.reveal,.stagger').forEach(el=>el.classList.add('is-in'));
+    document.querySelectorAll('[data-count]').forEach(el=>{el.textContent=fmtNum(parseFloat(el.dataset.count),el.dataset.format)+(el.dataset.suffix||'');});
+    document.querySelectorAll('.theme-bar-fill,.bar>span').forEach(el=>{const w=el.dataset.width;if(w)el.style.width=w+'%';});
+    document.querySelectorAll('.rank-pill').forEach(el=>el.classList.add('is-in'));
+    document.querySelectorAll('.brand-emphasis').forEach(el=>el.classList.add('is-painted'));
+    drawCharts();return;
+  }
+
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el=entry.target;el.classList.add('is-in');
+        if(el.hasAttribute('data-count'))scrambleCount(el);
+        if(el.matches('.theme-bar-fill,.bar>span')){const w=el.dataset.width;if(w)el.style.width=w+'%';}
+        if(el.classList.contains('players')){setTimeout(()=>{el.querySelectorAll('.rank-pill').forEach((p,i)=>setTimeout(()=>p.classList.add('is-in'),i*40));},1500);}
+        io.unobserve(el);
+      }
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal,.stagger,[data-count],.theme-bar-fill,.bar>span,.players').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('.brand-emphasis').forEach(el=>setTimeout(()=>el.classList.add('is-painted'),800));
+  drawCharts();
+});
+
+window.addEventListener('scroll',()=>{const h=document.documentElement;const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('scroll-progress').style.width=pct+'%';},{passive:true});
+
+const navIO=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){const id=entry.target.id;document.querySelectorAll('.nav-mid a').forEach(a=>a.classList.remove('is-active'));const link=document.querySelector('.nav-mid a[href="#'+id+'"]');if(link)link.classList.add('is-active');}});},{rootMargin:'-40% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>navIO.observe(s));
+
+setInterval(()=>{document.querySelectorAll('.wave').forEach(el=>{el.style.animation='none';el.offsetHeight;el.style.animation='wave-wiggle 1.2s ease-in-out';});},10000);
+document.querySelectorAll('.wave').forEach(el=>{el.style.animation='wave-wiggle 1.2s ease-in-out';});
+
+function baseOpts(extra){return Object.assign({responsive:true,maintainAspectRatio:false,animation:reduceMotion?{duration:0}:{duration:1200,easing:'easeOutCubic',delay:(ctx)=>(ctx.dataIndex??0)*70},plugins:{legend:{display:false}}},extra||{});}
+let charted=false;
+function drawCharts(){
+  if(charted)return;charted=true;
+  Chart.defaults.font.family="Inter, sans-serif";Chart.defaults.color="#71717A";
+
+  new Chart(document.getElementById('compChart'),{type:'bar',
+    data:{labels:['PRÉS','Javvy','Chike','Throne','Super Coffee'],datasets:[{data:[0.021,0.262,0.069,0.005,0],backgroundColor:[BRAND_PRIMARY,PALETTE[0],PALETTE[2],PALETTE[3],PALETTE[1]],borderRadius:6}]},
+    options:baseOpts({scales:{y:{title:{display:true,text:'Total Creator Views (millions)'},grid:{color:'#F4F4F5'}},x:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:(c)=>c.parsed.y+'M views'}}}})});
+
+  new Chart(document.getElementById('longevityChart'),{type:'bar',
+    data:{labels:['0-29','30-59','60-89','90-179','180+'],datasets:[
+      {label:'Still active',data:[2224,736,346,399,93],backgroundColor:BRAND_PRIMARY,borderRadius:4,stack:'s'},
+      {label:'Expired',data:[1824,610,342,352,54],backgroundColor:'#E4E4E7',borderRadius:4,stack:'s'}]},
+    options:baseOpts({scales:{x:{stacked:true,grid:{display:false},title:{display:true,text:'Days running'}},y:{stacked:true,grid:{color:'#F4F4F5'}}},plugins:{legend:{display:true,position:'bottom'}}})});
+
+  new Chart(document.getElementById('winnersChart'),{type:'bar',
+    data:{labels:['UGC','Static graphic','Polished brand','Product-only','Lifestyle'],datasets:[
+      {label:'Share of 60+ day winners',data:[41,23,12,12,8],backgroundColor:BRAND_PRIMARY,borderRadius:4},
+      {label:'Share of all top creatives',data:[36,25,18,12,6],backgroundColor:'#E4E4E7',borderRadius:4}]},
+    options:baseOpts({scales:{y:{grid:{color:'#F4F4F5'},title:{display:true,text:'% of creatives'}},x:{grid:{display:false}}},plugins:{legend:{display:true,position:'bottom'}}})});
+
+  new Chart(document.getElementById('pillarLikes'),{type:'bar',
+    data:{labels:['Carousel','Photo','Video'],datasets:[{data:[69,32,26],backgroundColor:[BRAND_PRIMARY,'#E4E4E7','#E4E4E7'],borderRadius:4}]},
+    options:baseOpts({indexAxis:'y',scales:{x:{grid:{color:'#F4F4F5'},title:{display:true,text:'Avg likes per post'}},y:{grid:{display:false}}}})});
+
+  new Chart(document.getElementById('pillarCount'),{type:'bar',
+    data:{labels:['Video','Carousel','Photo'],datasets:[{data:[9,3,2],backgroundColor:['#E4E4E7',BRAND_PRIMARY,'#E4E4E7'],borderRadius:4}]},
+    options:baseOpts({indexAxis:'y',scales:{x:{grid:{color:'#F4F4F5'},title:{display:true,text:'Posts published'}},y:{grid:{display:false}}}})});
+}
+</script>
+</body>
+</html>
