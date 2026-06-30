@@ -1,0 +1,177 @@
+<!-- sup-report-meta: subcategory="Protein Coffee" palette="sky" evidence_variant="Coffee can" brand_slug="slate" year="2026" month_lower="june" layout="wordmark-hero" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slate &mdash; Sup Signal Report cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    width: 800px; height: 1200px;
+    overflow: hidden; background: transparent;
+    font-family: 'Geist Mono', monospace;
+  }
+
+  .cover {
+    width: 800px; height: 1200px;
+    background: linear-gradient(170deg, #CDD2DF 0%, #C0C5D1 100%);
+    color: #121E3F;
+    position: relative; overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .grain {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.32), transparent 55%),
+      radial-gradient(ellipse at bottom right, rgba(18,30,63,0.05), transparent 60%);
+    pointer-events: none; z-index: 1;
+  }
+
+  .frame {
+    position: absolute; inset: 36px;
+    border: 1px solid rgba(18,30,63,0.20);
+    border-radius: 24px;
+    z-index: 2; pointer-events: none;
+  }
+
+  .content {
+    position: absolute; inset: 70px;
+    display: flex; flex-direction: column;
+    z-index: 3;
+  }
+
+  .header {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .header .brand { display: flex; align-items: center; gap: 8px; }
+  .header .wave { font-size: 16px; }
+
+  .wordmark-block {
+    margin-top: 140px;
+    text-align: center;
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 184px;
+    line-height: 0.85;
+    color: #00caaa;
+    letter-spacing: -0.045em;
+    font-variation-settings: "opsz" 144;
+  }
+  .wordmark .apos {
+    font-weight: 500;
+    font-size: 0.78em;
+    margin-left: -0.04em;
+    opacity: 0.85;
+  }
+
+  .strap {
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.30em;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.62;
+  }
+  .strap .sep { margin: 0 14px; opacity: 0.45; }
+
+  .ornament {
+    margin: 40px auto 30px;
+    width: 100px; height: 1px;
+    background: currentColor;
+    opacity: 0.26;
+  }
+
+  .deck {
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 1.4;
+    max-width: 560px;
+    margin: 0 auto;
+    opacity: 0.88;
+    font-variation-settings: "opsz" 48;
+  }
+  .deck .num {
+    font-weight: 700;
+    font-style: normal;
+    opacity: 1;
+  }
+
+  .evidence {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0 12px;
+  }
+  .evidence svg {
+    width: 570px;
+    height: auto;
+    opacity: 0.72;
+  }
+
+  .bottom-rule {
+    height: 1px;
+    background: currentColor;
+    opacity: 0.18;
+    margin-top: 8px;
+  }
+  .footer {
+    margin-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .footer .center { opacity: 0.55; }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <div class="grain"></div>
+    <div class="frame"></div>
+    <div class="content">
+
+      <div class="header">
+        <span class="brand"><span class="wave">&#128075;</span><span>Sup &mdash; Signals</span></span>
+        <span>No. 11 / 2026</span>
+      </div>
+
+      <div class="wordmark-block">
+        <div class="wordmark">Slate</div>
+      </div>
+
+      <div class="strap">Protein Coffee<span class="sep">·</span>US<span class="sep">·</span>Jun 2026</div>
+
+      <div class="ornament"></div>
+
+      <div class="deck">A social deep-dive into how Slate stacks up across the <span class="num">97</span> brands defining the protein coffee category.</div>
+
+      <div class="evidence"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 220' fill='none'><rect x='152' y='62' width='56' height='124' rx='6' stroke='#121E3F' stroke-width='1.7' opacity='0.9'/><ellipse cx='180' cy='62' rx='28' ry='7' stroke='#121E3F' stroke-width='1.5' opacity='0.85'/><ellipse cx='180' cy='62' rx='9' ry='3' stroke='#121E3F' stroke-width='1.3' opacity='0.7'/><path d='M152 104 L208 104 M152 150 L208 150' stroke='#121E3F' stroke-width='1.3' opacity='0.6'/><path d='M164 124 L196 124 M170 134 L190 134' stroke='#121E3F' stroke-width='1.2' opacity='0.5'/><ellipse cx='180' cy='194' rx='40' ry='6' stroke='#121E3F' stroke-width='1.3' opacity='0.45'/><path d='M168 46 q6 -8 0 -16 M192 46 q6 -8 0 -16' stroke='#121E3F' stroke-width='1.3' opacity='0.55'/><g opacity='0.7'><ellipse cx='252' cy='188' rx='9' ry='6' transform='rotate(28 252 188)' stroke='#121E3F' stroke-width='1.4'/><path d='M247 185 Q252 189 257 192' stroke='#121E3F' stroke-width='1.2'/></g></svg></div>
+
+      <div class="bottom-rule"></div>
+      <div class="footer">
+        <span>Vol. 11</span>
+        <span class="center">Social Deep Dive</span>
+        <span>sup.co/reports</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
