@@ -1,13 +1,71 @@
 {
+  "$comment": [
+    "Reports moved to sup.co/research/{brands,niches}/<slug>/<year>/<month> on 2026-09-08.",
+    "This project is now the STORE, not the public address. Two hosts, two behaviours:",
+    "  - reports.sup.co  -> 301s everything to the sup.co canonical (host-scoped redirects).",
+    "  - sup-reports.vercel.app -> still SERVES the files. sup-site proxies to it via a",
+    "    Next.js rewrite, so this alias must never redirect or the proxy breaks.",
+    "That is why every redirect below carries a `has` host condition. Removing it would",
+    "make the alias redirect to sup.co, which rewrites back here — an infinite loop.",
+    "No X-Robots-Tag noindex on the alias either: proxied response headers pass through",
+    "the rewrite, so a noindex here would noindex the live sup.co URL. Duplicate content",
+    "on the alias is handled by the canonical tag in each report's <head> instead."
+  ],
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research",
+      "permanent": true
+    },
+    {
+      "source": "/brands/:slug/:year(\\d{4})/:month/:file*",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research/brands/:slug/:year/:month/:file*",
+      "permanent": true
+    },
+    {
+      "source": "/brands/:slug/:year(\\d{4})/:month",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research/brands/:slug/:year/:month",
+      "permanent": true
+    },
+    {
+      "source": "/niches/:slug/:year(\\d{4})/:month/:file*",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research/niches/:slug/:year/:month/:file*",
+      "permanent": true
+    },
+    {
+      "source": "/niches/:slug/:year(\\d{4})/:month",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research/niches/:slug/:year/:month",
+      "permanent": true
+    },
+    {
+      "source": "/:slug/:year(\\d{4})/:month/:file*",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research/brands/:slug/:year/:month/:file*",
+      "permanent": true
+    },
+    {
+      "source": "/:slug/:year(\\d{4})/:month",
+      "has": [{ "type": "host", "value": "reports.sup.co" }],
+      "destination": "https://sup.co/research/brands/:slug/:year/:month",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/:slug/:year(\\d{4})/:month/:file", "destination": "/reports/:slug/:year/:month/:file" },
-    { "source": "/:slug/:year(\\d{4})/:month", "destination": "/reports/:slug/:year/:month" }
+    { "source": "/brands/:slug/:year(\\d{4})/:month/:file*", "destination": "/reports/brands/:slug/:year/:month/:file*" },
+    { "source": "/brands/:slug/:year(\\d{4})/:month", "destination": "/reports/brands/:slug/:year/:month" },
+    { "source": "/niches/:slug/:year(\\d{4})/:month/:file*", "destination": "/reports/niches/:slug/:year/:month/:file*" },
+    { "source": "/niches/:slug/:year(\\d{4})/:month", "destination": "/reports/niches/:slug/:year/:month" }
   ],
   "headers": [
     {
-      "source": "/reports/:slug/(.*)",
+      "source": "/reports/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400" }
       ]
@@ -19,13 +77,6 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "https://sup.co/reports",
-      "permanent": false
     }
   ]
 }
