@@ -14,17 +14,6 @@
       "permanent": true
     },
     {
-      "source": "/brands/:slug/:year(\\d{4})/:month/:file*",
-      "has": [
-        {
-          "type": "host",
-          "value": "reports.sup.co"
-        }
-      ],
-      "destination": "https://sup.co/research/brands/:slug/:year/:month/:file*",
-      "permanent": true
-    },
-    {
       "source": "/brands/:slug/:year(\\d{4})/:month",
       "has": [
         {
@@ -36,14 +25,14 @@
       "permanent": true
     },
     {
-      "source": "/niches/:slug/:year(\\d{4})/:month/:file*",
+      "source": "/brands/:slug/:year(\\d{4})/:month/:file*",
       "has": [
         {
           "type": "host",
           "value": "reports.sup.co"
         }
       ],
-      "destination": "https://sup.co/research/niches/:slug/:year/:month/:file*",
+      "destination": "https://sup.co/research/brands/:slug/:year/:month/:file*",
       "permanent": true
     },
     {
@@ -58,14 +47,14 @@
       "permanent": true
     },
     {
-      "source": "/:slug/:year(\\d{4})/:month/:file*",
+      "source": "/niches/:slug/:year(\\d{4})/:month/:file*",
       "has": [
         {
           "type": "host",
           "value": "reports.sup.co"
         }
       ],
-      "destination": "https://sup.co/research/brands/:slug/:year/:month/:file*",
+      "destination": "https://sup.co/research/niches/:slug/:year/:month/:file*",
       "permanent": true
     },
     {
@@ -77,6 +66,17 @@
         }
       ],
       "destination": "https://sup.co/research/brands/:slug/:year/:month",
+      "permanent": true
+    },
+    {
+      "source": "/:slug/:year(\\d{4})/:month/:file*",
+      "has": [
+        {
+          "type": "host",
+          "value": "reports.sup.co"
+        }
+      ],
+      "destination": "https://sup.co/research/brands/:slug/:year/:month/:file*",
       "permanent": true
     }
   ],
