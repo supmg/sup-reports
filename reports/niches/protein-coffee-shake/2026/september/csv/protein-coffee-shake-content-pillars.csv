@@ -1,0 +1,20 @@
+value,n,share,nWithViews,medianViews,liftVsMedian,reportable
+Inspirational,116,29.0,96,32327,1.07,True
+Relatable/Meme,112,28.0,106,25656,0.85,True
+Educational,50,12.5,48,42301,1.4,True
+Promotional,33,8.2,28,22850,0.76,True
+Entertaining,22,5.5,22,57750,1.91,True
+Seasonal/Timely,19,4.8,15,51539,1.7,True
+Behind-the-Scenes,10,2.5,10,21950,0.73,True
+User-Generated,10,2.5,10,14061,0.46,True
+Relatable/Behind-the-Scenes,6,1.5,6,44497,1.47,True
+Relatable/User-Generated,5,1.2,5,18800,0.62,True
+Relatable/Educational,3,0.8,3,,,False
+Relatable/Entertaining,3,0.8,3,,,False
+Relatable/Inspirational,3,0.8,3,,,False
+Relatable/Lifestyle,3,0.8,3,,,False
+Educational / Relatable,1,0.2,1,,,False
+Inspirational/Relatable,1,0.2,1,,,False
+Relatable,1,0.2,1,,,False
+Relatable/Vlog,1,0.2,1,,,False
+Seasonal/Promotional,1,0.2,1,,,False

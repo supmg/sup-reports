@@ -1,0 +1,17 @@
+value,n,share,nWithViews,medianViews,liftVsMedian,reportable
+POV or Skit Setup,65,17.7,64,26306,0.87,True
+Product In Action,48,13.0,43,18900,0.62,True
+Curiosity Gap,46,12.5,40,25650,0.85,True
+Bold Claim,38,10.3,33,28926,0.96,True
+Audience Callout,37,10.1,34,27700,0.92,True
+Storytime,33,9.0,33,18400,0.61,True
+Tutorial Promise,27,7.3,26,57280,1.89,True
+Shock or Pattern Interrupt,26,7.1,23,24500,0.81,True
+Before-After Reveal,17,4.6,16,47300,1.56,True
+Price or Value Reveal,9,2.4,8,124984,4.13,True
+Challenge,8,2.2,8,65600,2.17,True
+Contrarian Take,7,1.9,7,10000,0.33,True
+Question,4,1.1,4,,,False
+Audience callout,1,0.3,1,,,False
+Pattern Interrupt,1,0.3,1,,,False
+Reaction,1,0.3,1,,,False

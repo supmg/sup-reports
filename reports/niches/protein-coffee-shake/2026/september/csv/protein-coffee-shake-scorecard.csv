@@ -1,0 +1,11 @@
+practice,brandsDoing,brandsTotal,share,basis,example
+Have at least one creator post tagging them in the window,82,97,84.5,table 01 tagged post counts,Legion
+Work with 20 or more unique creators,33,97,34.0,table 01 unique creators,Alani Nu
+Get most of their creator posts from creators under 20k followers,14,63,22.2,brands with 5 or more creator posts; follower bands from table 01,Alani Nu
+Run Meta ads at all,54,97,55.7,table 01 ads_live,Javvy
+Keep at least one ad running past 60 days,27,97,27.8,table 01 ads_over_60d,Naked Nutrition
+Use video in more than half of their live ads,28,54,51.9,advertisers only; table 01 pct_video,Javvy
+Run mostly creator-style (UGC) ad creative,5,18,27.8,advertisers with 3 or more classified creatives; Gemini creative style,Clevr Blends
+Show a named influencer strategy we can detect,24,97,24.7,table 17,
+Top creator posts open with a face on camera in the first three seconds,280,368,76.1,"posts, not brands: hook decomposition rows",
+Top creator posts are low or medium production effort,397,400,99.2,"posts, not brands: Gemini production complexity",

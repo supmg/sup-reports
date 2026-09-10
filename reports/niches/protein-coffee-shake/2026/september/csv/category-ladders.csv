@@ -1,0 +1,123 @@
+category,slug,location,platform,tier,tierLabel,n,medianViews,top10Views,top1Views,medianEngagementPct,medianViewsPerFollower,windowStart,windowEnd,reportable
+Boxed Meal Kits,boxed-meal-kits,US,instagram,nano,under 10k,151,1788,23757,851561,1.3,0.5,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,instagram,micro,10k to 100k,178,5563,57406,825600,0.51,0.21,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,instagram,mid,100k to 500k,75,41077,128750,455185,0.34,0.16,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,instagram,macro,500k to 1M,23,103302,230237,1096530,0.35,0.17,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,instagram,mega,over 1M,11,154630,2111911,8110078,0.42,0.13,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,tiktok,nano,under 10k,2,5237,8331,9027,4.17,0.89,2026-02-20,2026-05-15,False
+Boxed Meal Kits,boxed-meal-kits,US,tiktok,micro,10k to 100k,5,541,1064,1372,0.19,0.03,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,tiktok,mid,100k to 500k,11,13700,334800,1113480,0.37,0.1,2026-02-20,2026-05-15,True
+Boxed Meal Kits,boxed-meal-kits,US,tiktok,macro,500k to 1M,1,2800000,2800000,2800000,30.03,3.21,2026-02-20,2026-05-15,False
+Boxed Meal Kits,boxed-meal-kits,US,tiktok,mega,over 1M,3,16300,19020,19632,0.0,0.0,2026-02-20,2026-05-15,False
+DTC Beauty-Tech,dtc-beauty-tech,US,instagram,nano,under 10k,102,30335,303008,1191194,8.88,7.32,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,instagram,micro,10k to 100k,602,25485,150226,1213399,0.98,0.75,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,instagram,mid,100k to 500k,598,48745,361285,2290978,0.48,0.25,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,instagram,macro,500k to 1M,105,103663,555953,7446580,0.29,0.14,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,instagram,mega,over 1M,93,212002,781533,1345437,0.13,0.13,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,tiktok,nano,under 10k,16,1150,2607,5592,1.53,0.19,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,tiktok,micro,10k to 100k,47,1864,11599,412543,0.26,0.06,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,tiktok,mid,100k to 500k,18,9276,70670,274792,0.2,0.06,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,tiktok,macro,500k to 1M,14,30200,107870,971572,0.6,0.05,2026-03-07,2026-05-16,True
+DTC Beauty-Tech,dtc-beauty-tech,US,tiktok,mega,over 1M,6,78750,132000,144150,0.1,0.01,2026-03-07,2026-05-16,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,instagram,nano,under 10k,430,1313,5440,54839,0.93,0.38,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,instagram,micro,10k to 100k,551,3819,28504,231599,0.28,0.15,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,instagram,mid,100k to 500k,289,28050,138315,745839,0.3,0.14,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,instagram,macro,500k to 1M,44,64851,359416,1780952,0.22,0.09,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,instagram,mega,over 1M,31,242682,529820,1249142,0.11,0.1,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,tiktok,nano,under 10k,18,738,6458,2076937,0.95,0.16,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,tiktok,micro,10k to 100k,18,1022,5221,2574276,0.2,0.03,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,tiktok,mid,100k to 500k,10,25600,135539,637254,1.1,0.13,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,tiktok,macro,500k to 1M,6,12330,24250,24745,0.12,0.01,2026-03-07,2026-05-15,True
+DTC Supplements & Wellness,dtc-supplements-wellness,US,tiktok,mega,over 1M,1,63800,63800,63800,0.32,0.06,2026-03-07,2026-05-15,False
+Creator & Fashion Apps,fashion-app-brands,Global,instagram,nano,under 10k,410,801,3736,155891,1.78,0.23,2026-02-20,2026-05-15,True
+Creator & Fashion Apps,fashion-app-brands,Global,instagram,micro,10k to 100k,262,3601,46747,373201,0.57,0.17,2026-02-20,2026-05-15,True
+Creator & Fashion Apps,fashion-app-brands,Global,instagram,mid,100k to 500k,90,42306,359164,1962405,0.56,0.23,2026-02-20,2026-05-15,True
+Creator & Fashion Apps,fashion-app-brands,Global,instagram,macro,500k to 1M,9,34365,200043,676264,0.04,0.04,2026-02-20,2026-05-15,True
+Creator & Fashion Apps,fashion-app-brands,Global,instagram,mega,over 1M,9,375941,2677348,2759924,0.29,0.22,2026-02-20,2026-05-15,True
+Creator & Fashion Apps,fashion-app-brands,Global,tiktok,micro,10k to 100k,1,1407,1407,1407,0.19,0.03,2026-02-20,2026-05-15,False
+Creator & Fashion Apps,fashion-app-brands,Global,tiktok,mid,100k to 500k,1,81400,81400,81400,1.37,0.22,2026-02-20,2026-05-15,False
+Functional Beverages,functional-beverages,US,instagram,nano,under 10k,111,61523,317354,2121013,31.82,14.97,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,instagram,micro,10k to 100k,427,52233,387758,2254200,4.24,1.6,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,instagram,mid,100k to 500k,634,70269,312260,2108281,0.76,0.3,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,instagram,macro,500k to 1M,161,130548,469023,4548131,0.44,0.2,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,instagram,mega,over 1M,167,265842,2097119,13194402,0.32,0.16,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,tiktok,nano,under 10k,49,840,4469,66863,2.07,0.19,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,tiktok,micro,10k to 100k,99,1144,9844,447007,0.6,0.06,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,tiktok,mid,100k to 500k,67,17900,860000,5934000,0.48,0.06,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,tiktok,macro,500k to 1M,9,85400,1340000,1484000,0.88,0.13,2026-03-06,2026-05-16,True
+Functional Beverages,functional-beverages,US,tiktok,mega,over 1M,33,97000,1800000,2812000,0.11,0.02,2026-03-06,2026-05-16,True
+Home Fragrance,home-fragrance,US,instagram,nano,under 10k,356,1475,6594,132310,1.22,0.4,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,instagram,micro,10k to 100k,537,5422,25958,269557,0.4,0.17,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,instagram,mid,100k to 500k,230,23352,119438,756478,0.21,0.1,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,instagram,macro,500k to 1M,30,84519,386877,957720,0.3,0.14,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,instagram,mega,over 1M,17,278516,748251,2976654,0.09,0.19,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,tiktok,nano,under 10k,11,608,6109,15190,1.4,0.17,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,tiktok,micro,10k to 100k,27,1676,5246,56183,0.84,0.08,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,tiktok,mid,100k to 500k,3,5263,7208,7646,0.17,0.04,2026-03-07,2026-05-15,False
+Home Fragrance,home-fragrance,US,tiktok,macro,500k to 1M,5,21600,24860,24896,0.63,0.03,2026-03-07,2026-05-15,True
+Home Fragrance,home-fragrance,US,tiktok,mega,over 1M,2,118053,209530,230113,0.14,0.05,2026-03-07,2026-05-15,False
+Indie DTC Skincare,indie-dtc-skincare,US,instagram,nano,under 10k,83,90834,1074452,92868941,42.57,20.6,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,instagram,micro,10k to 100k,359,77240,315488,4384988,2.43,1.96,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,instagram,mid,100k to 500k,706,75427,358378,3935971,0.88,0.37,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,instagram,macro,500k to 1M,200,109660,382909,1486062,0.35,0.18,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,instagram,mega,over 1M,152,260273,1188125,2211013,0.2,0.17,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,tiktok,nano,under 10k,124,800,3294,27902,2.12,0.21,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,tiktok,micro,10k to 100k,259,1793,16080,207497,0.61,0.07,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,tiktok,mid,100k to 500k,137,6637,61520,311835,0.18,0.04,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,tiktok,macro,500k to 1M,43,26300,442420,3469999,0.63,0.04,2026-03-07,2026-05-16,True
+Indie DTC Skincare,indie-dtc-skincare,US,tiktok,mega,over 1M,30,58250,293180,2648220,0.12,0.02,2026-03-07,2026-05-16,True
+Legacy CPG,legacy-cpg,US,instagram,nano,under 10k,14,1080,3310,8522,1.44,0.31,2026-03-07,2026-05-17,True
+Legacy CPG,legacy-cpg,US,instagram,micro,10k to 100k,20,7035,35126,108437,0.59,0.23,2026-03-07,2026-05-17,True
+Legacy CPG,legacy-cpg,US,instagram,mid,100k to 500k,22,32619,833382,1687925,0.37,0.15,2026-03-07,2026-05-17,True
+Legacy CPG,legacy-cpg,US,instagram,macro,500k to 1M,3,78199,92797,96082,0.38,0.1,2026-03-07,2026-05-17,False
+Legacy CPG,legacy-cpg,US,instagram,mega,over 1M,1,601574,601574,601574,0.3,0.22,2026-03-07,2026-05-17,False
+Legacy CPG,legacy-cpg,US,tiktok,mid,100k to 500k,2,505,608,631,0.01,0.0,2026-03-07,2026-05-17,False
+London Cafés & Bakeries,london-cafes-bakeries,London,instagram,nano,under 10k,167,1663,5177,137605,1.34,0.42,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,instagram,micro,10k to 100k,214,4956,39234,272829,0.46,0.21,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,instagram,mid,100k to 500k,47,24332,126555,340444,0.38,0.15,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,instagram,macro,500k to 1M,7,52315,130959,182742,0.12,0.09,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,instagram,mega,over 1M,3,32014,54426,59468,0.02,0.03,2026-02-13,2026-03-22,False
+London Cafés & Bakeries,london-cafes-bakeries,London,tiktok,nano,under 10k,36,937,10323,42704,2.61,0.3,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,tiktok,micro,10k to 100k,44,3589,32380,453467,1.02,0.11,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,tiktok,mid,100k to 500k,11,4138,35400,249420,0.27,0.03,2026-02-13,2026-03-22,True
+London Cafés & Bakeries,london-cafes-bakeries,London,tiktok,macro,500k to 1M,1,11800,11800,11800,0.12,0.02,2026-02-13,2026-03-22,False
+Premium Snacks,premium-snacks,US,instagram,nano,under 10k,399,1651,5927,84430,1.37,0.49,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,instagram,micro,10k to 100k,378,5582,42784,169436,0.54,0.23,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,instagram,mid,100k to 500k,175,27834,203028,2721966,0.27,0.15,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,instagram,macro,500k to 1M,33,151724,431483,6283562,0.47,0.2,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,instagram,mega,over 1M,21,201597,830740,2097419,0.32,0.14,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,tiktok,nano,under 10k,4,520,946,1049,0.95,0.18,2026-03-08,2026-05-16,False
+Premium Snacks,premium-snacks,US,tiktok,micro,10k to 100k,24,1404,20395,39753,0.26,0.04,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,tiktok,mid,100k to 500k,17,33900,1019920,5140000,1.12,0.17,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,tiktok,macro,500k to 1M,5,27300,315860,459716,0.3,0.05,2026-03-08,2026-05-16,True
+Premium Snacks,premium-snacks,US,tiktok,mega,over 1M,2,17000,17160,17196,0.01,0.0,2026-03-08,2026-05-16,False
+Protein Coffee & Shake,protein-coffee-shake,US,instagram,nano,under 10k,486,1185,5001,29125,0.86,0.31,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,instagram,micro,10k to 100k,568,5351,27334,455276,0.33,0.18,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,instagram,mid,100k to 500k,227,23941,124225,786140,0.2,0.13,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,instagram,macro,500k to 1M,30,94947,452164,5184308,0.24,0.14,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,instagram,mega,over 1M,17,137385,474534,1201485,0.07,0.09,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,tiktok,nano,under 10k,191,749,3277,25329,2.05,0.22,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,tiktok,micro,10k to 100k,255,1975,20399,112980,0.45,0.08,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,tiktok,mid,100k to 500k,135,3819,29180,993625,0.12,0.02,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,tiktok,macro,500k to 1M,30,28000,59710,222596,0.32,0.04,2025-12-29,2026-06-28,True
+Protein Coffee & Shake,protein-coffee-shake,US,tiktok,mega,over 1M,29,26900,2160000,3015999,0.12,0.02,2025-12-29,2026-06-28,True
+Salty Snacks,salty-snacks,US,instagram,nano,under 10k,221,4684,31329,242481,2.41,1.0,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,instagram,micro,10k to 100k,692,8920,58022,408628,0.53,0.28,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,instagram,mid,100k to 500k,469,27842,193161,920304,0.27,0.14,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,instagram,macro,500k to 1M,70,82792,365203,1867036,0.21,0.14,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,instagram,mega,over 1M,48,268486,1276826,4092715,0.33,0.15,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,tiktok,nano,under 10k,26,913,12633,189100,1.39,0.22,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,tiktok,micro,10k to 100k,63,2403,15480,149294,0.48,0.1,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,tiktok,mid,100k to 500k,30,21650,403890,1178063,0.46,0.12,2025-07-27,2026-07-23,True
+Salty Snacks,salty-snacks,US,tiktok,macro,500k to 1M,3,419300,1043860,1184386,13.7,0.68,2025-07-27,2026-07-23,False
+Salty Snacks,salty-snacks,US,tiktok,mega,over 1M,12,115900,484070,1388350,0.17,0.06,2025-07-27,2026-07-23,True
+US Snacks,us-snacks,US,instagram,nano,under 10k,93,12906,58934,200047,4.01,2.4,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,instagram,micro,10k to 100k,618,15933,79088,1051449,0.93,0.46,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,instagram,mid,100k to 500k,613,33654,169981,1111420,0.33,0.15,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,instagram,macro,500k to 1M,130,77659,472233,2109755,0.29,0.12,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,instagram,mega,over 1M,46,207309,870215,5253327,0.18,0.13,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,tiktok,nano,under 10k,68,770,4210,93675,1.0,0.21,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,tiktok,micro,10k to 100k,127,2367,24980,92053,0.54,0.08,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,tiktok,mid,100k to 500k,69,21200,391860,2979999,0.45,0.12,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,tiktok,macro,500k to 1M,14,56450,965790,2591999,0.46,0.09,2025-07-08,2026-07-05,True
+US Snacks,us-snacks,US,tiktok,mega,over 1M,31,356100,1500000,2540000,0.67,0.09,2025-07-08,2026-07-05,True

@@ -1,0 +1,11 @@
+platform,tier,label,n,medianViews,top25Views,top10Views,top1Views,medianEngagementPct,medianViewsPerFollower,top10ViewsPerFollower,reportable
+instagram,nano,under 10k followers,486,1185,2503,5001,29125,0.86,0.31,1.16,True
+instagram,micro,10k to 100k followers,568,5351,12580,27334,455276,0.33,0.18,0.94,True
+instagram,mid,100k to 500k followers,227,23941,49428,124225,786140,0.2,0.13,0.54,True
+instagram,macro,500k to 1M followers,30,94947,204278,452164,5184308,0.24,0.14,0.72,True
+instagram,mega,over 1M followers,17,137385,276564,474534,1201485,0.07,0.09,0.31,True
+tiktok,nano,under 10k followers,191,749,1321,3277,25329,2.05,0.22,1.09,True
+tiktok,micro,10k to 100k followers,255,1975,5757,20399,112980,0.45,0.08,0.56,True
+tiktok,mid,100k to 500k followers,135,3819,13500,29180,993625,0.12,0.02,0.15,True
+tiktok,macro,500k to 1M followers,30,28000,39550,59710,222596,0.32,0.04,0.1,True
+tiktok,mega,over 1M followers,29,26900,331000,2160000,3015999,0.12,0.02,0.64,True
