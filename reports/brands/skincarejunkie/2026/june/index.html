@@ -539,7 +539,7 @@ table.vel-t td{padding:10px 12px;border-bottom:1px solid var(--border);font-vari
     <h3>Who are we?</h3>
     <p><span class="wave">👋</span> Sup is an AI-native influencer marketing platform built around data and performance. We find creators who actually convert and track every sale, lowering your CAC alongside Meta and Google.</p>
   </div>
-  <div class="booking">Book 30 min to walk through the data together at <a href="https://sup.co/meet">sup.co/meet</a></div>
+  <div class="booking">Book 30 min to walk through the data together at <a href="https://sup.co/meet">sup.co/meet</a>. Or check your own brand free at <a href="https://sup.co/start" target="_blank" rel="noopener">sup.co/start</a></div>
   <div class="footer"><span class="wave">👋</span> Sup · sup.co · Confidential · June 2026</div>
 </div>
 
@@ -573,4 +573,5 @@ function drawCharts(){ if(drawn)return; drawn=true; Chart.defaults.font.family="
   new Chart(document.getElementById('chPillarCnt'),{type:'bar',data:{labels:CD.pillar_names,datasets:[{data:CD.pillar_cnt,backgroundColor:CD.pillar_names.map((_,i)=>i===BEST_IDX?BRAND_PRIMARY:'#A1A1AA'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:1200,easing:'easeOutCubic',delay:(c)=>(c.dataIndex??0)*70},plugins:{legend:{display:false}},scales:{x:{...gridY},y:{...gridX}}}});
 }
 </script>
+<script defer src="https://sup.co/report-kit.js"></script>
 </body></html>
