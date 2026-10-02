@@ -341,7 +341,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   btn.addEventListener('click',(e)=>{ e.stopPropagation(); const open=more.classList.toggle('is-open'); btn.setAttribute('aria-expanded',String(open)); });
   document.addEventListener('click',close);
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
-  let timer; window.addEventListener('resize',()=>{ clearTimeout(timer); timer=setTimeout(fit,100); });
+  let width=0; const refit=()=>{ const w=mid.parentNode.clientWidth; if(w!==width){ width=w; fit(); } };
+  if(window.ResizeObserver) new ResizeObserver(refit).observe(mid.parentNode);
+  window.addEventListener('resize',refit);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
   fit();
   const navIO=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.remove('is-active')); const l=mid.querySelector('a[href="#'+e.target.id+'"]'); if(l) l.classList.add('is-active'); mark(); } }); },{rootMargin:'-40% 0px -50% 0px'});
